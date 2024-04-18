@@ -5,7 +5,9 @@ import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
@@ -13,20 +15,20 @@ public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
 
     String queryResult; //esto es pa meterle el valor en String de cualquier consulta tipo SELECT
 
+    Connection con;
+
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
             /*En railway, es la que aparece en "Settings" en el apartado de NetWorking, poniéndole delante "jdbc:mysql://"
             y detrás el nombre que aparece en "Variables" como "MYSQLDATABASE" con una barra delante, en este caso, "/railway" */
-            String connectionString = "jdbc:mysql://monorail.proxy.rlwy.net:45523/railway";
+            String connectionString = "jdbc:mysql://viaduct.proxy.rlwy.net:21120/railway";
 
-            /*Lo que aparece como "MYSQLUSER" en la parte de "Variables", es el súper usuario, lo mantenemos siempre así */
             String user = "root";
 
-            /*Lo que aparece como "MYSQL_ROOT_PASSWORD" en la parte de "Variables" */
-            String password = "vDemhtCuWGRNzlYnkENndIbEtZsnnylA";
+            String password = "dCWwchdFnRuZMnZhWFyLRRQHGByISwtk";
 
-            Connection con = DriverManager.getConnection(connectionString, user, password);
+            con = DriverManager.getConnection(connectionString, user, password);
             if (con == null)
             {
                 return false;
@@ -37,7 +39,7 @@ public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
                 - ResultSet: pa decirle de que va la consulta, siempre es "executeQuery"
                 - StringBuilder: pa convertir lo que devuelva el SELECT a un String
                 - */
-            Statement statement = con.createStatement();
+          /*  Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
 
             StringBuilder resultStringBuilder = new StringBuilder();
@@ -71,7 +73,7 @@ public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
                   Statement statement3 = con.createStatement();
                   int rowsAffected3 = statement3.executeUpdate("INSERT INTO users VALUES(" +
                                                                "'3','lucajin','pelucas','1234','');");
-                */
+
 
             Statement statement4 = con.createStatement();
             int rowsAffected4 = statement4.executeUpdate("INSERT INTO users VALUES(" +
@@ -83,7 +85,7 @@ public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
             } else {
                 // Por ejemplo pa decirle "Tienes que meter todos tus datos mimimimi"
                 Log.d("ANIADIR", "Alex es tan gei que no se deja agregar :(");
-            }
+            }*/
 
         } catch (NoClassDefFoundError e){
             Log.e("Definicion de clase",e.getMessage());
@@ -94,6 +96,16 @@ public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
         return true;
     }
 
+    public boolean ejecutarConsulta(String sql) {
+        try {
+            Statement statement4 = con.createStatement();
+            int rowsAffected = statement4.executeUpdate(sql);;
+            return rowsAffected > 0; // Si se ejecutó correctamente, retorna true
+        } catch (SQLException e) {
+            Log.e("ERROR", "Error al ejecutar la consulta: " + e.getMessage());
+            return false;
+        }
+    }
     @Override
     protected void onPostExecute(Boolean resultado) {
         Log.d("RESULTADO", resultado.toString());
