@@ -1,7 +1,9 @@
 package com.example.urchoice2;
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,30 +13,31 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
+public class ConexionClandestina /*extends AsyncTask<Void,Integer,Boolean> */ {
+    String connectionString = "jdbc:mysql://viaduct.proxy.rlwy.net:21120/railway";
 
-    String queryResult; //esto es pa meterle el valor en String de cualquier consulta tipo SELECT
+    String user = "root";
 
-    Connection con;
+    String password = "dCWwchdFnRuZMnZhWFyLRRQHGByISwtk";
 
-    @Override
-    protected Boolean doInBackground(Void... params) {
+    public Connection conexionDB() {
+        Connection con = null;
         try {
-            /*En railway, es la que aparece en "Settings" en el apartado de NetWorking, poniéndole delante "jdbc:mysql://"
-            y detrás el nombre que aparece en "Variables" como "MYSQLDATABASE" con una barra delante, en este caso, "/railway" */
-            String connectionString = "jdbc:mysql://viaduct.proxy.rlwy.net:21120/railway";
-
-            String user = "root";
-
-            String password = "dCWwchdFnRuZMnZhWFyLRRQHGByISwtk";
-
+            Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(connectionString, user, password);
-            if (con == null)
-            {
-                return false;
-            }
+        } catch (Exception e) {
+            Log.e("SQL", "ERROR AL CONECTAR");
+        }
+        return con;
+    }
 
-            /*Consulta tipo SELECT, tiene:
+
+
+
+
+}
+
+ /*Consulta tipo SELECT, tiene:
                 - Statement: pa crear la consulta
                 - ResultSet: pa decirle de que va la consulta, siempre es "executeQuery"
                 - StringBuilder: pa convertir lo que devuelva el SELECT a un String
@@ -86,34 +89,3 @@ public class ConexionClandestina extends AsyncTask<Void,Integer,Boolean> {
                 // Por ejemplo pa decirle "Tienes que meter todos tus datos mimimimi"
                 Log.d("ANIADIR", "Alex es tan gei que no se deja agregar :(");
             }*/
-
-        } catch (NoClassDefFoundError e){
-            Log.e("Definicion de clase",e.getMessage());
-        } catch (Exception e) {
-            Log.e("ERROR Conexion:",e.getMessage());
-            return false;
-        }
-        return true;
-    }
-
-    public boolean ejecutarConsulta(String sql) {
-        try {
-            Statement statement4 = con.createStatement();
-            int rowsAffected = statement4.executeUpdate(sql);;
-            return rowsAffected > 0; // Si se ejecutó correctamente, retorna true
-        } catch (SQLException e) {
-            Log.e("ERROR", "Error al ejecutar la consulta: " + e.getMessage());
-            return false;
-        }
-    }
-    @Override
-    protected void onPostExecute(Boolean resultado) {
-        Log.d("RESULTADO", resultado.toString());
-        if(resultado) {
-            Log.d("WENAS:", "DE LOKISIMOS MANO");
-            Log.d("WENAS query Result:", "jiji " + queryResult);
-        }else {
-            Log.d("WENAS:", "trosteza :(");
-        }
-    }
-}
