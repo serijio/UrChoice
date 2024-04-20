@@ -1,4 +1,4 @@
-package com.example.urchoice2;
+package com.example.urchoice2.SQL;
 
 import android.os.AsyncTask;
 import android.os.StrictMode;
