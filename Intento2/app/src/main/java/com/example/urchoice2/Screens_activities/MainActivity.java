@@ -1,20 +1,22 @@
-package com.example.urchoice2;
+package com.example.urchoice2.Screens_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
+import com.example.urchoice2.Classes.RoomData;
+import com.example.urchoice2.Classes.RoomGame;
+import com.example.urchoice2.Classes.User;
+import com.example.urchoice2.R;
 import com.example.urchoice2.SQL.CrudSQL;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textViewElement1;
     private TextView textViewElement2;
+    private Handler handler;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 startRound();
             }
         });
-
     }
 
     public void Login(View view){
@@ -134,6 +138,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void handleUsers(List<User> users) {
+        Log.e("SQL", "Error al obtener elementos: " + users.size());
+        // Ahora puedes trabajar con la lista de elementos
+        for (User user : users) {
+            // Hacer algo con cada elemento, por ejemplo, imprimir sus detalles
+            Log.d("Usuario", "ID: " + user.id_user + ", GMAIL: " + user.email_user + ", NICK: " + user.nick_user + ", PASSWORD: " + user.pass_user + ",IMG:" + user.img_user);
+        }
+    }
+
     public void handleElementsGame(List<Element> elements) {
         Log.e("SQL", "Error al obtener elementos: " + elements.size());
         // Ahora puedes trabajar con la lista de elementos
@@ -162,6 +175,12 @@ public class MainActivity extends AppCompatActivity {
                     currentRound = 0;
                     startRound();
                 } else {
+                    SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+                    int id_cat = sharedPreferences.getInt("id_cat", 0);
+                    String sql = "UPDATE elemcat SET victories = '" + (shuffledElements.get(0).getVictories() + 1) + "' WHERE id_elem = '" + shuffledElements.get(0).getId_element() + "' " +
+                            "AND id_cat = '" + id_cat + "'";
+
+                    crud.Update(sql);
                     Toast.makeText(MainActivity.this, "Ha ganado" + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -178,11 +197,144 @@ public class MainActivity extends AppCompatActivity {
 
     public void Game(View view) {
         Integer id_cat = 1;
+        SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("id_cat", id_cat);
+        editor.apply();
         String sql = "SELECT e.id_elem, e.img_elem, e.name_elem, ec.victories FROM elements e INNER JOIN elemcat ec ON e.id_elem = ec.id_elem " +
                 "INNER JOIN categories c ON ec.id_cat = c.id_cat WHERE c.id_cat = '" + id_cat + "'";
         crud.GetElements(sql, this::handleElementsGame);
     }
 
+    public void GetUsers(View view) {
+        String sql = "SELECT * FROM users";
+        crud.GetUsers(sql, this::handleUsers);
+    }
+
+    public void SendRequestFriend(View view){
+        int id_user = 4;
+        int id_friend_user = 5;
+        crud.addFriend(id_user,id_friend_user);
+    }
+
+    public void AcceptFriend(View view){
+        int id_user = 4;
+        int id_friend_user = 5;
+        String estado = "Aceptado";
+        crud.updateFriendRequestStatus(id_user,id_friend_user,estado);
+    }
+
+    public void DenniedFriend(View view){
+        int id_user = 4;
+        int id_friend_user = 5;
+        String estado = "Denegado";
+        crud.updateFriendRequestStatus(id_user,id_friend_user,estado);
+    }
 
 
+    public void CreateRoom(View view){
+        String password = "";
+        String queryRoom = "INSERT room VALUES(" +
+                "'0','" + password + "','NO LISTO');";
+        long roomId = crud.insertAndGetId(queryRoom);
+
+        String category = "1";
+        String queryGame = "INSERT game_multi VALUES(" +
+                "'0','" + category + "');";
+        long gameId = crud.insertAndGetId(queryGame);
+
+        Integer id_user = 4;
+        String queryRoom_Game = "INSERT room_game VALUES('0','" + roomId + "','" + gameId + "','" + id_user + "','');";
+        crud.insert(queryRoom_Game);
+    }
+
+
+    public void JoinGame(View view){
+
+        /*if(!passwordroom.isEmpty()){
+            String passwordtry = "";
+            if(passwordtry.equals(passwordroom)){
+                String id_room = "1";
+                String id_game = "1";
+                String id_user = "4";
+                String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_game + "','" + id_user + "','');";
+                crud.insert(queryRoom_Game);
+            }else{
+                Toast.makeText(this, "Contraseña Errónea", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            String id_room = "1";
+            String id_game = "1";
+            String id_user = "4";
+            String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_game + "','" + id_user + "','');";
+            crud.insert(queryRoom_Game);
+        }*/
+
+
+        String id_room = "1";
+        String id_game = "1";
+        String id_user = "4";
+        String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_game + "','" + id_user + "','');";
+        crud.insert(queryRoom_Game);
+    }
+
+
+    private void getUsersRoom() {
+        int id_room = 1;
+        crud.getUsersForRoom(id_room, this::setHandleroom);
+    }
+
+    public void setHandleroom(RoomData roomData) {
+        List<User> users = roomData.getUsers();
+        List<RoomGame> roomGames = roomData.getRoomGames();
+        Boolean jugar = true;
+
+        Log.e("SQL", "Cantidad de users: " + users.size());
+        for (User user : users) {
+            Log.d("Usuario", "ID: " + user.id_user + ", GMAIL: " + user.email_user + ", NICK: " + user.nick_user + ", PASSWORD: " + user.pass_user + ",IMG:" + user.img_user);
+        }
+
+        Log.e("SQL", "Cantidad de registros de room_game: " + roomGames.size());
+        for (RoomGame roomGame : roomGames) {
+            Log.d("RoomGame", "ID: " + roomGame.getId_game_room());
+            if(roomGame.getVote().equals("NO LISTO")) {
+                jugar = false;
+            }
+        }
+
+        String sql = "UPDATE room SET status = 'CERRADA' WHERE id_room = '" + roomGames.get(0).getId_room() + "'";
+        crud.Update(sql);
+
+        /*if(jugar == true) {
+            Toast.makeText(this, "Todos los jugadores están listos", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(intent);
+        }*/
+    }
+    private void startFetchingData() {
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getUsersRoom();
+                handler.postDelayed(this, 5000);
+            }
+        }, 5000);
+    }
+
+    private void stopFetchingData() {
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null); // Detiene la ejecución del Runnable
+            handler = null;
+        }
+    }
+
+
+    public void StartGame(){
+        int id_user = 4;
+        int id_room = 1;
+        String sql = "UPDATE room_game SET vote = 'LISTO' WHERE id_room = '" + id_room +
+                "' AND id_user = '" + id_user + "'";
+        crud.Update(sql);
+    }
 }
