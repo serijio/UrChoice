@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".Screens_activities.StartScreen">
 
+    <!--Constraints horizontales-->
+
+
+    <!--Constraints verticales-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
