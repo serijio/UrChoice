@@ -14,6 +14,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <string name="app_title">UrChoice</string>
+    <string name="tap_screen_to_start">TAP SCREEN TO START</string>
+    <string name="urchoice_studio">\@UrChoice STUDIO</string>
+    <string name="_2024_uwu_entertainment_inc">\@2024 UwU Entertainment Inc.</string>
+    <string name="urchoice_toei_animation">\@UrChoice, UwU Animation</string>
+    <string name="which_will_be_your_choice">Which will be your choice ?</string>
+
+
     <!--X SCREEN-->
 
 </resources>
