@@ -52,7 +52,7 @@ public class StartScreen extends AppCompatActivity {
         Intent intent = new Intent(StartScreen.this, MainActivity.class);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StartScreenn .this);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StartScreen.this);
             startActivity(intent, options.toBundle());
         } else {
             startActivity(intent);

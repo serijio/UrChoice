@@ -278,10 +278,9 @@ public class CrudSQL {
                 while (rs.next()) {
                     int idGameRoom = rs.getInt("id_game_room");
                     int roomId = rs.getInt("id_room");
-                    int gameId = rs.getInt("id_game");
                     int userId = rs.getInt("id_user");
                     String vote = rs.getString("vote");
-                    RoomGame roomGame = new RoomGame(idGameRoom, roomId, gameId, userId, vote);
+                    RoomGame roomGame = new RoomGame(idGameRoom, roomId, userId, vote);
                     roomGames.add(roomGame);
                 }
 

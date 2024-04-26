@@ -2,7 +2,10 @@ package com.example.urchoice2.Screens_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,16 +13,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.urchoice2.API.CategoriesAPI;
+import com.example.urchoice2.API.ElementsAPI;
+import com.example.urchoice2.API.FriendsAPI;
+import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.Classes.RoomData;
 import com.example.urchoice2.Classes.RoomGame;
 import com.example.urchoice2.Classes.User;
+import com.example.urchoice2.HttpTask;
 import com.example.urchoice2.R;
 import com.example.urchoice2.SQL.CrudSQL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     CrudSQL crud;
@@ -32,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewElement1;
     private TextView textViewElement2;
     private Handler handler;
+
+    private UserAPI userApi;
+    private ElementsAPI elementApi;
+
+    private CategoriesAPI categoriesAPI;
+
+    private FriendsAPI friendsAPI;
 
 
 
@@ -64,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void Login(View view){
+
+    /*public void Login(View view){
         String email_user = "SergioGey@gey.com";
         String nick_user = "SergioGey";
         String pass_user = "123";
@@ -83,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void Iniciar(View view){
+   public void Iniciar(View view){
         String email_user = "SergioGey@gey.com";
         String nick_user = "SergioGey";
         String pass_user = "123";
@@ -94,14 +117,14 @@ public class MainActivity extends AppCompatActivity {
             if (count == 0) {
                 Toast.makeText(this, "No existe un usuario con ese gmail", Toast.LENGTH_SHORT).show();
             } else {
-                /*Intent intent = new Intent(this, SecondActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(this, SecondActivity.class);
+                startActivity(intent);
 
             }
         });
     }
 
-    /*public void GetCategorias(View view) {
+    public void GetCategorias(View view) {
         String sql = "SELECT * FROM categories";
         crud.GetCategories(sql, new CrudSQL.CategoriesCallback() {
             @Override
@@ -112,14 +135,121 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }*/
-
-    public void GetCategorias(View view) {
-        String sql = "SELECT * FROM categories";
-        crud.GetCategories(sql, this::handleCategories);
     }
 
 
+    public void GetUsers(View view) {
+        String sql = "SELECT * FROM users";
+        crud.GetUsers(sql, this::handleUsers);
+    }
+
+
+   public void Ranking(View view) {
+        Integer id_cat = 1;
+        String sql = "SELECT e.id_elem, e.img_elem, e.name_elem, ec.victories FROM elements e INNER JOIN elemcat ec ON e.id_elem = ec.id_elem " +
+                "INNER JOIN categories c ON ec.id_cat = c.id_cat WHERE c.id_cat = '" + id_cat + "' ORDER BY ec.victories DESC;";
+        crud.GetElements(sql, this::handleElements);
+    }
+
+
+     public void GetCategorias(View view) {
+        String sql = "SELECT * FROM categories";
+        crud.GetCategories(sql, this::handleCategories);
+    }
+    */
+
+public void GetUsers(){
+    userApi.getUsers().enqueue(new Callback<List<User>>() {
+        @Override
+        public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            if (response.isSuccessful()) {
+                List<User> userList = response.body();
+            } else {
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<User>> call, Throwable t) {
+        }
+    });
+
+}
+
+public void Ranking(){
+    Integer categoryId = 1;
+    elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
+        @Override
+        public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
+            if (response.isSuccessful()) {
+                List<Element> elementList = response.body();
+            } else {
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<Element>> call, Throwable t) {
+        }
+    });
+
+}
+
+public void GetCategories(){
+    categoriesAPI.getCategories().enqueue(new Callback<List<Category>>() {
+        @Override
+        public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+            if (response.isSuccessful()) {
+                List<Category> categoryList = response.body();
+            } else {
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<Category>> call, Throwable t) {
+        }
+    });
+
+}
+
+
+public void SendRequestFriend(){
+    Integer id_us1 = 4;
+    Integer id_us2 = 5;
+    friendsAPI.addFriend(id_us1, id_us2).enqueue(new Callback<Void>() {
+        @Override
+        public void onResponse(Call<Void> call, Response<Void> response) {
+            if (response.isSuccessful()) {
+            } else {
+            }
+        }
+
+        @Override
+        public void onFailure(Call<Void> call, Throwable t) {
+        }
+    });
+
+}
+
+public void Friend(){
+    Integer id_us1 = 4;
+    Integer id_us2 = 5;
+    String nuevoEstado = "Aceptada";
+    friendsAPI.updateFriendRelation(id_us1, id_us2, nuevoEstado).enqueue(new Callback<Void>() {
+        @Override
+        public void onResponse(Call<Void> call, Response<Void> response) {
+            if (response.isSuccessful()) {
+                // La actualización fue exitosa
+            } else {
+                // Manejar el error de respuesta
+            }
+        }
+
+        @Override
+        public void onFailure(Call<Void> call, Throwable t) {
+            // Manejar el fallo de la llamada
+        }
+    });
+
+}
     public void handleCategories(List<Category> categories) {
         Log.e("SQL", "Error al obtener categorías: " + categories.size());
         // Ahora puedes trabajar con la lista de categorías
@@ -187,14 +317,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    public void Ranking(View view) {
-        Integer id_cat = 1;
-        String sql = "SELECT e.id_elem, e.img_elem, e.name_elem, ec.victories FROM elements e INNER JOIN elemcat ec ON e.id_elem = ec.id_elem " +
-                "INNER JOIN categories c ON ec.id_cat = c.id_cat WHERE c.id_cat = '" + id_cat + "' ORDER BY ec.victories DESC;";
-        crud.GetElements(sql, this::handleElements);
-    }
-
     public void Game(View view) {
         Integer id_cat = 1;
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
@@ -204,11 +326,6 @@ public class MainActivity extends AppCompatActivity {
         String sql = "SELECT e.id_elem, e.img_elem, e.name_elem, ec.victories FROM elements e INNER JOIN elemcat ec ON e.id_elem = ec.id_elem " +
                 "INNER JOIN categories c ON ec.id_cat = c.id_cat WHERE c.id_cat = '" + id_cat + "'";
         crud.GetElements(sql, this::handleElementsGame);
-    }
-
-    public void GetUsers(View view) {
-        String sql = "SELECT * FROM users";
-        crud.GetUsers(sql, this::handleUsers);
     }
 
     public void SendRequestFriend(View view){
@@ -234,17 +351,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void CreateRoom(View view){
         String password = "";
+        String category = "1";
         String queryRoom = "INSERT room VALUES(" +
-                "'0','" + password + "','NO LISTO');";
+                "'0','" + password + "','NO LISTO','" + category + "');";
         long roomId = crud.insertAndGetId(queryRoom);
 
-        String category = "1";
-        String queryGame = "INSERT game_multi VALUES(" +
-                "'0','" + category + "');";
-        long gameId = crud.insertAndGetId(queryGame);
 
         Integer id_user = 4;
-        String queryRoom_Game = "INSERT room_game VALUES('0','" + roomId + "','" + gameId + "','" + id_user + "','');";
+        String queryRoom_Game = "INSERT room_game VALUES('0','" + roomId + "','"  + id_user + "','');";
         crud.insert(queryRoom_Game);
     }
 
@@ -254,27 +368,24 @@ public class MainActivity extends AppCompatActivity {
         /*if(!passwordroom.isEmpty()){
             String passwordtry = "";
             if(passwordtry.equals(passwordroom)){
-                String id_room = "1";
-                String id_game = "1";
-                String id_user = "4";
-                String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_game + "','" + id_user + "','');";
-                crud.insert(queryRoom_Game);
+             String id_room = "1";
+            String id_user = "4";
+            String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_user + "','');";
+            crud.insert(queryRoom_Game);
             }else{
                 Toast.makeText(this, "Contraseña Errónea", Toast.LENGTH_SHORT).show();
             }
         }else{
-            String id_room = "1";
-            String id_game = "1";
-            String id_user = "4";
-            String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_game + "','" + id_user + "','');";
-            crud.insert(queryRoom_Game);
+           String id_room = "1";
+        String id_user = "4";
+        String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_user + "','');";
+        crud.insert(queryRoom_Game);
         }*/
 
 
         String id_room = "1";
-        String id_game = "1";
         String id_user = "4";
-        String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_game + "','" + id_user + "','');";
+        String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_user + "','');";
         crud.insert(queryRoom_Game);
     }
 

@@ -6,17 +6,14 @@ public class RoomGame {
 
     Integer id_room;
 
-    Integer id_game;
-
     Integer id_user;
 
     String vote;
 
 
-    public RoomGame(Integer id_game_room, Integer id_room, Integer id_game, Integer id_user, String vote) {
+    public RoomGame(Integer id_game_room, Integer id_room, Integer id_user, String vote) {
         this.id_game_room = id_game_room;
         this.id_room = id_room;
-        this.id_game = id_game;
         this.id_user = id_user;
         this.vote = vote;
     }
@@ -36,14 +33,6 @@ public class RoomGame {
 
     public void setId_room(Integer id_room) {
         this.id_room = id_room;
-    }
-
-    public Integer getId_game() {
-        return id_game;
-    }
-
-    public void setId_game(Integer id_game) {
-        this.id_game = id_game;
     }
 
     public Integer getId_user() {
