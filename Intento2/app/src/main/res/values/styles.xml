@@ -16,4 +16,12 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="LoginSubmitFields" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">#00000000</item>
+        <item name="boxStrokeColor">@color/red</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
 </resources>
