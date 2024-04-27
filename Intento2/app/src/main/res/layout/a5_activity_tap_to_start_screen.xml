@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Screens_activities.MainScreen">
+    tools:context=".Screens_activities.TapToStartScreen">
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/azul"
         android:layout_width="match_parent"
@@ -16,8 +17,8 @@
         app:layout_constraintTop_toTopOf="@id/h25"
         app:layout_constraintBottom_toBottomOf="@id/h26"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintRight_toRightOf="parent" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/rojo"
         android:layout_width="match_parent"
@@ -28,11 +29,10 @@
         app:layout_constraintTop_toTopOf="@id/h26"
         app:layout_constraintBottom_toBottomOf="@id/h27"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
-        android:id="@+id/main_cards"
+        android:id="@+id/taptostart_cards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo_without_letters"
@@ -40,10 +40,10 @@
         app:layout_constraintBottom_toBottomOf="@id/h22"
         app:layout_constraintLeft_toLeftOf="@id/v21"
         app:layout_constraintRight_toRightOf="@id/v22"
-        android:transitionName="cardanimation"
-        />
+        android:transitionName="cardanimation" />
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/main_screen_title"
+        android:id="@+id/taptostart_screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/h23"
@@ -54,10 +54,10 @@
         android:textAlignment="center"
         android:textColor="#ED3B3B"
         android:textSize="50sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_log_button"
+        android:id="@+id/taptostart_log_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/login_button"
@@ -69,11 +69,10 @@
         app:layout_constraintTop_toTopOf="@id/h28"
         app:layout_constraintBottom_toBottomOf="@id/h29"
         app:layout_constraintLeft_toLeftOf="@id/v21"
-        app:layout_constraintRight_toRightOf="@id/v22"
+        app:layout_constraintRight_toRightOf="@id/v22" />
 
-        />
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_sign_button"
+        android:id="@+id/taptostart_sign_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/signin_button"
@@ -85,9 +84,8 @@
         app:layout_constraintTop_toTopOf="@id/h29"
         app:layout_constraintBottom_toBottomOf="@id/h30"
         app:layout_constraintLeft_toLeftOf="@id/v21"
-        app:layout_constraintRight_toRightOf="@id/v22"
+        app:layout_constraintRight_toRightOf="@id/v22" />
 
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,12 +93,11 @@
         app:layout_constraintTop_toTopOf="@+id/h31"
         app:layout_constraintBottom_toBottomOf="@id/h32"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        >
+        app:layout_constraintRight_toRightOf="parent" >
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -126,9 +123,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            >
+            android:orientation="vertical" >
 
             <ImageView
                 android:layout_width="match_parent"
@@ -138,8 +133,38 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!--Constraints horizontales-->
 
+    <!--Constraints verticales-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+
+    <!--Constraints horizontales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h21"
         android:layout_width="wrap_content"
@@ -153,6 +178,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h23"
         android:layout_width="wrap_content"
@@ -166,6 +192,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h25"
         android:layout_width="wrap_content"
@@ -179,67 +206,47 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.70" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.80" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.99" />
-
-    <!--Constraints verticales-->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
