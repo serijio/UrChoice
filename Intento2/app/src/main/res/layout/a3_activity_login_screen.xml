@@ -26,6 +26,7 @@
         android:text="@string/login"
         style="@style/LoginStyle" />
 
+
     <!--Constraints horizontales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h400"

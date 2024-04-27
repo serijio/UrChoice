@@ -38,7 +38,7 @@ public class LoginScreen extends AppCompatActivity {
                 .build();
         userApi = retrofit.create(UserAPI.class);
     }
-
+    /*
     public void Login(Dialog dialog) {
         TextView emailTextView = dialog.findViewById(R.id.register_name);
         TextView contraTextView = dialog.findViewById(R.id.register_pass);
@@ -68,4 +68,6 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
     }
+    */
+
 }

@@ -164,6 +164,7 @@
         app:layout_constraintRight_toRightOf="@id/v6"
         app:layout_constraintTop_toTopOf="@id/h4"
         app:layout_constraintBottom_toBottomOf="@id/h5"
+        android:transitionName="splashbluecard"
 
         />
     <ImageView
@@ -175,7 +176,7 @@
         app:layout_constraintLeft_toLeftOf="@id/v7"
         app:layout_constraintTop_toTopOf="@id/h4"
         app:layout_constraintBottom_toBottomOf="@id/h5"
-        android:transitionName="prueba2"
+        android:transitionName="splashredcard"
         />
 
 

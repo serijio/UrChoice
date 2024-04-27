@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextPaint;
+import android.util.Pair;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -85,9 +87,12 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashScreen.this, StartScreen.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(bluecard,"splashbluecard");
+                pairs[1] = new Pair<View, String>(redcard,"splashredcard");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this);
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this,pairs);
                     startActivity(intent, options.toBundle());
                 } else {
                     startActivity(intent);

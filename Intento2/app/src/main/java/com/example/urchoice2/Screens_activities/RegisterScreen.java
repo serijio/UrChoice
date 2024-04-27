@@ -37,9 +37,10 @@ public class RegisterScreen extends AppCompatActivity {
                 .build();
         userApi = retrofit.create(UserAPI.class);
     }
-
+    /*
 
     public void Registrer(Dialog dialog) {
+
         TextView emailTextView = dialog.findViewById(R.id.register_name);
         TextView nickTextView = dialog.findViewById(R.id.register_surname);
         TextView imgTextView = dialog.findViewById(R.id.register_email);
@@ -67,4 +68,6 @@ public class RegisterScreen extends AppCompatActivity {
             }
         });
     }
+    */
+
 }

@@ -9,8 +9,11 @@ import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextPaint;
+import android.util.Pair;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
@@ -18,6 +21,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 public class StartScreen extends AppCompatActivity {
     MaterialTextView MtextView;
+    ImageView start_bluecard, start_redcard;
     MaterialButton tapButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,8 @@ public class StartScreen extends AppCompatActivity {
         setContentView(R.layout.a2_activity_start_screen);
         MtextView = findViewById(R.id.lobby_app_title);
         tapButton = findViewById(R.id.tapScreenButton);
+        start_redcard = findViewById(R.id.start_redcard);
+        start_bluecard = findViewById(R.id.start_bluecard);
         setDegradadoTitulo();
         tapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,17 +53,26 @@ public class StartScreen extends AppCompatActivity {
         MtextView.getPaint().setShader(textShader);
     }
     public void ChangeButton(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(StartScreen.this, MainScreen.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(start_bluecard,"startbluecard");
+                pairs[1] = new Pair<View, String>(start_redcard,"startredcard");
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StartScreen.this,pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        },400);
 
 
-        Intent intent = new Intent(StartScreen.this, MainActivity.class);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StartScreen.this);
-            startActivity(intent, options.toBundle());
-        } else {
-            startActivity(intent);
-            finish();
-        }
     }
 
 
