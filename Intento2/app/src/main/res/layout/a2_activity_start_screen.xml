@@ -45,7 +45,7 @@
         app:layout_constraintLeft_toLeftOf="@id/v14"
         app:layout_constraintRight_toRightOf="@id/v12"
         app:layout_constraintTop_toTopOf="@id/h12"
-        app:layout_constraintVertical_bias="0.49" />
+    />
 
     <ImageView
         android:id="@+id/start_bluecard"
