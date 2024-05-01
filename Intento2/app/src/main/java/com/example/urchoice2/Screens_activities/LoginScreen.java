@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,11 @@ public class LoginScreen extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userApi = retrofit.create(UserAPI.class);
+    }
+
+    public void ToRegister(View view) {
+        Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
+        startActivity(intent);
     }
     /*
     public void Login(Dialog dialog) {
