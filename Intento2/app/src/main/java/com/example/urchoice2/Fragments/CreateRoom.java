@@ -25,7 +25,7 @@ public class CreateRoom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.f5_fragment_create_room_screen);
+        setContentView(R.layout.xx_fragment_create_room_screen);
 
         // Declare and initialize the array of images and backgrounds
         final int[] images = {
@@ -60,7 +60,7 @@ public class CreateRoom extends AppCompatActivity {
         private final int[] mBackgrounds;
 
         public CustomAdapter(Context context, String[] options, int[] images, int[] backgrounds) {
-            super(context, R.layout.f5_fragment_x_spinner_category_list, options);
+            super(context, R.layout.xx_fragment_x_spinner_category_list, options);
             this.mContext = context;
             this.mOptions = options;
             this.mImages = images;
@@ -70,7 +70,7 @@ public class CreateRoom extends AppCompatActivity {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view = inflater.inflate(R.layout.f5_fragment_x_spinner_category_list, parent, false);
+            View view = inflater.inflate(R.layout.xx_fragment_x_spinner_category_list, parent, false);
 
             TextView textViewLabel = view.findViewById(R.id.textViewLabel);
             ImageView imageViewIcon = view.findViewById(R.id.imageViewIcon);
@@ -85,7 +85,7 @@ public class CreateRoom extends AppCompatActivity {
         @Override
         public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view = inflater.inflate(R.layout.f5_fragment_x_spinner_category_list, parent, false);
+            View view = inflater.inflate(R.layout.xx_fragment_x_spinner_category_list, parent, false);
 
             ImageView imageViewIcon = view.findViewById(R.id.imageViewIcon);
             TextView textViewLabel = view.findViewById(R.id.textViewLabel);
