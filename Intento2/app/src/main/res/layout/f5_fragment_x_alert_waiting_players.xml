@@ -26,9 +26,28 @@
         android:textAlignment="center"
         />
     <com.google.android.material.button.MaterialButton
-        android:layout_width="250dp"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="495dp"
+        android:layout_marginLeft="25dp"
+        android:layout_alignParentLeft="true"
+        android:background="#00FFFFFF"
+        android:backgroundTint="@null"
+        android:textColor="@color/white"
+        android:text="START"
+        android:textSize="30dp"
         />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="165dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="495dp"
+        android:layout_marginRight="25dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="@null"
+        android:text="EXIT"
+        android:textSize="30dp"
+        android:textColor="@color/white" />
 
 </RelativeLayout>
