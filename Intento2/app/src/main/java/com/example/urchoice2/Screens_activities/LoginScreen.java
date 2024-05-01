@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +40,19 @@ public class LoginScreen extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userApi = retrofit.create(UserAPI.class);
+    }
+
+    public void LoginNow(View view) {
+        TextInputLayout loginEmailLayout = findViewById(R.id.login_email);
+        TextInputLayout loginPassLayout = findViewById(R.id.login_pass);
+
+        TextInputEditText loginEmailEditText = (TextInputEditText) loginEmailLayout.getEditText();
+        TextInputEditText loginPassEditText = (TextInputEditText) loginPassLayout.getEditText();
+
+        String loginEmail = loginEmailEditText.getText().toString();
+        String loginPass = loginPassEditText.getText().toString();
+
+
     }
 
     public void ToRegister(View view) {
