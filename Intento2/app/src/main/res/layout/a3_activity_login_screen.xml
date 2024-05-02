@@ -126,6 +126,7 @@
         app:layout_constraintBottom_toTopOf="@id/h41"
         app:layout_constraintStart_toEndOf="@id/v32"
         app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="LoginNow"
         android:scaleType="fitXY"
         android:src="@drawable/loglobby_rec2" />
 

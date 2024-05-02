@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
+import com.example.urchoice2.SQL.CrudSQL;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,6 +25,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginScreen extends AppCompatActivity {
+
+    CrudSQL crud;
 
     private UserAPI userApi;
 
@@ -43,6 +46,9 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     public void LoginNow(View view) {
+        crud = new CrudSQL();
+        crud.conexion();
+
         TextInputLayout loginEmailLayout = findViewById(R.id.login_email);
         TextInputLayout loginPassLayout = findViewById(R.id.login_pass);
 
@@ -52,6 +58,18 @@ public class LoginScreen extends AppCompatActivity {
         String loginEmail = loginEmailEditText.getText().toString();
         String loginPass = loginPassEditText.getText().toString();
 
+        String checkIfExistsQuery = "SELECT COUNT(*) FROM users WHERE email_user = '" + loginEmail + "' AND pass_user = '" + loginPass +  "'";
+
+        crud.getCount(checkIfExistsQuery, count -> {
+            if (count == 0) {
+                Toast.makeText(this, "Login information isn't correct", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Welcome " + loginEmail, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainScreen.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

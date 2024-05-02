@@ -60,7 +60,7 @@ public class TapToStartScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(TapToStartScreen.this, LoginScreen.class);
+                Intent intent = new Intent(TapToStartScreen.this, StartScreen.class);
                 Pair[] pairs = new Pair[1];
                 pairs[0] = new Pair<View, String>(mainCards, "cardAnimation");
 
