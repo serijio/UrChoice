@@ -2,20 +2,13 @@ package com.example.urchoice2.Screens_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.urchoice2.API.UserAPI;
-import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,7 +19,7 @@ public class RegisterScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a4_activity_register_screen);
+        setContentView(R.layout.a5___activity_register_screen);
         Conectar();
     }
 

@@ -33,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //DEGRADADO DE TITULO
-        setContentView(R.layout.a1_activity_splash_screen);
+        setContentView(R.layout.a1___activity_splash_screen);
         MtextView = findViewById(R.id.splash_app_title);
         setDegradadoTitulo();
 
@@ -86,7 +86,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, StartScreen.class);
+                Intent intent = new Intent(SplashScreen.this, TapToStartScreen.class);
                 Pair[] pairs = new Pair[2];
                 pairs[0] = new Pair<View, String>(bluecard,"splashbluecard");
                 pairs[1] = new Pair<View, String>(redcard,"splashredcard");

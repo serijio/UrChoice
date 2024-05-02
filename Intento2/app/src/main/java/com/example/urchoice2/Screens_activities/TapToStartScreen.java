@@ -21,29 +21,25 @@ import com.google.android.material.textview.MaterialTextView;
 
 public class TapToStartScreen extends AppCompatActivity {
     MaterialTextView MtextView;
-    ImageView mainCards;
-
-    MaterialButton login_tapButton;
-
+    ImageView start_bluecard, start_redcard;
+    MaterialButton tapButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a5_activity_tap_to_start_screen);
-        MtextView = findViewById(R.id.taptostart_screen_title);
-        mainCards = findViewById(R.id.taptostart_cards);
-        login_tapButton = findViewById(R.id.taptostart_log_button);
+        setContentView(R.layout.a2___activity_tap_to_start_screen);
+        MtextView = findViewById(R.id.lobby_app_title);
+        tapButton = findViewById(R.id.tapScreenButton);
+        start_redcard = findViewById(R.id.start_redcard);
+        start_bluecard = findViewById(R.id.start_bluecard);
         setDegradadoTitulo();
-
-
-        login_tapButton.setOnClickListener(new View.OnClickListener() {
+        tapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ChangeButton();
             }
         });
-
     }
-    private void setDegradadoTitulo() {
+    private void setDegradadoTitulo(){
         TextPaint pintar = MtextView.getPaint();
         float width = pintar.measureText(("UrChoice"));
         //Establecemos el tamaño del degradado que se va a plicar en el MaterialTextView
@@ -56,23 +52,28 @@ public class TapToStartScreen extends AppCompatActivity {
                 }, null, Shader.TileMode.CLAMP);
         MtextView.getPaint().setShader(textShader);
     }
-    public void ChangeButton() {
+    public void ChangeButton(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(TapToStartScreen.this, StartScreen.class);
-                Pair[] pairs = new Pair[1];
-                pairs[0] = new Pair<View, String>(mainCards, "cardAnimation");
-
+                Intent intent = new Intent(TapToStartScreen.this, MainScreen.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(start_bluecard,"startbluecard");
+                pairs[1] = new Pair<View, String>(start_redcard,"startredcard");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TapToStartScreen.this, pairs);
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TapToStartScreen.this,pairs);
                     startActivity(intent, options.toBundle());
                 } else {
                     startActivity(intent);
                     finish();
                 }
             }
-        }, 400);
+        },400);
+
+
+
     }
+
+
 }
