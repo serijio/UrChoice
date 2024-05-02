@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.CreateRoom">
+    tools:context=".Fragments.CreateRoomFragment">
     <ImageView
 
         android:layout_width="match_parent"
@@ -142,15 +142,15 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/create_room_button"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                app:backgroundTint="@null"
                 android:background="@drawable/button_blue_border"
                 android:text="CREATE"
+                android:textColor="@color/white"
                 android:textSize="35dp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                />
+                app:backgroundTint="@null" />
 
         </LinearLayout>
     </LinearLayout>

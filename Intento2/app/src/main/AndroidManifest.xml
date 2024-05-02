@@ -46,10 +46,6 @@
         <activity
             android:name=".Screens_activities.LoginScreen"
             android:exported="false" />
-        <activity
-            android:name=".Fragments.CreateRoom"
-            android:exported="false">
-        </activity>
     </application>
 
 </manifest>
