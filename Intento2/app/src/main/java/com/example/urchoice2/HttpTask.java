@@ -20,6 +20,7 @@ public class HttpTask extends AsyncTask<Void, Void, String> {
         BufferedReader reader = null;
         String response = null;
 
+        //Hola
         try {
             URL url = new URL(SERVER_URL);
             urlConnection = (HttpURLConnection) url.openConnection();
