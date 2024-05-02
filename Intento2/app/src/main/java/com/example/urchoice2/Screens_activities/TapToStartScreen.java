@@ -70,10 +70,5 @@ public class TapToStartScreen extends AppCompatActivity {
                 }
             }
         },400);
-
-
-
     }
-
-
 }

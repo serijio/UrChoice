@@ -44,7 +44,6 @@ public class SplashScreen extends AppCompatActivity {
         right_middleAnimation = AnimationUtils.loadAnimation(this, R.anim.right_middle_elemets_animation);
         bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_elemnts_animation);
 
-
         linea1 = findViewById(R.id.line1);
         linea2 = findViewById(R.id.line2);
         linea3 = findViewById(R.id.line3);
@@ -57,7 +56,6 @@ public class SplashScreen extends AppCompatActivity {
         linea10 = findViewById(R.id.line10);
         linea11 = findViewById(R.id.line11);
         linea12 = findViewById(R.id.line12);
-
 
         bluecard = findViewById(R.id.bluecard);
         redcard = findViewById(R.id.redcard);
@@ -98,12 +96,8 @@ public class SplashScreen extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-
-
             }
         }, 2400);
-
-
     }
 
     private void setDegradadoTitulo() {
