@@ -118,57 +118,57 @@
         android:id="@+id/rojo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/rojo"
         app:layout_constraintTop_toBottomOf="@id/h1"
         app:layout_constraintBottom_toTopOf="@id/h2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/rojo" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/azul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/azul"
         app:layout_constraintTop_toBottomOf="@id/h2"
         app:layout_constraintBottom_toTopOf="@id/h3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/azul" />
 
     <ImageView
         android:id="@+id/bluecard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/bluecard"
         app:layout_constraintTop_toBottomOf="@id/h4"
         app:layout_constraintBottom_toTopOf="@id/h5"
         app:layout_constraintStart_toEndOf="@id/v1"
         app:layout_constraintEnd_toStartOf="@id/v2"
+        android:src="@drawable/bluecard"
         android:transitionName="splashbluecard" />
 
     <ImageView
         android:id="@+id/redcard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/redcard"
         app:layout_constraintTop_toBottomOf="@id/h6"
         app:layout_constraintBottom_toTopOf="@id/h7"
         app:layout_constraintStart_toEndOf="@id/v3"
         app:layout_constraintEnd_toStartOf="@id/v4"
+        android:src="@drawable/redcard"
         android:transitionName="splashredcard" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/splash_app_title"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/app_title"
         app:layout_constraintTop_toBottomOf="@id/h8"
         app:layout_constraintBottom_toTopOf="@id/h9"
         app:layout_constraintStart_toEndOf="@id/v5"
         app:layout_constraintEnd_toStartOf="@id/v6"
+        android:text="@string/app_title"
         android:transitionName="prueba1"
         style="@style/SplashScreenStyle" />
 
