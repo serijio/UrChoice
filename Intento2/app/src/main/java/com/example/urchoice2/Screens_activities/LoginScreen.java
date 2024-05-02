@@ -37,7 +37,7 @@ public class LoginScreen extends AppCompatActivity {
         userApi = retrofit.create(UserAPI.class);
     }
 
-    public void LoginNow(View view) {
+    /*public void LoginNow(View view) {
         crud = new CrudSQL();
         crud.conexion();
 
@@ -63,7 +63,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     public void ToRegister(View view) {
         Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
