@@ -2,10 +2,7 @@ package com.example.urchoice2.Screens_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityOptions;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,15 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.urchoice2.API.CategoriesAPI;
+import com.example.urchoice2.API.ElemCatAPI;
 import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.API.FriendsAPI;
+import com.example.urchoice2.API.RoomAPI;
+import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.Classes.RoomData;
 import com.example.urchoice2.Classes.RoomGame;
 import com.example.urchoice2.Classes.User;
-import com.example.urchoice2.HttpTask;
 import com.example.urchoice2.R;
 import com.example.urchoice2.SQL.CrudSQL;
 import java.util.ArrayList;
@@ -54,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
     private CategoriesAPI categoriesAPI;
 
     private FriendsAPI friendsAPI;
+    private RoomAPI roomAPI;
+    private ElemCatAPI elemCatAPI;
 
+    private RoomGameAPI roomGameAPI;
 
 
     @Override
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         crud = new CrudSQL();
         crud.conexion();
+        Conectar();
         textViewElement1 = findViewById(R.id.textViewElement1);
         textViewElement2 = findViewById(R.id.textViewElement2);
         textViewElement1.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,21 @@ public class MainActivity extends AppCompatActivity {
                 startRound();
             }
         });
+    }
+
+
+    public void Conectar(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://railwayserver-production-7692.up.railway.app")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        userApi = retrofit.create(UserAPI.class);
+        elementApi = retrofit.create(ElementsAPI.class);
+        categoriesAPI = retrofit.create(CategoriesAPI.class);
+        friendsAPI = retrofit.create(FriendsAPI.class);
+        roomAPI = retrofit.create(RoomAPI.class);
+        elemCatAPI = retrofit.create(ElemCatAPI.class);
+        roomGameAPI = retrofit.create(RoomGameAPI.class);
     }
 
 
@@ -151,143 +169,74 @@ public class MainActivity extends AppCompatActivity {
         crud.GetElements(sql, this::handleElements);
     }
 
-
      public void GetCategorias(View view) {
         String sql = "SELECT * FROM categories";
         crud.GetCategories(sql, this::handleCategories);
     }
     */
 
-public void GetUsers(){
-    userApi.getUsers().enqueue(new Callback<List<User>>() {
-        @Override
-        public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-            if (response.isSuccessful()) {
-                List<User> userList = response.body();
-            } else {
+    public void GetUsers(View view){
+        userApi.getUsers().enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> userList = response.body();
+                    for (int i = 0; i < userList.size();i++){
+                        Log.e("URCHOICE","User:" + userList.get(i).getNick_user());
+                    }
+                } else {
+                    Log.e("URCHOICE","UserERROR");
+                }
             }
-        }
 
-        @Override
-        public void onFailure(Call<List<User>> call, Throwable t) {
-        }
-    });
-
-}
-
-public void Ranking(){
-    Integer categoryId = 1;
-    elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
-        @Override
-        public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
-            if (response.isSuccessful()) {
-                List<Element> elementList = response.body();
-            } else {
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
             }
-        }
-
-        @Override
-        public void onFailure(Call<List<Element>> call, Throwable t) {
-        }
-    });
-
-}
-
-public void GetCategories(){
-    categoriesAPI.getCategories().enqueue(new Callback<List<Category>>() {
-        @Override
-        public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-            if (response.isSuccessful()) {
-                List<Category> categoryList = response.body();
-            } else {
-            }
-        }
-
-        @Override
-        public void onFailure(Call<List<Category>> call, Throwable t) {
-        }
-    });
-
-}
-
-
-public void SendRequestFriend(){
-    Integer id_us1 = 4;
-    Integer id_us2 = 5;
-    friendsAPI.addFriend(id_us1, id_us2).enqueue(new Callback<Void>() {
-        @Override
-        public void onResponse(Call<Void> call, Response<Void> response) {
-            if (response.isSuccessful()) {
-            } else {
-            }
-        }
-
-        @Override
-        public void onFailure(Call<Void> call, Throwable t) {
-        }
-    });
-
-}
-
-public void Friend(){
-    Integer id_us1 = 4;
-    Integer id_us2 = 5;
-    String nuevoEstado = "Aceptada";
-    friendsAPI.updateFriendRelation(id_us1, id_us2, nuevoEstado).enqueue(new Callback<Void>() {
-        @Override
-        public void onResponse(Call<Void> call, Response<Void> response) {
-            if (response.isSuccessful()) {
-                // La actualización fue exitosa
-            } else {
-                // Manejar el error de respuesta
-            }
-        }
-
-        @Override
-        public void onFailure(Call<Void> call, Throwable t) {
-            // Manejar el fallo de la llamada
-        }
-    });
-
-}
-    public void handleCategories(List<Category> categories) {
-        Log.e("SQL", "Error al obtener categorías: " + categories.size());
-        // Ahora puedes trabajar con la lista de categorías
-        for (Category categoria : categories) {
-            // Hacer algo con cada categoría, por ejemplo, imprimir sus detalles
-            Log.d("Categoria", "ID: " + categoria.id_cat + ", Nombre: " + categoria.name_cat + ", Imagen: " + categoria.img_cat);
-        }
+        });
     }
 
-    public void handleElements(List<Element> elements) {
-        Log.e("SQL", "Error al obtener elementos: " + elements.size());
-        // Ahora puedes trabajar con la lista de elementos
-        for (Element element : elements) {
-            // Hacer algo con cada elemento, por ejemplo, imprimir sus detalles
-            Log.d("Elemento", "ID: " + element.id_elem + ", Nombre: " + element.name_elem + ", Imagen: " + element.img_elem + ", Victorias: " + element.victories);
-        }
+    public void Ranking(View view){
+        Integer categoryId = 1;
+        elementApi.getRanking(categoryId).enqueue(new Callback<List<Element>>() {
+            @Override
+            public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
+                if (response.isSuccessful()) {
+                    List<Element> elementList = response.body();
+                    for (int i = 0; i < elementList.size();i++){
+                        Log.e("URCHOICE","Elemento:" + elementList.get(i).getName_elem());
+                    }
+                } else {
+                    Log.e("URCHOICE","ElementoERROR");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Element>> call, Throwable t) {
+                Log.e("URCHOICE","ElementoERROR2");
+            }
+        });
     }
 
-    public void handleUsers(List<User> users) {
-        Log.e("SQL", "Error al obtener elementos: " + users.size());
-        // Ahora puedes trabajar con la lista de elementos
-        for (User user : users) {
-            // Hacer algo con cada elemento, por ejemplo, imprimir sus detalles
-            Log.d("Usuario", "ID: " + user.id_user + ", GMAIL: " + user.email_user + ", NICK: " + user.nick_user + ", PASSWORD: " + user.pass_user + ",IMG:" + user.img_user);
-        }
+    public void Game(View view){
+        Integer categoryId = 1;
+        elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
+            @Override
+            public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
+                if (response.isSuccessful()) {
+                    List<Element> elementList = response.body();
+                    Collections.shuffle(elementList);
+                    shuffledElements = elementList;
+                    startRound();
+                } else {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Element>> call, Throwable t) {
+            }
+        });
     }
 
-    public void handleElementsGame(List<Element> elements) {
-        Log.e("SQL", "Error al obtener elementos: " + elements.size());
-        // Ahora puedes trabajar con la lista de elementos
-        Collections.shuffle(elements);
-        for (Element element : elements) {
-            // Hacer algo con cada elemento, por ejemplo, imprimir sus detalles
-            Log.d("Elemento", "ID: " + element.id_elem + ", Nombre: " + element.name_elem + ", Imagen: " + element.img_elem + ", Victorias: " + element.victories);
-        }
-        shuffledElements = elements;
-        startRound();
-    }
 
     private void startRound() {
         runOnUiThread(new Runnable() {
@@ -307,145 +256,203 @@ public void Friend(){
                 } else {
                     SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                     int id_cat = sharedPreferences.getInt("id_cat", 0);
-                    String sql = "UPDATE elemcat SET victories = '" + (shuffledElements.get(0).getVictories() + 1) + "' WHERE id_elem = '" + shuffledElements.get(0).getId_element() + "' " +
-                            "AND id_cat = '" + id_cat + "'";
 
-                    crud.Update(sql);
-                    Toast.makeText(MainActivity.this, "Ha ganado" + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
+                    Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_element(), id_cat, shuffledElements.get(0).getVictories());
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                // La actualización se realizó correctamente
+                                Log.d("ElemCatUpdate", "Actualización exitosa");
+                                Toast.makeText(MainActivity.this, "Ha ganado" + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Error en la respuesta del servidor
+                                Log.e("ElemCatUpdate", "Error en la respuesta del servidor: " + response.message());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            // Error en la llamada (p. ej., problemas de red)
+                            Log.e("ElemCatUpdate", "Error en la llamada: " + t.getMessage());
+                        }
+                    });
                 }
             }
         });
     }
 
-    public void Game(View view) {
-        Integer id_cat = 1;
-        SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("id_cat", id_cat);
-        editor.apply();
-        String sql = "SELECT e.id_elem, e.img_elem, e.name_elem, ec.victories FROM elements e INNER JOIN elemcat ec ON e.id_elem = ec.id_elem " +
-                "INNER JOIN categories c ON ec.id_cat = c.id_cat WHERE c.id_cat = '" + id_cat + "'";
-        crud.GetElements(sql, this::handleElementsGame);
+    public void GetCategories(){
+        categoriesAPI.getCategories().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful()) {
+                    List<Category> categoryList = response.body();
+                } else {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+            }
+        });
+
     }
 
     public void SendRequestFriend(View view){
-        int id_user = 4;
-        int id_friend_user = 5;
-        crud.addFriend(id_user,id_friend_user);
+        Integer id_us1 = 4;
+        Integer id_us2 = 5;
+        friendsAPI.addFriend(id_us1, id_us2).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("URCHOICE","Solicitud enviada");
+
+                } else {
+                    Log.e("URCHOICE","SENDERROR");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("URCHOICE","SENDERROR2");
+            }
+        });
+
     }
 
     public void AcceptFriend(View view){
-        int id_user = 4;
-        int id_friend_user = 5;
-        String estado = "Aceptado";
-        crud.updateFriendRequestStatus(id_user,id_friend_user,estado);
-    }
-
-    public void DenniedFriend(View view){
-        int id_user = 4;
-        int id_friend_user = 5;
-        String estado = "Denegado";
-        crud.updateFriendRequestStatus(id_user,id_friend_user,estado);
-    }
-
-
-    public void CreateRoom(View view){
-        String password = "";
-        String category = "1";
-        String queryRoom = "INSERT room VALUES(" +
-                "'0','" + password + "','NO LISTO','" + category + "');";
-        long roomId = crud.insertAndGetId(queryRoom);
-
-
-        Integer id_user = 4;
-        String queryRoom_Game = "INSERT room_game VALUES('0','" + roomId + "','"  + id_user + "','');";
-        crud.insert(queryRoom_Game);
-    }
-
-
-    public void JoinGame(View view){
-
-        /*if(!passwordroom.isEmpty()){
-            String passwordtry = "";
-            if(passwordtry.equals(passwordroom)){
-             String id_room = "1";
-            String id_user = "4";
-            String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_user + "','');";
-            crud.insert(queryRoom_Game);
-            }else{
-                Toast.makeText(this, "Contraseña Errónea", Toast.LENGTH_SHORT).show();
-            }
-        }else{
-           String id_room = "1";
-        String id_user = "4";
-        String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_user + "','');";
-        crud.insert(queryRoom_Game);
-        }*/
-
-
-        String id_room = "1";
-        String id_user = "4";
-        String queryRoom_Game = "INSERT room_game VALUES('0','" + id_room + "','" + id_user + "','');";
-        crud.insert(queryRoom_Game);
-    }
-
-
-    private void getUsersRoom() {
-        int id_room = 1;
-        crud.getUsersForRoom(id_room, this::setHandleroom);
-    }
-
-    public void setHandleroom(RoomData roomData) {
-        List<User> users = roomData.getUsers();
-        List<RoomGame> roomGames = roomData.getRoomGames();
-        Boolean jugar = true;
-
-        Log.e("SQL", "Cantidad de users: " + users.size());
-        for (User user : users) {
-            Log.d("Usuario", "ID: " + user.id_user + ", GMAIL: " + user.email_user + ", NICK: " + user.nick_user + ", PASSWORD: " + user.pass_user + ",IMG:" + user.img_user);
-        }
-
-        Log.e("SQL", "Cantidad de registros de room_game: " + roomGames.size());
-        for (RoomGame roomGame : roomGames) {
-            Log.d("RoomGame", "ID: " + roomGame.getId_game_room());
-            if(roomGame.getVote().equals("NO LISTO")) {
-                jugar = false;
-            }
-        }
-
-        String sql = "UPDATE room SET status = 'CERRADA' WHERE id_room = '" + roomGames.get(0).getId_room() + "'";
-        crud.Update(sql);
-
-        /*if(jugar == true) {
-            Toast.makeText(this, "Todos los jugadores están listos", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            startActivity(intent);
-        }*/
-    }
-    private void startFetchingData() {
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        Integer id_us1 = 4;
+        Integer id_us2 = 5;
+        String nuevoEstado = "Aceptada";
+        friendsAPI.updateFriendRelation(id_us1, id_us2, nuevoEstado).enqueue(new Callback<Void>() {
             @Override
-            public void run() {
-                getUsersRoom();
-                handler.postDelayed(this, 5000);
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("URCHOICE","Solicitud aceptada");
+                } else {
+                    Log.e("URCHOICE","ACCEPTERROR");
+                }
             }
-        }, 5000);
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("URCHOICE","ACCEPTERROR2");
+            }
+        });
+
     }
 
-    private void stopFetchingData() {
-        if (handler != null) {
-            handler.removeCallbacksAndMessages(null); // Detiene la ejecución del Runnable
-            handler = null;
-        }
+    public void DeniedFriend(View view){
+        Integer id_us1 = 4;
+        Integer id_us2 = 5;
+        String nuevoEstado = "Denegado";
+        friendsAPI.updateFriendRelation(id_us1, id_us2, nuevoEstado).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("URCHOICE","Solicitud rechazada");
+                } else {
+                    // Manejar el error de respuesta
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Manejar el fallo de la llamada
+            }
+        });
+
     }
+
+
+
+    public void createRoom(int categoryId, int userId) {
+        Call<Void> call = roomAPI.createRoom(categoryId, userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomCreation", "Nueva sala creada correctamente");
+                } else {
+                    // Ocurrió un error al intentar crear la sala
+                    Log.e("RoomCreation", "Error al crear la sala: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("RoomCreation", "Error de red: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void joinRoom(){
+        Integer userId = 5;
+        Integer roomId = 1;
+        Call<Void> call = roomGameAPI.createRoomGame(roomId, userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomGameCreation", "Nuevo juego de sala creado correctamente");
+                } else {
+                    Log.e("RoomGameCreation", "Error al crear el juego de sala: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Ocurrió un error de red u otro error durante la llamada
+                Log.e("RoomGameCreation", "Error de red: " + t.getMessage());
+            }
+        });
+    }
+
 
 
     public void StartGame(){
-        int id_user = 4;
-        int id_room = 1;
-        String sql = "UPDATE room_game SET vote = 'LISTO' WHERE id_room = '" + id_room +
-                "' AND id_user = '" + id_user + "'";
-        crud.Update(sql);
+        Integer userId = 5;
+        Integer roomId = 1;
+
+        Call<Void> call = roomAPI.startRoom(roomId, userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomStart", "Se ha iniciado la sala correctamente");
+                    // Aquí puedes agregar lógica adicional si es necesario
+                } else {
+                    Log.e("RoomStart", "Error al iniciar la sala: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("RoomStart", "Error de red: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void endRoom(int roomId, int userId) {
+        Call<Void> call = roomAPI.endRoom(roomId, userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomEnd", "Operación completada correctamente");
+                } else {
+                    // Ocurrió un error al intentar finalizar la sala
+                    Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Ocurrió un error de red u otro error durante la llamada
+                Log.e("RoomEnd", "Error de red: " + t.getMessage());
+            }
+        });
     }
 }
