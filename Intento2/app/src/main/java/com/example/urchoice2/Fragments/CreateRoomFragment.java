@@ -204,6 +204,7 @@ public class CreateRoomFragment extends Fragment {
             textViewLabel.setText(mOptions[position]);
 
             return view;
+            //hola
         }
     }
 }
