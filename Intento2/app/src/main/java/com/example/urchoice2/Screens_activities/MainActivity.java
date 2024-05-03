@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void createRoom(int categoryId, int userId) {
+    /*public void createRoom(int categoryId, int userId) {
         Call<Void> call = roomAPI.createRoom(categoryId, userId);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -384,7 +384,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("RoomCreation", "Error de red: " + t.getMessage());
             }
         });
-    }
+    }*/
 
 
     public void joinRoom(){

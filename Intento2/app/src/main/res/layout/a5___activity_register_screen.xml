@@ -47,6 +47,7 @@
         style="@style/SignUpSubmitFields"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sign_user_insert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
@@ -74,6 +75,7 @@
         style="@style/SignUpSubmitFields"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sign_email_insert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -104,6 +106,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sign_pass_insert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pass"
@@ -134,6 +137,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sign_pass2_insert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/confirm"

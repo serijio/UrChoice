@@ -66,6 +66,7 @@
         style="@style/LoginSubmitFields"
         >
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_email_insert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -96,6 +97,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_pass_insert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pass"

@@ -3,32 +3,37 @@ package com.example.urchoice2.Screens_activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.urchoice2.API.UserAPI;
+import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.SQL.CrudSQL;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginScreen extends AppCompatActivity {
-
     ImageView blueBack;
     MaterialButton logToStart, logNow;
-
-    CrudSQL crud;
-
     private UserAPI userApi;
 
     @Override
@@ -50,7 +55,8 @@ public class LoginScreen extends AppCompatActivity {
         logNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginNow();
+
+                Login();
             }
         });
     }
@@ -83,44 +89,9 @@ public class LoginScreen extends AppCompatActivity {
         }, 400);
     }
 
-    public void LoginNow () {
-        Intent intent = new Intent(this, MainScreen.class);
-        startActivity(intent);
-    }
-
-    /*public void LoginNow(View view) {
-        crud = new CrudSQL();
-        crud.conexion();
-
-        TextInputLayout loginEmailLayout = findViewById(R.id.login_email);
-        TextInputLayout loginPassLayout = findViewById(R.id.login_pass);
-
-        TextInputEditText loginEmailEditText = (TextInputEditText) loginEmailLayout.getEditText();
-        TextInputEditText loginPassEditText = (TextInputEditText) loginPassLayout.getEditText();
-
-        String loginEmail = loginEmailEditText.getText().toString();
-        String loginPass = loginPassEditText.getText().toString();
-
-        String checkIfExistsQuery = "SELECT COUNT(*) FROM users WHERE email_user = '" + loginEmail + "' AND pass_user = '" + loginPass +  "'";
-
-        crud.getCount(checkIfExistsQuery, count -> {
-            if (count == 0) {
-                Toast.makeText(this, "Login information isn't correct", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Welcome " + loginEmail, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainScreen.class);
-                startActivity(intent);
-
-            }
-        });
-
-    }*/
-
-    /*
-    public void Login(Dialog dialog) {
-        TextView emailTextView = dialog.findViewById(R.id.register_name);
-        TextView contraTextView = dialog.findViewById(R.id.register_pass);
-
+    public void Login() {
+        TextView emailTextView = findViewById(R.id.login_email_insert);
+        TextView contraTextView = findViewById(R.id.login_pass_insert);
         String emailString = emailTextView.getText().toString();
         String contraString = contraTextView.getText().toString();
 
@@ -134,10 +105,11 @@ public class LoginScreen extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("id_user", user.getId_user());
                     editor.apply();
-                    Intent intent = new Intent(LoginScreen.this, MainActivity.class);
+                    Log.e("SQL","Usuario encontrado");
+                    Intent intent = new Intent(LoginScreen.this, MainScreen.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LoginScreen.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -146,6 +118,4 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
     }
-    */
-
 }
