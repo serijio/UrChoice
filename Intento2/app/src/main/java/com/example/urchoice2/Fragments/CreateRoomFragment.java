@@ -1,5 +1,6 @@
 package com.example.urchoice2.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.R;
@@ -27,7 +29,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateRoomFragment extends Fragment {
     private TextInputLayout textInputLayout;
-    private Spinner spinner;
+
+    private MaterialButton categoryButton;
     private MaterialButton createRoomButton;
 
     public CreateRoomFragment() {
@@ -57,9 +60,8 @@ public class CreateRoomFragment extends Fragment {
 
         // Configure the Spinner and the custom adapter
         String[] options = {"CHOOSE CATEGORY", "UMA USUME", "SIRGAY"};
-        spinner = view.findViewById(R.id.Spinner01);
-        CustomAdapter adapter = new CustomAdapter(requireContext(), options, images, backgrounds);
-        spinner.setAdapter(adapter);
+
+
 
         createRoomButton = view.findViewById(R.id.create_room_button);
         createRoomButton.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +71,17 @@ public class CreateRoomFragment extends Fragment {
             }
         });
 
+        categoryButton = view.findViewById(R.id.choose_categorybutton);
+        categoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                category_alertDialogOpen();
+            }
+        });
+
         return view;
+
+
     }
 
     private void alertDialogOpen() {
@@ -79,6 +91,7 @@ public class CreateRoomFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_players);
 
         String[] usernames = {"TheRockex", "Spidey1912", "Lukinda551", "LordGrim551", "TuMama", "王八蛋"};
+
         recyclerView.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             @NonNull
             @Override
@@ -155,56 +168,75 @@ public class CreateRoomFragment extends Fragment {
         });
     }
 
-    public class CustomAdapter extends ArrayAdapter<String> {
-        private final Context mContext;
-        private final String[] mOptions;
-        private final int[] mImages;
-        private final int[] mBackgrounds;
+    private void category_alertDialogOpen() {
+        // Inflar el diseño del AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___fragment_x_choose_category_alert, null);
 
-        public CustomAdapter(Context context, String[] options, int[] images, int[] backgrounds) {
-            super(context, R.layout.f5___fragment_x_spinner_category_list, options);
-            this.mContext = context;
-            this.mOptions = options;
-            this.mImages = images;
-            this.mBackgrounds = backgrounds;
-        }
+        // Crear el AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view = inflater.inflate(R.layout.f5___fragment_x_spinner_category_list, parent, false);
+        // Obtener la referencia del RecyclerView dentro del diseño del AlertDialog
+        RecyclerView category_recyclerView = view.findViewById(R.id.recycler_category);
 
-            TextView textViewLabel = view.findViewById(R.id.textViewLabel);
-            ImageView imageViewIcon = view.findViewById(R.id.imageViewIcon);
+        // Datos para el RecyclerView
+        String[] category_name = {"CHOOSE CATEGORY", "UMA USUME", "SIRGAY"};
+        final int[] images = {
+                R.drawable.background_transparent,
+                R.drawable.a,
+                R.drawable.b,
+                // Añadir más imágenes si es necesario
+        };
 
-            textViewLabel.setText(mOptions[position]);
-            imageViewIcon.setImageResource(mImages[position]);
+        // Configurar el RecyclerView
+        categoryButton.findViewById(R.id.choose_categorybutton);
+        AlertDialog alertDialog = builder.create();
+        category_recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        category_recyclerView.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f5___fragment_x_category_cardview_list, parent, false);
+                return new RecyclerView.ViewHolder(itemView) {};
+            }
 
-            return view;
-        }
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+                // Obtener las vistas dentro de la CardView
+                ImageView imageView = holder.itemView.findViewById(R.id.card_image);
+                TextView textView = holder.itemView.findViewById(R.id.card_title);
 
-        @NonNull
-        @Override
-        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view = inflater.inflate(R.layout.f5___fragment_x_spinner_category_list, parent, false);
+                // Establecer los datos en las vistas
+                imageView.setImageResource(images[position]);
+                textView.setText(category_name[position]);
 
-            ImageView imageViewIcon = view.findViewById(R.id.imageViewIcon);
-            TextView textViewLabel = view.findViewById(R.id.textViewLabel);
+                // Añadir onClickListener a cada elemento de RecyclerView
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Cerrar el AlertDialog
+                        alertDialog.dismiss();
+                        // Cambiar el fondo y el texto del MaterialButton
+                        categoryButton.setBackgroundResource(images[position]);
+                        categoryButton.setText(category_name[position]);
+                    }
+                });
+            }
 
-            // Set image and background
-            imageViewIcon.setImageResource(mImages[position]);
-            view.setBackgroundResource(mBackgrounds[position]);
+            @Override
+            public int getItemCount() {
+                return category_name.length;
+            }
+        });
 
-            // Establecer transparencia para el icono
+        // Crear y mostrar el AlertDialog
 
-
-            // Establecer transparencia para el texto
-            textViewLabel.setText(mOptions[position]);
-
-            return view;
-            //hola
-        }
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
     }
+
+
+
 }

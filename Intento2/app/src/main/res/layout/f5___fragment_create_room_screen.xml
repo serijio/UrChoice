@@ -51,19 +51,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-<<<<<<< Updated upstream
             android:orientation="vertical" >
 
-=======
-<<<<<<< HEAD
-            android:orientation="vertical"
-
-            >
-=======
-            android:orientation="vertical" >
-
->>>>>>> 41a5d4911a48d0a74d7166bfd8175b64559b4cf6
->>>>>>> Stashed changes
             <View
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -77,10 +66,10 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:paddingTop="25dp"
-                    android:paddingBottom="25dp"
                     android:paddingLeft="50dp"
+                    android:paddingTop="25dp"
                     android:paddingRight="50dp"
+                    android:paddingBottom="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
                     <com.google.android.material.textfield.TextInputEditText
@@ -91,10 +80,10 @@
                         android:background="@drawable/black_border" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/choose_categorybutton"
+                <!--<com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:id="@+id/inputlayout"
                     android:layout_width="match_parent"
-<<<<<<< Updated upstream
                     android:layout_height="105dp"
                     android:paddingLeft="50dp"
                     android:paddingTop="25dp"
@@ -111,18 +100,7 @@
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>-->
-=======
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="50dp"
-                    android:layout_marginBottom="0dp"
-                    android:text="CHOOSE CATEGORY"
-                    android:textAlignment="textStart"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/black_border"
-                    />
->>>>>>> Stashed changes
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -140,17 +118,22 @@
                         android:hint="PIN"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-<<<<<<< HEAD
-=======
-                <Spinner
-                    android:id="@+id/Spinner01"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="280dp"
-                    android:layout_height="80dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/choose_categorybutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginRight="25dp"
-                    android:spinnerMode="dropdown"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="CHOOSE CATEGORY"
+                    android:textAlignment="textStart"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/black_border"
+                    />
+
+
+
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -163,58 +146,11 @@
                 android:textSize="35dp"
                 android:textStyle="bold"
                 app:backgroundTint="@null" />
->>>>>>> 41a5d4911a48d0a74d7166bfd8175b64559b4cf6
 
         </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-       android:id="@+id/create_room_button"
-       android:layout_width="match_parent"
-       android:layout_height="80dp"
-       android:background="@drawable/button_blue_border"
-       android:text="CREATE"
-       android:textColor="@color/white"
-       android:textSize="35dp"
-       android:textStyle="bold"
-       app:backgroundTint="@null" />
-
     </LinearLayout>
-</LinearLayout>
 
 
-<<<<<<< HEAD
-
-
-<<<<<<< Updated upstream
-=======
-
-<androidx.constraintlayout.widget.Guideline
-android:id="@+id/v700"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-app:layout_constraintGuide_percent="0.1"/>
-<androidx.constraintlayout.widget.Guideline
-android:id="@+id/v701"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-app:layout_constraintGuide_percent="0.9"/>
-<androidx.constraintlayout.widget.Guideline
-android:id="@+id/v702"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-app:layout_constraintGuide_percent="0.1"/>
-<androidx.constraintlayout.widget.Guideline
-android:id="@+id/v703"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-app:layout_constraintGuide_percent="0.9"/>
-<!--Constraints horizontales-->
-=======
->>>>>>> Stashed changes
     <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v700"
@@ -246,7 +182,6 @@ app:layout_constraintGuide_percent="0.9"/>
 
 
     <!--Constraints horizontales-->
->>>>>>> 41a5d4911a48d0a74d7166bfd8175b64559b4cf6
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h700"
         android:layout_width="wrap_content"

@@ -15,7 +15,7 @@
             android:id="@+id/imageViewIcon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/redcard"
+            android:src="@drawable/b"
             android:scaleType="centerCrop"
             android:alpha="0.5"/> <!-- Aquí puedes poner una imagen por defecto -->
 

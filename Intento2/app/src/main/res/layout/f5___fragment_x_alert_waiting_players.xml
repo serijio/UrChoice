@@ -2,16 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-<<<<<<< Updated upstream
     xmlns:app="http://schemas.android.com/apk/res-auto" >
-=======
-<<<<<<< HEAD
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-=======
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
->>>>>>> 41a5d4911a48d0a74d7166bfd8175b64559b4cf6
->>>>>>> Stashed changes
 
     <ImageView
         android:id="@+id/waiting_playes_background"
