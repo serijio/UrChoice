@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/black_border"
+>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/category_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <ImageView
+            android:id="@+id/imageViewIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/redcard"
+            android:scaleType="centerCrop"
+            android:alpha="0.5"/> <!-- Aquí puedes poner una imagen por defecto -->
+
+
+        <TextView
+            android:id="@+id/textViewLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"
+            android:text="hola"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
