@@ -88,6 +88,7 @@
             android:paddingTop="50dp"
             >
             <com.google.android.material.button.MaterialButton
+
                 android:id="@+id/create_private_room_button"
                 android:layout_width="250dp"
                 android:layout_height="200dp"

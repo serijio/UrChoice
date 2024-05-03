@@ -26,20 +26,33 @@ public class PrivateFragment extends Fragment {
    public PrivateFragment(){
 
    }
-   @Override
-   public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                            Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.f5___fragment_private_screen,container,false);
 
+   @Override
+   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      View view = inflater.inflate(R.layout.f5___fragment_private_screen, container, false);
+
+      create_category_button = view.findViewById(R.id.create_category_button);
       create_private_room_button = view.findViewById(R.id.create_private_room_button);
-      create_private_room_button.setOnClickListener(new View.OnClickListener() {
+
+      create_category_button.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-            Create_room_button();
+            //deshabilitar los botones antes de iniciar la transacción
+            create_category_button.setEnabled(false);
+            create_private_room_button.setEnabled(false);
+            Create_category_button();
          }
       });
 
-
+      create_private_room_button.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            //deshabilitar los botones antes de iniciar la transacción
+            create_category_button.setEnabled(false);
+            create_private_room_button.setEnabled(false);
+            Create_room_button();
+         }
+      });
 
       return view;
    }
@@ -52,4 +65,15 @@ public class PrivateFragment extends Fragment {
       transaction.commit();
    }
 
+   public void Create_category_button() {
+      try {
+         Fragment createCategory = new CreateCategory();
+         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+         transaction.replace(R.id.private_screen, createCategory);
+         transaction.addToBackStack(null);
+         transaction.commit();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 }

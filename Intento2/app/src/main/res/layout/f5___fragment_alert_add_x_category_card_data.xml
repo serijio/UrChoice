@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <ImageView
+        android:id="@+id/waiting_playes_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/start_game_background" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="450dp"
+            android:background="@drawable/circle_image"
+            android:elevation="1dp"
+            android:padding="50dp"
+            android:src="@drawable/navbar_add" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/alert_start_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginRight="42dp"
+            android:background="@drawable/tap_to_start_rec"
+            android:text="START"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:backgroundTint="@null" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
