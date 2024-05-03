@@ -84,4 +84,36 @@
         <item name="android:color">@color/red</item>
     </style>
 
+    <style name="TopUserInfoNickname">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbiblack</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
+    <style name="TopUserInfoEmail">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbimedium</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
+    <style name="TopUserInfoGames">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbiblack</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
+    <style name="FragmentName">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbiblack</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
 </resources>
