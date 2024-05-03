@@ -28,7 +28,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class CreateRoomFragment extends Fragment {
-    private TextInputLayout textInputLayout;
 
     private MaterialButton categoryButton;
     private MaterialButton createRoomButton;
@@ -42,26 +41,6 @@ public class CreateRoomFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f5___fragment_create_room_screen, container, false);
-
-        // Declare and initialize the array of images and backgrounds
-        final int[] images = {
-                R.drawable.background_transparent,
-                R.drawable.a,
-                R.drawable.b,
-                // Add more images as needed
-        };
-
-        final int[] backgrounds = {
-                R.drawable.background_transparent,
-                R.drawable.a,
-                R.drawable.b,
-                // Add more backgrounds as needed
-        };
-
-        // Configure the Spinner and the custom adapter
-        String[] options = {"CHOOSE CATEGORY", "UMA USUME", "SIRGAY"};
-
-
 
         createRoomButton = view.findViewById(R.id.create_room_button);
         createRoomButton.setOnClickListener(new View.OnClickListener() {

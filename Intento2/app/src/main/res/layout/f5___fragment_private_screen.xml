@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/private_screen"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Fragments.PrivateFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/h707"
+        >
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="#38E1FC" />
+
+        <TextView
+            android:paddingTop="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:text="PRIVATE"
+    />
+
+        <ImageView
+            android:paddingTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/red_topic_retangle"
+          />
+
+    </RelativeLayout>
+
+
+
+
+    <!--Constraints horizontales-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/h708"
+        app:layout_constraintBottom_toBottomOf="@id/h709"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/create_category_button"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                app:backgroundTint="@null"
+                android:text="CATEGORY"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/blue_option_button"
+                android:transitionName="category_transition"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/rojo"
+                android:layout_width="180dp"
+                android:layout_height="200dp"
+                android:layout_alignParentRight="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/rojo" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50dp"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/create_private_room_button"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_alignParentRight="true"
+                app:backgroundTint="@null"
+                android:text="PRIVATE ROOM"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:transitionName="private_transition"
+                android:background="@drawable/red_option_button" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/azul"
+                android:layout_width="180dp"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/azul" />
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h705"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h706"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h707"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h708"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.21" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h709"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.81" />
+
+
+    <!--Constraints verticales-->
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v704"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v705"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v706"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

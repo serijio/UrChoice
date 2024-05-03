@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.urchoice2.Fragments.PrivateFragment;
 import com.example.urchoice2.databinding.A6ActivityMainScreenBinding;
 import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.Fragments.FriendsFragment;
@@ -41,7 +42,7 @@ public class MainScreen extends AppCompatActivity {
                 } else if (itemId == R.id.nav_friends) {
                     replaceFragment(new FriendsFragment());
                 } else if (itemId == R.id.nav_add) {
-                    replaceFragment (new CreateRoomFragment());
+                    replaceFragment (new PrivateFragment());
                 } else if (itemId == R.id.nav_favs) {
                 replaceFragment (new SavedFragment());
                 } else if (itemId == R.id.nav_user) {
