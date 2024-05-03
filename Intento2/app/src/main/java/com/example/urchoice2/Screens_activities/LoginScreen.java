@@ -32,7 +32,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginScreen extends AppCompatActivity {
-    ImageView blueBack;
+    ImageView blueBack, backPic;
     MaterialButton logToStart, logNow;
     private UserAPI userApi;
 
@@ -43,6 +43,7 @@ public class LoginScreen extends AppCompatActivity {
         blueBack = findViewById(R.id.login_back_blue);
         logToStart = findViewById(R.id.login_to_start_button);
         logNow = findViewById(R.id.login_to_main_button);
+        backPic = findViewById(R.id.login_back_profile_pic);
         Conectar();
 
         logToStart.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +56,6 @@ public class LoginScreen extends AppCompatActivity {
         logNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Login();
             }
         });
@@ -89,6 +89,27 @@ public class LoginScreen extends AppCompatActivity {
         }, 400);
     }
 
+    public void LogToMainButton() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(blueBack, "bottom_trans");
+                pairs[1] = new Pair<View, String>(backPic, "back_pic_trans");
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginScreen.this, pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }, 400);
+    }
+
     public void Login() {
         TextView emailTextView = findViewById(R.id.login_email_insert);
         TextView contraTextView = findViewById(R.id.login_pass_insert);
@@ -106,8 +127,9 @@ public class LoginScreen extends AppCompatActivity {
                     editor.putInt("id_user", user.getId_user());
                     editor.apply();
                     Log.e("SQL","Usuario encontrado");
-                    Intent intent = new Intent(LoginScreen.this, MainScreen.class);
-                    startActivity(intent);
+                    /*Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+                    startActivity(intent);*/
+                    LogToMainButton();
                 } else {
                     Toast.makeText(LoginScreen.this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                 }

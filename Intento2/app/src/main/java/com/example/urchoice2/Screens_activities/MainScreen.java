@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.urchoice2.Fragments.PrivateFragment;
 import com.example.urchoice2.databinding.A6ActivityMainScreenBinding;
@@ -25,12 +26,17 @@ import com.example.urchoice2.R;
 public class MainScreen extends AppCompatActivity {
 
     A6ActivityMainScreenBinding binding;
+    ImageView backPic;
+    BottomNavigationView bottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = A6ActivityMainScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        backPic = findViewById(R.id.main_screen_back_pic);
+        bottom = findViewById(R.id.bottomNavigationViewMain);
+
         replaceFragment(new MainFragment());
 
         binding.bottomNavigationViewMain.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
