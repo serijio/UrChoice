@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".Fragments.CreateRoomFragment">
-    <ImageView
 
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="#38E1FC"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/h702"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/h702" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,8 +27,8 @@
         app:layout_constraintLeft_toLeftOf="@id/v700"
         app:layout_constraintRight_toRightOf="@id/v701"
         app:layout_constraintTop_toTopOf="@id/h700"
-        app:layout_constraintBottom_toBottomOf="@id/h701"
-        />
+        app:layout_constraintBottom_toBottomOf="@id/h701" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,8 +36,8 @@
         app:layout_constraintTop_toTopOf="@id/h700"
         app:layout_constraintBottom_toBottomOf="@id/h701"
         app:layout_constraintLeft_toLeftOf="@id/v700"
-        app:layout_constraintRight_toRightOf="@id/v701"
-        />
+        app:layout_constraintRight_toRightOf="@id/v701" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,24 +46,24 @@
         app:layout_constraintTop_toTopOf="@id/h703"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/h704"
-        >
+        app:layout_constraintBottom_toBottomOf="@id/h704" >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical" >
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/top_blue_border"
-                />
-            <LinearLayout
+                android:background="@drawable/top_blue_border" />
 
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:orientation="vertical"
                 android:background="#ED3B3B">
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:paddingTop="25dp"
@@ -71,18 +71,13 @@
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-
-                    >
+                    android:layout_height="wrap_content" >
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="ROOM NAME"
                         android:textColorHint="@color/black"
-                        android:background="@drawable/black_border"
-                        />
-
+                        android:background="@drawable/black_border" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!--<com.google.android.material.textfield.TextInputLayout
@@ -106,9 +101,6 @@
 
                 </com.google.android.material.textfield.TextInputLayout>-->
 
-
-
-
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:paddingTop="25dp"
@@ -116,17 +108,13 @@
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-
-                    >
+                    android:layout_height="wrap_content" >
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/black"
                         android:background="@drawable/black_border"
                         android:hint="PIN"/>
-
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Spinner
@@ -137,8 +125,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="25dp"
                     android:spinnerMode="dropdown"
-                    android:layout_marginTop="20dp"
-                    />
+                    android:layout_marginTop="20dp" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -156,52 +143,57 @@
     </LinearLayout>
 
 
-
-
-
+    <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v700"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.1" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v701"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9"/>
+        app:layout_constraintGuide_percent="0.9" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v702"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.1" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v703"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9"/>
+        app:layout_constraintGuide_percent="0.9" />
+
+
     <!--Constraints horizontales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h700"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03"/>
+        app:layout_constraintGuide_percent="0.03" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h701"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
+        app:layout_constraintGuide_percent="0.15" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h702"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h703"
@@ -216,13 +208,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
-
-
-
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

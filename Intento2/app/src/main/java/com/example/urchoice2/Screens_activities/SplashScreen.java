@@ -85,9 +85,10 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashScreen.this, TapToStartScreen.class);
-                Pair[] pairs = new Pair[2];
-                pairs[0] = new Pair<View, String>(bluecard,"splashbluecard");
-                pairs[1] = new Pair<View, String>(redcard,"splashredcard");
+                Pair[] pairs = new Pair[3];
+                pairs[0] = new Pair<View, String>(bluecard,"taptostart_blue_card");
+                pairs[1] = new Pair<View, String>(redcard,"taptostart_red_card");
+                pairs[2] = new Pair<View, String>(MtextView,"taptostart_app_name");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this,pairs);

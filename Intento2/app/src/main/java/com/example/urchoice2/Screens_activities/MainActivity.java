@@ -403,7 +403,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Ocurrió un error de red u otro error durante la llamada
+                // Ocurrió un error de red tap_blue_card otro error durante la llamada
                 Log.e("RoomGameCreation", "Error de red: " + t.getMessage());
             }
         });
@@ -450,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Ocurrió un error de red u otro error durante la llamada
+                // Ocurrió un error de red tap_blue_card otro error durante la llamada
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });

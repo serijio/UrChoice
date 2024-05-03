@@ -146,8 +146,7 @@
         app:layout_constraintBottom_toTopOf="@id/h5"
         app:layout_constraintStart_toEndOf="@id/v1"
         app:layout_constraintEnd_toStartOf="@id/v2"
-        android:src="@drawable/bluecard"
-        android:transitionName="splashbluecard" />
+        android:src="@drawable/tap_blue_card" />
 
     <ImageView
         android:id="@+id/redcard"
@@ -157,8 +156,7 @@
         app:layout_constraintBottom_toTopOf="@id/h7"
         app:layout_constraintStart_toEndOf="@id/v3"
         app:layout_constraintEnd_toStartOf="@id/v4"
-        android:src="@drawable/redcard"
-        android:transitionName="splashredcard" />
+        android:src="@drawable/tap_red_card" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/splash_app_title"
@@ -169,7 +167,6 @@
         app:layout_constraintStart_toEndOf="@id/v5"
         app:layout_constraintEnd_toStartOf="@id/v6"
         android:text="@string/app_title"
-        android:transitionName="prueba1"
         style="@style/SplashScreenStyle" />
 
 
@@ -244,28 +241,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.23" />
+        app:layout_constraintGuide_percent="0.22" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.63" />
+        app:layout_constraintGuide_percent="0.62" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.27" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.67" />
+        app:layout_constraintGuide_percent="0.66" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h8"

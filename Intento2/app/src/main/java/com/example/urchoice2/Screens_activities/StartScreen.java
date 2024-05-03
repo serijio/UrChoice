@@ -21,24 +21,33 @@ import com.google.android.material.textview.MaterialTextView;
 
 public class StartScreen extends AppCompatActivity {
     MaterialTextView MtextView;
-    ImageView mainCards;
+    ImageView blueCard, redCard;
 
-    MaterialButton login_tapButton;
+    MaterialButton login_tapButton, sign_tapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a3___activity_start_screen);
-        MtextView = findViewById(R.id.taptostart_screen_title);
-        mainCards = findViewById(R.id.taptostart_cards);
-        login_tapButton = findViewById(R.id.taptostart_log_button);
+        MtextView = findViewById(R.id.start_app_name);
+        blueCard = findViewById(R.id.start_blue_card);
+        redCard = findViewById(R.id.start_red_card);
+        login_tapButton = findViewById(R.id.start_login_button);
+        sign_tapButton = findViewById(R.id.start_sign_button);
         setDegradadoTitulo();
 
 
         login_tapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangeButton();
+                ToLoginButton();
+            }
+        });
+
+        sign_tapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToSignButton();
             }
         });
 
@@ -56,13 +65,33 @@ public class StartScreen extends AppCompatActivity {
                 }, null, Shader.TileMode.CLAMP);
         MtextView.getPaint().setShader(textShader);
     }
-    public void ChangeButton() {
+    public void ToLoginButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(StartScreen.this, TapToStartScreen.class);
+                Intent intent = new Intent(StartScreen.this, LoginScreen.class);
                 Pair[] pairs = new Pair[1];
-                pairs[0] = new Pair<View, String>(mainCards, "cardAnimation");
+                pairs[0] = new Pair<View, String>(blueCard, "login_blue_trans");
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StartScreen.this, pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }, 400);
+    }
+
+    public void ToSignButton() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(StartScreen.this, RegisterScreen.class);
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(redCard, "sign_red_trans");
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

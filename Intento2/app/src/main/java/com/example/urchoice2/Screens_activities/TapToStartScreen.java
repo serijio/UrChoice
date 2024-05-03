@@ -14,6 +14,8 @@ import android.text.TextPaint;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
@@ -21,16 +23,21 @@ import com.google.android.material.textview.MaterialTextView;
 
 public class TapToStartScreen extends AppCompatActivity {
     MaterialTextView MtextView;
-    ImageView start_bluecard, start_redcard;
+    TextView slogan;
+    ImageView taptostart_bluecard, taptostart_redcard;
     MaterialButton tapButton;
+    LinearLayout linear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a2___activity_tap_to_start_screen);
-        MtextView = findViewById(R.id.lobby_app_title);
-        tapButton = findViewById(R.id.tapScreenButton);
-        start_redcard = findViewById(R.id.start_redcard);
-        start_bluecard = findViewById(R.id.start_bluecard);
+        MtextView = findViewById(R.id.tap_app_title);
+        slogan = findViewById(R.id.tap_slogan);
+        linear = findViewById(R.id.tap_credits);
+        tapButton = findViewById(R.id.tap_button);
+        taptostart_redcard = findViewById(R.id.tap_redcard);
+        taptostart_bluecard = findViewById(R.id.tap_bluecard);
         setDegradadoTitulo();
         tapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +63,14 @@ public class TapToStartScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(TapToStartScreen.this, MainScreen.class);
-                Pair[] pairs = new Pair[2];
-                pairs[0] = new Pair<View, String>(start_bluecard,"startbluecard");
-                pairs[1] = new Pair<View, String>(start_redcard,"startredcard");
+                Intent intent = new Intent(TapToStartScreen.this, StartScreen.class);
+                Pair[] pairs = new Pair[6];
+                pairs[0] = new Pair<View, String>(taptostart_bluecard,"start_blue_trans");
+                pairs[1] = new Pair<View, String>(taptostart_redcard,"start_red_card");
+                pairs[2] = new Pair<View, String>(MtextView,"start_appname_trans");
+                pairs[3] = new Pair<View, String>(slogan,"start_log_trans");
+                pairs[4] = new Pair<View, String>(tapButton,"start_sign_trans");
+                pairs[5] = new Pair<View, String>(linear,"start_credits_trans");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TapToStartScreen.this,pairs);

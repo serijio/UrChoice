@@ -2,11 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
-
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <ImageView
         android:id="@+id/waiting_playes_background"
@@ -27,8 +23,8 @@
         android:textSize="25dp"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textAlignment="center"
-        />
+        android:textAlignment="center" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_players"
         android:layout_width="match_parent"
@@ -37,8 +33,8 @@
         android:layout_marginLeft="55dp"
         android:layout_marginRight="55dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1"
-        />
+        app:spanCount="1" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/alert_start_button"
         android:layout_width="120dp"
@@ -50,8 +46,7 @@
         android:backgroundTint="@null"
         android:textColor="@color/white"
         android:text="START"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/alert_exit_button"

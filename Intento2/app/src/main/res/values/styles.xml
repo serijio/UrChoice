@@ -2,6 +2,15 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <style name="StartScreenStyle">
+        <item name="android:textSize">55sp</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="fontFamily">@font/baloomedium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
     <style name="SplashScreenStyle">
         <item name="android:textSize">60sp</item>
         <item name="android:textColor">@color/red</item>
@@ -46,22 +55,6 @@
         <item name="android:textAlignment">center</item>
     </style>
 
-    <style name="LogLobby">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/blue</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-    </style>
-
-    <style name="CreateAcc">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/red</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-    </style>
-
     <style name="LoginSubmitFields" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxBackgroundColor">#00000000</item>
         <item name="boxStrokeColor">@color/text_input_outline_color_red</item>
@@ -81,7 +74,7 @@
     <style name="NavBarStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">@color/blue</item>
         <item name="itemIconTint">@color/black</item>
-        <item name="itemRippleColor">#1B6C78</item>
+        <item name="itemRippleColor">@color/red</item>
         <item name="startIconTint">@color/black</item>
         <item name="android:state_selected">true</item>
         <item name="itemActiveIndicatorStyle">@style/activeIndicator</item>
