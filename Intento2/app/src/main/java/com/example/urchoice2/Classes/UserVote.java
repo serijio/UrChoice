@@ -6,11 +6,21 @@ public class UserVote {
     private String nick_user;
     private String vote_game;
 
+    private boolean admin;
 
-    public UserVote(int id_user, String nick_user, String vote_game) {
+    public UserVote(int id_user, String nick_user, String vote_game,boolean admin) {
         this.id_user = id_user;
         this.nick_user = nick_user;
         this.vote_game = vote_game;
+        this.admin = admin;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public int getId_user() {

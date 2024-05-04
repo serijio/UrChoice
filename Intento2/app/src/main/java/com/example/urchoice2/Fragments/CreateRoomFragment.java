@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -54,6 +55,8 @@ public class CreateRoomFragment extends Fragment {
     private int roomId;
     private List<String> usernames = new ArrayList<>();
     private boolean shouldUpdate = true;
+
+    private List<UserVote> userVotes;
 
 
 
@@ -137,7 +140,7 @@ public class CreateRoomFragment extends Fragment {
                         Log.e("RoomCreation", "El ID de la nueva sala es cero");
                     }
                 } else {
-                    // Ocurrió un error al intentar crear la sala
+                    // OcurriÃ³ un error al intentar crear la sala
                     Log.e("RoomCreation", "Error al crear la sala: " + response.message());
                 }
             }
@@ -148,7 +151,7 @@ public class CreateRoomFragment extends Fragment {
         });
     }
 
-    public void UsersRoom(Integer id_room, RecyclerView.Adapter adapter) {
+    public void UsersRoom(RecyclerView.Adapter adapter) {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -163,7 +166,7 @@ public class CreateRoomFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<UserVote>> call, Response<List<UserVote>> response) {
                         if (response.isSuccessful()) {
-                            List<UserVote> userVotes = response.body();
+                            userVotes = response.body();
                             // Crear una lista de nombres de usuario a partir de los datos obtenidos
                             List<String> newNames = new ArrayList<>();
                             for (UserVote userVote : userVotes) {
@@ -216,14 +219,26 @@ public class CreateRoomFragment extends Fragment {
             }
 
             @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
                 TextView playerName = holder.itemView.findViewById(R.id.player_name);
                 ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
                 MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
 
                 playerName.setText(usernames.get(position));
-                readyicon.setVisibility(View.VISIBLE);
-                exitstatus.setVisibility(View.VISIBLE);
+                for(int i = 0;i < userVotes.size();i++){
+                    if(userVotes.get(i).getId_user() == userId && userVotes.get(i).isAdmin()){
+                        exitstatus.setVisibility(View.VISIBLE);
+                    }
+                    if(userVotes.get(i).getVote_game().equals("LISTO")){
+                        readyicon.setVisibility(View.VISIBLE);
+                    }
+                }
+                exitstatus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        endRoom(roomId,userVotes.get(position).getId_user());
+                    }
+                });
             }
 
             @Override
@@ -231,20 +246,20 @@ public class CreateRoomFragment extends Fragment {
                 return usernames.size();
             }
         });
-        UsersRoom(roomId,recyclerView.getAdapter());
+        UsersRoom(recyclerView.getAdapter());
         AlertDialog alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setCancelable(true);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
 
-        // Obtener una referencia al botón de salir dentro del cuadro de diálogo
+        // Obtener una referencia al botÃ³n de salir dentro del cuadro de diÃ¡logo
         MaterialButton exitButton = view.findViewById(R.id.alert_exit_button);
         MaterialButton startButton = view.findViewById(R.id.alert_start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acción a realizar cuando se haga clic en el botón de inicio
+                // AcciÃ³n a realizar cuando se haga clic en el botÃ³n de inicio
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -261,8 +276,18 @@ public class CreateRoomFragment extends Fragment {
                 }, 400);
             }
         });
+        boolean isUserNotInVotes = true;
+        for (UserVote userVote : userVotes) {
+            if (userVote.getId_user() == userId) {
+                isUserNotInVotes = false;
+                break;
+            }
+        }
+        if(isUserNotInVotes == false){
+            alertDialog.dismiss();
+        }
 
-        // Agregar un OnClickListener al botón de salir
+        // Agregar un OnClickListener al botÃ³n de salir
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -274,19 +299,19 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void category_alertDialogOpen() {
-        // Inflar el diseño del AlertDialog
+        // Inflar el diseÃ±o del AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___fragment_x_choose_category_alert, null);
 
         // Crear el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
 
-        // Obtener la referencia del RecyclerView dentro del diseño del AlertDialog
+        // Obtener la referencia del RecyclerView dentro del diseÃ±o del AlertDialog
         RecyclerView category_recyclerView = view.findViewById(R.id.recycler_category);
 
         // Datos para el RecyclerView
         String[] category_name = new String[categoryList.size()];
-        Log.e("SQL","Tamaño: " + categoryList.size());
+        Log.e("SQL","TamaÃ±o: " + categoryList.size());
         for (int i = 0; i < categoryList.size(); i++) {
             category_name[i] = categoryList.get(i).getName_cat();
         }
@@ -294,7 +319,7 @@ public class CreateRoomFragment extends Fragment {
         final int[] images = {
                 R.drawable.a,
                 R.drawable.b,
-                // Añadir más imágenes si es necesario
+                // AÃ±adir mÃ¡s imÃ¡genes si es necesario
         };
 
         // Configurar el RecyclerView
@@ -321,7 +346,7 @@ public class CreateRoomFragment extends Fragment {
                 imageView.setImageResource(images[position]);
                 textView.setText(category_name[position]);
 
-                // Añadir onClickListener a cada elemento de RecyclerView
+                // AÃ±adir onClickListener a cada elemento de RecyclerView
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -355,16 +380,16 @@ public class CreateRoomFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d("RoomEnd", "Operación completada correctamente");
+                    Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
                 } else {
-                    // Ocurrió un error al intentar finalizar la sala
+                    // OcurriÃ³ un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Ocurrió un error de red tap_blue_card otro error durante la llamada
+                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });
@@ -380,7 +405,7 @@ public class CreateRoomFragment extends Fragment {
             activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-                    // No hacer nada cuando se presiona el botón de retroceso
+                    // No hacer nada cuando se presiona el botÃ³n de retroceso
                 }
             });
         }
