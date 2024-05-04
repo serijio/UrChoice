@@ -1,5 +1,6 @@
 package com.example.urchoice2.Fragments;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +25,21 @@ public class CreateCategory extends Fragment {
         View view = inflater.inflate(R.layout.f5___fragment_r_create_category_screen, container, false);
 
         return view;
+    }
+
+    //deshabilitar boton de retroceder
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // No hacer nada cuando se presiona el botón de retroceso
+                }
+            });
+        }
     }
 
 }
