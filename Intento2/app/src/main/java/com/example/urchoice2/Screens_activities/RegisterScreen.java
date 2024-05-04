@@ -30,6 +30,7 @@ public class RegisterScreen extends AppCompatActivity {
 
     ImageView redBack;
     MaterialButton signToStart, createAcc;
+    TextView titleSign;
 
     private UserAPI userApi;
 
@@ -40,6 +41,7 @@ public class RegisterScreen extends AppCompatActivity {
         redBack = findViewById(R.id.sign_back_red);
         signToStart = findViewById(R.id.sign_to_start_button);
         createAcc = findViewById(R.id.create_acc_button);
+        titleSign = findViewById(R.id.sign_title);
         Conectar();
 
         signToStart.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +89,28 @@ public class RegisterScreen extends AppCompatActivity {
     }
 
 
+    public void SignToMainButton() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(RegisterScreen.this, MainScreen.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View, String>(redBack, "bottom_trans");
+                pairs[1] = new Pair<View, String>(titleSign, "back_pic_trans");
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RegisterScreen.this, pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }, 400);
+    }
+
+
     public void Registrer() {
 
         TextView emailTextView = findViewById(R.id.sign_email_insert);
@@ -111,8 +135,7 @@ public class RegisterScreen extends AppCompatActivity {
                         editor.putInt("id_user", user.getId_user());
                         editor.apply();
                         Toast.makeText(RegisterScreen.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterScreen.this, MainScreen.class);
-                        startActivity(intent);
+                        SignToMainButton();
                     } else {
                         Toast.makeText(RegisterScreen.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
                     }
