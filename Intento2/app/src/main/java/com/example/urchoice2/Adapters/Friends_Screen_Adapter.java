@@ -40,7 +40,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
     public Friends_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Conectar();
         inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.a5___activity_register_screen, parent, false); //modificar cuando haya row
+        View view = inflater.inflate(R.layout.row_friends_screen, parent, false);
         return new Friends_Screen_Adapter.MyViewHolder(view);
     }
 

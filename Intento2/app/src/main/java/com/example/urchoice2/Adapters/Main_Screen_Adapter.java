@@ -38,7 +38,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     public Main_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Conectar();
         inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.a5___activity_register_screen, parent, false); //modificar cuando haya row
+        View view = inflater.inflate(R.layout.row_main_screen, parent, false);
         return new Main_Screen_Adapter.MyViewHolder(view);
     }
 

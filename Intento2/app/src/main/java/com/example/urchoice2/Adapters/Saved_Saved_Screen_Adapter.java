@@ -40,7 +40,7 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
     public Saved_Saved_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Conectar();
         inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.a5___activity_register_screen, parent, false); //modificar cuando haya row
+        View view = inflater.inflate(R.layout.row_saved_saved_screen, parent, false);
         return new Saved_Saved_Screen_Adapter.MyViewHolder(view);
     }
 
