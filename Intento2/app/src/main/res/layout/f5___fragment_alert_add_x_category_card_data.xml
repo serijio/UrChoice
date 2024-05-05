@@ -1,55 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/waiting_playes_background"
+        android:id="@+id/waiting_players_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:padding="20dp"
-        android:scaleType="fitXY"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/start_game_background" />
-
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content">
 
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="450dp"
-            android:background="@drawable/circle_image"
-            android:elevation="1dp"
-            android:padding="50dp"
-            android:src="@drawable/navbar_add" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/alert_start_button"
-            android:layout_width="match_parent"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/rojo"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="450dp"
-            android:layout_marginRight="42dp"
-            android:background="@drawable/tap_to_start_rec"
-            android:text="START"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            app:backgroundTint="@null" />
+            android:layout_marginTop="110dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/rojo" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/azul"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="110dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/azul" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/card_image_data"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_image"
+            android:elevation="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/navbar_add"
+            app:riv_corner_radius="80dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/card_textinputlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="380dp"
+            android:background="#00FFFFFF"
+            android:clickable="false"
+            android:paddingStart="50dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="50dp"
+            android:paddingBottom="25dp"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="@null"
+            app:hintTextColor="#FEFEFE">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/card_textEdittextlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:gravity="center"
+                android:hint="CARD NAME"
+                android:textAlignment="center"
+                android:cursorVisible="false"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/set_data_alert_addcard_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginEnd="20dp"
+            android:text="ADD CARD"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:backgroundTint="@null"
+            android:background="@drawable/tap_to_start_rec"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

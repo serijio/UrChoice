@@ -7,44 +7,51 @@
     android:background="@color/black"
     tools:context=".Fragments.CreateCategory"
     >
-    <RelativeLayout
+
+
+    <ImageView
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
+        android:background="#38E1FC"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/h710"
-        >
-        <ImageView
+        />
 
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="#38E1FC" />
+    <TextView
+        android:paddingTop="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:text="CATEGORY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/h710"
+        />
 
-        <TextView
-            android:paddingTop="55dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="1dp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:text="CATEGORY"
-            />
+    <ImageView
+        android:paddingTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/red_topic_retangle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/h710"
 
-        <ImageView
-            android:paddingTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/red_topic_retangle"
+        />
 
-            />
 
-    </RelativeLayout>
 
     <LinearLayout
-
+        android:layout_margin="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/category_background"
@@ -64,8 +71,7 @@
             app:boxCornerRadiusTopEnd="0dp"
             app:boxCornerRadiusBottomStart="0dp"
             app:boxCornerRadiusBottomEnd="0dp"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/red"
+
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:paddingTop="25dp"
@@ -76,8 +82,8 @@
                 android:id="@+id/login_pass_insert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/pass"
-                android:inputType="textPassword"
+                android:hint="CATEGORY NAME"
+
                 android:textColor="@color/red"
                 android:fontFamily="@font/baloomedium"
                 android:textColorHint="@color/red"
@@ -85,9 +91,11 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_new_category_image_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="15dp"
@@ -97,17 +105,24 @@
             android:textColor="@color/red"
             android:textAlignment="textStart"
             android:textSize="10dp"
-            app:backgroundTint="@android:color/transparent"
+            app:backgroundTint="@null"
             app:boxCornerRadiusBottomEnd="0dp"
             app:boxCornerRadiusBottomStart="0dp"
             app:boxCornerRadiusTopEnd="0dp"
             app:boxCornerRadiusTopStart="0dp"
             app:strokeColor="@color/red"
             app:strokeWidth="2dp"
+            android:background="@drawable/red_border"
+            android:backgroundTint="@null"
+
             />
+
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="15dp"
@@ -129,9 +144,11 @@
 
                 />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_category"
+                android:id="@+id/recycler_card_category"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal"
@@ -140,6 +157,7 @@
 
         </LinearLayout>
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_new_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -158,8 +176,10 @@
             app:boxCornerRadiusTopStart="0dp"
             app:strokeColor="@color/red"
             app:strokeWidth="2dp"
+            android:scaleType="centerCrop"
             />
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_new_category_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
