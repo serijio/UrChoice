@@ -1,35 +1,27 @@
 package com.example.urchoice2.Fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.urchoice2.R;
-import com.example.urchoice2.Screens_activities.StartScreen;
-import com.example.urchoice2.Screens_activities.TapToStartScreen;
 import com.google.android.material.button.MaterialButton;
 
-public class PrivateFragment extends Fragment {
+public class CreateCatRoomFragment extends Fragment {
    MaterialButton create_category_button;
    MaterialButton create_private_room_button;
 
-   public PrivateFragment(){
+   public CreateCatRoomFragment(){
 
    }
 
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.f5___fragment_private_screen, container, false);
+      View view = inflater.inflate(R.layout.f3___fragment_create_cat_room_screen, container, false);
 
       create_category_button = view.findViewById(R.id.create_category_button);
       create_private_room_button = view.findViewById(R.id.create_private_room_button);
@@ -58,16 +50,16 @@ public class PrivateFragment extends Fragment {
    }
 
    public void Create_room_button() {
-      Fragment createRoomFragment = new CreateRoomFragment();
+      Fragment createRoomFragment = new CreateRoomSubFragment();
       FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
       transaction.replace(R.id.private_screen, createRoomFragment);
       transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
       transaction.commit();
    }
 
-   public void Create_category_button() {
+   /*public void Create_category_button() {
       try {
-         Fragment createCategory = new CreateCategory();
+         Fragment createCategory = new CreateCategorySubFragment();
          FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
          transaction.replace(R.id.private_screen, createCategory);
          transaction.addToBackStack(null);
@@ -75,5 +67,13 @@ public class PrivateFragment extends Fragment {
       } catch (Exception e) {
          e.printStackTrace();
       }
+   }*/
+
+   public void Create_category_button() {
+      Fragment createCategoryFragment = new CreateCategorySubFragment();
+      FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+      transaction.replace(R.id.private_screen, createCategoryFragment);
+      transaction.addToBackStack(null);
+      transaction.commit();
    }
 }

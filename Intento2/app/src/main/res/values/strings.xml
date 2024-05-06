@@ -28,8 +28,15 @@
 
 
     <!--FRAGMENTS-->
+    <string name="create_fragment">NEW</string>
     <string name="friends_fragment">FRIENDS</string>
+    <string name="saved_fragment">FAVORITES</string>
+    <string name="profile_fragment">PROFILE</string>
     <string name="user_fragment">USER</string>
+    <string name="find">Find by ID</string>
+
+    <!--CREATE CATEGORY SUB FRAGMENT-->
+    <string name="category">CATEGORY</string>
 
     <!--X SCREEN-->
 

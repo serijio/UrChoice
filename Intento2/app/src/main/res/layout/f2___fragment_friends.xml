@@ -27,7 +27,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/h71"
         app:layout_constraintBottom_toTopOf="@id/h72"
         app:layout_constraintStart_toEndOf="@id/v49"
@@ -35,6 +35,44 @@
         android:text="@string/friends_fragment"
         style="@style/FragmentName" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_friends"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/blue"
+        app:layout_constraintTop_toBottomOf="@id/h73"
+        app:layout_constraintBottom_toTopOf="@id/h74"
+        app:layout_constraintStart_toEndOf="@id/v51"
+        app:layout_constraintEnd_toStartOf="@id/v52"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        style="@style/SearchFriendsBar"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/find"
+            android:inputType="text"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/orbimedium"
+            android:textColorHint="@color/blue"
+            android:textSize="18sp"
+            app:endIconDrawable="@drawable/search_friends"
+            app:endIconTint="@color/blue"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h75"
+        app:layout_constraintBottom_toTopOf="@id/h76"
+        app:layout_constraintStart_toEndOf="@id/v53"
+        app:layout_constraintEnd_toStartOf="@id/v54"
+        android:background="@drawable/search_friends" />
 
 
     <!--Constraints verticales-->
@@ -78,49 +116,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v53"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.79" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v54"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v55"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v56"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v57"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v58"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.88" />
 
 
     <!--Constraints horizontales-->
@@ -164,27 +188,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.19" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h74"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.215" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h76"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.245" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h77"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.309" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h78"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--End icon:
+    app:endIconDrawable="@drawable/search_friends"
+        app:endIconTint="@color/blue"
+        app:endIconMode="custom"
+        app:endIconScaleType="fitEnd"
+-->

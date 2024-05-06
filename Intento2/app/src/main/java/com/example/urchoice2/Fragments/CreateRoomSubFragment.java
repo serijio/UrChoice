@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -44,7 +43,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CreateRoomFragment extends Fragment {
+public class CreateRoomSubFragment extends Fragment {
     private MaterialButton categoryButton;
     private MaterialButton createRoomButton;
     private CategoriesAPI categoriesAPI;
@@ -62,15 +61,14 @@ public class CreateRoomFragment extends Fragment {
 
 
 
-    public CreateRoomFragment() {
+    public CreateRoomSubFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f5___fragment_create_room_screen, container, false);
+        View view = inflater.inflate(R.layout.f3__sub__fragment_create_room_screen, container, false);
         Conectar();
         createRoomButton = view.findViewById(R.id.create_room_button);
         createRoomButton.setOnClickListener(new View.OnClickListener() {
@@ -205,7 +203,7 @@ public class CreateRoomFragment extends Fragment {
 
     private void alertDialogOpen(int roomId) {
         shouldUpdate = true;
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___fragment_x_alert_waiting_players, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_players);
@@ -215,7 +213,7 @@ public class CreateRoomFragment extends Fragment {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f5___fragment_x_player_status_cardview, parent, false);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_player_status_cardview, parent, false);
                 return new RecyclerView.ViewHolder(itemView) {
                 };
             }
@@ -302,7 +300,7 @@ public class CreateRoomFragment extends Fragment {
 
     private void category_alertDialogOpen() {
         // Inflar el diseÃ±o del AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___fragment_x_choose_category_alert, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_choose_category_alert, null);
 
         // Crear el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -332,7 +330,7 @@ public class CreateRoomFragment extends Fragment {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f5___fragment_x_category_cardview_list, parent, false);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_category_cardview_list, parent, false);
                 return new RecyclerView.ViewHolder(itemView) {};
             }
 

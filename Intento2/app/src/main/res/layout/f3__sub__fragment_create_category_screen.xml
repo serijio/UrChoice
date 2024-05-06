@@ -5,49 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.CreateCategory"
+    tools:context=".Fragments.CreateCategorySubFragment"
     >
 
-
-    <ImageView
-
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#38E1FC"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/h710"
-        />
+        app:layout_constraintBottom_toTopOf="@id/h800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/blue" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h801"
+        app:layout_constraintBottom_toTopOf="@id/h802"
+        app:layout_constraintStart_toEndOf="@id/v800"
+        app:layout_constraintEnd_toStartOf="@id/v801"
+        android:background="@drawable/user_info_container" />
 
     <TextView
-        android:paddingTop="55dp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:text="CATEGORY"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/h710"
-        />
-
-    <ImageView
-        android:paddingTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/red_topic_retangle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/h710"
-
-        />
-
+        app:layout_constraintTop_toBottomOf="@id/h803"
+        app:layout_constraintBottom_toTopOf="@id/h804"
+        app:layout_constraintStart_toEndOf="@id/v802"
+        app:layout_constraintEnd_toStartOf="@id/v803"
+        android:text="@string/category"
+        style="@style/FragmentName" />
 
 
     <LinearLayout
@@ -59,8 +46,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/h711"
         app:layout_constraintTop_toTopOf="@id/h712"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical" >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_pass"
@@ -71,7 +57,6 @@
             app:boxCornerRadiusTopEnd="0dp"
             app:boxCornerRadiusBottomStart="0dp"
             app:boxCornerRadiusBottomEnd="0dp"
-
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:paddingTop="25dp"
@@ -83,12 +68,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="CATEGORY NAME"
-
                 android:textColor="@color/red"
                 android:fontFamily="@font/baloomedium"
                 android:textColorHint="@color/red"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -113,12 +97,7 @@
             app:strokeColor="@color/red"
             app:strokeWidth="2dp"
             android:background="@drawable/red_border"
-            android:backgroundTint="@null"
-
-            />
-
-
-
+            android:backgroundTint="@null" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,10 +108,8 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:orientation="vertical"
-            android:background="@drawable/red_border"
+            android:background="@drawable/red_border" >
 
-
-            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,9 +117,8 @@
                 android:textColor="@color/red"
                 android:layout_marginLeft="15dp"
                 android:textSize="10dp"
-                android:textStyle="bold"
+                android:textStyle="bold" />
 
-                />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_card_category"
                 android:layout_width="match_parent"
@@ -151,11 +127,11 @@
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                />
+                android:orientation="horizontal" />
 
 
         </LinearLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_new_card"
             android:layout_width="match_parent"
@@ -176,8 +152,8 @@
             app:boxCornerRadiusTopStart="0dp"
             app:strokeColor="@color/red"
             app:strokeWidth="2dp"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/create_new_category_button"
             android:layout_width="match_parent"
@@ -193,9 +169,7 @@
             android:textColor="@color/red"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:backgroundTint="@null"
-
-            />
+            app:backgroundTint="@null" />
 
     </LinearLayout>
 
@@ -205,18 +179,88 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h711"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h712"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
+
+
+    <!--Constraints serijio pa que cuadre con el resto, en proceso de cambio-->
+    <!--Constraints verticales-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v800"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v801"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v802"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v803"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.88" />
+
+
+    <!--Constraints horizontales-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h800"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.11" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h801"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h802"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h803"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h804"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

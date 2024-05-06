@@ -4,24 +4,18 @@ import static android.app.Activity.RESULT_OK;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,15 +24,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.makeramen.roundedimageview.RoundedDrawable;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -47,7 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateCategory extends Fragment {
+public class CreateCategorySubFragment extends Fragment {
     MaterialButton add_new_card_button;
     MaterialButton add_category_image_button;
     RoundedImageView edit_image_button;
@@ -66,16 +57,15 @@ public class CreateCategory extends Fragment {
     private static final int PICK_IMAGE_REQUEST1 = 0;
     private static final int PICK_IMAGE_REQUEST2 = 1;
 
-    public CreateCategory() {
+    public CreateCategorySubFragment() {
         // Required empty public constructor
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f5___fragment_r_create_category_screen, container, false);
+        View view = inflater.inflate(R.layout.f3__sub__fragment_create_category_screen, container, false);
         cardsList = new ArrayList<>();
-        add_new_card_button = view.findViewById(R.id.add_new_card);
+        /*add_new_card_button = view.findViewById(R.id.add_new_card);
 
         add_new_card_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,23 +83,17 @@ public class CreateCategory extends Fragment {
         cardsList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_card_category);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new CardAdapter(cardsList));
-
-
-
-
+        recyclerView.setAdapter(new CardAdapter(cardsList));*/
 
         return view;
     }
 
     private void create_card_alertDialog(){
         // Inflar el diseño del AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___fragment_alert_add_x_category_card_data,null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_add_category_card_data,null);
         edit_image_button = view.findViewById(R.id.card_image_data);
         setCard_data_button = view.findViewById(R.id.set_data_alert_addcard_button);
         alert_card_textview = view.findViewById(R.id.card_textEdittextlayout);
-
-
 
         edit_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,11 +109,8 @@ public class CreateCategory extends Fragment {
                 String cardName = alert_card_textview.getText().toString();
                 Bitmap cardImage = ((RoundedDrawable) edit_image_button.getDrawable()).getSourceBitmap();
 
-
-
-// Establecer la imagen en el RoundedImageView
+                // Establecer la imagen en el RoundedImageView
                 ((RoundedImageView) edit_image_button).setImageBitmap(cardImage);
-// Establecer la imagen en el RoundedImageView
 
                 String base64Image = bitmapToBase64(cardImage);
 
@@ -137,46 +118,33 @@ public class CreateCategory extends Fragment {
 
                 alert_card_textview.setText(cardName);
 
-// Establecer la imagen y el nombre de la carta donde lo desees
+                // Establecer la imagen y el nombre de la carta donde lo desees
                 Element newCard = new Element(0, base64Image, cardName, 0);
                 cardsList.add(newCard);
 
-// Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
+                // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
                 recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
-
 
                 Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getName_elem()));
                 Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getImg_element()));
 
-
-
-// Cerrar el AlertDialog
+                // Cerrar el AlertDialog
                 alertDialog.dismiss();
             }
         });
 
-
-
-
         // Crear el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
-
 
         alertDialog = builder.create();
         alertDialog.show();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setCancelable(true);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-
-
-
-
     }
     public void create_new_category_alert_dialog(){
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___fragment_category_new_category_alertdialog,null);
-
-
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_category_new_category_alertdialog,null);
     }
 
 
@@ -224,7 +192,7 @@ public class CreateCategory extends Fragment {
                 //add_category_image_button.setBackground(drawable);
                 // Convertir Bitmap a Drawable
                 BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
-// Establecer el Drawable como fondo del botón
+                // Establecer el Drawable como fondo del botón
                 add_category_image_button.setBackground(bitmapDrawable);
 
             } catch (IOException e) {
@@ -260,7 +228,7 @@ public class CreateCategory extends Fragment {
         @NonNull
         @Override
         public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f5___fragment_category_card_data_cardview, parent, false);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_category_card_data_cardview, parent, false);
             return new CardViewHolder(itemView);
         }
 

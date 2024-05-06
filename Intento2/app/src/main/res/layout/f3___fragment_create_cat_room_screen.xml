@@ -6,47 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.PrivateFragment">
+    tools:context=".Fragments.CreateCatRoomFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/h707"
-        >
-        <ImageView
+        app:layout_constraintBottom_toTopOf="@id/h79"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/blue" />
 
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="#38E1FC" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h80"
+        app:layout_constraintBottom_toTopOf="@id/h81"
+        app:layout_constraintStart_toEndOf="@id/v57"
+        app:layout_constraintEnd_toStartOf="@id/v58"
+        android:background="@drawable/user_info_container" />
 
-        <TextView
-            android:paddingTop="55dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="1dp"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:textSize="40dp"
-            android:textStyle="bold"
-            android:text="PRIVATE"
-    />
-
-        <ImageView
-            android:paddingTop="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/red_topic_retangle"
-          />
-
-    </RelativeLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/h82"
+        app:layout_constraintBottom_toTopOf="@id/h83"
+        app:layout_constraintStart_toEndOf="@id/v59"
+        app:layout_constraintEnd_toStartOf="@id/v60"
+        android:text="@string/create_fragment"
+        style="@style/FragmentName" />
 
 
 
-
-    <!--Constraints horizontales-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,26 +110,73 @@
 
 
 
+    <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h705"
+        android:id="@+id/v57"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v58"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+
+    <!--Constraints horizontales-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h79"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
+        app:layout_constraintGuide_percent="0.11" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h706"
+        android:id="@+id/h80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h81"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h707"
+        android:id="@+id/h82"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h83"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h708"
@@ -146,40 +184,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.21" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h709"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.81" />
-
-
-    <!--Constraints verticales-->
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v704"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v705"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
-
-
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v706"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

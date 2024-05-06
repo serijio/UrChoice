@@ -10,11 +10,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.example.urchoice2.Fragments.PrivateFragment;
+import com.example.urchoice2.Fragments.CreateCatRoomFragment;
 import com.example.urchoice2.databinding.A6ActivityMainScreenBinding;
 import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.Fragments.FriendsFragment;
-import com.example.urchoice2.Fragments.CreateRoomFragment;
 
 import com.example.urchoice2.Fragments.SavedFragment;
 import com.example.urchoice2.Fragments.ProfileFragment;
@@ -48,7 +47,7 @@ public class MainScreen extends AppCompatActivity {
                 } else if (itemId == R.id.nav_friends) {
                     replaceFragment(new FriendsFragment());
                 } else if (itemId == R.id.nav_add) {
-                    replaceFragment (new PrivateFragment());
+                    replaceFragment (new CreateCatRoomFragment());
                 } else if (itemId == R.id.nav_favs) {
                 replaceFragment (new SavedFragment());
                 } else if (itemId == R.id.nav_user) {
