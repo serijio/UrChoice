@@ -37,6 +37,22 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/azul" />
+        <TextView
+            android:id="@+id/card_image_data"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/new_category_succesfully"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center|center_vertical"
+            android:elevation="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/navbar_add"
+            app:riv_corner_radius="80dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/gotohome"

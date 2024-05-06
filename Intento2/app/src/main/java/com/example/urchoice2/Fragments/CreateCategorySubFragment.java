@@ -6,6 +6,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,17 +29,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.urchoice2.API.CategoriesAPI;
+import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.makeramen.roundedimageview.RoundedDrawable;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateCategorySubFragment extends Fragment {
     MaterialButton add_new_card_button;
@@ -52,7 +70,11 @@ public class CreateCategorySubFragment extends Fragment {
     private Uri selectedImageUri;
 
     MaterialButton create_category_button;
-    MaterialButton go_to_main_screen;
+    MaterialButton go_to_newCP_sceen;
+    private CategoriesAPI categoriesAPI;
+    //private AlertDialog alertDialog2;
+
+    private BitmapDrawable bitmapDrawable;
 
 
     private static final int PICK_IMAGE_REQUEST1 = 0;
@@ -63,8 +85,11 @@ public class CreateCategorySubFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f3__sub__fragment_create_category_screen, container, false);
+        Conectar();
+
         cardsList = new ArrayList<>();
         add_new_card_button = view.findViewById(R.id.add_new_card);
 
@@ -86,8 +111,70 @@ public class CreateCategorySubFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new CardAdapter(cardsList));
 
+
+        create_category_button = view.findViewById(R.id.create_new_category_button);
+        create_category_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextInputEditText textInputEditText = view.findViewById(R.id.login_pass_insert);
+                String categoryName = textInputEditText.getText().toString();
+
+                if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    String IMGString = bitmapToBase64(selectedBitmap);
+                    InsertCategory(categoryName, IMGString, cardsList);
+                }
+
+
+
+            }
+        });
+
+
         return view;
     }
+    public void create_new_category_alert_dialog(){
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_category_new_category_alertdialog,null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+
+        final AlertDialog alertDialog2 = builder.create();
+        alertDialog2.setCanceledOnTouchOutside(false);
+        alertDialog2.setCancelable(false);
+        alertDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog2.show();
+
+        go_to_newCP_sceen = view.findViewById(R.id.gotohome);
+        go_to_newCP_sceen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mandarCPFragment();
+                alertDialog2.dismiss();
+            }
+        });
+
+
+
+
+    }
+    private void mandarCPFragment() {
+        // Obtenemos el FragmentManager del Activity y comenzamos una transacción
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Reemplazamos el FragmentoA con FragmentoB y lo agregamos a la pila de retroceso
+        CreateCatRoomFragment fragmentoB = new CreateCatRoomFragment();
+        fragmentTransaction.replace(R.id.uwu, fragmentoB);
+        fragmentTransaction.addToBackStack(null);
+
+        // Realizamos el cambio de fragmento
+        fragmentTransaction.commit();
+    }
+
 
     private void create_card_alertDialog(){
         // Inflar el diseño del AlertDialog
@@ -144,9 +231,6 @@ public class CreateCategorySubFragment extends Fragment {
         alertDialog.setCancelable(true);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
     }
-    public void create_new_category_alert_dialog(){
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_category_new_category_alertdialog,null);
-    }
 
 
 
@@ -192,7 +276,7 @@ public class CreateCategorySubFragment extends Fragment {
                 // Establece el Drawable como fondo del MaterialButton
                 //add_category_image_button.setBackground(drawable);
                 // Convertir Bitmap a Drawable
-                BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
+                bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
                 // Establecer el Drawable como fondo del botón
                 add_category_image_button.setBackground(bitmapDrawable);
 
@@ -292,6 +376,61 @@ public class CreateCategorySubFragment extends Fragment {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+    private void InsertCategory(String categoryName,String categoryImage, List<Element> elements){
+        for(int i = 0; i < elements.size(); i++){
+            Log.e("CategoryActivity", "Nombre: " + elements.get(i).getName_elem());
+        }
+
+        JSONObject jsonRequest = new JSONObject();
+        try {
+            jsonRequest.put("name_cat", categoryName);
+            jsonRequest.put("img_cat", categoryImage);
+
+            JSONArray elementsArray = new JSONArray();
+            for (Element element : elements) {
+                JSONObject elementObject = new JSONObject();
+                elementObject.put("name_elem", element.getName_elem());
+                elementObject.put("img_elem", element.getImg_element());
+                elementObject.put("victories", element.getVictories());
+                elementsArray.put(elementObject);
+            }
+            jsonRequest.put("elements", elementsArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonRequest.toString());
+        Call<Void> call = categoriesAPI.createCategory(requestBody);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // La solicitud fue exitosa
+                    Log.d("CategoryActivity", "Categoría creada exitosamente");
+                    create_new_category_alert_dialog();
+                } else {
+                    // La solicitud no fue exitosa
+                    Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Error de red o error en la respuesta
+                Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
+            }
+        });
+    }
+    public void Conectar(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://railwayserver-production-7692.up.railway.app")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        categoriesAPI = retrofit.create(CategoriesAPI.class);
+    }
+
+
+
 
 
 
