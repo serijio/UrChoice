@@ -6,6 +6,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -65,7 +66,7 @@ public class CreateCategorySubFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f3__sub__fragment_create_category_screen, container, false);
         cardsList = new ArrayList<>();
-        /*add_new_card_button = view.findViewById(R.id.add_new_card);
+        add_new_card_button = view.findViewById(R.id.add_new_card);
 
         add_new_card_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +84,7 @@ public class CreateCategorySubFragment extends Fragment {
         cardsList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_card_category);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new CardAdapter(cardsList));*/
+        recyclerView.setAdapter(new CardAdapter(cardsList));
 
         return view;
     }
