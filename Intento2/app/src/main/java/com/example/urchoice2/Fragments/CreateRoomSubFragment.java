@@ -5,16 +5,21 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -50,7 +55,7 @@ public class CreateRoomSubFragment extends Fragment {
     private RoomAPI roomAPI;
     private Integer userId;
     private List<Category> categoryList;
-    private int selectedPosition;
+    private Integer selectedPosition;
     private int roomId;
     private List<String> usernames = new ArrayList<>();
     private boolean shouldUpdate = true;
@@ -81,7 +86,11 @@ public class CreateRoomSubFragment extends Fragment {
                 TextInputEditText passroom = view.findViewById(R.id.passRoom);
                 String nameRoom = nickroom.getText().toString();
                 String password = passroom.getText().toString();
-                createRoom(selectedPosition,userId,nameRoom,password);
+                if(nameRoom.isEmpty() || password.isEmpty() || selectedPosition == null){
+                    Toast.makeText(context, "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                }else{
+                    createRoom(selectedPosition,userId,nameRoom,password);
+                }
             }
         });
 
@@ -203,6 +212,7 @@ public class CreateRoomSubFragment extends Fragment {
 
     private void alertDialogOpen(int roomId) {
         shouldUpdate = true;
+        boolean presente = false;
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
@@ -224,14 +234,19 @@ public class CreateRoomSubFragment extends Fragment {
                 ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
                 MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
 
+                boolean admin = false;
                 playerName.setText(usernames.get(position));
                 for(int i = 0;i < userVotes.size();i++){
-                    if(userVotes.get(i).getId_user() == userId && userVotes.get(i).isAdmin()){
-                        exitstatus.setVisibility(View.VISIBLE);
+                    if(userVotes.get(i).getId_user() == userId && userVotes.get(i).getAdmin() == 1){
+                        admin = true;
                     }
                     if(userVotes.get(i).getVote_game().equals("LISTO")){
                         readyicon.setVisibility(View.VISIBLE);
                     }
+                }
+
+                if(admin == true){
+                    exitstatus.setVisibility(View.VISIBLE);
                 }
                 exitstatus.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -276,17 +291,17 @@ public class CreateRoomSubFragment extends Fragment {
                 }, 400);
             }
         });
-        boolean isUserNotInVotes = true;
-        for (UserVote userVote : userVotes) {
-            if (userVote.getId_user() == userId) {
-                isUserNotInVotes = false;
-                break;
+
+       /* for(int i = 0;i < userVotes.size();i++){
+            if(userVotes.get(i).getId_user() == userId){
+                presente = true;
             }
         }
-        if(isUserNotInVotes == false){
-            alertDialog.dismiss();
-        }
 
+        if(presente == false){
+            shouldUpdate = false;
+            alertDialog.dismiss();
+        }*/
         // Agregar un OnClickListener al botÃ³n de salir
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,6 +311,11 @@ public class CreateRoomSubFragment extends Fragment {
                 alertDialog.dismiss();
             }
         });
+    }
+
+    public Bitmap base64ToBitmap(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
     private void category_alertDialogOpen() {
@@ -315,12 +335,14 @@ public class CreateRoomSubFragment extends Fragment {
         for (int i = 0; i < categoryList.size(); i++) {
             category_name[i] = categoryList.get(i).getName_cat();
         }
+        ArrayList<String> imageBase64List = new ArrayList<>();
+        for (int i = 0; i < categoryList.size(); i++) {
+            String base64Image = categoryList.get(i).getImg_cat();
+            imageBase64List.add(base64Image);
+        }
 
-        final int[] images = {
-                R.drawable.a,
-                R.drawable.b,
-                // AÃ±adir mÃ¡s imÃ¡genes si es necesario
-        };
+        String[] imagesBase64 = imageBase64List.toArray(new String[0]);
+
 
         // Configurar el RecyclerView
         categoryButton.findViewById(R.id.choose_categorybutton);
@@ -342,19 +364,31 @@ public class CreateRoomSubFragment extends Fragment {
 
                 Category category = categoryList.get(position);
 
-                // Establecer los datos en las vistas
-                imageView.setImageResource(images[position]);
+                // Decodificar la imagen Base64 y establecerla en el ImageView
+                Bitmap bitmap = base64ToBitmap(imagesBase64[position]);
+                imageView.setImageBitmap(bitmap);
+
                 textView.setText(category_name[position]);
 
-                // AÃ±adir onClickListener a cada elemento de RecyclerView
+                // Añadir onClickListener a cada elemento de RecyclerView
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Cerrar el AlertDialog
                         alertDialog.dismiss();
                         selectedPosition = category.getId_cat();
-                        // Cambiar el fondo y el texto del MaterialButton
-                        categoryButton.setBackgroundResource(images[position]);
+
+                        // Convertir el Bitmap en un Drawable
+                        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+
+                        // Establecer el Drawable como fondo del botón
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            categoryButton.setBackground(bitmapDrawable);
+                        } else {
+                            categoryButton.setBackgroundDrawable(bitmapDrawable);
+                        }
+
+                        // Establecer el texto del botón
                         categoryButton.setText(category_name[position]);
                     }
                 });

@@ -62,6 +62,7 @@ public class CreateCategorySubFragment extends Fragment {
     MaterialButton add_category_image_button;
     RoundedImageView edit_image_button;
     Bitmap selectedBitmap;
+    Bitmap selectedBitmap2;
     TextView alert_card_textview;
     MaterialButton setCard_data_button;
     List<Element> cardsList;
@@ -123,7 +124,7 @@ public class CreateCategorySubFragment extends Fragment {
                     Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    String IMGString = bitmapToBase64(selectedBitmap);
+                    String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList);
                 }
 
@@ -270,7 +271,7 @@ public class CreateCategorySubFragment extends Fragment {
             Uri selectedImageUri = data.getData();
             try {
                 // Convierte la URI en un Bitmap
-                Bitmap selectedBitmap2 = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), selectedImageUri);
+                selectedBitmap2 = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), selectedImageUri);
                 // Convierte el Bitmap en un Drawable
                 //Drawable drawable = new BitmapDrawable(getResources(), selectedBitmap2);
                 // Establece el Drawable como fondo del MaterialButton
