@@ -34,6 +34,7 @@ import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.MainActivity;
+import com.example.urchoice2.Screens_activities.prueba;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -278,7 +279,7 @@ public class CreateRoomSubFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(requireContext(), MainActivity.class);
+                        Intent intent = new Intent(requireContext(), prueba.class);
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             startActivity(intent);
