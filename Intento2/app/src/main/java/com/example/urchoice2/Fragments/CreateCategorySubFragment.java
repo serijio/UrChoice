@@ -3,7 +3,6 @@ package com.example.urchoice2.Fragments;
 import static android.app.Activity.RESULT_OK;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,12 +25,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.urchoice2.API.CategoriesAPI;
-import com.example.urchoice2.API.RoomAPI;
+import com.example.urchoice2.Adapters.CreateCategory_CardAdapter;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
@@ -68,15 +65,12 @@ public class CreateCategorySubFragment extends Fragment {
     List<Element> cardsList;
     AlertDialog alertDialog;
     RecyclerView recyclerView;
-    private Uri selectedImageUri;
-
+    //private Uri selectedImageUri;
     MaterialButton create_category_button;
     MaterialButton go_to_newCP_sceen;
     private CategoriesAPI categoriesAPI;
     //private AlertDialog alertDialog2;
-
     private BitmapDrawable bitmapDrawable;
-
 
     private static final int PICK_IMAGE_REQUEST1 = 0;
     private static final int PICK_IMAGE_REQUEST2 = 1;
@@ -110,7 +104,7 @@ public class CreateCategorySubFragment extends Fragment {
         cardsList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_card_category);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new CardAdapter(cardsList));
+        recyclerView.setAdapter(new CreateCategory_CardAdapter(cardsList));
 
 
         create_category_button = view.findViewById(R.id.create_new_category_button);
@@ -127,13 +121,8 @@ public class CreateCategorySubFragment extends Fragment {
                     String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList);
                 }
-
-
-
             }
         });
-
-
         return view;
     }
     public void create_new_category_alert_dialog(){
@@ -157,10 +146,6 @@ public class CreateCategorySubFragment extends Fragment {
                 alertDialog2.dismiss();
             }
         });
-
-
-
-
     }
     private void mandarCPFragment() {
         // Obtenemos el FragmentManager del Activity y comenzamos una transacción
@@ -175,8 +160,6 @@ public class CreateCategorySubFragment extends Fragment {
         // Realizamos el cambio de fragmento
         fragmentTransaction.commit();
     }
-
-
     private void create_card_alertDialog(){
         // Inflar el diseño del AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_add_category_card_data,null);
@@ -302,12 +285,12 @@ public class CreateCategorySubFragment extends Fragment {
             });
         }
     }
-
-    public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
+/*
+    public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCategory_CardAdapter.CardViewHolder> {
 
         private List<Element> cardsList;
 
-        public CardAdapter(List<Element> cardsList) {
+        public CreateCategory_CardAdapter(List<Element> cardsList) {
             this.cardsList = cardsList;
         }
 
@@ -362,7 +345,7 @@ public class CreateCategorySubFragment extends Fragment {
             }
         }
     }
-
+*/
     public String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
