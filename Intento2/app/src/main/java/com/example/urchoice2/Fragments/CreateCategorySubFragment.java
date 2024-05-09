@@ -129,6 +129,7 @@ public class CreateCategorySubFragment extends Fragment {
 
         if(cardsList.isEmpty()){
             empty_text.setVisibility(View.VISIBLE);
+            empty_text.setElevation(0);
         }
         return view;
     }
@@ -207,6 +208,7 @@ public class CreateCategorySubFragment extends Fragment {
                 Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getName_elem()));
                 Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getImg_element()));
                 empty_text.setVisibility(View.INVISIBLE);
+                empty_text.setElevation(1);
 
                 // Cerrar el AlertDialog
                 alertDialog.dismiss();
