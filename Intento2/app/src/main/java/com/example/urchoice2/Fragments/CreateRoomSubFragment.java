@@ -88,7 +88,7 @@ public class CreateRoomSubFragment extends Fragment {
                 TextInputEditText passroom = view.findViewById(R.id.passRoom);
                 String nameRoom = nickroom.getText().toString();
                 String password = passroom.getText().toString();
-                if(nameRoom.isEmpty() || password.isEmpty() || selectedPosition == null){
+                if(nameRoom.isEmpty() || selectedPosition == null){
                     Toast.makeText(context, "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 }else{
                     createRoom(selectedPosition,userId,nameRoom,password);

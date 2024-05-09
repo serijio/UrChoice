@@ -91,110 +91,47 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
             @Override
             public void onClick(View v) {
 
+
+
                 // Aquí abres el AlertDialog
                 int roomId = rooms.get(position).getId_room();
-                LayoutInflater inflater = LayoutInflater.from(context);
-                View dialogView = inflater.inflate(R.layout.f1__x__main_fragment_room_pin_alert, null);
 
-                // Construir el AlertDialog utilizando el diseño personalizado
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setView(dialogView);
+                if(!rooms.get(position).getPass_room().isEmpty()){
+                    LayoutInflater inflater = LayoutInflater.from(context);
+                    View dialogView = inflater.inflate(R.layout.f1__x__main_fragment_room_pin_alert, null);
 
-                // Mostrar el AlertDialog
-                AlertDialog alertDialog = builder.create();
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                alertDialog.show();
+                    // Construir el AlertDialog utilizando el diseño personalizado
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setView(dialogView);
 
-
-
-                // Obtener referencia al botón dentro del AlertDialog
-                MaterialButton enterRoomPinButton = dialogView.findViewById(R.id.enter_room_pin);
-                enterRoomPinButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        TextInputEditText Pin = dialogView.findViewById(R.id.pin_room_textEdittextlayout);
-                        String pinValue = Pin.getText().toString();
-                        // Cerrar el AlertDialog actual
-                        alertDialog.dismiss();
-                        joinRoom(roomId,userId,pinValue);
-                        // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
-                        LayoutInflater inflater = LayoutInflater.from(context);
-                        View waitingPlayersDialogView = inflater.inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
-
-                        RecyclerView recyclerView = waitingPlayersDialogView.findViewById(R.id.recycler_players);
-                        String[] usernames = {"TheRockex", "Spidey1912", "Lukinda551", "LordGrim551", "TuMama", "王八蛋"};
+                    // Mostrar el AlertDialog
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                    alertDialog.show();
 
 
-                        recyclerView.setAdapter(new RecyclerView.Adapter() {
-                            @NonNull
-                            @Override
-                            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_player_status_cardview, parent, false);
-                                return new RecyclerView.ViewHolder(itemView) {
-                                };
-                            }
 
-                            @Override
-                            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                                TextView playerName = holder.itemView.findViewById(R.id.player_name);
-                                ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
-                                MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
-
-                                playerName.setText(usernames[position]);
-                                readyicon.setVisibility(View.VISIBLE);
-                                exitstatus.setVisibility(View.VISIBLE);
-                            }
-
-                            @Override
-                            public int getItemCount() {
-                                return usernames.length;
-                            }
-                        });
+                    // Obtener referencia al botón dentro del AlertDialog
+                    MaterialButton enterRoomPinButton = dialogView.findViewById(R.id.enter_room_pin);
+                    enterRoomPinButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            TextInputEditText Pin = dialogView.findViewById(R.id.pin_room_textEdittextlayout);
+                            String pinValue = Pin.getText().toString();
+                            // Cerrar el AlertDialog actual
+                            alertDialog.dismiss();
+                            joinRoom(roomId,userId,pinValue);
+                            // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
 
 
-                        // Construir el nuevo AlertDialog
-                        AlertDialog.Builder waitingPlayersBuilder = new AlertDialog.Builder(context);
-                        waitingPlayersBuilder.setView(waitingPlayersDialogView);
 
-                        // Mostrar el nuevo AlertDialog
-                        AlertDialog waitingPlayersAlertDialog = waitingPlayersBuilder.create();
-                        waitingPlayersAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                        waitingPlayersAlertDialog.show();
-                        MaterialButton exitButton = waitingPlayersDialogView.findViewById(R.id.alert_exit_button);
-                        exitButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
 
-                                waitingPlayersAlertDialog.dismiss();
-                            }
-                        });
-                        MaterialButton startButton = waitingPlayersDialogView.findViewById(R.id.alert_start_button);
-                        startButton.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent = new Intent(context, prueba.class);
+                        }
+                    });
 
-                                        // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                            startButton.setText("ESPERANDO AL ANFITRIÓN");
-                                            startButton.setTextSize(10);
-                                            //context.startActivity(intent);
-                                        } else {
-                                            // En versiones anteriores a LOLLIPOP, simplemente inicia la actividad
-                                            context.startActivity(intent);
-                                            // Si es necesario, finaliza la actividad actual
-                                            // ((Activity) context).finish();
-                                        }
-                                    }
-                                }, 400);
-                            }
-
-                        });
-                    }
-                });
-
+                }else{
+                    joinRoom(roomId,userId,"");
+                }
             }
         });
     }
@@ -223,47 +160,9 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 if (response.isSuccessful()) {
                     Log.e("SQL","FUNCIONA");
                     // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
-                    LayoutInflater inflater = LayoutInflater.from(context);
-                    View waitingPlayersDialogView = inflater.inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
+                    Room();
 
-                    // Construir el nuevo AlertDialog
-                    AlertDialog.Builder waitingPlayersBuilder = new AlertDialog.Builder(context);
-                    waitingPlayersBuilder.setView(waitingPlayersDialogView);
 
-                    // Mostrar el nuevo AlertDialog
-                    AlertDialog waitingPlayersAlertDialog = waitingPlayersBuilder.create();
-                    waitingPlayersAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                    waitingPlayersAlertDialog.show();
-                    MaterialButton exitButton = waitingPlayersDialogView.findViewById(R.id.alert_exit_button);
-                    exitButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            endRoom(roomId,userId);
-                            waitingPlayersAlertDialog.dismiss();
-                        }
-                    });
-                    MaterialButton startButton = waitingPlayersDialogView.findViewById(R.id.alert_start_button);
-                    startButton.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Intent intent = new Intent(context, prueba.class);
-
-                                    // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                        context.startActivity(intent);
-                                    } else {
-                                        // En versiones anteriores a LOLLIPOP, simplemente inicia la actividad
-                                        context.startActivity(intent);
-                                        // Si es necesario, finaliza la actividad actual
-                                        // ((Activity) context).finish();
-                                    }
-                                }
-                            }, 400);
-                        }
-
-                    });
                 } else {
                     Log.e("SQL","NO FUNCIONA");
                 }
@@ -303,5 +202,83 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         roomAPI = retrofit.create(RoomAPI.class);
+    }
+
+    public void Room(){
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View waitingPlayersDialogView = inflater.inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
+
+        RecyclerView recyclerView = waitingPlayersDialogView.findViewById(R.id.recycler_players);
+        String[] usernames = {"TheRockex", "Spidey1912", "Lukinda551", "LordGrim551", "TuMama", "王八蛋"};
+
+
+        recyclerView.setAdapter(new RecyclerView.Adapter() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_player_status_cardview, parent, false);
+                return new RecyclerView.ViewHolder(itemView) {
+                };
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+                TextView playerName = holder.itemView.findViewById(R.id.player_name);
+                ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
+                MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
+
+                playerName.setText(usernames[position]);
+                readyicon.setVisibility(View.VISIBLE);
+                exitstatus.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public int getItemCount() {
+                return usernames.length;
+            }
+        });
+
+
+        // Construir el nuevo AlertDialog
+        AlertDialog.Builder waitingPlayersBuilder = new AlertDialog.Builder(context);
+        waitingPlayersBuilder.setView(waitingPlayersDialogView);
+
+        // Mostrar el nuevo AlertDialog
+        AlertDialog waitingPlayersAlertDialog = waitingPlayersBuilder.create();
+        waitingPlayersAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        waitingPlayersAlertDialog.show();
+        MaterialButton exitButton = waitingPlayersDialogView.findViewById(R.id.alert_exit_button);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                waitingPlayersAlertDialog.dismiss();
+            }
+        });
+        MaterialButton startButton = waitingPlayersDialogView.findViewById(R.id.alert_start_button);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(context, prueba.class);
+
+                        // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            startButton.setText("ESPERANDO AL ANFITRIÓN");
+                            startButton.setTextSize(10);
+                            //context.startActivity(intent);
+                        } else {
+                            // En versiones anteriores a LOLLIPOP, simplemente inicia la actividad
+                            context.startActivity(intent);
+                            // Si es necesario, finaliza la actividad actual
+                            // ((Activity) context).finish();
+                        }
+                    }
+                }, 400);
+            }
+
+        });
     }
 }
