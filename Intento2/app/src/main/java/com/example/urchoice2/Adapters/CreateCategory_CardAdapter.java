@@ -50,16 +50,26 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
         TextView cardName;
         MaterialButton deleteCard;
 
+
+
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             cardImage = itemView.findViewById(R.id.category_card_data);
             cardName = itemView.findViewById(R.id.category_carddata_name);
             deleteCard = itemView.findViewById(R.id.deleteCard);
+
         }
 
         public void bind(Bitmap bitmap, String cardNameText) {
             cardImage.setImageBitmap(bitmap);
             cardName.setText(cardNameText);
+            /*
+            if (cardsList.isEmpty()){
+                emptyText.setVisibility(View.VISIBLE);
+            }else{
+                emptyText.setVisibility(View.INVISIBLE);
+            }
+            */
         }
     }
 

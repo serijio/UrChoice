@@ -32,6 +32,14 @@ public interface RoomAPI {
     @GET("/rooms")
     Call<List<Rooms>> getRooms();
 
+    @FormUrlEncoded
+    @POST("/room/join")
+    Call<Void> joinRoom(
+            @Field("id_room") Integer roomId,
+            @Field("id_user") Integer userId,
+            @Field("password") String password
+    );
+
 
 
 }

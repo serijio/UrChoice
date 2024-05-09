@@ -74,6 +74,7 @@ public class CreateCategorySubFragment extends Fragment {
 
     private static final int PICK_IMAGE_REQUEST1 = 0;
     private static final int PICK_IMAGE_REQUEST2 = 1;
+    private TextView empty_text;
 
     public CreateCategorySubFragment() {
         // Required empty public constructor
@@ -123,6 +124,12 @@ public class CreateCategorySubFragment extends Fragment {
                 }
             }
         });
+
+        empty_text = view.findViewById(R.id.empty_card_views_text);
+
+        if(cardsList.isEmpty()){
+            empty_text.setVisibility(View.VISIBLE);
+        }
         return view;
     }
     public void create_new_category_alert_dialog(){
@@ -199,6 +206,7 @@ public class CreateCategorySubFragment extends Fragment {
 
                 Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getName_elem()));
                 Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getImg_element()));
+                empty_text.setVisibility(View.INVISIBLE);
 
                 // Cerrar el AlertDialog
                 alertDialog.dismiss();

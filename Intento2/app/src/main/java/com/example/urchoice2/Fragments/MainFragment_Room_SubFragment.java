@@ -53,14 +53,6 @@ public class MainFragment_Room_SubFragment extends Fragment {
         GetRooms();
 
 
-
-
-
-
-
-
-
-
         return rootView;
     }
 
@@ -77,15 +69,10 @@ public class MainFragment_Room_SubFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Rooms>> call, Response<List<Rooms>> response) {
                 if (response.isSuccessful()) {
-                    List<String> roomNames = new ArrayList<>();
-                    List<Integer> numberOfPlayers = new ArrayList<>();
+
                     List<Rooms> rooms = response.body();
-                    for (int i = 0; i < rooms.size();i++){
-                        roomNames.add(rooms.get(i).getName_room());
-                        Log.e("SQL","Datos:"  + rooms.get(i).getName_room());
-                        numberOfPlayers.add(rooms.get(i).getUserCount());
-                    }
-                    roomAdapter = new MainFragment_Room_Adapter(getContext(), roomNames, numberOfPlayers);
+
+                    roomAdapter = new MainFragment_Room_Adapter(getContext(),rooms);
                     recyclerView.setAdapter(roomAdapter);
                 } else {
 
