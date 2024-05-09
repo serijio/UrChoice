@@ -15,7 +15,7 @@ import com.example.urchoice2.databinding.A6ActivityMainScreenBinding;
 import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.Fragments.FriendsFragment;
 
-import com.example.urchoice2.Fragments.SavedFragment;
+import com.example.urchoice2.Fragments.SavedFavFragment;
 import com.example.urchoice2.Fragments.ProfileFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,7 +49,7 @@ public class MainScreen extends AppCompatActivity {
                 } else if (itemId == R.id.nav_add) {
                     replaceFragment (new CreateCatRoomFragment());
                 } else if (itemId == R.id.nav_favs) {
-                replaceFragment (new SavedFragment());
+                replaceFragment (new SavedFavFragment());
                 } else if (itemId == R.id.nav_user) {
                     replaceFragment (new ProfileFragment());
                 }

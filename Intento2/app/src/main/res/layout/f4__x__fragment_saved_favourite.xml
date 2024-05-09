@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.SavedFragment">
+    tools:context=".Fragments.SavedFavFragment">
 
     <View
         android:layout_width="0dp"
@@ -14,11 +14,13 @@
         app:layout_constraintBottom_toTopOf="@id/h400"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="1dp"
         android:background="@color/blue" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:elevation="1dp"
         app:layout_constraintTop_toBottomOf="@id/h401"
         app:layout_constraintBottom_toTopOf="@id/h402"
         app:layout_constraintStart_toEndOf="@id/v400"
@@ -32,8 +34,36 @@
         app:layout_constraintBottom_toTopOf="@id/h404"
         app:layout_constraintStart_toEndOf="@id/v402"
         app:layout_constraintEnd_toStartOf="@id/v403"
-        android:text="@string/saved_fragment"
+        android:text="SAVED &amp; FAVOURITE"
+        android:textSize="20dp"
+        android:elevation="1dp"
         style="@style/FragmentName" />
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/ftab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue"
+        android:paddingTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fh68"
+        app:tabGravity="fill"
+        app:tabIconTint="@color/red"
+        app:tabIndicatorColor="#F44336"
+        app:tabIndicatorHeight="3dp"
+        app:tabMode="fixed"
+
+        app:tabSelectedTextColor="@color/red"
+        app:tabTextColor="@color/white" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fview_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ftab_layout"
+        />
+
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -100,5 +130,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.14" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fh68"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.11" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
