@@ -37,10 +37,11 @@
 
     <!--CREATE ALL ROOMS SCREEN-->
     <string name="priv">PRIVATE ROOM</string>
+    <string name="category">CATEGORY</string>
 
 
     <!--CREATE CATEGORY SUB FRAGMENT-->
-    <string name="category">CATEGORY</string>
+
 
     <!--X SCREEN-->
 
