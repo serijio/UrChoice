@@ -2,69 +2,69 @@ package com.example.urchoice2.Classes;
 
 public class Rooms {
 
-    private int idRoom;
+    private int id_room;
 
-    private String passRoom;
+    private String pass_room;
 
-    private String statusRoom;
+    private String status_room;
 
-    private int idCat;
+    private int id_cat;
 
-    private String nameRoom;
+    private String name_room;
 
     private int userCount;
 
-    private String imgCat;
+    private String img_cat;
 
-    public Rooms(int idRoom, String passRoom, String statusRoom, int idCat, String nameRoom, int userCount, String imgCat) {
-        this.idRoom = idRoom;
-        this.passRoom = passRoom;
-        this.statusRoom = statusRoom;
-        this.idCat = idCat;
-        this.nameRoom = nameRoom;
+
+    public Rooms(int id_room, String pass_room, String status_room, int id_cat, String name_room, int userCount, String img_cat) {
+        this.id_room = id_room;
+        this.pass_room = pass_room;
+        this.status_room = status_room;
+        this.id_cat = id_cat;
+        this.name_room = name_room;
         this.userCount = userCount;
-        this.imgCat = imgCat;
+        this.img_cat = img_cat;
     }
 
-
-    public int getIdRoom() {
-        return idRoom;
+    public int getId_room() {
+        return id_room;
     }
 
-    public void setIdRoom(int idRoom) {
-        this.idRoom = idRoom;
+    public void setId_room(int id_room) {
+        this.id_room = id_room;
     }
 
-    public String getPassRoom() {
-        return passRoom;
+    public String getPass_room() {
+        return pass_room;
     }
 
-    public void setPassRoom(String passRoom) {
-        this.passRoom = passRoom;
+    public void setPass_room(String pass_room) {
+        this.pass_room = pass_room;
     }
 
-    public String getStatusRoom() {
-        return statusRoom;
+    public String getStatus_room() {
+        return status_room;
     }
 
-    public void setStatusRoom(String statusRoom) {
-        this.statusRoom = statusRoom;
+    public void setStatus_room(String status_room) {
+        this.status_room = status_room;
     }
 
-    public int getIdCat() {
-        return idCat;
+    public int getId_cat() {
+        return id_cat;
     }
 
-    public void setIdCat(int idCat) {
-        this.idCat = idCat;
+    public void setId_cat(int id_cat) {
+        this.id_cat = id_cat;
     }
 
-    public String getNameRoom() {
-        return nameRoom;
+    public String getName_room() {
+        return name_room;
     }
 
-    public void setNameRoom(String nameRoom) {
-        this.nameRoom = nameRoom;
+    public void setName_room(String name_room) {
+        this.name_room = name_room;
     }
 
     public int getUserCount() {
@@ -75,11 +75,11 @@ public class Rooms {
         this.userCount = userCount;
     }
 
-    public String getImgCat() {
-        return imgCat;
+    public String getImg_cat() {
+        return img_cat;
     }
 
-    public void setImgCat(String imgCat) {
-        this.imgCat = imgCat;
+    public void setImg_cat(String img_cat) {
+        this.img_cat = img_cat;
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,8 @@ public class MainFragment_Room_SubFragment extends Fragment {
     private RoomAPI roomAPI;
     private MainFragment_Room_Adapter roomAdapter;
 
-    private TextView room_pin_textview;
-    private MaterialButton enter_room;
+
+
 
     public MainFragment_Room_SubFragment() {
         // Required empty public constructor
@@ -43,21 +44,13 @@ public class MainFragment_Room_SubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Conectar();
         View rootView = inflater.inflate(R.layout.f1__x__main_fragment_room, container, false);
 
         recyclerView = rootView.findViewById(R.id.rooms_recyler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        List<String> roomNames = new ArrayList<>();
-        roomNames.add("Room 1");
-        // Añade más nombres de habitaciones si es necesario
-
-        List<Integer> numberOfPlayers = new ArrayList<>();
-        numberOfPlayers.add(0);
-        // Añade más números de jugadores si es necesario
-
-        roomAdapter = new MainFragment_Room_Adapter(getContext(), roomNames, numberOfPlayers);
-        recyclerView.setAdapter(roomAdapter);
+        GetRooms();
 
 
 
@@ -88,7 +81,8 @@ public class MainFragment_Room_SubFragment extends Fragment {
                     List<Integer> numberOfPlayers = new ArrayList<>();
                     List<Rooms> rooms = response.body();
                     for (int i = 0; i < rooms.size();i++){
-                        roomNames.add(rooms.get(i).getNameRoom());
+                        roomNames.add(rooms.get(i).getName_room());
+                        Log.e("SQL","Datos:"  + rooms.get(i).getName_room());
                         numberOfPlayers.add(rooms.get(i).getUserCount());
                     }
                     roomAdapter = new MainFragment_Room_Adapter(getContext(), roomNames, numberOfPlayers);
