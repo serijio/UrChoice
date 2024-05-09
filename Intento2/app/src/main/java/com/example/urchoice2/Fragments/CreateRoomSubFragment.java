@@ -62,6 +62,7 @@ public class CreateRoomSubFragment extends Fragment {
     private boolean shouldUpdate = true;
 
     private List<UserVote> userVotes;
+    private MaterialButton enter_room;
 
 
 

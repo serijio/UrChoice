@@ -1,5 +1,6 @@
 package com.example.urchoice2.API;
 
+import com.example.urchoice2.Classes.Rooms;
 import com.example.urchoice2.Classes.UserVote;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public interface RoomAPI {
 
     @GET("/room/{id_room}/users")
     Call<List<UserVote>> getUsersInRoom(@Path("id_room") int id_room);
+    @GET("/rooms")
+    Call<List<Rooms>> getRooms();
 
 
 
