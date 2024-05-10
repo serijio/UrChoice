@@ -22,6 +22,11 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="80dp"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="1"
         app:layout_constraintBottom_toBottomOf="@id/xx2"
         app:layout_constraintTop_toTopOf="@id/xx1"
         />
@@ -34,6 +39,12 @@
         android:gravity="center"
         android:textSize="45dp"
         android:textStyle="bold"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="1"
+        android:fontFamily="@font/orbimedium"
         />
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
@@ -44,7 +55,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/xx3"
-
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="1"
+        android:fontFamily="@font/orbimedium"
         />
 
 
