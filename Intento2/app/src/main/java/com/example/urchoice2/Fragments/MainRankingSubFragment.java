@@ -39,6 +39,8 @@ public class MainRankingSubFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main_ranking_sub, container, false);
+        View view = inflater.inflate(R.layout.f1__sub__fragment_ranking_category, container, false);
+
+        return view;
     }
 }
