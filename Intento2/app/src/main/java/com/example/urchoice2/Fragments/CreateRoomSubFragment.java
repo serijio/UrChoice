@@ -58,10 +58,9 @@ public class CreateRoomSubFragment extends Fragment {
     private List<Category> categoryList;
     private Integer selectedPosition;
     private int roomId;
-    private List<String> usernames = new ArrayList<>();
     private boolean shouldUpdate = true;
 
-    private List<UserVote> userVotes;
+    private List<UserVote> userVotes = new ArrayList<>();
     private MaterialButton enter_room;
 
 
@@ -179,9 +178,10 @@ public class CreateRoomSubFragment extends Fragment {
                         if (response.isSuccessful()) {
                             userVotes = response.body();
                             // Crear una lista de nombres de usuario a partir de los datos obtenidos
-                            List<String> newNames = new ArrayList<>();
+                            userVotes = response.body();
+                            List<UserVote> newNames = new ArrayList<>();
                             for (UserVote userVote : userVotes) {
-                                newNames.add(userVote.getNick_user());
+                                newNames.add(userVote);
                                 Log.e("SQL", "User: " + userVote.getNick_user());
                             }
                             updateAdapter(newNames, adapter);
@@ -203,18 +203,17 @@ public class CreateRoomSubFragment extends Fragment {
 
 
 
-    private void updateAdapter(List<String> newNames, RecyclerView.Adapter adapter) {
+    private void updateAdapter(List<UserVote> userVote, RecyclerView.Adapter adapter) {
         if (!shouldUpdate) {
             return;
         }
-        usernames.clear();
-        usernames.addAll(newNames);
+        userVotes.clear();
+        userVotes.addAll(userVote);
         adapter.notifyDataSetChanged();
     }
 
     private void alertDialogOpen(int roomId) {
         shouldUpdate = true;
-        boolean presente = false;
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
@@ -237,19 +236,12 @@ public class CreateRoomSubFragment extends Fragment {
                 MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
 
                 boolean admin = false;
-                playerName.setText(usernames.get(position));
-                for(int i = 0;i < userVotes.size();i++){
-                    if(userVotes.get(i).getId_user() == userId && userVotes.get(i).getAdmin() == 1){
-                        admin = true;
-                    }
-                    if(userVotes.get(i).getVote_game().equals("LISTO")){
-                        readyicon.setVisibility(View.VISIBLE);
-                    }
+                playerName.setText(userVotes.get(position).getNick_user());
+                exitstatus.setVisibility(View.VISIBLE);
+                if(userVotes.get(position).getVote_game().equals("LISTO")){
+                    readyicon.setVisibility(View.VISIBLE);
                 }
 
-                if(admin == true){
-                    exitstatus.setVisibility(View.VISIBLE);
-                }
                 exitstatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -260,7 +252,7 @@ public class CreateRoomSubFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return usernames.size();
+                return userVotes.size();
             }
         });
         UsersRoom(recyclerView.getAdapter());
@@ -283,7 +275,10 @@ public class CreateRoomSubFragment extends Fragment {
                         Intent intent = new Intent(requireContext(), prueba.class);
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            startActivity(intent);
+                            //startActivity(intent);
+                            startButton.setText("ESPERANDO AL ANFITRIÓN");
+                            startButton.setTextSize(10);
+                            Listo(roomId,userId);
 
                         } else {
                             startActivity(intent);
@@ -293,18 +288,6 @@ public class CreateRoomSubFragment extends Fragment {
                 }, 400);
             }
         });
-
-       /* for(int i = 0;i < userVotes.size();i++){
-            if(userVotes.get(i).getId_user() == userId){
-                presente = true;
-            }
-        }
-
-        if(presente == false){
-            shouldUpdate = false;
-            alertDialog.dismiss();
-        }*/
-        // Agregar un OnClickListener al botÃ³n de salir
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -445,6 +428,27 @@ public class CreateRoomSubFragment extends Fragment {
                 }
             });
         }
+    }
+
+    public void Listo(int roomId, int userId){
+        Call<Void> call = roomAPI.startRoom(roomId, userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
+                } else {
+                    // OcurriÃ³ un error al intentar finalizar la sala
+                    Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
+                Log.e("RoomEnd", "Error de red: " + t.getMessage());
+            }
+        });
     }
 
 }

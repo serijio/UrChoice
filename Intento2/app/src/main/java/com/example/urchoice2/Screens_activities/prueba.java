@@ -26,6 +26,7 @@ import com.example.urchoice2.SQL.CrudSQL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -92,6 +93,11 @@ public class prueba extends AppCompatActivity {
         });
 
     }
+
+    /*public void AlertWaitingPlayers(){
+        View view = Inflater inflate
+    }*/
+
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
