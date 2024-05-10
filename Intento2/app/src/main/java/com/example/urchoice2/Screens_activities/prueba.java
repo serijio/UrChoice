@@ -5,15 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.ElemCatAPI;
@@ -68,7 +65,7 @@ public class prueba extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.xx__fragment_game_round_layout);
+        setContentView(R.layout.xx__fragment_multi_game_round_layout);
         crud = new CrudSQL();
         crud.conexion();
         Conectar();
