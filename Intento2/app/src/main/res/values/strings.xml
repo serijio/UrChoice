@@ -43,6 +43,11 @@
     <!--CREATE CATEGORY SUB FRAGMENT-->
 
 
+    <!--CARDVIEWS-->
+    <string name="cat_name">LA MAMÁ DE LUCA</string>
+    <string name="cat_name2">Akame Ga Kill Esdeath</string>
+
+
     <!--X SCREEN-->
 
 

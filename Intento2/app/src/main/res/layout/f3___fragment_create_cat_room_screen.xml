@@ -45,20 +45,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/v61"
         app:backgroundTint="@null"
-        android:background="@drawable/create_category_card"
-        android:elevation="1dp"
+        android:background="@drawable/create_category_card_letters"
         android:transitionName="category_transition"/>
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h88"
-        app:layout_constraintBottom_toTopOf="@id/h89"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/v61"
-        android:text="@string/category"
-        android:elevation="2dp"
-        style="@style/CreateScreenStyle" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/rojo"
@@ -81,20 +69,8 @@
         app:layout_constraintStart_toEndOf="@id/v64"
         app:layout_constraintEnd_toEndOf="parent"
         app:backgroundTint="@null"
-        android:background="@drawable/create_room_card"
-        android:elevation="1dp"
+        android:background="@drawable/create_room_card_letters"
         android:transitionName="private_transition" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h90"
-        app:layout_constraintBottom_toTopOf="@id/h91"
-        app:layout_constraintStart_toEndOf="@id/v62"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/priv"
-        android:elevation="2dp"
-        style="@style/CreateScreenStyle" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/azul"
@@ -230,33 +206,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h88"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.38" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h89"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.47" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h90"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.77" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h91"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.89" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

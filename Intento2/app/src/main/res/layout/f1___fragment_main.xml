@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-
     tools:context=".Fragments.MainFragment">
 
     <View
@@ -85,8 +84,24 @@
         android:elevation="1dp"
         style="@style/TopUserInfoGames" />
 
-
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h67"
+        app:layout_constraintBottom_toTopOf="@id/h68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/blue"
+        app:tabGravity="fill"
+        app:tabIconTint="@color/red"
+        app:tabIndicatorColor="#F44336"
+        app:tabIndicatorHeight="1dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/red"
+        app:tabTextColor="@color/white" />
+
+    <!--<com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -101,19 +116,14 @@
         app:tabIndicatorColor="#F44336"
         app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
-
         app:tabSelectedTextColor="@color/red"
-        app:tabTextColor="@color/white" />
+        app:tabTextColor="@color/white" />-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tab_layout"
-        />
-
-
-
+        android:layout_below="@id/tab_layout" />
 
 
     <!--Constraints verticales-->
@@ -194,7 +204,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h57"
@@ -271,13 +281,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.18" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h68"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11" />
+        app:layout_constraintGuide_percent="0.25" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h69"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
