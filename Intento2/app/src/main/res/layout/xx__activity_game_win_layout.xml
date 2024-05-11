@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,6 +48,7 @@
         android:fontFamily="@font/orbimedium"
         />
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_home_materialbutton"
         android:layout_width="wrap_content"
         android:layout_height="105dp"
         android:background="@drawable/home_button"

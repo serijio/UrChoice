@@ -117,8 +117,11 @@ public class CreateCategorySubFragment extends Fragment {
 
                 if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
                     Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                }else if(cardsList.size() < 4){
+                    Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
+                }else if(cardsList.size() % 2 != 0){
+                    Toast.makeText(getActivity(), "El número de cartas tienen que ser pares", Toast.LENGTH_SHORT).show();
                 }else{
-
                     String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList);
                 }
@@ -295,72 +298,72 @@ public class CreateCategorySubFragment extends Fragment {
             });
         }
     }
-/*
-    public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCategory_CardAdapter.CardViewHolder> {
+    /*
+        public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCategory_CardAdapter.CardViewHolder> {
 
-        private List<Element> cardsList;
+            private List<Element> cardsList;
 
-        public CreateCategory_CardAdapter(List<Element> cardsList) {
-            this.cardsList = cardsList;
-        }
+            public CreateCategory_CardAdapter(List<Element> cardsList) {
+                this.cardsList = cardsList;
+            }
 
-        @NonNull
-        @Override
-        public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_category_card_data_cardview, parent, false);
-            return new CardViewHolder(itemView);
-        }
+            @NonNull
+            @Override
+            public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_category_card_data_cardview, parent, false);
+                return new CardViewHolder(itemView);
+            }
 
-        @Override
-        public int getItemCount() {
-            return cardsList.size();
-        }
+            @Override
+            public int getItemCount() {
+                return cardsList.size();
+            }
 
-        @Override
-        public void onBindViewHolder(@NonNull CardViewHolder holder, @SuppressLint("RecyclerView") int position) {
-            Element element = cardsList.get(position);
+            @Override
+            public void onBindViewHolder(@NonNull CardViewHolder holder, @SuppressLint("RecyclerView") int position) {
+                Element element = cardsList.get(position);
 
-            Bitmap bitmap = base64ToBitmap(element.getImg_element());
+                Bitmap bitmap = base64ToBitmap(element.getImg_element());
 
-            holder.bind(bitmap, element.getName_elem());
+                holder.bind(bitmap, element.getName_elem());
 
-            holder.deleteCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Eliminar la carta del cardsList
-                    cardsList.remove(position);
-                    // Notificar al adaptador del RecyclerView que se ha eliminado un elemento
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, cardsList.size());
+                holder.deleteCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Eliminar la carta del cardsList
+                        cardsList.remove(position);
+                        // Notificar al adaptador del RecyclerView que se ha eliminado un elemento
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, cardsList.size());
+                    }
+                });
+            }
+
+
+            public class CardViewHolder extends RecyclerView.ViewHolder {
+                ImageView cardImage;
+                TextView cardName;
+                MaterialButton deleteCard;
+
+                public CardViewHolder(@NonNull View itemView) {
+                    super(itemView);
+                    cardImage = itemView.findViewById(R.id.category_card_data);
+                    cardName = itemView.findViewById(R.id.category_carddata_name);
+                    deleteCard = itemView.findViewById(R.id.deleteCard); // Agregar la referencia del botón deleteCard
                 }
-            });
-        }
 
-
-        public class CardViewHolder extends RecyclerView.ViewHolder {
-            ImageView cardImage;
-            TextView cardName;
-            MaterialButton deleteCard;
-
-            public CardViewHolder(@NonNull View itemView) {
-                super(itemView);
-                cardImage = itemView.findViewById(R.id.category_card_data);
-                cardName = itemView.findViewById(R.id.category_carddata_name);
-                deleteCard = itemView.findViewById(R.id.deleteCard); // Agregar la referencia del botón deleteCard
-            }
-
-            public void bind(Bitmap bitmap, String cardNameText) {
-                cardImage.setImageBitmap(bitmap);
-                cardName.setText(cardNameText);
+                public void bind(Bitmap bitmap, String cardNameText) {
+                    cardImage.setImageBitmap(bitmap);
+                    cardName.setText(cardNameText);
+                }
             }
         }
-    }
-*/
+    */
     public String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         /*evitar que se pete debido a ciertas imagenes sobre todo las de camara*/
-             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);

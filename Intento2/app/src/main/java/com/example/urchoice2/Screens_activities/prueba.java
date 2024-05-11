@@ -1,15 +1,25 @@
 package com.example.urchoice2.Screens_activities;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.util.Log;
+import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.urchoice2.API.CategoriesAPI;
@@ -20,8 +30,10 @@ import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.Element;
+import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.R;
 import com.example.urchoice2.SQL.CrudSQL;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +91,8 @@ public class prueba extends AppCompatActivity {
                 winnerElements.add(shuffledElements.get(currentRound * 2));
                 currentRound++;
                 startRound();
+                //lo nuevo de Luca
+                //AlertWaitingPlayers();
             }
         });
 
@@ -89,15 +103,76 @@ public class prueba extends AppCompatActivity {
                 winnerElements.add(shuffledElements.get(currentRound * 2 + 1));
                 currentRound++;
                 startRound();
+                //lo nuevo de Luca
+                //AlertWinner();
             }
         });
 
     }
 
-    /*public void AlertWaitingPlayers(){
-        View view = Inflater inflate
-    }*/
+    /*
+     //lo nuevo de Luca
 
+    public void AlertWaitingPlayers(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View view = layoutInflater.inflate(R.layout.xx__fragment_multi_waiting_game_alert,null);
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.setView(view);
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+    }
+    public void AlertWinner() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View view = layoutInflater.inflate(R.layout.xx__fragment_game_win_alert_layout, null);
+
+        ViewGroup winnerLayout = view.findViewById(R.id.winner_layout);
+        View inflatedLayout = layoutInflater.inflate(R.layout.xx__activity_game_win_layout, null);
+        winnerLayout.addView(inflatedLayout); // Agregar el layout inflado a winnerLayout
+
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.setView(view);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+        // Obtener referencia al botón "home" dentro del layout inflado
+        MaterialButton homeButton = inflatedLayout.findViewById(R.id.main_home_materialbutton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeToMainButton();
+            }
+        });
+    }
+
+    public void changeToMainButton() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(prueba.this, MainScreen.class);
+                Pair[] pairs = new Pair[0];
+
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(prueba.this, pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }, 400);
+    }
+
+        //lo nuevo de Luca
+*/
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()

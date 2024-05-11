@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.RoomAPI;
+import com.example.urchoice2.Adapters.MainFragment_Room_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
@@ -235,7 +236,6 @@ public class CreateRoomSubFragment extends Fragment {
                 ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
                 MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
 
-                boolean admin = false;
                 playerName.setText(userVotes.get(position).getNick_user());
                 exitstatus.setVisibility(View.VISIBLE);
                 if(userVotes.get(position).getVote_game().equals("LISTO")){
@@ -275,14 +275,28 @@ public class CreateRoomSubFragment extends Fragment {
                         Intent intent = new Intent(requireContext(), prueba.class);
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            shouldUpdate = false;
                             //startActivity(intent);
-                            startButton.setText("ESPERANDO AL ANFITRIÓN");
+                            startButton.setText("ESPERANDO");
                             startButton.setTextSize(10);
-                            Listo(roomId,userId);
+                            Listo(roomId, userId, new MainFragment_Room_Adapter.RoomClosedListener() {
+                                @Override
+                                public void onRoomClosed() {
+                                    shouldUpdate = false;
+                                    // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
+                                    startActivity(intent);
+                                }
+                            });
 
                         } else {
-                            startActivity(intent);
-                            requireActivity().finish();
+                            Listo(roomId, userId, new MainFragment_Room_Adapter.RoomClosedListener() {
+                                @Override
+                                public void onRoomClosed() {
+                                    // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
+                                    startActivity(intent);
+                                    requireActivity().finish();
+                                }
+                            });
                         }
                     }
                 }, 400);
@@ -430,7 +444,7 @@ public class CreateRoomSubFragment extends Fragment {
         }
     }
 
-    public void Listo(int roomId, int userId){
+    public void Listo(int roomId, int userId, final MainFragment_Room_Adapter.RoomClosedListener listener){
         Call<Void> call = roomAPI.startRoom(roomId, userId);
         call.enqueue(new Callback<Void>() {
             @Override

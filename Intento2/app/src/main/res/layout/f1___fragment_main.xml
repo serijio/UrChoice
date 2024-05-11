@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.MainFragment">
+    tools:context=".Fragments.MainFragment"
+    android:id="@+id/after_win">
 
     <View
         android:layout_width="0dp"

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -200,15 +201,15 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 TextView playerName = holder.itemView.findViewById(R.id.player_name);
                 ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
                 MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
-                Log.e("SQL","Tamaño " + userVotes.size());
-                boolean admin = false;
                 playerName.setText(userVotes.get(position).getNick_user());
+                boolean admin = false;
+
                 for(int i = 0;i < userVotes.size();i++){
-                    Log.e("SQL","Nombre: " + userVotes.get(i).getNick_user());
                     if(userVotes.get(i).getId_user() == userId && userVotes.get(i).getAdmin() == 1){
                         admin = true;
                     }
                 }
+
                 if(userVotes.get(position).getVote_game().equals("LISTO")){
                     readyicon.setVisibility(View.VISIBLE);
                 }
@@ -232,6 +233,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         AlertDialog waitingPlayersAlertDialog = waitingPlayersBuilder.create();
         waitingPlayersAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         waitingPlayersAlertDialog.show();
+
         MaterialButton exitButton = waitingPlayersDialogView.findViewById(R.id.alert_exit_button);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,21 +250,27 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                     @Override
                     public void run() {
                         Intent intent = new Intent(context, prueba.class);
-
                         // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            startButton.setText("ESPERANDO AL ANFITRIÓN");
+                            startButton.setText("ESPERANDO");
                             startButton.setTextSize(10);
-
-
-                            Listo(roomId,userId);
-
-                            //context.startActivity(intent);
+                            shouldUpdate = false;
+                            Listo(roomId, userId, new RoomClosedListener() {
+                                @Override
+                                public void onRoomClosed() {
+                                    shouldUpdate = false;
+                                    // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
+                                    context.startActivity(intent);
+                                }
+                            });
                         } else {
-                            // En versiones anteriores a LOLLIPOP, simplemente inicia la actividad
-                            context.startActivity(intent);
-                            // Si es necesario, finaliza la actividad actual
-                            // ((Activity) context).finish();
+                            Listo(roomId, userId, new RoomClosedListener() {
+                                @Override
+                                public void onRoomClosed() {
+                                    // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
+                                    context.startActivity(intent);
+                                }
+                            });
                         }
                     }
                 }, 400);
@@ -337,24 +345,31 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         });
     }
 
-    public void Listo(int roomId, int userId){
+    public void Listo(int roomId, int userId, final RoomClosedListener listener){
         Call<Void> call = roomAPI.startRoom(roomId, userId);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
+                    Log.d("RoomEnd", "Operación completada correctamente");
+                    // Llama al método onRoomClosed del listener cuando la sala se cierra correctamente
+                    listener.onRoomClosed();
                 } else {
-                    // OcurriÃ³ un error al intentar finalizar la sala
+                    // Ocurrió un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
+                // Ocurrió un error de red o error al procesar la respuesta
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });
     }
+
+    public interface RoomClosedListener {
+        void onRoomClosed();
+    }
+
 }
