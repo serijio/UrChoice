@@ -12,7 +12,7 @@
     </style>
 
     <style name="SplashScreenStyle">
-        <item name="android:textSize">60sp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:textColor">@color/red</item>
         <item name="fontFamily">@font/baloomedium</item>
         <item name="android:textStyle">bold</item>

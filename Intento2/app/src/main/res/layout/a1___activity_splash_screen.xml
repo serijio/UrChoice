@@ -160,8 +160,8 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/splash_app_title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
         app:layout_constraintTop_toBottomOf="@id/h8"
         app:layout_constraintBottom_toTopOf="@id/h9"
         app:layout_constraintStart_toEndOf="@id/v5"
