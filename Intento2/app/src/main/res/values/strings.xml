@@ -48,7 +48,11 @@
     <string name="cat_name2">Akame Ga Kill Esdeath</string>
 
 
-    <!--HOME SCREEN-->
+    <!--FRIENDS SCREEN-->
+    <string name="lukinda">Lukinda551</string>
+    <string name="lukinda_mail">/@LUKINDA551</string>
+
+    <!--X SCREEN-->
 
 
     <!--RANKING SCREEN-->
