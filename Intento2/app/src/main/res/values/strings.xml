@@ -48,8 +48,22 @@
     <string name="cat_name2">Akame Ga Kill Esdeath</string>
 
 
-    <!--X SCREEN-->
+    <!--HOME SCREEN-->
 
+
+    <!--RANKING SCREEN-->
+    <string name="ranking">RANKING</string>
+    <string name="start">START GAME</string>
+    <string name="hisoka">Hisoka Morow</string>
+    <string name="hisoka_100">100</string>
+    <string name="feitan">Feitan Portor</string>
+    <string name="feitan_90">90</string>
+    <string name="kite">Kite</string>
+    <string name="kite_74">74</string>
+    <string name="illumi">Illumi Zoldyck</string>
+    <string name="illumi_61">61</string>
+    <string name="shizuku">Shizuku Murasaki</string>
+    <string name="shizuku_23">23</string>
 
     <!-- CREATE ROOM  -->
     <string name="room">ROOM</string>

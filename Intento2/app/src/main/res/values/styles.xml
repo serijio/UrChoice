@@ -144,6 +144,14 @@
         <item name="android:textAlignment">gravity</item>
     </style>
 
+    <style name="RankingStyle">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbimedium</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
     <style name="MyHintText" parent="TextAppearance.Design.Hint">
         <item name="android:textColor">@color/white</item>
     </style>
