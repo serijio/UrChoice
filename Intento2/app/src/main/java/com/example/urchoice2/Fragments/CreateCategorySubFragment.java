@@ -115,16 +115,18 @@ public class CreateCategorySubFragment extends Fragment {
                 TextInputEditText textInputEditText = view.findViewById(R.id.login_pass_insert);
                 String categoryName = textInputEditText.getText().toString();
 
-                if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
+                /*if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
                     Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() < 4){
                     Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() % 2 != 0){
                     Toast.makeText(getActivity(), "El número de cartas tienen que ser pares", Toast.LENGTH_SHORT).show();
-                }else{
+                }*/
+
+
                     String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList);
-                }
+
             }
         });
 
