@@ -1,6 +1,5 @@
 package com.example.urchoice2.Fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -20,6 +19,6 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_second_fragment, container, false);
+        return inflater.inflate(R.layout.xxx_activity_second_fragment, container, false);
     }
 }

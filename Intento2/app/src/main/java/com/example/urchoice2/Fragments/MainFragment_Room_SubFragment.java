@@ -1,26 +1,19 @@
 package com.example.urchoice2.Fragments;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.Adapters.MainFragment_Room_Adapter;
 import com.example.urchoice2.Classes.Rooms;
 import com.example.urchoice2.R;
-import com.google.android.material.button.MaterialButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,7 +38,7 @@ public class MainFragment_Room_SubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Conectar();
-        View rootView = inflater.inflate(R.layout.f1__x__main_fragment_room, container, false);
+        View rootView = inflater.inflate(R.layout.f1___sub__fragment_main_room, container, false);
 
         recyclerView = rootView.findViewById(R.id.rooms_recyler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

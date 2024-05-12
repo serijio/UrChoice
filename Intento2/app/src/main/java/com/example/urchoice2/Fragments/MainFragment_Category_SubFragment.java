@@ -17,6 +17,6 @@ public class MainFragment_Category_SubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.f1__x__main_fragment_category, container, false);
+        return inflater.inflate(R.layout.f1___sub__fragment_main_category, container, false);
     }
 }

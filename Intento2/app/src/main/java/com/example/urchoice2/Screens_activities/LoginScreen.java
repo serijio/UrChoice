@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
-import com.example.urchoice2.SQL.CrudSQL;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

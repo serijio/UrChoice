@@ -63,7 +63,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
     @NonNull
     @Override
     public RoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.f1__x__main_fragment_room_card_view, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_home_rooms, parent, false);
         return new RoomViewHolder(view);
     }
 
@@ -96,6 +96,10 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
 
                 // Aquí abres el AlertDialog
                 roomId = rooms.get(position).getId_room();
+                SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("id_categoryMulti", rooms.get(position).getId_cat());
+                editor.apply();
 
                 if(!rooms.get(position).getPass_room().isEmpty()){
                     LayoutInflater inflater = LayoutInflater.from(context);
@@ -191,7 +195,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_player_status_cardview, parent, false);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_player_status_room, parent, false);
                 return new RecyclerView.ViewHolder(itemView) {
                 };
             }
@@ -252,9 +256,9 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                         Intent intent = new Intent(context, prueba.class);
                         // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            shouldUpdate = false;
                             startButton.setText("ESPERANDO");
                             startButton.setTextSize(10);
-                            shouldUpdate = false;
                             Listo(roomId, userId, new RoomClosedListener() {
                                 @Override
                                 public void onRoomClosed() {

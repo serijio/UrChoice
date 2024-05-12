@@ -4,11 +4,14 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -32,7 +35,6 @@ import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.R;
-import com.example.urchoice2.SQL.CrudSQL;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class prueba extends AppCompatActivity {
 
-    CrudSQL crud;
+    //CrudSQL crud;
 
     private int currentRound = 0;
 
@@ -61,7 +63,6 @@ public class prueba extends AppCompatActivity {
     private ImageView imageViewElement1;
     private ImageView imageViewElement2;
 
-
     private Handler handler;
 
     private UserAPI userApi;
@@ -73,19 +74,22 @@ public class prueba extends AppCompatActivity {
     private RoomAPI roomAPI;
     private ElemCatAPI elemCatAPI;
 
+    private Integer categoryId;
     private RoomGameAPI roomGameAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xx__fragment_multi_game_round_layout);
-        crud = new CrudSQL();
-        crud.conexion();
+        SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        categoryId = sharedPreferences.getInt("id_categoryMulti", 0);
         Conectar();
         textViewElement1 = findViewById(R.id.card_name1);
         textViewElement2 = findViewById(R.id.card_name2);
+        imageViewElement1 = findViewById(R.id.imageView1);
+        imageViewElement2 = findViewById(R.id.imageView2);
         textViewElement1.setOnClickListener(new View.OnClickListener() {
-//            @Override
+            //            @Override
             public void onClick(View v) {
                 // Lógica para manejar la selección del primer element
                 winnerElements.add(shuffledElements.get(currentRound * 2));
@@ -186,10 +190,10 @@ public class prueba extends AppCompatActivity {
         roomAPI = retrofit.create(RoomAPI.class);
         elemCatAPI = retrofit.create(ElemCatAPI.class);
         roomGameAPI = retrofit.create(RoomGameAPI.class);
+        Game();
     }
 
     public void Ranking(View view){
-        Integer categoryId = 1;
         elementApi.getRanking(categoryId).enqueue(new Callback<List<Element>>() {
             @Override
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
@@ -210,8 +214,7 @@ public class prueba extends AppCompatActivity {
         });
     }
 
-    public void Game(View view){
-        Integer categoryId = 1;
+    public void Game(){
         elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
             @Override
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
@@ -230,6 +233,10 @@ public class prueba extends AppCompatActivity {
         });
     }
 
+    public Bitmap base64ToBitmap(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 
     private void startRound() {
         runOnUiThread(new Runnable() {
@@ -239,6 +246,12 @@ public class prueba extends AppCompatActivity {
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
                     // Mostrar los nombres de los elementos en los TextView correspondientes
+
+
+                    Bitmap base64Image = base64ToBitmap(firstElement.img_elem);
+                    Bitmap base64Image2 = base64ToBitmap(secondElement.img_elem);
+                    imageViewElement1.setImageBitmap(base64Image);
+                    imageViewElement2.setImageBitmap(base64Image2);
                     textViewElement1.setText(firstElement.name_elem);
                     textViewElement2.setText(secondElement.name_elem);
                 } else if (shuffledElements.size() != 1) {
@@ -247,10 +260,9 @@ public class prueba extends AppCompatActivity {
                     currentRound = 0;
                     startRound();
                 } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
-                    int id_cat = sharedPreferences.getInt("id_cat", 0);
+                    Toast.makeText(prueba.this , "Ha ganado" + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
 
-                    Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_element(), id_cat, shuffledElements.get(0).getVictories());
+                   /* Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_element(), categoryId, shuffledElements.get(0).getVictories());
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -269,7 +281,7 @@ public class prueba extends AppCompatActivity {
                             // Error en la llamada (p. ej., problemas de red)
                             Log.e("ElemCatUpdate", "Error en la llamada: " + t.getMessage());
                         }
-                    });
+                    });*/
                 }
             }
         });

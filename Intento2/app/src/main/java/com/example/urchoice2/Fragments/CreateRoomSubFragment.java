@@ -145,6 +145,10 @@ public class CreateRoomSubFragment extends Fragment {
                     if (roomId != 0) {
                         Log.d("RoomCreation", "Nueva sala creada correctamente, ID: " + roomId);
                         // Haz algo con el roomId, como mostrarlo en un Toast
+                        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("id_categoryMulti", categoryId);
+                        editor.apply();
                         alertDialogOpen(roomId);
                     } else {
                         // La respuesta del servidor fue exitosa pero el roomId es cero
@@ -177,7 +181,6 @@ public class CreateRoomSubFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<UserVote>> call, Response<List<UserVote>> response) {
                         if (response.isSuccessful()) {
-                            userVotes = response.body();
                             // Crear una lista de nombres de usuario a partir de los datos obtenidos
                             userVotes = response.body();
                             List<UserVote> newNames = new ArrayList<>();
@@ -225,7 +228,7 @@ public class CreateRoomSubFragment extends Fragment {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_player_status_cardview, parent, false);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_player_status_room, parent, false);
                 return new RecyclerView.ViewHolder(itemView) {
                 };
             }
@@ -245,6 +248,10 @@ public class CreateRoomSubFragment extends Fragment {
                 exitstatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.remove("id_categoryMulti");
+                        editor.apply();
                         endRoom(roomId,userVotes.get(position).getId_user());
                     }
                 });
@@ -351,7 +358,7 @@ public class CreateRoomSubFragment extends Fragment {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_category_cardview_list, parent, false);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_create_category_image, parent, false);
                 return new RecyclerView.ViewHolder(itemView) {};
             }
 
@@ -364,6 +371,7 @@ public class CreateRoomSubFragment extends Fragment {
                 Category category = categoryList.get(position);
 
                 // Decodificar la imagen Base64 y establecerla en el ImageView
+
                 Bitmap bitmap = base64ToBitmap(imagesBase64[position]);
                 imageView.setImageBitmap(bitmap);
 
@@ -451,6 +459,7 @@ public class CreateRoomSubFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
+                    listener.onRoomClosed();
                 } else {
                     // OcurriÃ³ un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());

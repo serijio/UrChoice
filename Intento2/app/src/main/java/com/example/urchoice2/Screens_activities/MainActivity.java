@@ -24,7 +24,6 @@ import com.example.urchoice2.Classes.RoomData;
 import com.example.urchoice2.Classes.RoomGame;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
-import com.example.urchoice2.SQL.CrudSQL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +35,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    CrudSQL crud;
+    //CrudSQL crud;
 
     private int currentRound = 0;
 
@@ -62,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        crud = new CrudSQL();
-        crud.conexion();
+        setContentView(R.layout.xxx_activity_main);
+        //crud = new CrudSQL();
+        //crud.conexion();
         Conectar();
         textViewElement1 = findViewById(R.id.textViewElement1);
         textViewElement2 = findViewById(R.id.textViewElement2);
@@ -257,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                     int id_cat = sharedPreferences.getInt("id_cat", 0);
 
-                    Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_element(), id_cat, shuffledElements.get(0).getVictories());
+                    Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_elem(), id_cat, shuffledElements.get(0).getVictories());
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

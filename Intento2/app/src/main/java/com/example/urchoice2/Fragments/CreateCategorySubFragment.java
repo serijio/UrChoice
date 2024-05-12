@@ -121,12 +121,13 @@ public class CreateCategorySubFragment extends Fragment {
                     Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() % 2 != 0){
                     Toast.makeText(getActivity(), "El número de cartas tienen que ser pares", Toast.LENGTH_SHORT).show();
-                }*/
-
-
+                }else{
                     String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList);
+                }*/
 
+                String IMGString = bitmapToBase64(selectedBitmap2);
+                InsertCategory(categoryName, IMGString, cardsList);
             }
         });
 
@@ -204,14 +205,13 @@ public class CreateCategorySubFragment extends Fragment {
                 alert_card_textview.setText(cardName);
 
                 // Establecer la imagen y el nombre de la carta donde lo desees
-                Element newCard = new Element(0, base64Image, cardName, 0);
+                Element newCard = new Element(0, base64Image, cardName, 0,0);
+
                 cardsList.add(newCard);
 
                 // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
                 recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
 
-                Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getName_elem()));
-                Log.d("TAG", "Tamaño de cardlist : " + cardsList.size() +  " y su primera carta con nombre: " + (cardsList.isEmpty() ? "Lista vacía" : cardsList.get(0).getImg_element()));
                 empty_text.setVisibility(View.INVISIBLE);
                 empty_text.setElevation(1);
 
@@ -389,8 +389,9 @@ public class CreateCategorySubFragment extends Fragment {
             for (Element element : elements) {
                 JSONObject elementObject = new JSONObject();
                 elementObject.put("name_elem", element.getName_elem());
-                elementObject.put("img_elem", element.getImg_element());
+                elementObject.put("img_elem", element.getImg_elem());
                 elementObject.put("victories", element.getVictories());
+                elementObject.put("id_cat", element.getId_cat());
                 elementsArray.put(elementObject);
             }
             jsonRequest.put("elements", elementsArray);

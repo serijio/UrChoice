@@ -29,7 +29,7 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.f3__x__fragment_category_card_data_cardview, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_create_category_card, parent, false);
         return new CardViewHolder(itemView);
     }
 
@@ -41,7 +41,7 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         Element element = cardsList.get(position);
-        Bitmap bitmap = base64ToBitmap(element.getImg_element());
+        Bitmap bitmap = base64ToBitmap(element.getImg_elem());
         holder.bind(bitmap, element.getName_elem());
     }
 
