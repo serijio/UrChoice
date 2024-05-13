@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_above="@id/hx"
-            android:src="@drawable/a"
+            android:src="@drawable/logo"
             android:scaleType="centerCrop" />
         <TextView
             android:id="@+id/card_name1"
@@ -28,7 +28,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_above="@id/hx"
-            android:text="CARD 1"
+            android:text=""
             android:textStyle="bold"
             android:textSize="35dp"
             android:gravity="center"
@@ -94,7 +94,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_below="@id/hp"
-            android:src="@drawable/b"
+            android:src="@drawable/logo"
             android:scaleType="centerCrop" />
         <TextView
             android:id="@+id/card_name2"
@@ -104,7 +104,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_below="@id/hp"
-            android:text="CARD 2"
+            android:text=""
             android:textStyle="bold"
             android:textSize="35dp"
             android:gravity="center"

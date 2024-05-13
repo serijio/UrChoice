@@ -19,13 +19,16 @@
         <activity
             android:name=".Fragments.CreateCategorySubFragment"
             android:windowSoftInputMode="adjustPan|adjustResize"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.CreateCatRoomFragment"
             android:windowSoftInputMode="adjustPan|adjustResize"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.CreateRoomSubFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.FriendsFragment"
@@ -33,28 +36,36 @@
         <activity
             android:name=".Fragments.MainFragment"
             android:windowSoftInputMode="adjustPan|adjustResize"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.MainFragment_Category_SubFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.MainFragment_Room_SubFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.MainRankingSubFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.ProfileFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.SavedFavFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Fragments.SecondFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <activity
             android:name=".Screens_activities.SplashScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,25 +75,32 @@
         </activity>
         <activity
             android:name=".Screens_activities.StartScreen"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.TapToStartScreen"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.MainScreen"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.RegisterScreen"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.LoginScreen"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.prueba"
+            android:screenOrientation="portrait"
             android:exported="false" />
     </application>
 
