@@ -84,7 +84,7 @@ public class CreateCategorySubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f3__sub__fragment_create_category_screen, container, false);
+        View view = inflater.inflate(R.layout.xxx_prueba, container, false);
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Conectar();
 

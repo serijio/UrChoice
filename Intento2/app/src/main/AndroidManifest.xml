@@ -18,9 +18,11 @@
         <!--android:windowSoftInputMode="adjustNothing"-->
         <activity
             android:name=".Fragments.CreateCategorySubFragment"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
             android:name=".Fragments.CreateCatRoomFragment"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
             android:name=".Fragments.CreateRoomSubFragment"
@@ -30,6 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".Fragments.MainFragment"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
             android:name=".Fragments.MainFragment_Category_SubFragment"
@@ -67,6 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".Screens_activities.MainScreen"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
             android:name=".Screens_activities.MainActivity"
