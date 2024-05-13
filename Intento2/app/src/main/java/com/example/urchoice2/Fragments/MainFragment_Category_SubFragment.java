@@ -18,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.urchoice2.API.CategoriesAPI;
-import com.example.urchoice2.API.RoomAPI;
-import com.example.urchoice2.Adapters.MainFragment_Room_Adapter;
 import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.R;
@@ -42,7 +40,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
 
     private List<Category> categoryList;
 
-    Main_Screen_Adapter main_screen_adapter;
+    private Main_Screen_Adapter main_screen_adapter;
     private ArrayList<Main_Screen_Model> main_screen_model = new ArrayList<>();
 
     public MainFragment_Category_SubFragment() {

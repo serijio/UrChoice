@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.CategoriesAPI;
+import com.example.urchoice2.API.FavsAPI;
+import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Rooms;
+import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.Fragments.MainRankingSubFragment;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
@@ -32,6 +36,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -39,9 +46,13 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     Context context;
     ArrayList<Main_Screen_Model> mainScreenModels;
     private LayoutInflater inflater;
-    private CategoriesAPI categoriesAPI;
-
     private List<Category> categoryList;
+    private List<Category> categorySavedList = new ArrayList<>();
+    private List<Category> categoryFavList = new ArrayList<>();
+    private int userId;
+    private SavedAPI savedAPI;
+
+    private FavsAPI favsAPI;
 
     public Main_Screen_Adapter(Context context, ArrayList<Main_Screen_Model> mainScreenModels, List<Category> category) {
         this.context = context;
@@ -52,6 +63,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     @NonNull
     @Override
     public Main_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Conectar();
         inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_main_screen, parent, false);
         return new Main_Screen_Adapter.MyViewHolder(view);
@@ -65,7 +77,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
 
         holder.catName.setText(category_name);
         holder.catImg.setImageBitmap(bitmap);
-        holder.cvMain.setOnClickListener(new View.OnClickListener() {
+        holder.catImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
@@ -75,6 +87,31 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                 Intent intent = new Intent(context, MainRankingSubFragment.class);
                 context.startActivity(intent);
 
+            }
+        });
+        holder.favsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(categoryFavList.contains(categoryList.get(position))){
+                    eliminarFavorito(userId, categoryList.get(position).getId_cat());
+                    categoryFavList.remove(categoryList.get(position));
+                }else{
+                    addFav(userId, categoryList.get(position).getId_cat());
+                    categoryFavList.add(categoryList.get(position));
+                }
+            }
+        });
+
+        holder.saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(categorySavedList.contains(categoryList.get(position))){
+                    eliminarSaved(userId, categoryList.get(position).getId_cat());
+                    categorySavedList.remove(categoryList.get(position));
+                }else{
+                    insertarSaved(userId, categoryList.get(position).getId_cat());
+                    categorySavedList.add(categoryList.get(position));
+                }
             }
         });
 
@@ -108,5 +145,92 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     @Override
     public int getItemCount() {
         return mainScreenModels.size();
+    }
+
+    public void Conectar(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://railwayserver-production-7692.up.railway.app")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        savedAPI = retrofit.create(SavedAPI.class);
+        favsAPI = retrofit.create(FavsAPI.class);
+        SharedPreferences preferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        userId = preferences.getInt("id_user", 0);
+    }
+
+    private void insertarSaved(int idUser, int idCat) {
+        Call<Void> call = savedAPI.insertarSaved(idUser, idCat);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("SQL","FUNCIONO");
+                } else {
+                    Log.e("SQL","NO FUNCIONO");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("SQL","ERROR");
+            }
+        });
+    }
+    private void addFav(int idUser, int idCat){
+        Call<Void> call = savedAPI.anadirFav(idUser, idCat);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("SQL","FUNCIONO");
+                } else {
+                    Log.e("SQL","NO FUNCIONO");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("SQL","ERROR");
+            }
+        });
+    }
+
+    private void eliminarSaved(int idUser, int idCat) {
+        Call<Void> call = savedAPI.eliminarSaved(idUser, idCat);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("SQL","FUNCIONO");
+                } else {
+                    Log.e("SQL","NO FUNCIONO");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("SQL","ERROR");
+            }
+        });
+    }
+
+
+    private void eliminarFavorito(int idUser, int idCat) {
+        Call<Void> call = favsAPI.eliminarFavorito(idUser, idCat);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("SQL","SE ELIMINO");
+                } else {
+                    Log.e("SQL","NO FUNCIONO");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("SQL","ERROR");
+            }
+        });
     }
 }
