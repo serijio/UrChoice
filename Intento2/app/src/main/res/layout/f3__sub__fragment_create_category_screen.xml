@@ -50,7 +50,7 @@
         android:orientation="vertical" >
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_pass"
+            android:id="@+id/create_cat_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/red"
@@ -65,7 +65,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_pass_insert"
+                android:id="@+id/create_cat_name_insert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="CATEGORY NAME"

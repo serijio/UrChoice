@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:windowSoftInputMode="adjustNothing"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,15 +15,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UrChoice2"
         tools:targetApi="31">
+        <!--android:windowSoftInputMode="adjustNothing"-->
         <activity
-            android:name=".Fragments.MainFragment_Room_SubFragment"
+            android:name=".Fragments.CreateCategorySubFragment"
             android:exported="false" />
         <activity
-            android:name=".Fragments.SecondFragment"
+            android:name=".Fragments.CreateCatRoomFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.CreateRoomSubFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.FriendsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.MainFragment"
             android:exported="false" />
         <activity
             android:name=".Fragments.MainFragment_Category_SubFragment"
             android:exported="false" />
+        <activity
+            android:name=".Fragments.MainFragment_Room_SubFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.MainRankingSubFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.ProfileFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.SavedFavFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Fragments.SecondFragment"
+            android:exported="false" />
+
         <activity
             android:name=".Screens_activities.SplashScreen"
             android:exported="true">

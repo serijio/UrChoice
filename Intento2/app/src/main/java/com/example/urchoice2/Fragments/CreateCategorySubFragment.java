@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,6 +85,7 @@ public class CreateCategorySubFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f3__sub__fragment_create_category_screen, container, false);
+        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Conectar();
 
         cardsList = new ArrayList<>();
@@ -112,7 +114,7 @@ public class CreateCategorySubFragment extends Fragment {
         create_category_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextInputEditText textInputEditText = view.findViewById(R.id.login_pass_insert);
+                TextInputEditText textInputEditText = view.findViewById(R.id.create_cat_name_insert);
                 String categoryName = textInputEditText.getText().toString();
 
                 /*if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){

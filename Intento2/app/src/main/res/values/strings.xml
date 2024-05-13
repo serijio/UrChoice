@@ -41,7 +41,13 @@
 
 
     <!--CREATE CATEGORY SUB FRAGMENT-->
-
+    <string name="insert_name">CATEGORY NAME</string>
+    <string name="insert_image">CATEGORY IMAGE</string>
+    <string name="insert_card">ADD CARD</string>
+    <string name="card_data">CARD DATA</string>
+    <string name="create_cat">CREATE</string>
+    <string name="no_cards_yet_caps">U HAVEN\'T ADD ANY CARDS YET.\nWHAT U WAITING FOR?</string>
+    <string name="no_cards_yet_minus">U haven\'t add any cards yet.\nWhat u waiting for?</string>
 
     <!--CARDVIEWS-->
     <string name="cat_name">LA MAMÁ DE LUCA</string>

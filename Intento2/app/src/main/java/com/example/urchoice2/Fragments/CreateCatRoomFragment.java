@@ -30,8 +30,8 @@ public class CreateCatRoomFragment extends Fragment {
          @Override
          public void onClick(View v) {
             //deshabilitar los botones antes de iniciar la transacción
-            create_category_button.setEnabled(false);
             create_private_room_button.setEnabled(false);
+            create_category_button.setEnabled(false);
             Create_category_button();
          }
       });

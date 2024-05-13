@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/h79"
+        app:layout_constraintBottom_toTopOf="@id/h140"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/blue" />
@@ -20,19 +20,19 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h80"
-        app:layout_constraintBottom_toTopOf="@id/h81"
-        app:layout_constraintStart_toEndOf="@id/v57"
-        app:layout_constraintEnd_toStartOf="@id/v58"
+        app:layout_constraintTop_toBottomOf="@id/h141"
+        app:layout_constraintBottom_toTopOf="@id/h142"
+        app:layout_constraintStart_toEndOf="@id/v86"
+        app:layout_constraintEnd_toStartOf="@id/v87"
         android:background="@drawable/user_info_container" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h82"
-        app:layout_constraintBottom_toTopOf="@id/h83"
-        app:layout_constraintStart_toEndOf="@id/v59"
-        app:layout_constraintEnd_toStartOf="@id/v60"
+        app:layout_constraintTop_toBottomOf="@id/h143"
+        app:layout_constraintBottom_toTopOf="@id/h144"
+        app:layout_constraintStart_toEndOf="@id/v88"
+        app:layout_constraintEnd_toStartOf="@id/v89"
         android:text="@string/create_fragment"
         style="@style/FragmentName" />
 
@@ -40,10 +40,10 @@
         android:id="@+id/create_category_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h84"
-        app:layout_constraintBottom_toTopOf="@id/h85"
+        app:layout_constraintTop_toBottomOf="@id/h145"
+        app:layout_constraintBottom_toTopOf="@id/h146"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/v61"
+        app:layout_constraintEnd_toStartOf="@id/v90"
         app:backgroundTint="@null"
         android:background="@drawable/create_category_card_letters"
         android:transitionName="category_transition"/>
@@ -52,9 +52,9 @@
         android:id="@+id/rojo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h84"
-        app:layout_constraintBottom_toTopOf="@id/h85"
-        app:layout_constraintStart_toEndOf="@id/v62"
+        app:layout_constraintTop_toBottomOf="@id/h145"
+        app:layout_constraintBottom_toTopOf="@id/h146"
+        app:layout_constraintStart_toEndOf="@id/v91"
         app:layout_constraintEnd_toEndOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
@@ -64,9 +64,9 @@
         android:id="@+id/create_private_room_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h86"
-        app:layout_constraintBottom_toTopOf="@id/h87"
-        app:layout_constraintStart_toEndOf="@id/v64"
+        app:layout_constraintTop_toBottomOf="@id/h147"
+        app:layout_constraintBottom_toTopOf="@id/h148"
+        app:layout_constraintStart_toEndOf="@id/v93"
         app:layout_constraintEnd_toEndOf="parent"
         app:backgroundTint="@null"
         android:background="@drawable/create_room_card_letters"
@@ -76,10 +76,10 @@
         android:id="@+id/azul"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h86"
-        app:layout_constraintBottom_toTopOf="@id/h87"
+        app:layout_constraintTop_toBottomOf="@id/h147"
+        app:layout_constraintBottom_toTopOf="@id/h148"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/v63"
+        app:layout_constraintEnd_toStartOf="@id/v92"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/azul" />
@@ -87,56 +87,56 @@
 
     <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v57"
+        android:id="@+id/v86"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v58"
+        android:id="@+id/v87"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v59"
+        android:id="@+id/v88"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v60"
+        android:id="@+id/v89"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v61"
+        android:id="@+id/v90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.65" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v62"
+        android:id="@+id/v91"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v63"
+        android:id="@+id/v92"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v64"
+        android:id="@+id/v93"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -145,63 +145,63 @@
 
     <!--Constraints horizontales-->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h79"
+        android:id="@+id/h140"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.11" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h80"
+        android:id="@+id/h141"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.07" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h81"
+        android:id="@+id/h142"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h82"
+        android:id="@+id/h143"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h83"
+        android:id="@+id/h144"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.14" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h84"
+        android:id="@+id/h145"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h85"
+        android:id="@+id/h146"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h86"
+        android:id="@+id/h147"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/h87"
+        android:id="@+id/h148"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

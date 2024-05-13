@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.example.urchoice2.Fragments.CreateCatRoomFragment;
+import com.example.urchoice2.Fragments.CreateCategorySubFragment;
 import com.example.urchoice2.databinding.A6ActivityMainScreenBinding;
 import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.Fragments.FriendsFragment;
@@ -48,6 +49,7 @@ public class MainScreen extends AppCompatActivity {
                     replaceFragment(new FriendsFragment());
                 } else if (itemId == R.id.nav_add) {
                     replaceFragment (new CreateCatRoomFragment());
+                    //replaceFragment (new CreateCategorySubFragment());
                 } else if (itemId == R.id.nav_favs) {
                 replaceFragment (new SavedFavFragment());
                 } else if (itemId == R.id.nav_user) {
