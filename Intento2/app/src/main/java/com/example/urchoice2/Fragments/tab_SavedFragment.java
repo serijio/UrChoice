@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,6 +51,7 @@ public class tab_SavedFragment extends Fragment {
     private Saved_Saved_Screen_Adapter saved_saved_screen_adapter;
 
     private SavedAPI savedAPI;
+    private AlertDialog alertDialog;
     public tab_SavedFragment(){
 
     }
@@ -56,8 +60,16 @@ public class tab_SavedFragment extends Fragment {
                              Bundle savedInstanceState) {
         Conectar();
         View rootView = inflater.inflate(R.layout.f4__x__fragment_saved, container, false);
+
+            waitAlert();
+
+
         recyclerView = rootView.findViewById(R.id.rvSaved);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
+
         return rootView;
     }
 
@@ -70,6 +82,7 @@ public class tab_SavedFragment extends Fragment {
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         int userId = preferences.getInt("id_user", 0);
         GetSaved(userId);
+
     }
 
     private void GetSaved(int idUser) {
@@ -80,13 +93,21 @@ public class tab_SavedFragment extends Fragment {
                 if (response.isSuccessful()) {
                     saveds = response.body();
                     Log.e("Retrofit", "DatosS: " + saveds.get(0).getName_cat());
+                    Log.d("msg","TAMAÑO DE CARDS : " + saveds.size());
+
 
                     setRvMain();
                     saved_saved_screen_adapter = new Saved_Saved_Screen_Adapter(getContext(),savedSavedScreenModels,saveds);
                     recyclerView.setAdapter(saved_saved_screen_adapter);
+                    if(saveds != null && !saveds.isEmpty()){
+                        dismissWaitAlert();
+                    }
+
+
                 } else {
                     // La solicitud no fue exitosa (código de respuesta no 200-299)
                     Log.e("Retrofit", "No hay");
+                    dismissWaitAlert();
                 }
             }
 
@@ -105,6 +126,7 @@ public class tab_SavedFragment extends Fragment {
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
+
         for (int i = 0; i < saveds.size(); i++) {
             savedSavedScreenModels.add(new Saved_Saved_Screen_Model(
                     saveds.get(i).getName_cat(),
@@ -114,5 +136,25 @@ public class tab_SavedFragment extends Fragment {
             ));
         }
     }
+
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxx_loanding_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+
+    }
+    public void dismissWaitAlert() {
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+        }
+    }
+
 
 }

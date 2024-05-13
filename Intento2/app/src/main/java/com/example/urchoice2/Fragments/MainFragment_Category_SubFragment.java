@@ -1,10 +1,14 @@
 package com.example.urchoice2.Fragments;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,6 +26,7 @@ import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +39,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment_Category_SubFragment extends Fragment {
 
+    private Context context;
+
+
     private CategoriesAPI categoriesAPI;
 
     private RecyclerView recyclerView;
 
     private List<Category> categoryList;
+    private AlertDialog alertDialog;
 
     private Main_Screen_Adapter main_screen_adapter;
     private ArrayList<Main_Screen_Model> main_screen_model = new ArrayList<>();
@@ -47,17 +56,25 @@ public class MainFragment_Category_SubFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Conectar();
 
+
+
         View rootView = inflater.inflate(R.layout.f1___sub__fragment_main_category, container, false);
 
         recyclerView = rootView.findViewById(R.id.rvCategoriesHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        waitAlert();
         GetCategories();
 
         return   rootView;
@@ -84,6 +101,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
                     recyclerView.setLayoutManager(layoutManager);
                     main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(main_screen_adapter);
+                    dismissWaitAlert();
 
                 } else {
                     Log.e("SQL","ERROR AL SACAR CATEGORIA");
@@ -110,6 +128,24 @@ public class MainFragment_Category_SubFragment extends Fragment {
                     mainSaveIcon
             ));
         }
+
     }
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxx_loanding_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
+    }
+
 
 }

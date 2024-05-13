@@ -81,4 +81,6 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>
+    <string name="loading_title">WAITING FOR SERVER</string>
+    <string name="loading_message">WAIT</string>
 </resources>
