@@ -51,7 +51,7 @@ public class MainScreen extends AppCompatActivity {
                     replaceFragment (new CreateCatRoomFragment());
                     //replaceFragment (new CreateCategorySubFragment());
                 } else if (itemId == R.id.nav_favs) {
-                replaceFragment (new SavedFavFragment());
+                    replaceFragment (new SavedFavFragment());
                 } else if (itemId == R.id.nav_user) {
                     replaceFragment (new ProfileFragment());
                 }
@@ -61,10 +61,13 @@ public class MainScreen extends AppCompatActivity {
         });
     }
 
+
+
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.mainframe, fragment);
         fragmentTransaction.commit();
     }
+
 }

@@ -75,6 +75,8 @@ public class TapToStartScreen extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TapToStartScreen.this,pairs);
                     startActivity(intent, options.toBundle());
+                    finish();
+
                 } else {
                     startActivity(intent);
                     finish();
