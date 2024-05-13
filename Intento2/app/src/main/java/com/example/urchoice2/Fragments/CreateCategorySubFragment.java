@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -279,6 +280,7 @@ public class CreateCategorySubFragment extends Fragment {
                 // Convertir Bitmap a Drawable
                 bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
                 // Establecer el Drawable como fondo del botón
+                //bitmapDrawable.setGravity(Gravity.CENTER);
                 add_category_image_button.setBackground(bitmapDrawable);
 
             } catch (IOException e) {

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +42,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
 
     private List<Category> categoryList;
 
-    private Main_Screen_Adapter main_screen_adapter;
+    Main_Screen_Adapter main_screen_adapter;
     private ArrayList<Main_Screen_Model> main_screen_model = new ArrayList<>();
 
     public MainFragment_Category_SubFragment() {
@@ -79,7 +80,11 @@ public class MainFragment_Category_SubFragment extends Fragment {
                 if (response.isSuccessful()) {
                     categoryList = response.body();
                     setRvMain();
-                    main_screen_adapter = new Main_Screen_Adapter(getContext(),main_screen_model,categoryList);
+
+                    //para que el recycler tenga 2 columnas, no vale solo con ponerlo en el xml
+                    GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
+                    recyclerView.setLayoutManager(layoutManager);
+                    main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(main_screen_adapter);
 
                 } else {

@@ -51,6 +51,7 @@
                     android:layout_weight="0.45" >
 
                     <ImageView
+                        android:id="@+id/fav_Button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:paddingStart="5dp"
@@ -58,6 +59,7 @@
                         android:src="@drawable/fav_red_border" />
 
                     <ImageView
+                        android:id="@+id/save_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:paddingStart="5dp"
