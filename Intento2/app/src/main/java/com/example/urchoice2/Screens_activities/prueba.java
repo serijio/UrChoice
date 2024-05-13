@@ -76,6 +76,8 @@ public class prueba extends AppCompatActivity {
 
     private Integer categoryId;
     private RoomGameAPI roomGameAPI;
+    private TextView winnerName;
+    private ImageView winnerImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +116,7 @@ public class prueba extends AppCompatActivity {
 
     }
 
-    /*
+
      //lo nuevo de Luca
 
     public void AlertWaitingPlayers(){
@@ -153,6 +155,11 @@ public class prueba extends AppCompatActivity {
                 changeToMainButton();
             }
         });
+        winnerName = inflatedLayout.findViewById(R.id.winner_card_name);
+        winnerImage = inflatedLayout.findViewById(R.id.winner_card_image);
+        winnerName.setText(shuffledElements.get(0).getName_elem());
+        winnerImage.setImageBitmap(base64ToBitmap(shuffledElements.get(0).getImg_elem()));;
+
     }
 
     public void changeToMainButton() {
@@ -176,7 +183,7 @@ public class prueba extends AppCompatActivity {
     }
 
         //lo nuevo de Luca
-*/
+
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -260,7 +267,10 @@ public class prueba extends AppCompatActivity {
                     currentRound = 0;
                     startRound();
                 } else {
-                    Toast.makeText(prueba.this , "Ha ganado" + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
+                    //winnerName.setText(shuffledElements.get(0).getName_elem());
+                    Toast.makeText(prueba.this , "Ha ganado : " + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
+
+                    AlertWinner();
 
                    /* Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_element(), categoryId, shuffledElements.get(0).getVictories());
                     call.enqueue(new Callback<Void>() {
