@@ -80,6 +80,7 @@ public class RegisterScreen extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RegisterScreen.this, pairs);
                     startActivity(intent, options.toBundle());
+                    finish();
                 } else {
                     startActivity(intent);
                     finish();
