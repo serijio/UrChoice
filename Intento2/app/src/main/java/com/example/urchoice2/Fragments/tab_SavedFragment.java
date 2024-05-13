@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,15 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.urchoice2.API.FavsAPI;
-import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.SavedAPI;
-import com.example.urchoice2.Adapters.Saved_Favs_Screen_Adapter;
 import com.example.urchoice2.Adapters.Saved_Saved_Screen_Adapter;
-import com.example.urchoice2.Classes.Favs;
 import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.R;
-import com.example.urchoice2.RecyclerViews.Saved_Favs_Screen_Model;
 import com.example.urchoice2.RecyclerViews.Saved_Saved_Screen_Model;
 
 import java.util.ArrayList;

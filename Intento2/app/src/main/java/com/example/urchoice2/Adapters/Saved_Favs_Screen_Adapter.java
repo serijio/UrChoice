@@ -17,10 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.urchoice2.API.FavsAPI;
-import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Favs;
-import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Saved_Favs_Screen_Model;
 

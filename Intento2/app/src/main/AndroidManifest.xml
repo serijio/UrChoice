@@ -87,10 +87,6 @@
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
-            android:name=".Screens_activities.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-        <activity
             android:name=".Screens_activities.RegisterScreen"
             android:screenOrientation="portrait"
             android:exported="false" />

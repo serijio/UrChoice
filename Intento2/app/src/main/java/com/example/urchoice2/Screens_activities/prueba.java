@@ -158,7 +158,7 @@ public class prueba extends AppCompatActivity {
         winnerName = inflatedLayout.findViewById(R.id.winner_card_name);
         winnerImage = inflatedLayout.findViewById(R.id.winner_card_image);
         winnerName.setText(shuffledElements.get(0).getName_elem());
-        winnerImage.setImageBitmap(base64ToBitmap(shuffledElements.get(0).getImg_elem()));;
+        winnerImage.setImageBitmap(base64ToBitmap(shuffledElements.get(0).getImg_elem()));
 
     }
 

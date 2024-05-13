@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,22 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.FavsAPI;
 import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Category;
-import com.example.urchoice2.Classes.Rooms;
-import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.Fragments.MainRankingSubFragment;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
-import com.example.urchoice2.Screens_activities.prueba;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;

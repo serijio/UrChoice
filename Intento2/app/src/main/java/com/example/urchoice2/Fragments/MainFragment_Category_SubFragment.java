@@ -2,6 +2,7 @@ package com.example.urchoice2.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -40,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainFragment_Category_SubFragment extends Fragment {
 
     private Context context;
-
+    private int userId;
 
     private CategoriesAPI categoriesAPI;
 
@@ -86,31 +87,39 @@ public class MainFragment_Category_SubFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         categoriesAPI = retrofit.create(CategoriesAPI.class);
+        SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        userId = preferences.getInt("id_user", 0);
     }
 
     public void GetCategories(){
-        categoriesAPI.getCategories().enqueue(new Callback<List<Category>>() {
+
+
+        categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if (response.isSuccessful()) {
                     categoryList = response.body();
                     setRvMain();
 
-                    //para que el recycler tenga 2 columnas, no vale solo con ponerlo en el xml
+                    // Para que el recycler tenga 2 columnas
                     GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
                     recyclerView.setLayoutManager(layoutManager);
-                    main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
+
+                    // Aquí creas tu adaptador y lo estableces en el RecyclerView
+                    Main_Screen_Adapter main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(main_screen_adapter);
                     dismissWaitAlert();
-
                 } else {
-                    Log.e("SQL","ERROR AL SACAR CATEGORIA");
+                    Log.e("API Error", "Error al obtener las categorías: " + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
+                Log.e("API Error", "Error al realizar la llamada: " + t.getMessage());
             }
         });
+
     }
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);

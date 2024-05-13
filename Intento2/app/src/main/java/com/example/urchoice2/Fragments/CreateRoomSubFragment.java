@@ -34,7 +34,6 @@ import com.example.urchoice2.Adapters.MainFragment_Room_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
-import com.example.urchoice2.Screens_activities.MainActivity;
 import com.example.urchoice2.Screens_activities.prueba;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -82,8 +81,7 @@ public class CreateRoomSubFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Context context = getContext();
-                SharedPreferences preferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
-                userId = preferences.getInt("id_user", 0);
+
                 TextInputEditText nickroom = view.findViewById(R.id.nick_room);
                 TextInputEditText passroom = view.findViewById(R.id.passRoom);
                 String nameRoom = nickroom.getText().toString();
@@ -114,10 +112,12 @@ public class CreateRoomSubFragment extends Fragment {
                 .build();
         categoriesAPI = retrofit.create(CategoriesAPI.class);
         roomAPI = retrofit.create(RoomAPI.class);
+        SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        userId = preferences.getInt("id_user", 0);
     }
 
     public void GetCategories(){
-        categoriesAPI.getCategories().enqueue(new Callback<List<Category>>() {
+        categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if (response.isSuccessful()) {

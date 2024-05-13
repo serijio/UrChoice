@@ -3,7 +3,9 @@ package com.example.urchoice2.Screens_activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -74,7 +76,18 @@ public class TapToStartScreen extends AppCompatActivity {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TapToStartScreen.this,pairs);
+
+                    SharedPreferences preferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+                    int userId = preferences.getInt("id_user", 0);
                     startActivity(intent, options.toBundle());
+                    if(userId == 0){
+                        startActivity(intent, options.toBundle());
+                    }else{
+                        Intent intent2 = new Intent(TapToStartScreen.this, MainScreen.class);
+                        startActivity(intent2, options.toBundle());
+
+                    }
+
                     finish();
 
                 } else {

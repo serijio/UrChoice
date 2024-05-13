@@ -17,10 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.FavsAPI;
 import com.example.urchoice2.API.SavedAPI;
-import com.example.urchoice2.Classes.Favs;
 import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Saved_Saved_Screen_Model;
@@ -33,8 +31,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.DELETE;
-import retrofit2.http.Path;
 
 public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved_Screen_Adapter.MyViewHolder> {
 
