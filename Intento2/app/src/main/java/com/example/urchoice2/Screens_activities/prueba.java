@@ -10,37 +10,30 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
 import android.util.Base64;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.urchoice2.API.CategoriesAPI;
-import com.example.urchoice2.API.ElemCatAPI;
 import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.Element;
-import com.example.urchoice2.Fragments.MainFragment;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,18 +57,8 @@ public class prueba extends AppCompatActivity {
     private ImageView imageViewElement2;
 
     private Handler handler;
-
-    private UserAPI userApi;
     private ElementsAPI elementApi;
-
-    private CategoriesAPI categoriesAPI;
-
-    private FriendsAPI friendsAPI;
-    private RoomAPI roomAPI;
-    private ElemCatAPI elemCatAPI;
-
     private Integer categoryId;
-    private RoomGameAPI roomGameAPI;
     private TextView winnerName;
     private ImageView winnerImage;
 
@@ -84,7 +67,7 @@ public class prueba extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xx__fragment_multi_game_round_layout);
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
-        categoryId = sharedPreferences.getInt("id_categoryMulti", 0);
+        categoryId = sharedPreferences.getInt("id_categorySingle", 0);
         Conectar();
         textViewElement1 = findViewById(R.id.card_name1);
         textViewElement2 = findViewById(R.id.card_name2);
@@ -117,7 +100,7 @@ public class prueba extends AppCompatActivity {
     }
 
 
-     //lo nuevo de Luca
+    //lo nuevo de Luca
 
     public void AlertWaitingPlayers(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -182,7 +165,7 @@ public class prueba extends AppCompatActivity {
         }, 400);
     }
 
-        //lo nuevo de Luca
+    //lo nuevo de Luca
 
 
     public void Conectar(){
@@ -190,35 +173,8 @@ public class prueba extends AppCompatActivity {
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        userApi = retrofit.create(UserAPI.class);
         elementApi = retrofit.create(ElementsAPI.class);
-        categoriesAPI = retrofit.create(CategoriesAPI.class);
-        friendsAPI = retrofit.create(FriendsAPI.class);
-        roomAPI = retrofit.create(RoomAPI.class);
-        elemCatAPI = retrofit.create(ElemCatAPI.class);
-        roomGameAPI = retrofit.create(RoomGameAPI.class);
         Game();
-    }
-
-    public void Ranking(View view){
-        elementApi.getRanking(categoryId).enqueue(new Callback<List<Element>>() {
-            @Override
-            public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
-                if (response.isSuccessful()) {
-                    List<Element> elementList = response.body();
-                    for (int i = 0; i < elementList.size();i++){
-                        Log.e("URCHOICE","Elemento:" + elementList.get(i).getName_elem());
-                    }
-                } else {
-                    Log.e("URCHOICE","ElementoERROR");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Element>> call, Throwable t) {
-                Log.e("URCHOICE","ElementoERROR2");
-            }
-        });
     }
 
     public void Game(){
@@ -253,8 +209,6 @@ public class prueba extends AppCompatActivity {
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
                     // Mostrar los nombres de los elementos en los TextView correspondientes
-
-
                     Bitmap base64Image = base64ToBitmap(firstElement.img_elem);
                     Bitmap base64Image2 = base64ToBitmap(secondElement.img_elem);
                     imageViewElement1.setImageBitmap(base64Image);
@@ -268,37 +222,25 @@ public class prueba extends AppCompatActivity {
                     startRound();
                 } else {
                     //winnerName.setText(shuffledElements.get(0).getName_elem());
-                    Toast.makeText(prueba.this , "Ha ganado : " + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
-
-                    AlertWinner();
-
-                   /* Call<Void> call = elemCatAPI.updateElemCat(shuffledElements.get(0).getId_element(), categoryId, shuffledElements.get(0).getVictories());
+                    Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories());
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
-                                // La actualización se realizó correctamente
-                                Log.d("ElemCatUpdate", "Actualización exitosa");
-                                Toast.makeText(prueba.this , "Ha ganado" + shuffledElements.get(0).getName_elem(), Toast.LENGTH_SHORT).show();
+                                AlertWinner();
                             } else {
-                                // Error en la respuesta del servidor
-                                Log.e("ElemCatUpdate", "Error en la respuesta del servidor: " + response.message());
+                                // Manejar el error de la respuesta
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            // Error en la llamada (p. ej., problemas de red)
-                            Log.e("ElemCatUpdate", "Error en la llamada: " + t.getMessage());
+                            // Manejar el error de la llamada
                         }
-                    });*/
+                    });
                 }
             }
         });
     }
-
-
-
-
 
 }

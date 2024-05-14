@@ -15,7 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.FavsAPI;
@@ -34,7 +38,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapter.MyViewHolder> {
+public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapter.MyViewHolder>{
     Context context;
     ArrayList<Main_Screen_Model> mainScreenModels;
     private LayoutInflater inflater;
@@ -45,6 +49,9 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     private SavedAPI savedAPI;
 
     private FavsAPI favsAPI;
+
+
+
 
     public Main_Screen_Adapter(Context context, ArrayList<Main_Screen_Model> mainScreenModels, List<Category> category) {
         this.context = context;
@@ -76,8 +83,17 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("id_categorySingle", categoryList.get(position).getId_cat());
                 editor.apply();
-                Intent intent = new Intent(context, MainRankingSubFragment.class);
-                context.startActivity(intent);
+                //Intent intent = new Intent(context, MainRankingSubFragment.class);
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+                // Iniciar la transacción de fragmento
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                // Reemplazar el fragmento actual con MainRankingSubFragment
+                MainRankingSubFragment fragment = new MainRankingSubFragment();
+                transaction.replace(R.id.mainframe, fragment); // Reemplaza R.id.mainFrame(El frame intermedio) con el ID de tu contenedor de fragmentos
+                transaction.addToBackStack(null);
+                transaction.commit();
+                //context.startActivity(intent);
 
             }
         });
@@ -225,4 +241,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
             }
         });
     }
+
+
+
 }

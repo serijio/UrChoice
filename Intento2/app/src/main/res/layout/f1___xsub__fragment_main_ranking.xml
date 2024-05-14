@@ -2,383 +2,397 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Number1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.MainRankingSubFragment" >
+    tools:context=".Fragments.MainRankingSubFragment">
 
     <!--Parte superior info user-->
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/blue"
         app:layout_constraintBottom_toTopOf="@id/h71"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/blue" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h72"
+        android:background="@drawable/user_info_container"
         app:layout_constraintBottom_toTopOf="@id/h73"
-        app:layout_constraintStart_toEndOf="@id/v50"
         app:layout_constraintEnd_toStartOf="@id/v51"
-        android:background="@drawable/user_info_container" />
+        app:layout_constraintStart_toEndOf="@id/v50"
+        app:layout_constraintTop_toBottomOf="@id/h72" />
 
     <ImageView
         android:id="@+id/ranking_screen_back_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h74"
-        app:layout_constraintBottom_toTopOf="@id/h75"
-        app:layout_constraintStart_toEndOf="@id/v52"
-        app:layout_constraintEnd_toStartOf="@id/v53"
         android:src="@drawable/nopic_blue"
-        android:transitionName="back_pic_trans" />
+        android:transitionName="back_pic_trans"
+        app:layout_constraintBottom_toTopOf="@id/h75"
+        app:layout_constraintEnd_toStartOf="@id/v53"
+        app:layout_constraintStart_toEndOf="@id/v52"
+        app:layout_constraintTop_toBottomOf="@id/h74" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h74"
-        app:layout_constraintBottom_toTopOf="@id/h75"
-        app:layout_constraintStart_toEndOf="@id/v52"
-        app:layout_constraintEnd_toStartOf="@id/v53"
+        android:scaleType="fitCenter"
         android:src="@drawable/nopic_login_inside"
-        android:scaleType="fitCenter"/>
+        app:layout_constraintBottom_toTopOf="@id/h75"
+        app:layout_constraintEnd_toStartOf="@id/v53"
+        app:layout_constraintStart_toEndOf="@id/v52"
+        app:layout_constraintTop_toBottomOf="@id/h74" />
 
     <TextView
         android:id="@+id/ranking_username"
+        style="@style/TopUserInfoNickname"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h76"
-        app:layout_constraintBottom_toTopOf="@id/h77"
-        app:layout_constraintStart_toEndOf="@id/v54"
-        app:layout_constraintEnd_toStartOf="@id/v55"
         android:text="@string/user_nick"
-        style="@style/TopUserInfoNickname" />
+        app:layout_constraintBottom_toTopOf="@id/h77"
+        app:layout_constraintEnd_toStartOf="@id/v55"
+        app:layout_constraintStart_toEndOf="@id/v54"
+        app:layout_constraintTop_toBottomOf="@id/h76" />
 
     <TextView
         android:id="@+id/ranking_email"
+        style="@style/TopUserInfoEmail"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h78"
-        app:layout_constraintBottom_toTopOf="@id/h79"
-        app:layout_constraintStart_toEndOf="@id/v54"
-        app:layout_constraintEnd_toStartOf="@id/v55"
         android:text="@string/user_email"
-        style="@style/TopUserInfoEmail" />
+        app:layout_constraintBottom_toTopOf="@id/h79"
+        app:layout_constraintEnd_toStartOf="@id/v55"
+        app:layout_constraintStart_toEndOf="@id/v54"
+        app:layout_constraintTop_toBottomOf="@id/h78" />
 
     <TextView
         android:id="@+id/ranking_games_played"
+        style="@style/TopUserInfoGames"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h80"
-        app:layout_constraintBottom_toTopOf="@id/h81"
-        app:layout_constraintStart_toEndOf="@id/v56"
-        app:layout_constraintEnd_toStartOf="@id/v57"
         android:text="@string/user_games"
-        style="@style/TopUserInfoGames" />
+        app:layout_constraintBottom_toTopOf="@id/h81"
+        app:layout_constraintEnd_toStartOf="@id/v57"
+        app:layout_constraintStart_toEndOf="@id/v56"
+        app:layout_constraintTop_toBottomOf="@id/h80" />
 
 
     <!--Titulo ranking-->
     <ImageView
+        android:id="@+id/IMGCategory"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h82"
-        app:layout_constraintBottom_toTopOf="@id/h83"
-        app:layout_constraintStart_toEndOf="@id/v58"
-        app:layout_constraintEnd_toStartOf="@id/v59"
-        android:src="@drawable/hxh"
         android:alpha="0.6"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/hxh"
+        app:layout_constraintBottom_toTopOf="@id/h83"
+        app:layout_constraintEnd_toStartOf="@id/v59"
+        app:layout_constraintStart_toEndOf="@id/v58"
+        app:layout_constraintTop_toBottomOf="@id/h82" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h85"
+        android:src="@drawable/fav_red_border"
         app:layout_constraintBottom_toTopOf="@id/h86"
-        app:layout_constraintStart_toEndOf="@id/v60"
         app:layout_constraintEnd_toStartOf="@id/v61"
-        android:src="@drawable/fav_red_border" />
+        app:layout_constraintStart_toEndOf="@id/v60"
+        app:layout_constraintTop_toBottomOf="@id/h85" />
 
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h85"
+        android:src="@drawable/save_blue_border"
         app:layout_constraintBottom_toTopOf="@id/h86"
-        app:layout_constraintStart_toEndOf="@id/v62"
         app:layout_constraintEnd_toStartOf="@id/v63"
-        android:src="@drawable/save_blue_border" />
+        app:layout_constraintStart_toEndOf="@id/v62"
+        app:layout_constraintTop_toBottomOf="@id/h85" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h83"
+        android:background="@color/blue"
         app:layout_constraintBottom_toTopOf="@id/h84"
-        app:layout_constraintStart_toEndOf="@id/v58"
         app:layout_constraintEnd_toStartOf="@id/v59"
-        android:background="@color/blue" />
+        app:layout_constraintStart_toEndOf="@id/v58"
+        app:layout_constraintTop_toBottomOf="@id/h83" />
 
     <TextView
+        style="@style/FragmentName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h83"
-        app:layout_constraintBottom_toTopOf="@id/h84"
-        app:layout_constraintStart_toEndOf="@id/v58"
-        app:layout_constraintEnd_toStartOf="@id/v59"
         android:text="@string/ranking"
-        style="@style/FragmentName" />
+        app:layout_constraintBottom_toTopOf="@id/h84"
+        app:layout_constraintEnd_toStartOf="@id/v59"
+        app:layout_constraintStart_toEndOf="@id/v58"
+        app:layout_constraintTop_toBottomOf="@id/h83" />
 
 
     <!--Ranking 1-->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h87"
+        android:src="@drawable/first_ranking_cards_all"
         app:layout_constraintBottom_toTopOf="@id/h88"
-        app:layout_constraintStart_toEndOf="@id/v64"
         app:layout_constraintEnd_toStartOf="@id/v65"
-        android:src="@drawable/first_ranking_cards_all" />
+        app:layout_constraintStart_toEndOf="@id/v64"
+        app:layout_constraintTop_toBottomOf="@id/h87" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h89"
+        android:background="@drawable/ranking_border"
         app:layout_constraintBottom_toTopOf="@id/h90"
-        app:layout_constraintStart_toEndOf="@id/v66"
         app:layout_constraintEnd_toStartOf="@id/v67"
-        android:background="@drawable/ranking_border" />
+        app:layout_constraintStart_toEndOf="@id/v66"
+        app:layout_constraintTop_toBottomOf="@id/h89" />
 
     <ImageView
+        android:id="@+id/Number1IMG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h91"
-        app:layout_constraintBottom_toTopOf="@id/h92"
-        app:layout_constraintStart_toEndOf="@id/v68"
-        app:layout_constraintEnd_toStartOf="@id/v69"
+        android:scaleType="centerCrop"
         android:src="@drawable/hisoka"
-        android:scaleType="centerCrop" />
+        app:layout_constraintBottom_toTopOf="@id/h92"
+        app:layout_constraintEnd_toStartOf="@id/v69"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/v68"
+        app:layout_constraintTop_toBottomOf="@id/h91"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/Number1"
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h93"
-        app:layout_constraintBottom_toTopOf="@id/h94"
-        app:layout_constraintStart_toEndOf="@id/v70"
-        app:layout_constraintEnd_toStartOf="@id/v71"
         android:text="@string/hisoka"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h94"
+        app:layout_constraintEnd_toStartOf="@id/v71"
+        app:layout_constraintStart_toEndOf="@id/v70"
+        app:layout_constraintTop_toBottomOf="@id/h93" />
 
     <TextView
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h93"
-        app:layout_constraintBottom_toTopOf="@id/h94"
-        app:layout_constraintStart_toEndOf="@id/v72"
-        app:layout_constraintEnd_toStartOf="@id/v73"
         android:text="@string/hisoka_100"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h94"
+        app:layout_constraintEnd_toStartOf="@id/v73"
+        app:layout_constraintStart_toEndOf="@id/v72"
+        app:layout_constraintTop_toBottomOf="@id/h93" />
 
 
     <!--Ranking 2-->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h95"
+        android:src="@drawable/second_ranking_cards_all"
         app:layout_constraintBottom_toTopOf="@id/h96"
-        app:layout_constraintStart_toEndOf="@id/v64"
         app:layout_constraintEnd_toStartOf="@id/v65"
-        android:src="@drawable/second_ranking_cards_all" />
+        app:layout_constraintStart_toEndOf="@id/v64"
+        app:layout_constraintTop_toBottomOf="@id/h95" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h97"
+        android:background="@drawable/ranking_border"
         app:layout_constraintBottom_toTopOf="@id/h98"
-        app:layout_constraintStart_toEndOf="@id/v66"
         app:layout_constraintEnd_toStartOf="@id/v67"
-        android:background="@drawable/ranking_border" />
+        app:layout_constraintStart_toEndOf="@id/v66"
+        app:layout_constraintTop_toBottomOf="@id/h97" />
 
     <ImageView
+        android:id="@+id/Number2IMG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h99"
-        app:layout_constraintBottom_toTopOf="@id/h100"
-        app:layout_constraintStart_toEndOf="@id/v68"
-        app:layout_constraintEnd_toStartOf="@id/v69"
+        android:scaleType="centerCrop"
         android:src="@drawable/feitan"
-        android:scaleType="centerCrop" />
+        app:layout_constraintBottom_toTopOf="@id/h100"
+        app:layout_constraintEnd_toStartOf="@id/v69"
+        app:layout_constraintStart_toEndOf="@id/v68"
+        app:layout_constraintTop_toBottomOf="@id/h99" />
 
     <TextView
+        android:id="@+id/Number2"
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h101"
-        app:layout_constraintBottom_toTopOf="@id/h102"
-        app:layout_constraintStart_toEndOf="@id/v70"
-        app:layout_constraintEnd_toStartOf="@id/v71"
         android:text="@string/feitan"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h102"
+        app:layout_constraintEnd_toStartOf="@id/v71"
+        app:layout_constraintStart_toEndOf="@id/v70"
+        app:layout_constraintTop_toBottomOf="@id/h101" />
 
     <TextView
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h101"
-        app:layout_constraintBottom_toTopOf="@id/h102"
-        app:layout_constraintStart_toEndOf="@id/v72"
-        app:layout_constraintEnd_toStartOf="@id/v73"
         android:text="@string/feitan_90"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h102"
+        app:layout_constraintEnd_toStartOf="@id/v73"
+        app:layout_constraintStart_toEndOf="@id/v72"
+        app:layout_constraintTop_toBottomOf="@id/h101" />
 
 
     <!--Ranking 3-->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h103"
+        android:src="@drawable/third_ranking_cards_all"
         app:layout_constraintBottom_toTopOf="@id/h104"
-        app:layout_constraintStart_toEndOf="@id/v64"
         app:layout_constraintEnd_toStartOf="@id/v65"
-        android:src="@drawable/third_ranking_cards_all" />
+        app:layout_constraintStart_toEndOf="@id/v64"
+        app:layout_constraintTop_toBottomOf="@id/h103" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h105"
+        android:background="@drawable/ranking_border"
         app:layout_constraintBottom_toTopOf="@id/h106"
-        app:layout_constraintStart_toEndOf="@id/v66"
         app:layout_constraintEnd_toStartOf="@id/v67"
-        android:background="@drawable/ranking_border" />
+        app:layout_constraintStart_toEndOf="@id/v66"
+        app:layout_constraintTop_toBottomOf="@id/h105" />
 
     <ImageView
+        android:id="@+id/Number3IMG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h107"
-        app:layout_constraintBottom_toTopOf="@id/h108"
-        app:layout_constraintStart_toEndOf="@id/v68"
-        app:layout_constraintEnd_toStartOf="@id/v69"
+        android:scaleType="centerCrop"
         android:src="@drawable/kite"
-        android:scaleType="centerCrop" />
+        app:layout_constraintBottom_toTopOf="@id/h108"
+        app:layout_constraintEnd_toStartOf="@id/v69"
+        app:layout_constraintStart_toEndOf="@id/v68"
+        app:layout_constraintTop_toBottomOf="@id/h107" />
 
     <TextView
+        android:id="@+id/Number3"
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h109"
-        app:layout_constraintBottom_toTopOf="@id/h110"
-        app:layout_constraintStart_toEndOf="@id/v70"
-        app:layout_constraintEnd_toStartOf="@id/v71"
         android:text="@string/kite"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h110"
+        app:layout_constraintEnd_toStartOf="@id/v71"
+        app:layout_constraintStart_toEndOf="@id/v70"
+        app:layout_constraintTop_toBottomOf="@id/h109" />
 
     <TextView
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h109"
-        app:layout_constraintBottom_toTopOf="@id/h110"
-        app:layout_constraintStart_toEndOf="@id/v72"
-        app:layout_constraintEnd_toStartOf="@id/v73"
         android:text="@string/kite_74"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h110"
+        app:layout_constraintEnd_toStartOf="@id/v73"
+        app:layout_constraintStart_toEndOf="@id/v72"
+        app:layout_constraintTop_toBottomOf="@id/h109" />
 
 
     <!--Ranking 4-->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h111"
+        android:src="@drawable/fourth_ranking_cards_all"
         app:layout_constraintBottom_toTopOf="@id/h112"
-        app:layout_constraintStart_toEndOf="@id/v64"
         app:layout_constraintEnd_toStartOf="@id/v65"
-        android:src="@drawable/fourth_ranking_cards_all" />
+        app:layout_constraintStart_toEndOf="@id/v64"
+        app:layout_constraintTop_toBottomOf="@id/h111" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h113"
+        android:background="@drawable/ranking_border"
         app:layout_constraintBottom_toTopOf="@id/h114"
-        app:layout_constraintStart_toEndOf="@id/v66"
         app:layout_constraintEnd_toStartOf="@id/v67"
-        android:background="@drawable/ranking_border" />
+        app:layout_constraintStart_toEndOf="@id/v66"
+        app:layout_constraintTop_toBottomOf="@id/h113" />
 
     <ImageView
+        android:id="@+id/Number4IMG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h115"
-        app:layout_constraintBottom_toTopOf="@id/h116"
-        app:layout_constraintStart_toEndOf="@id/v68"
-        app:layout_constraintEnd_toStartOf="@id/v69"
+        android:scaleType="centerCrop"
         android:src="@drawable/illumi"
-        android:scaleType="centerCrop" />
+        app:layout_constraintBottom_toTopOf="@id/h116"
+        app:layout_constraintEnd_toStartOf="@id/v69"
+        app:layout_constraintStart_toEndOf="@id/v68"
+        app:layout_constraintTop_toBottomOf="@id/h115" />
 
     <TextView
+        android:id="@+id/Number4"
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h117"
-        app:layout_constraintBottom_toTopOf="@id/h118"
-        app:layout_constraintStart_toEndOf="@id/v70"
-        app:layout_constraintEnd_toStartOf="@id/v71"
         android:text="@string/illumi"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h118"
+        app:layout_constraintEnd_toStartOf="@id/v71"
+        app:layout_constraintStart_toEndOf="@id/v70"
+        app:layout_constraintTop_toBottomOf="@id/h117" />
 
     <TextView
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h117"
-        app:layout_constraintBottom_toTopOf="@id/h118"
-        app:layout_constraintStart_toEndOf="@id/v72"
-        app:layout_constraintEnd_toStartOf="@id/v73"
         android:text="@string/illumi_61"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h118"
+        app:layout_constraintEnd_toStartOf="@id/v73"
+        app:layout_constraintStart_toEndOf="@id/v72"
+        app:layout_constraintTop_toBottomOf="@id/h117" />
 
 
     <!--Ranking 5-->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h119"
+        android:src="@drawable/fifth_ranking_cards_all"
         app:layout_constraintBottom_toTopOf="@id/h120"
-        app:layout_constraintStart_toEndOf="@id/v64"
         app:layout_constraintEnd_toStartOf="@id/v65"
-        android:src="@drawable/fifth_ranking_cards_all" />
+        app:layout_constraintStart_toEndOf="@id/v64"
+        app:layout_constraintTop_toBottomOf="@id/h119" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h121"
+        android:background="@drawable/ranking_border"
         app:layout_constraintBottom_toTopOf="@id/h122"
-        app:layout_constraintStart_toEndOf="@id/v66"
         app:layout_constraintEnd_toStartOf="@id/v67"
-        android:background="@drawable/ranking_border" />
+        app:layout_constraintStart_toEndOf="@id/v66"
+        app:layout_constraintTop_toBottomOf="@id/h121" />
 
     <ImageView
+        android:id="@+id/Number5IMG"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h123"
-        app:layout_constraintBottom_toTopOf="@id/h124"
-        app:layout_constraintStart_toEndOf="@id/v68"
-        app:layout_constraintEnd_toStartOf="@id/v69"
+        android:scaleType="centerCrop"
         android:src="@drawable/shizuku"
-        android:scaleType="centerCrop" />
+        app:layout_constraintBottom_toTopOf="@id/h124"
+        app:layout_constraintEnd_toStartOf="@id/v69"
+        app:layout_constraintStart_toEndOf="@id/v68"
+        app:layout_constraintTop_toBottomOf="@id/h123" />
 
     <TextView
+        android:id="@+id/Number5"
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h125"
-        app:layout_constraintBottom_toTopOf="@id/h126"
-        app:layout_constraintStart_toEndOf="@id/v70"
-        app:layout_constraintEnd_toStartOf="@id/v71"
         android:text="@string/shizuku"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h126"
+        app:layout_constraintEnd_toStartOf="@id/v71"
+        app:layout_constraintStart_toEndOf="@id/v70"
+        app:layout_constraintTop_toBottomOf="@id/h125" />
 
     <TextView
+        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/h125"
-        app:layout_constraintBottom_toTopOf="@id/h126"
-        app:layout_constraintStart_toEndOf="@id/v72"
-        app:layout_constraintEnd_toStartOf="@id/v73"
         android:text="@string/shizuku_23"
-        style="@style/RankingStyle" />
+        app:layout_constraintBottom_toTopOf="@id/h126"
+        app:layout_constraintEnd_toStartOf="@id/v73"
+        app:layout_constraintStart_toEndOf="@id/v72"
+        app:layout_constraintTop_toBottomOf="@id/h125" />
 
 
     <!--Botones abajo-->
@@ -386,38 +400,41 @@
         android:id="@+id/back_home_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h127"
-        app:layout_constraintBottom_toTopOf="@id/h128"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/v74"
         android:background="@drawable/back_cat_rec"
-        app:icon="@drawable/login_arrow"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        app:backgroundTint="@null"
+        app:icon="@drawable/login_arrow"
         app:iconGravity="textStart"
         app:iconPadding="10dp"
         app:iconTint="@color/red"
-        app:backgroundTint="@null" />
+        app:layout_constraintBottom_toTopOf="@id/h128"
+        app:layout_constraintEnd_toStartOf="@id/v74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/h127" />
 
+
+    <!--Constraints verticales-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/start_game_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/h127"
-        app:layout_constraintBottom_toTopOf="@id/h128"
-        app:layout_constraintStart_toEndOf="@id/v75"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/start_game_rec"
-        app:backgroundTint="@null"
+        android:fontFamily="@font/orbiblack"
+        android:onClick="StartGame"
         android:text="@string/start"
-        android:textSize="16sp"
         android:textColor="@color/blue"
-        android:fontFamily="@font/orbiblack" />
+        android:textSize="16sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@id/h128"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/v75"
+        app:layout_constraintTop_toBottomOf="@id/h127"
+        app:layout_constraintVertical_bias="0.0" />
 
-
-    <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v50"
         android:layout_width="wrap_content"
