@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Number1"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -149,15 +149,17 @@
         android:background="@drawable/ranking_border"
         app:layout_constraintBottom_toTopOf="@id/h90"
         app:layout_constraintEnd_toStartOf="@id/v67"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/v66"
-        app:layout_constraintTop_toBottomOf="@id/h89" />
+        app:layout_constraintTop_toBottomOf="@id/h89"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/Number1IMG"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/hisoka"
+
         app:layout_constraintBottom_toTopOf="@id/h92"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintHorizontal_bias="0.0"
@@ -170,17 +172,18 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/hisoka"
+
         app:layout_constraintBottom_toTopOf="@id/h94"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
         app:layout_constraintTop_toBottomOf="@id/h93" />
 
     <TextView
+        android:id="@+id/Number1Score"
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/hisoka_100"
+
         app:layout_constraintBottom_toTopOf="@id/h94"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -211,7 +214,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/feitan"
+
         app:layout_constraintBottom_toTopOf="@id/h100"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -222,17 +225,19 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/feitan"
+
         app:layout_constraintBottom_toTopOf="@id/h102"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
         app:layout_constraintTop_toBottomOf="@id/h101" />
 
     <TextView
+        android:id="@+id/Number2Score"
+
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/feitan_90"
+
         app:layout_constraintBottom_toTopOf="@id/h102"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -263,7 +268,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/kite"
+
         app:layout_constraintBottom_toTopOf="@id/h108"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -274,17 +279,19 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/kite"
+
         app:layout_constraintBottom_toTopOf="@id/h110"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
         app:layout_constraintTop_toBottomOf="@id/h109" />
 
     <TextView
+        android:id="@+id/Number3Score"
+
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/kite_74"
+
         app:layout_constraintBottom_toTopOf="@id/h110"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -315,7 +322,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/illumi"
+
         app:layout_constraintBottom_toTopOf="@id/h116"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -326,17 +333,18 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/illumi"
+
         app:layout_constraintBottom_toTopOf="@id/h118"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
         app:layout_constraintTop_toBottomOf="@id/h117" />
 
     <TextView
+        android:id="@+id/Number4Score"
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/illumi_61"
+
         app:layout_constraintBottom_toTopOf="@id/h118"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -367,7 +375,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/shizuku"
+
         app:layout_constraintBottom_toTopOf="@id/h124"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -378,17 +386,19 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/shizuku"
+
         app:layout_constraintBottom_toTopOf="@id/h126"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
         app:layout_constraintTop_toBottomOf="@id/h125" />
 
     <TextView
+        android:id="@+id/Number5Score"
+
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/shizuku_23"
+
         app:layout_constraintBottom_toTopOf="@id/h126"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"

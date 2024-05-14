@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.prueba;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
@@ -68,6 +70,13 @@ public class MainRankingSubFragment extends Fragment {
         View view = inflater.inflate(R.layout.f1___xsub__fragment_main_ranking, container, false);
         GetCategory(view);
         GetRanking(view);
+        MaterialButton startGameButton = view.findViewById(R.id.start_game_button); // Reemplaza start_game_button con el ID real de tu botón
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartGame();
+            }
+        });
         return view;
     }
 
@@ -110,13 +119,14 @@ public class MainRankingSubFragment extends Fragment {
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
                 if (response.isSuccessful()) {
                     List<Element> elements = response.body();
-                    for(int i = 0;i < elements.size();i++){
-                        int name = Integer.parseInt("R.id.Number" + i);
-                        int IMG = Integer.parseInt("R.id.Number" + i + "IMG");
-                        TextView nameTextView  = view.findViewById(name);
-                        ImageView IMGImageView = view.findViewById(IMG);
+                    for (int i = 0; i < elements.size(); i++) {
+                        TextView nameTextView = view.findViewById(getResources().getIdentifier("Number" + (i + 1), "id", requireContext().getPackageName()));
+                        ImageView imgImageView = view.findViewById(getResources().getIdentifier("Number" + (i + 1) + "IMG", "id", requireContext().getPackageName()));
+                        TextView scoreuser =  view.findViewById(getResources().getIdentifier("Number" + (i + 1) + "Score", "id", requireContext().getPackageName()));
+
                         nameTextView.setText(elements.get(i).getName_elem());
-                        IMGImageView.setImageBitmap(base64ToBitmap(elements.get(i).getImg_elem()));
+                        imgImageView.setImageBitmap(base64ToBitmap(elements.get(i).getImg_elem()));
+                        //scoreuser.setText(elements.get(i).getVictories());
                     }
                     // Haz algo con los datos recibidos
                 } else {
@@ -136,7 +146,8 @@ public class MainRankingSubFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-    public void StartGame(View view){
+    public void StartGame(){
+
         Intent intent = new Intent(requireContext(), prueba.class);
         requireContext().startActivity(intent);
     }
