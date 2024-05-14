@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,8 +84,11 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("id_categorySingle", categoryList.get(position).getId_cat());
                 editor.apply();
+
+                //PROBLEMON
+
                 //Intent intent = new Intent(context, MainRankingSubFragment.class);
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
 
                 // Iniciar la transacción de fragmento
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -93,6 +97,8 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                 transaction.replace(R.id.mainframe, fragment); // Reemplaza R.id.mainFrame(El frame intermedio) con el ID de tu contenedor de fragmentos
                 transaction.addToBackStack(null);
                 transaction.commit();
+                //PROBLEMON FIN
+
                 //context.startActivity(intent);
 
             }

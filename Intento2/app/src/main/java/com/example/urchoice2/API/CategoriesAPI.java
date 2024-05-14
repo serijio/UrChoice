@@ -19,7 +19,7 @@ public interface CategoriesAPI {
     @GET("/categories/{id_user}")
     Call<List<Category>> getCategories(@Path("id_user") int userId);
 
-    @GET("/categories/{id}")
+    @GET("/category/{id}")
     Call<Category> getCategory(@Path("id") int categoryId);
 
 }

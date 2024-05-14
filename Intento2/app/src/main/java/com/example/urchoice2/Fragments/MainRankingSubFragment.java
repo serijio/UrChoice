@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class MainRankingSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f1___xsub__fragment_main_ranking, container, false);
+
         GetCategory(view);
         GetRanking(view);
         MaterialButton startGameButton = view.findViewById(R.id.start_game_button); // Reemplaza start_game_button con el ID real de tu botón
@@ -75,7 +77,9 @@ public class MainRankingSubFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 StartGame();
+
             }
+
         });
         return view;
     }
@@ -98,16 +102,20 @@ public class MainRankingSubFragment extends Fragment {
             public void onResponse(Call<Category> call, Response<Category> response) {
                 if (response.isSuccessful()) {
                     Category category = response.body();
+                    // Aquí puedes manejar la categoría recibida
+                    Log.d("Categoría", "ID: " + category.getId_cat() + ", Nombre: " + category.getName_cat());
                     ImageView categoryIMG = view.findViewById(R.id.IMGCategory);
                     categoryIMG.setImageBitmap(base64ToBitmap(category.getImg_cat()));
                 } else {
-                    // Manejar el error de la respuesta
+                    // Manejar el caso en que la respuesta no sea exitosa
+                    Log.e("Error", "Error al obtener la categoría");
                 }
             }
 
             @Override
             public void onFailure(Call<Category> call, Throwable t) {
-                // Manejar el error de la llamada
+                // Manejar el caso de error en la comunicación
+                Log.e("Error", "Error en la llamada al servidor: " + t.getMessage());
             }
         });
     }
@@ -150,5 +158,9 @@ public class MainRankingSubFragment extends Fragment {
 
         Intent intent = new Intent(requireContext(), prueba.class);
         requireContext().startActivity(intent);
+
+
     }
+
+
 }

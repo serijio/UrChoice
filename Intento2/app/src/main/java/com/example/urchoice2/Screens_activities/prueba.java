@@ -136,6 +136,7 @@ public class prueba extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeToMainButton();
+
             }
         });
         winnerName = inflatedLayout.findViewById(R.id.winner_card_name);
@@ -157,9 +158,12 @@ public class prueba extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(prueba.this, pairs);
                     startActivity(intent, options.toBundle());
+                    //SUPUESTO CREEMOS QUE NO
+                    //finish();
                 } else {
                     startActivity(intent);
-                    finish();
+                    //SUPUESTO CREEMOS QUE NO
+                    //finish();
                 }
             }
         }, 400);
@@ -228,6 +232,7 @@ public class prueba extends AppCompatActivity {
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
                                 AlertWinner();
+
                             } else {
                                 // Manejar el error de la respuesta
                             }
