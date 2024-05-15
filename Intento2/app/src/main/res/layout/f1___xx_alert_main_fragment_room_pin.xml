@@ -48,30 +48,16 @@
             android:paddingStart="50dp"
             android:paddingEnd="50dp"
             android:textColorHint="@color/white"
-<<<<<<< Updated upstream:Intento2/app/src/main/res/layout/f1__x__main_fragment_room_pin_alert.xml
-            app:boxStrokeColor="@null"
-            app:endIconTint="#00FFFFFF"
-            app:hintTextColor="#FEFEFE">
-=======
             app:boxStrokeColor="@null" >
->>>>>>> Stashed changes:Intento2/app/src/main/res/layout/f1___xx_alert_main_fragment_room_pin.xml
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pin_room_textEdittextlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
-<<<<<<< Updated upstream:Intento2/app/src/main/res/layout/f1__x__main_fragment_room_pin_alert.xml
-                android:cursorVisible="false"
-                android:gravity="center"
-                android:hint="PIN"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-=======
                 android:hint="@string/pin"
                 android:cursorVisible="false"
                 style="@style/profile_text" />
->>>>>>> Stashed changes:Intento2/app/src/main/res/layout/f1___xx_alert_main_fragment_room_pin.xml
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
