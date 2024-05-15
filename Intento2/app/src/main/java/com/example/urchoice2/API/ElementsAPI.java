@@ -22,6 +22,7 @@ public interface ElementsAPI {
     @POST("/element/winner")
     Call<Void> updateElement(
             @Field("id_elem") int id_elem,
-            @Field("victories") int victories
+            @Field("victories") int victories,
+            @Field("id_user") int id_user
     );
 }

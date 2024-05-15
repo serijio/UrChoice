@@ -97,7 +97,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
 
                 if(!rooms.get(position).getPass_room().isEmpty()){
                     LayoutInflater inflater = LayoutInflater.from(context);
-                    View dialogView = inflater.inflate(R.layout.f1___xx_alert___main_fragment_room_pin, null);
+                    View dialogView = inflater.inflate(R.layout.f1___xx_alert__main_fragment_room_pin, null);
 
                     // Construir el AlertDialog utilizando el diseño personalizado
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -118,7 +118,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                             // Cerrar el AlertDialog actual
                             alertDialog.dismiss();
                             joinRoom(roomId,userId,pinValue);
-                            // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
+                            // Abrir el nuevo AlertDialog f3___xx_alert__createcatroom_fragment_waiting_players
                         }
                     });
                 }else{
@@ -176,7 +176,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
     public void Room(){
         shouldUpdate = true;
         LayoutInflater inflater = LayoutInflater.from(context);
-        View waitingPlayersDialogView = inflater.inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
+        View waitingPlayersDialogView = inflater.inflate(R.layout.f3___xx_alert__createcatroom_fragment_waiting_players, null);
 
         RecyclerView recyclerView = waitingPlayersDialogView.findViewById(R.id.recycler_players);
 

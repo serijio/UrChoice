@@ -118,7 +118,7 @@ public class CreateRoomSubFragment extends Fragment {
 
     private void category_alertDialogOpen() {
         // Inflar el diseÃ±o del AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_choose_category_alert, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_choose_category, null);
 
         // Crear el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -258,7 +258,7 @@ public class CreateRoomSubFragment extends Fragment {
 
     private void alertDialogOpen(int roomId) {
         shouldUpdate = true;
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_waiting_players, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_players);

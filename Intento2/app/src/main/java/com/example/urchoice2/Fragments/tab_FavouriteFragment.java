@@ -118,7 +118,7 @@ public class tab_FavouriteFragment extends Fragment {
 
     public void waitAlert(){
         // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxx_loanding_alert_dialog, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
         alertDialog = builder.create();

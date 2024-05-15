@@ -49,6 +49,7 @@ public class MultiGame extends AppCompatActivity {
     private int currentRound = 0;
     private List<Element> shuffledElements = new ArrayList<>();
     private List<Element> winnerElements = new ArrayList<>();
+
     private List<VoteCount> voteResults = new ArrayList<>();
     private TextView textViewElement1;
     private TextView textViewElement2;
@@ -62,6 +63,7 @@ public class MultiGame extends AppCompatActivity {
     private Integer roomId;
     private TextView winnerName;
     private ImageView winnerImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +97,6 @@ public class MultiGame extends AppCompatActivity {
 
     }
 
-
     //lo nuevo de Luca
 
     public void AlertWaitingPlayers(){
@@ -111,6 +112,8 @@ public class MultiGame extends AppCompatActivity {
         alertDialog.show();
 
     }
+
+
     public void AlertWinner() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -141,6 +144,7 @@ public class MultiGame extends AppCompatActivity {
 
     }
 
+
     public void changeToMainButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -149,8 +153,6 @@ public class MultiGame extends AppCompatActivity {
                 Pair[] pairs = new Pair[0];
 
                 endRoom(roomId,userId);
-
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MultiGame.this, pairs);
                     startActivity(intent, options.toBundle());
@@ -164,7 +166,6 @@ public class MultiGame extends AppCompatActivity {
 
     //lo nuevo de Luca
 
-
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
@@ -175,6 +176,7 @@ public class MultiGame extends AppCompatActivity {
         roomGameAPI = retrofit.create(RoomGameAPI.class);
         Game();
     }
+
 
     public void Ranking(View view){
         elementApi.getRanking(categoryId).enqueue(new Callback<List<Element>>() {
@@ -189,13 +191,13 @@ public class MultiGame extends AppCompatActivity {
                     Log.e("URCHOICE","ElementoERROR");
                 }
             }
-
             @Override
             public void onFailure(Call<List<Element>> call, Throwable t) {
                 Log.e("URCHOICE","ElementoERROR2");
             }
         });
     }
+
 
     public void Game(){
         elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
@@ -208,17 +210,18 @@ public class MultiGame extends AppCompatActivity {
                     startRound();
                 }
             }
-
             @Override
             public void onFailure(Call<List<Element>> call, Throwable t) {
             }
         });
     }
 
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
 
     private void startRound() {
         runOnUiThread(new Runnable() {
@@ -243,18 +246,16 @@ public class MultiGame extends AppCompatActivity {
                     currentRound = 0;
                     startRound();
                 } else {
-                    Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories());
+                    Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if (response.isSuccessful()) {
                                 AlertWinner();
-
                             } else {
                                 // Manejar el error de la respuesta
                             }
                         }
-
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             // Manejar el error de la llamada
@@ -264,6 +265,7 @@ public class MultiGame extends AppCompatActivity {
             }
         });
     }
+
 
     public void Vote(String voto) {
         Call<Void> call = roomGameAPI.updateVote(roomId, userId, voto);
@@ -279,13 +281,13 @@ public class MultiGame extends AppCompatActivity {
 
                 }
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("SQL", "ERRORUP2: " + t.getMessage());
             }
         });
     }
+
 
     private void startRepeatedCall() {
         Log.e("SQL","ENTRO AL CALL: " + allVotesReceived );
@@ -329,13 +331,13 @@ public class MultiGame extends AppCompatActivity {
                     Log.e("SQL","ERRORGET");
                 }
             }
-
             @Override
             public void onFailure(Call<List<UserVote>> call, Throwable t) {
                 Log.e("SQL","ERRORGET2");
             }
         });
     }
+
 
     public void WinnerRound(){
         Call<JsonObject> call = roomAPI.getWinnerRound(roomId);
@@ -352,7 +354,6 @@ public class MultiGame extends AppCompatActivity {
                     Log.e("SQL", "ERRORW");
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 Log.e("SQL", "ERRORW2");
@@ -376,7 +377,6 @@ public class MultiGame extends AppCompatActivity {
                     startRound();
                 } else {
                     Log.e("SQL", "ERRORUPC: " + response.message());
-
                 }
             }
             @Override
@@ -385,6 +385,7 @@ public class MultiGame extends AppCompatActivity {
             }
         });
     }
+
 
     public void endRoom(int roomId, int userId) {
         Call<Void> call = roomAPI.endRoom(roomId, userId);

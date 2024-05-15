@@ -6,13 +6,15 @@ public class User {
     public String nick_user;
     public String pass_user;
     public String img_user;
+    private int GamesPlayed;
 
-    public User(int id_user, String email_user, String nick_user, String pass_user, String img_user) {
+    public User(int id_user, String email_user, String nick_user, String pass_user, String img_user, int GamesPlayed) {
         this.id_user = id_user;
         this.email_user = email_user;
         this.nick_user = nick_user;
         this.pass_user = pass_user;
         this.img_user = img_user;
+        this.GamesPlayed = GamesPlayed;
     }
 
     public int getId_user() {
@@ -53,5 +55,14 @@ public class User {
 
     public void setImg_user(String img_user) {
         this.img_user = img_user;
+    }
+
+
+    public int getGamesPlayed() {
+        return GamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        GamesPlayed = gamesPlayed;
     }
 }

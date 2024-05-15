@@ -1,6 +1,5 @@
 package com.example.urchoice2.Fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -27,7 +26,6 @@ import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
-import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +125,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
 
     public void waitAlert(){
         // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxx_loanding_alert_dialog, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
         alertDialog = builder.create();

@@ -156,8 +156,7 @@ public class MainFragment extends Fragment {
             if(user.getImg_user() != null || user.getImg_user().isEmpty()){
                 userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
             }
+            games.setText(String.valueOf(user.getGamesPlayed()));
         }
     }
-
-
 }

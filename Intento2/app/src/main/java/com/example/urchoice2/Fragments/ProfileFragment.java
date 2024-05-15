@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.urchoice2.API.ElementsAPI;
+import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.UserAPI;
@@ -36,6 +37,7 @@ import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.SplashScreen;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 import com.makeramen.roundedimageview.RoundedDrawable;
 
 import java.io.ByteArrayOutputStream;
@@ -51,6 +53,7 @@ public class ProfileFragment extends Fragment {
     MaterialButton edit_name_button;
     MaterialButton edit_profile_image_button;
     private UserAPI userAPI;
+    private FriendsAPI friendAPI;
     ImageView profile_image;
     private View view;
     ImageView profileBackground;
@@ -98,8 +101,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectImageFromGallery();
-
-
             }
         });
         logout = view.findViewById(R.id.logout_button);
@@ -110,10 +111,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-
         return view;
     }
+
 
     public void CerrarSesion(){
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
@@ -125,6 +125,7 @@ public class ProfileFragment extends Fragment {
         requireActivity().finish();
     }
 
+
     public void selectImageFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -132,6 +133,7 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST1);
 
     }
+
 
     public String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -143,10 +145,13 @@ public class ProfileFragment extends Fragment {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -166,6 +171,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+
     //deshabilitar boton de retroceder
     @Override
     public void onAttach(Context context) {
@@ -175,7 +181,7 @@ public class ProfileFragment extends Fragment {
             activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-                    // No hacer nada cuando se presiona el botón de retroceso
+                    // No hacer nada cuando se presiona el botÃ³n de retroceso
                 }
             });
         }
@@ -187,9 +193,35 @@ public class ProfileFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userAPI = retrofit.create(UserAPI.class);
+        friendAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        GetUser();
+        GetFriends();
+    }
+
+
+    public void GetFriends(){
+        Log.e("SQL","DATOS: " + userId);
+        Call<JsonObject> call = friendAPI.getFriendCount(userId);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    JsonObject jsonResponse = response.body();
+                    int friendCount = jsonResponse.get("count").getAsInt();
+                    TextView friendTextView = view.findViewById(R.id.friends);
+                    friendTextView.setText(String.valueOf(friendCount));
+                    GetUser();
+                }else{
+                    Log.e("SQL","ERROR");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.e("SQL","ERROR2" + t);
+            }
+        });
     }
 
 
@@ -202,10 +234,14 @@ public class ProfileFragment extends Fragment {
                     user = response.body();
                     TextInputEditText nombreTextView = view.findViewById(R.id.profileName_edittext);
                     nombreTextView.setText(user.getNick_user());
+
                     ImageView userIMG = view.findViewById(R.id.profile_image);
                     if(user.getImg_user() != null || user.getImg_user().isEmpty()){
                         userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
                     }
+
+                    TextView profileGames = view.findViewById(R.id.games);
+                    profileGames.setText(String.valueOf(user.getGamesPlayed()));
                 } else {
                     Log.e("API Error", "Error al obtener el usuario: " + response.message());
                 }
@@ -229,15 +265,16 @@ public class ProfileFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Toast.makeText(requireContext(), "Bienvenido " + nameString, Toast.LENGTH_SHORT).show();
                 } else {
-                    // La llamada no fue exitosa, maneja el error aquí
+                    // La llamada no fue exitosa, maneja el error aquÃ­
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Error de red o error en la llamada, maneja el error aquí
+                // Error de red o error en la llamada, maneja el error aquÃ­
             }
         });
     }
+
 
     public void UpdateIMG(){
         ImageView imgView = view.findViewById(R.id.profile_image);
@@ -261,11 +298,11 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+
     public void LogOut(){
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("id_user");
         editor.apply();
     }
-
 }

@@ -49,6 +49,7 @@ public class SingleGame extends AppCompatActivity {
     private Integer categoryId;
     private TextView winnerName;
     private ImageView winnerImage;
+    private Integer userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,8 @@ public class SingleGame extends AppCompatActivity {
         });
 
     }
+
+
     public void AlertWinner() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -115,6 +118,7 @@ public class SingleGame extends AppCompatActivity {
 
     }
 
+
     public void changeToMainButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -125,7 +129,6 @@ public class SingleGame extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("id_categorySingle");
                 editor.apply();
-
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SingleGame.this, pairs);
@@ -143,15 +146,18 @@ public class SingleGame extends AppCompatActivity {
 
     //lo nuevo de Luca
 
-
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         elementApi = retrofit.create(ElementsAPI.class);
+        SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        categoryId = sharedPreferences.getInt("id_categorySingle", 0);
+        userId = sharedPreferences.getInt("id_user", 0);
         Game();
     }
+
 
     public void Game(){
         elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
@@ -164,17 +170,18 @@ public class SingleGame extends AppCompatActivity {
                     startRound();
                 }
             }
-
             @Override
             public void onFailure(Call<List<Element>> call, Throwable t) {
             }
         });
     }
 
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
 
     private void startRound() {
         runOnUiThread(new Runnable() {
@@ -197,7 +204,7 @@ public class SingleGame extends AppCompatActivity {
                     startRound();
                 } else {
                     //winnerName.setText(shuffledElements.get(0).getName_elem());
-                    Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories());
+                    Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -208,7 +215,6 @@ public class SingleGame extends AppCompatActivity {
                                 // Manejar el error de la respuesta
                             }
                         }
-
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             // Manejar el error de la llamada
@@ -218,5 +224,4 @@ public class SingleGame extends AppCompatActivity {
             }
         });
     }
-
 }

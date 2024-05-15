@@ -83,8 +83,9 @@
     <string name="pin">PIN</string>
     <string name="enter_pin">ENTER PIN</string>
     <string name="card_name">CARD NAME</string>
+    <string name="go_home">GO TO HOME</string>
+    <string name="success">Ur category has been created!!</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>
     <string name="loading_title">WAITING FOR SERVER</string>
     <string name="loading_message">WAIT</string>
