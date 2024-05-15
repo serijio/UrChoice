@@ -12,8 +12,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ElementsAPI {
-
-
     @GET("/elements/ranking/{categoryId}")
     Call<List<Element>> getRanking(@Path("categoryId") int categoryId);
 
@@ -26,5 +24,4 @@ public interface ElementsAPI {
             @Field("id_elem") int id_elem,
             @Field("victories") int victories
     );
-
 }

@@ -13,7 +13,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface UserAPI {
-
     @FormUrlEncoded
     @POST("user/register")
     Call<User> registerUser(
@@ -22,7 +21,6 @@ public interface UserAPI {
             @Field("img") String img,
             @Field("contra") String contra
     );
-
 
     @FormUrlEncoded
     @POST("user/login")
@@ -35,5 +33,4 @@ public interface UserAPI {
     Call<List<User>> getUsers();
     @GET("/users/{id_user}")
     Call<User> getUser(@Path("id_user") int userId);
-
 }

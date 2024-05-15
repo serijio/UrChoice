@@ -7,8 +7,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface FriendsAPI {
-
-
     @FormUrlEncoded
     @POST("friends")
     Call<Void> addFriend(@Field("id_us1") int id_us1, @Field("id_us2") int id_us2);

@@ -14,7 +14,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface SavedAPI {
-
     @GET("saved/{id_user}")
     Call<List<Saved>> obtenerGuardados(@Path("id_user") int idUser);
 

@@ -12,7 +12,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface CategoriesAPI {
-
     @POST("/categories/create")
     Call<Void> createCategory(@Body RequestBody requestBody);
 
@@ -21,5 +20,4 @@ public interface CategoriesAPI {
 
     @GET("/category/{id}")
     Call<Category> getCategory(@Path("id") int categoryId);
-
 }

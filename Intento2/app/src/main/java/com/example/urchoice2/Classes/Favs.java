@@ -2,15 +2,10 @@ package com.example.urchoice2.Classes;
 
 public class Favs {
     private int id_fav;
-
     private int id_user;
-
     private int id_cat;
-
     private String name_cat;
-
     private String img_cat;
-
     private boolean isSaved;
 
     public Favs(int id_fav, int id_user, int id_cat, String name_cat, String img_cat) {
@@ -21,7 +16,6 @@ public class Favs {
         this.img_cat = img_cat;
         this.isSaved = true;
     }
-
 
     public int getId_fav() {
         return id_fav;

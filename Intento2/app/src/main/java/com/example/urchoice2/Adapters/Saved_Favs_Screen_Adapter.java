@@ -33,7 +33,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_Screen_Adapter.MyViewHolder> {
-
     Context context;
     ArrayList<Saved_Favs_Screen_Model> savedFavsScreenModels;
     private List<Favs> favsList;
@@ -47,6 +46,7 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
         this.favsList = favorites;
     }
 
+
     @NonNull
     @Override
     public Saved_Favs_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +56,7 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
         return new Saved_Favs_Screen_Adapter.MyViewHolder(view);
     }
 
+
     public void onBindViewHolder(@NonNull Saved_Favs_Screen_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String category_name = favsList.get(position).getName_cat();
         String category_img = favsList.get(position).getImg_cat();
@@ -63,10 +64,8 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
         Bitmap bitmap = base64ToBitmap(category_img);
         Favs saved = favsList.get(position);
 
-
         holder.favsImg.setImageBitmap(bitmap);
         holder.favsName.setText(category_name);
-
 
         holder.favsSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +73,7 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
 
             }
         });
+
 
         holder.favsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,17 +87,15 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
                     insertarFavorito(userId,favsList.get(position).getId_cat());
                     saved.setSaved(false);
                 }
-
-
             }
         });
-
     }
 
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView favsImg;
@@ -116,10 +114,12 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
         }
     }
 
+
     @Override
     public int getItemCount() {
         return savedFavsScreenModels.size();
     }
+
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -150,6 +150,7 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
             }
         });
     }
+
 
     private void eliminarFavorito(int idUser, int idCat) {
         Call<Void> call = favsAPI.eliminarFavorito(idUser, idCat);

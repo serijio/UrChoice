@@ -78,6 +78,8 @@
     <!-- CREATE ROOM  -->
     <string name="room">ROOM</string>
 
+    <!--OTHERS-->
+    <string name="loading">Loading...</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>

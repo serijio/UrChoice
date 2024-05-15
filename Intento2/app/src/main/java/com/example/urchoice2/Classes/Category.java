@@ -1,11 +1,8 @@
 package com.example.urchoice2.Classes;
 
 public class Category {
-
     public int id_cat;
-
     public String name_cat;
-
     public String img_cat;
 
     public Category(int id_cat, String name_cat, String img_cat) {

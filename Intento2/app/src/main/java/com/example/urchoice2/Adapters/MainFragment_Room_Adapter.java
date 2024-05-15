@@ -42,7 +42,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment_Room_Adapter.RoomViewHolder> {
-
     private Context context;
     private boolean shouldUpdate = true;
     private List<Rooms> rooms;
@@ -51,13 +50,10 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
     private int roomId;
     private int userId;
 
-
-
     public MainFragment_Room_Adapter(Context context, List<Rooms> rooms) {
         this.context = context;
         this.rooms = rooms;
     }
-
 
 
     @NonNull
@@ -76,7 +72,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         String roomName = rooms.get(position).getName_room();
         int numberOfPlayers = this.rooms.get(position).getUserCount();
 
-
         holder.roomNameTextView.setText(roomName);
         holder.numberOfPlayersTextView.setText(String.valueOf(numberOfPlayers));
 
@@ -87,7 +82,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
             // Si la posición es impar, establecer el fondo rojo
             holder.roomNameTextView.setBackgroundColor(context.getResources().getColor(R.color.red));
         }
-
 
         // Agregar OnClickListener al TextView del nombre de la habitación
         holder.roomNameTextView.setOnClickListener(new View.OnClickListener() {
@@ -160,8 +154,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                     Log.e("SQL","FUNCIONA");
                     // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
                     Room();
-
-
                 } else {
                     Log.e("SQL","NO FUNCIONA");
                 }
@@ -189,7 +181,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         View waitingPlayersDialogView = inflater.inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
 
         RecyclerView recyclerView = waitingPlayersDialogView.findViewById(R.id.recycler_players);
-
 
         recyclerView.setAdapter(new RecyclerView.Adapter() {
             @NonNull
@@ -247,6 +238,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 waitingPlayersAlertDialog.dismiss();
             }
         });
+
         MaterialButton startButton = waitingPlayersDialogView.findViewById(R.id.alert_start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -279,7 +271,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                     }
                 }, 400);
             }
-
         });
     }
 
@@ -336,7 +327,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 if (response.isSuccessful()) {
                     Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
                 } else {
-                    // OcurriÃ³ un error al intentar finalizar la sala
+                    // Ocurría un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
@@ -375,5 +366,4 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
     public interface RoomClosedListener {
         void onRoomClosed();
     }
-
 }

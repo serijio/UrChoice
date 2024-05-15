@@ -21,10 +21,10 @@ import java.util.List;
 
 public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCategory_CardAdapter.CardViewHolder> {
     private List<Element> cardsList;
-
     public CreateCategory_CardAdapter(List<Element> cardsList) {
         this.cardsList = cardsList;
     }
+
 
     @NonNull
     @Override
@@ -33,10 +33,12 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
         return new CardViewHolder(itemView);
     }
 
+
     @Override
     public int getItemCount() {
         return cardsList.size();
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
@@ -45,19 +47,17 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
         holder.bind(bitmap, element.getName_elem());
     }
 
+
     public class CardViewHolder extends RecyclerView.ViewHolder {
         ImageView cardImage;
         TextView cardName;
         MaterialButton deleteCard;
-
-
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             cardImage = itemView.findViewById(R.id.category_card_data);
             cardName = itemView.findViewById(R.id.category_carddata_name);
             deleteCard = itemView.findViewById(R.id.deleteCard);
-
         }
 
         public void bind(Bitmap bitmap, String cardNameText) {
@@ -83,9 +83,9 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
-
 }

@@ -48,10 +48,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     private List<Category> categoryFavList = new ArrayList<>();
     private int userId;
     private SavedAPI savedAPI;
-
     private FavsAPI favsAPI;
-
-
 
 
     public Main_Screen_Adapter(Context context, ArrayList<Main_Screen_Model> mainScreenModels, List<Category> category) {
@@ -59,6 +56,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
         this.mainScreenModels = mainScreenModels;
         this.categoryList = category;
     }
+
 
     @NonNull
     @Override
@@ -69,10 +67,10 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
         return new Main_Screen_Adapter.MyViewHolder(view);
     }
 
+
     public void onBindViewHolder(@NonNull Main_Screen_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String category_name = categoryList.get(position).getName_cat();
         String category_img = categoryList.get(position).getImg_cat();
-
         Bitmap bitmap = base64ToBitmap(category_img);
 
         holder.catName.setText(category_name);
@@ -85,24 +83,20 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                 editor.putInt("id_categorySingle", categoryList.get(position).getId_cat());
                 editor.apply();
 
-                //PROBLEMON
-
                 //Intent intent = new Intent(context, MainRankingSubFragment.class);
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
 
                 // Iniciar la transacción de fragmento
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+
                 // Reemplazar el fragmento actual con MainRankingSubFragment
                 MainRankingSubFragment fragment = new MainRankingSubFragment();
                 transaction.replace(R.id.mainframe, fragment); // Reemplaza R.id.mainFrame(El frame intermedio) con el ID de tu contenedor de fragmentos
                 transaction.addToBackStack(null);
                 transaction.commit();
-                //PROBLEMON FIN
-
-                //context.startActivity(intent);
-
             }
         });
+
         holder.favsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,16 +122,14 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                 }
             }
         });
-
-        //holder.catImg.setOnClickListener();
-
-
     }
+
 
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView catImg;
@@ -156,6 +148,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
         }
     }
 
+
     @Override
     public int getItemCount() {
         return mainScreenModels.size();
@@ -171,6 +164,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
         SharedPreferences preferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = preferences.getInt("id_user", 0);
     }
+
 
     private void insertarSaved(int idUser, int idCat) {
         Call<Void> call = savedAPI.insertarSaved(idUser, idCat);
@@ -190,6 +184,8 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
             }
         });
     }
+
+
     private void addFav(int idUser, int idCat){
         Call<Void> call = savedAPI.anadirFav(idUser, idCat);
         call.enqueue(new Callback<Void>() {
@@ -208,6 +204,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
             }
         });
     }
+
 
     private void eliminarSaved(int idUser, int idCat) {
         Call<Void> call = savedAPI.eliminarSaved(idUser, idCat);
@@ -247,7 +244,4 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
             }
         });
     }
-
-
-
 }

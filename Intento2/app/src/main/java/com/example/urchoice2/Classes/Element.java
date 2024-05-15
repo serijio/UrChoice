@@ -1,17 +1,11 @@
 package com.example.urchoice2.Classes;
 
 public class Element {
-
     public int id_elem;
-
     public String img_elem;
-
     public String name_elem;
-
     public int victories;
-
     public int id_cat;
-
 
     public Element(int id_elem, String img_elem, String name_elem, int victories, int id_cat) {
         this.id_elem = id_elem;

@@ -39,38 +39,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment_Category_SubFragment extends Fragment {
-
     private Context context;
     private int userId;
-
     private CategoriesAPI categoriesAPI;
-
     private RecyclerView recyclerView;
-
     private List<Category> categoryList;
     private AlertDialog alertDialog;
-
     private Main_Screen_Adapter main_screen_adapter;
     private ArrayList<Main_Screen_Model> main_screen_model = new ArrayList<>();
 
-    public MainFragment_Category_SubFragment() {
-        // Required empty public constructor
-    }
-
-
-
-
-
-
+    public MainFragment_Category_SubFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
-
-
-
         View rootView = inflater.inflate(R.layout.f1___sub__fragment_main_category, container, false);
 
         recyclerView = rootView.findViewById(R.id.rvCategoriesHome);
@@ -78,7 +60,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         waitAlert();
         GetCategories();
 
-        return   rootView;
+        return rootView;
     }
 
     public void Conectar(){
@@ -135,7 +117,6 @@ public class MainFragment_Category_SubFragment extends Fragment {
                     mainSaveIcon
             ));
         }
-
     }
     public void waitAlert(){
         // Construir el nuevo AlertDialog
@@ -147,12 +128,9 @@ public class MainFragment_Category_SubFragment extends Fragment {
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
-
-
     }
+
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }
-
-
 }

@@ -49,14 +49,10 @@ public class CenterCropDrawable extends Drawable {
     }
 
     @Override
-    public void setAlpha(int alpha) {
-        // Not needed
-    }
+    public void setAlpha(int alpha) {}
 
     @Override
-    public void setColorFilter(android.graphics.ColorFilter colorFilter) {
-        // Not needed
-    }
+    public void setColorFilter(android.graphics.ColorFilter colorFilter) {}
 
     @Override
     public int getOpacity() {

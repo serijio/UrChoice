@@ -1,18 +1,11 @@
 package com.example.urchoice2.Classes;
 
 public class User {
-
-
     public int id_user;
-
     public String email_user;
-
     public String nick_user;
-
     public String pass_user;
-
     public String img_user;
-
 
     public User(int id_user, String email_user, String nick_user, String pass_user, String img_user) {
         this.id_user = id_user;

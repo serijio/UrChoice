@@ -1,15 +1,10 @@
 package com.example.urchoice2.Classes;
 
 public class RoomGame {
-
     Integer id_game_room;
-
     Integer id_room;
-
     Integer id_user;
-
     String vote;
-
 
     public RoomGame(Integer id_game_room, Integer id_room, Integer id_user, String vote) {
         this.id_game_room = id_game_room;
@@ -17,7 +12,6 @@ public class RoomGame {
         this.id_user = id_user;
         this.vote = vote;
     }
-
 
     public Integer getId_game_room() {
         return id_game_room;

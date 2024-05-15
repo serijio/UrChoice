@@ -37,6 +37,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/azul" />
+
         <TextView
             android:id="@+id/card_image_data"
             android:layout_width="match_parent"
@@ -46,7 +47,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="290dp"
-            android:text="LOANDING...."
+            android:text="@string/loading"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="center|center_vertical"
@@ -54,17 +55,13 @@
             android:scaleType="centerCrop"
             android:src="@drawable/navbar_add"
             app:riv_corner_radius="80dp" />
+
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="250dp"
-
-            />
-
-
-
+            android:layout_marginTop="250dp" />
     </RelativeLayout>
 
 </RelativeLayout>

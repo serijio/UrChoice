@@ -78,9 +78,7 @@ public class CreateCategorySubFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST2 = 1;
     private TextView empty_text;
 
-    public CreateCategorySubFragment() {
-        // Required empty public constructor
-    }
+    public CreateCategorySubFragment() {}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -109,7 +107,6 @@ public class CreateCategorySubFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_card_category);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new CreateCategory_CardAdapter(cardsList));
-
 
         create_category_button = view.findViewById(R.id.create_new_category_button);
         create_category_button.setOnClickListener(new View.OnClickListener() {

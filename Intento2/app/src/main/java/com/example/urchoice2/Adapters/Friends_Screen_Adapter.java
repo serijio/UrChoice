@@ -35,6 +35,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
         Conectar();
     }
 
+
     @NonNull
     @Override
     public Friends_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,9 +45,11 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
         return new Friends_Screen_Adapter.MyViewHolder(view);
     }
 
+
     public void onBindViewHolder(@NonNull Friends_Screen_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
     }
+
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -55,6 +58,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
                 .build();
         userAPI = retrofit.create(UserAPI.class);
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView friendImg;

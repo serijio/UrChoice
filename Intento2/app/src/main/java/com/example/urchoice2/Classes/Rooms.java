@@ -1,21 +1,13 @@
 package com.example.urchoice2.Classes;
 
 public class Rooms {
-
     private int id_room;
-
     private String pass_room;
-
     private String status_room;
-
     private int id_cat;
-
     private String name_room;
-
     private int userCount;
-
     private String img_cat;
-
 
     public Rooms(int id_room, String pass_room, String status_room, int id_cat, String name_room, int userCount, String img_cat) {
         this.id_room = id_room;

@@ -6,8 +6,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ElemCatAPI {
-
-
     @FormUrlEncoded
     @POST("elemcat/update")
     Call<Void> updateElemCat(

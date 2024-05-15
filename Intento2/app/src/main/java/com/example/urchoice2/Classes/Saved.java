@@ -1,20 +1,12 @@
 package com.example.urchoice2.Classes;
 
 public class Saved {
-
-
     private int id_save;
-
     private int id_user;
-
     private int id_cat;
-
     private String name_cat;
-
     private String img_cat;
-
     private boolean isSaved;
-
 
     public Saved(int id_save, int id_user, int id_cat, String name_cat, String img_cat) {
         this.id_save = id_save;

@@ -33,24 +33,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved_Screen_Adapter.MyViewHolder> {
-
     Context context;
     ArrayList<Saved_Saved_Screen_Model> savedSavedScreenModels;
     private List<Saved> savedList;
-
     private List<Saved> favsList = new ArrayList<>();
     private LayoutInflater inflater;
-
     private int userId;
     private SavedAPI savedAPI;
-
     private FavsAPI favsAPI;
-
     public Saved_Saved_Screen_Adapter(Context context, ArrayList<Saved_Saved_Screen_Model> savedSavedScreenModels, List<Saved> saveds) {
         this.context = context;
         this.savedSavedScreenModels = savedSavedScreenModels;
         this.savedList = saveds;
     }
+
 
     @NonNull
     @Override
@@ -61,13 +57,13 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
         return new Saved_Saved_Screen_Adapter.MyViewHolder(view);
     }
 
+
     public void onBindViewHolder(@NonNull Saved_Saved_Screen_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String category_name = savedList.get(position).getName_cat();
         String category_img = savedList.get(position).getImg_cat();
 
         Bitmap bitmap = base64ToBitmap(category_img);
         Saved saved = savedList.get(position);
-
 
         if (saved.isSaved()) {
             //holder.savedSaveButton.setImageResource(R.drawable.ic_saved); // Por ejemplo, cambia la imagen del botón
@@ -106,6 +102,7 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
         });
     }
 
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -129,6 +126,7 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
         }
     }
 
+
     @Override
     public int getItemCount() {
         return savedSavedScreenModels.size();
@@ -145,6 +143,7 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
         SharedPreferences preferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = preferences.getInt("id_user", 0);
     }
+
 
     private void insertarSaved(int idUser, int idCat) {
         Call<Void> call = savedAPI.insertarSaved(idUser, idCat);
@@ -164,6 +163,8 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
             }
         });
     }
+
+
     private void addFav(int idUser, int idCat){
         Call<Void> call = savedAPI.anadirFav(idUser, idCat);
         call.enqueue(new Callback<Void>() {
@@ -182,6 +183,7 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
             }
         });
     }
+
 
     private void eliminarSaved(int idUser, int idCat) {
         Call<Void> call = savedAPI.eliminarSaved(idUser, idCat);
@@ -221,7 +223,4 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
             }
         });
     }
-
-
-
 }

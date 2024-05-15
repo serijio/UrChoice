@@ -13,8 +13,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface FavsAPI {
-
-
     @GET("favoritos/{id_user}")
     Call<List<Favs>> obtenerFavoritos(@Path("id_user") int id_user);
 
