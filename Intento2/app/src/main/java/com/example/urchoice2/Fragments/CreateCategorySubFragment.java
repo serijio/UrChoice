@@ -173,7 +173,7 @@ public class CreateCategorySubFragment extends Fragment {
     }
     private void create_card_alertDialog(){
         // Inflar el diseño del AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3__x__fragment_alert_add_category_card_data,null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert_createcatroom_fragment_add_category_card_data,null);
         edit_image_button = view.findViewById(R.id.card_image_data);
         setCard_data_button = view.findViewById(R.id.set_data_alert_addcard_button);
         alert_card_textview = view.findViewById(R.id.card_textEdittextlayout);

@@ -30,9 +30,7 @@ public class MainFragment_Room_SubFragment extends Fragment {
 
 
 
-    public MainFragment_Room_SubFragment() {
-        // Required empty public constructor
-    }
+    public MainFragment_Room_SubFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

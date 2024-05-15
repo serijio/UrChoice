@@ -35,34 +35,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tab_SavedFragment extends Fragment {
-
+    private Context context;
     private List<Saved> saveds;
-
     private RecyclerView recyclerView;
-
     private ArrayList<Saved_Saved_Screen_Model> savedSavedScreenModels = new ArrayList<>();
-
     private Saved_Saved_Screen_Adapter saved_saved_screen_adapter;
-
     private SavedAPI savedAPI;
     private AlertDialog alertDialog;
-    public tab_SavedFragment(){
 
-    }
+    public tab_SavedFragment() {}
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
         View rootView = inflater.inflate(R.layout.f4__x__fragment_saved, container, false);
-
-            waitAlert();
-
 
         recyclerView = rootView.findViewById(R.id.rvSaved);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-
+        waitAlert();
 
         return rootView;
     }
@@ -76,7 +67,6 @@ public class tab_SavedFragment extends Fragment {
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         int userId = preferences.getInt("id_user", 0);
         GetSaved(userId);
-
     }
 
     private void GetSaved(int idUser) {
@@ -86,22 +76,16 @@ public class tab_SavedFragment extends Fragment {
             public void onResponse(Call<List<Saved>> call, Response<List<Saved>> response) {
                 if (response.isSuccessful()) {
                     saveds = response.body();
-                    Log.e("Retrofit", "DatosS: " + saveds.get(0).getName_cat());
-                    Log.d("msg","TAMAÑO DE CARDS : " + saveds.size());
-
 
                     setRvMain();
-                    saved_saved_screen_adapter = new Saved_Saved_Screen_Adapter(getContext(),savedSavedScreenModels,saveds);
-                    recyclerView.setAdapter(saved_saved_screen_adapter);
-                    if(saveds != null && !saveds.isEmpty()){
-                        dismissWaitAlert();
-                    }
 
+                    saved_saved_screen_adapter = new Saved_Saved_Screen_Adapter(requireContext(), savedSavedScreenModels, saveds);
+                    recyclerView.setAdapter(saved_saved_screen_adapter);
+                    dismissWaitAlert();
 
                 } else {
                     // La solicitud no fue exitosa (código de respuesta no 200-299)
                     Log.e("Retrofit", "No hay");
-                    dismissWaitAlert();
                 }
             }
 
@@ -145,10 +129,6 @@ public class tab_SavedFragment extends Fragment {
 
     }
     public void dismissWaitAlert() {
-        if (alertDialog != null) {
             alertDialog.dismiss();
-        }
     }
-
-
 }

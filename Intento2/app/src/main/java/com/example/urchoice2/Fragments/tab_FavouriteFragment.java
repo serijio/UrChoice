@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,26 +35,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tab_FavouriteFragment extends Fragment {
-
+    private Context context;
     private List<Favs> favorites;
     private RecyclerView recyclerView;
     private ArrayList <Saved_Favs_Screen_Model> savedFavsScreenModels = new ArrayList<>();
     private Saved_Favs_Screen_Adapter saved_favs_screen_adapter;
     private FavsAPI favsAPI;
+    private AlertDialog alertDialog;
 
+    public tab_FavouriteFragment() {}
 
-    public tab_FavouriteFragment(){
-
-    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
         View rootView = inflater.inflate(R.layout.f4__x__fragment_favourite, container, false);
 
         recyclerView = rootView.findViewById(R.id.rvFavs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        waitAlert();
 
         return rootView;
     }
@@ -76,10 +77,13 @@ public class tab_FavouriteFragment extends Fragment {
             public void onResponse(Call<List<Favs>> call, Response<List<Favs>> response) {
                 if (response.isSuccessful()) {
                     favorites = response.body();
-                    Log.e("SQL","DATOS: " + favorites.get(0).getName_cat());
+                    //Log.e("SQL","DATOS: " + favorites.get(0).getName_cat());
+
                     setRvMain();
-                    saved_favs_screen_adapter = new Saved_Favs_Screen_Adapter(getContext(),savedFavsScreenModels,favorites);
+
+                    saved_favs_screen_adapter = new Saved_Favs_Screen_Adapter(requireContext(),savedFavsScreenModels,favorites);
                     recyclerView.setAdapter(saved_favs_screen_adapter);
+                    dismissWaitAlert();
                 } else {
                     Log.e("Retrofit", "No hay");
                 }
@@ -100,6 +104,7 @@ public class tab_FavouriteFragment extends Fragment {
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
+
         for (int i = 0; i < favorites.size(); i++) {
             savedFavsScreenModels.add(new Saved_Favs_Screen_Model(
                     favorites.get(i).getName_cat(),
@@ -108,6 +113,24 @@ public class tab_FavouriteFragment extends Fragment {
                     mainSaveIcon
             ));
         }
+    }
+
+
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxx_loanding_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 
 }
