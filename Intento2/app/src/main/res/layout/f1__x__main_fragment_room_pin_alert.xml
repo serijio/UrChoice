@@ -51,6 +51,7 @@
             android:paddingBottom="25dp"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@null"
+            app:endIconTint="#00FFFFFF"
             app:hintTextColor="#FEFEFE">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -58,10 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
+                android:cursorVisible="false"
                 android:gravity="center"
                 android:hint="PIN"
                 android:textAlignment="center"
-                android:cursorVisible="false"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 

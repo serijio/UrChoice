@@ -19,6 +19,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +39,9 @@ public class ProfileFragment extends Fragment {
     ImageView profile_image;
     ImageView profileBackground;
     TextView profile_userName;
+    private EditText profileNameEditText;
+    private MaterialButton editNewNameButton;
+    private MaterialButton setNewNameButton;
 
     Bitmap selectedBitmap;
     Bitmap selectedBitmap2;
@@ -82,6 +86,33 @@ public class ProfileFragment extends Fragment {
                 selectImageFromGallery();
 
 
+            }
+        });
+        profileNameEditText = view.findViewById(R.id.profileName_edittext);
+        editNewNameButton = view.findViewById(R.id.editnew_namebutton);
+        setNewNameButton = view.findViewById(R.id.setnew_namebutton);
+
+        profileNameEditText.setEnabled(false);
+
+        // Establece un OnClickListener para el botón de edición
+        editNewNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Habilita el EditText para que se pueda editar
+                editNewNameButton.setVisibility(View.GONE);
+                setNewNameButton.setVisibility(View.VISIBLE);
+                profileNameEditText.setEnabled(true);
+                profileNameEditText.setText("");
+            }
+        });
+        setNewNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newName = profileNameEditText.getText().toString();
+                profileNameEditText.setText(newName);
+                setNewNameButton.setVisibility(View.GONE);
+                editNewNameButton.setVisibility(View.VISIBLE);
+                profileNameEditText.setEnabled(false);
             }
         });
 

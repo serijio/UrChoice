@@ -202,7 +202,7 @@ public class MultiGame extends AppCompatActivity {
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
                 if (response.isSuccessful()) {
                     List<Element> elementList = response.body();
-                    Collections.shuffle(elementList);
+                    //Collections.shuffle(elementList);
                     shuffledElements = elementList;
                     Log.e("SQL", "GAMECONECT: " + shuffledElements.size());
                     startRound();

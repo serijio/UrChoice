@@ -130,27 +130,28 @@
         app:layout_constraintRight_toRightOf="parent"
 
         >
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/profileName_textinputlayout"
             android:layout_width="190dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profileName_edittext"
+                style="@style/profile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:text="LUKINDA551"
-                android:textColor="@color/white"
-
-                style="@style/profile_text"/>
+                android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/setnew_namebutton"
+            android:id="@+id/editnew_namebutton"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/edit"
@@ -158,6 +159,17 @@
             android:layout_marginTop="25dp"
             android:layout_marginLeft="200dp"
             />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/setnew_namebutton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/check_button"
+            app:backgroundTint="@null"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="200dp"
+            android:visibility="gone"
+            />
+
 
 
     </RelativeLayout>
