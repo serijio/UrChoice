@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:fitsSystemWindows="true"
+    android:id="@+id/uwu"
     tools:context=".Fragments.CreateCategorySubFragment" >
 
     <View

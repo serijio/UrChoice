@@ -67,7 +67,7 @@ public class MainRankingSubFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f1___xsub__fragment_main_ranking, container, false);
+        View view = inflater.inflate(R.layout.f1___x_sub__fragment_main_ranking, container, false);
 
         GetCategory(view);
         GetRanking(view);

@@ -31,12 +31,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
-import com.example.urchoice2.Adapters.MainFragment_Room_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.MultiGame;
-import com.example.urchoice2.Screens_activities.SingleGame;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -73,7 +71,7 @@ public class CreateRoomSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f3__sub__fragment_create_room_screen, container, false);
+        View view = inflater.inflate(R.layout.f3___x_sub__fragment_create_room_screen, container, false);
         handler = new Handler();
         Conectar();
         createRoomButton = view.findViewById(R.id.create_room_button);

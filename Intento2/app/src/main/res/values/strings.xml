@@ -80,6 +80,9 @@
 
     <!--OTHERS-->
     <string name="loading">Loading...</string>
+    <string name="pin">PIN</string>
+    <string name="enter_pin">ENTER PIN</string>
+    <string name="card_name">CARD NAME</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>

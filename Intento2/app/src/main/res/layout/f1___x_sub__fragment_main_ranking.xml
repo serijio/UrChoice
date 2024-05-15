@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
@@ -50,25 +49,25 @@
 
     <TextView
         android:id="@+id/ranking_username"
-        style="@style/TopUserInfoNickname"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/user_nick"
         app:layout_constraintBottom_toTopOf="@id/h77"
         app:layout_constraintEnd_toStartOf="@id/v55"
         app:layout_constraintStart_toEndOf="@id/v54"
-        app:layout_constraintTop_toBottomOf="@id/h76" />
+        app:layout_constraintTop_toBottomOf="@id/h76"
+        style="@style/TopUserInfoNickname" />
 
     <TextView
         android:id="@+id/ranking_email"
-        style="@style/TopUserInfoEmail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/user_email"
         app:layout_constraintBottom_toTopOf="@id/h79"
         app:layout_constraintEnd_toStartOf="@id/v55"
         app:layout_constraintStart_toEndOf="@id/v54"
-        app:layout_constraintTop_toBottomOf="@id/h78" />
+        app:layout_constraintTop_toBottomOf="@id/h78"
+        style="@style/TopUserInfoEmail" />
 
     <TextView
         android:id="@+id/ranking_games_played"
@@ -89,7 +88,6 @@
         android:layout_height="0dp"
         android:alpha="0.6"
         android:scaleType="centerCrop"
-        android:src="@drawable/hxh"
         app:layout_constraintBottom_toTopOf="@id/h83"
         app:layout_constraintEnd_toStartOf="@id/v59"
         app:layout_constraintStart_toEndOf="@id/v58"
@@ -159,7 +157,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-
         app:layout_constraintBottom_toTopOf="@id/h92"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintHorizontal_bias="0.0"
@@ -169,25 +166,23 @@
 
     <TextView
         android:id="@+id/Number1"
-        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h94"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
-        app:layout_constraintTop_toBottomOf="@id/h93" />
+        app:layout_constraintTop_toBottomOf="@id/h93"
+        style="@style/RankingStyle" />
 
     <TextView
         android:id="@+id/Number1Score"
-        style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h94"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
-        app:layout_constraintTop_toBottomOf="@id/h93" />
+        app:layout_constraintTop_toBottomOf="@id/h93"
+        style="@style/RankingStyle" />
 
 
     <!--Ranking 2-->

@@ -97,7 +97,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
 
                 if(!rooms.get(position).getPass_room().isEmpty()){
                     LayoutInflater inflater = LayoutInflater.from(context);
-                    View dialogView = inflater.inflate(R.layout.f1__x__main_fragment_room_pin_alert, null);
+                    View dialogView = inflater.inflate(R.layout.f1___xx_alert_main_fragment_room_pin, null);
 
                     // Construir el AlertDialog utilizando el diseño personalizado
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);

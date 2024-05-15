@@ -22,13 +22,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.Adapters.CreateCategory_CardAdapter;
@@ -83,7 +80,7 @@ public class CreateCategorySubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.xxx_prueba, container, false);
+        View view = inflater.inflate(R.layout.f3___x_sub__fragment_create_category_screen, container, false);
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Conectar();
 
