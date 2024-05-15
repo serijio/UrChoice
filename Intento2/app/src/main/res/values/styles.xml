@@ -115,6 +115,20 @@
         <item name="android:gravity">center_horizontal|center_vertical</item>
         <item name="android:textAlignment">gravity</item>
     </style>
+    <style name="profile_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbiblack</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+    <style name="profile_number">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/orbiblack</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
 
     <style name="SearchFriendsBar" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxBackgroundColor">#00000000</item>

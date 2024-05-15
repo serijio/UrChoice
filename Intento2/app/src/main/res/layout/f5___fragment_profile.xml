@@ -14,6 +14,7 @@
         app:layout_constraintBottom_toTopOf="@id/h300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="1dp"
         android:background="@color/blue" />
 
     <View
@@ -23,6 +24,8 @@
         app:layout_constraintBottom_toTopOf="@id/h302"
         app:layout_constraintStart_toEndOf="@id/v300"
         app:layout_constraintEnd_toStartOf="@id/v301"
+        android:elevation="1dp"
+
         android:background="@drawable/user_info_container" />
 
     <TextView
@@ -32,8 +35,133 @@
         app:layout_constraintBottom_toTopOf="@id/h304"
         app:layout_constraintStart_toEndOf="@id/v302"
         app:layout_constraintEnd_toStartOf="@id/v303"
+        android:elevation="1dp"
         android:text="@string/profile_fragment"
         style="@style/FragmentName" />
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/h305"
+        app:layout_constraintTop_toTopOf="@id/h307"
+        app:layout_constraintRight_toRightOf="@id/v304"
+        app:layout_constraintLeft_toLeftOf="@id/v305"
+        style="@style/profile_number"
+        android:text="9"
+        />
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/h306"
+        app:layout_constraintTop_toTopOf="@id/h305"
+        app:layout_constraintRight_toRightOf="@id/v304"
+        app:layout_constraintLeft_toLeftOf="@id/v305"
+        style="@style/profile_text"
+        android:text="PARTIDAS JUGADAS"
+        />
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/h306"
+        app:layout_constraintTop_toTopOf="@id/h305"
+        app:layout_constraintRight_toRightOf="@id/v303"
+        app:layout_constraintLeft_toLeftOf="@id/v304"
+        style="@style/profile_text"
+        android:text="AMIGOS"
+        />
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/h305"
+        app:layout_constraintTop_toTopOf="@id/h307"
+        app:layout_constraintRight_toRightOf="@id/v303"
+        app:layout_constraintLeft_toLeftOf="@id/v304"
+        style="@style/profile_number"
+
+        android:text="-1"
+        />
+
+    <ImageView
+        android:id="@+id/profile_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:scaleType="centerCrop"
+        android:elevation="0dp"
+        android:alpha="0.6"
+        android:src="@drawable/a"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/h309"
+        app:layout_constraintBottom_toBottomOf="@id/h308"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        >
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/a"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/edit_profile_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/edit"
+            app:backgroundTint="@null"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="140dp"
+             />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/h310"
+        app:layout_constraintBottom_toBottomOf="@id/h311"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/profileName_textinputlayout"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profileName_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="LUKINDA551"
+                android:textColor="@color/white"
+
+                style="@style/profile_text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/setnew_namebutton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/edit"
+            app:backgroundTint="@null"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="200dp"
+            />
+
+
+    </RelativeLayout>
+
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,6 +191,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.88" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v304"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v305"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.12" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v306"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
 
 
     <!--Constraints horizontales-->
@@ -100,5 +246,47 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.14" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h305"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h306"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h307"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h308"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h309"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h310"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.54" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h311"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

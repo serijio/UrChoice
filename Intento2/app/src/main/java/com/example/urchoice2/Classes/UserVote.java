@@ -5,7 +5,6 @@ public class UserVote {
     private int id_user;
     private String nick_user;
     private String vote_game;
-
     private int admin;
 
     public UserVote(int id_user, String nick_user, String vote_game,int admin) {
