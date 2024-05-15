@@ -95,7 +95,11 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".Screens_activities.prueba"
+            android:name=".Screens_activities.SingleGame"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".Screens_activities.MultiGame"
             android:screenOrientation="portrait"
             android:exported="false" />
     </application>

@@ -2,10 +2,8 @@ package com.example.urchoice2.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
@@ -15,18 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.RoomAPI;
-import com.example.urchoice2.Classes.RoomData;
 import com.example.urchoice2.Classes.Rooms;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
-import com.example.urchoice2.Screens_activities.prueba;
+import com.example.urchoice2.Screens_activities.MultiGame;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -245,7 +241,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(context, prueba.class);
+                        Intent intent2 = new Intent(context, MultiGame.class);
                         // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             shouldUpdate = false;
@@ -256,15 +252,16 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                                 public void onRoomClosed() {
                                     shouldUpdate = false;
                                     // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
-                                    context.startActivity(intent);
+                                    context.startActivity(intent2);
                                 }
                             });
+
                         } else {
                             Listo(roomId, userId, new RoomClosedListener() {
                                 @Override
                                 public void onRoomClosed() {
                                     // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
-                                    context.startActivity(intent);
+                                    context.startActivity(intent2);
                                 }
                             });
                         }

@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Screens_activities.prueba2">
+    tools:context=".Screens_activities.MultiGame">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/MultiimageView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_above="@id/hx"
+            android:layout_above="@id/Multihx"
             android:src="@drawable/logo"
             android:scaleType="centerCrop" />
         <TextView
-            android:id="@+id/card_name1"
+            android:id="@+id/Multicard_name1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_above="@id/hx"
+            android:layout_above="@id/Multihx"
             android:text=""
             android:textStyle="bold"
             android:textSize="35dp"
@@ -39,13 +39,13 @@
             android:shadowRadius="1"
             />
         <TextView
-            android:id="@+id/card_points1"
+            android:id="@+id/Multicard_points1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_above="@id/hx"
+            android:layout_above="@id/Multihx"
             android:paddingTop="100dp"
             android:text="1"
             android:textStyle="bold"
@@ -59,7 +59,7 @@
             android:visibility="invisible"
             />
         <View
-            android:id="@+id/hx"
+            android:id="@+id/Multihx"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_alignParentStart="true"
@@ -87,23 +87,23 @@
         android:layout_height="match_parent"
         >
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/MultiimageView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/hp"
+            android:layout_below="@id/Multihp"
             android:src="@drawable/logo"
             android:scaleType="centerCrop" />
         <TextView
-            android:id="@+id/card_name2"
+            android:id="@+id/Multicard_name2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/hp"
+            android:layout_below="@id/Multihp"
             android:text=""
             android:textStyle="bold"
             android:textSize="35dp"
@@ -115,13 +115,13 @@
             android:shadowRadius="1"
             />
         <TextView
-            android:id="@+id/card_points"
+            android:id="@+id/Multicard_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/hp"
+            android:layout_below="@id/Multihp"
             android:layout_marginTop="100dp"
             android:text="2"
             android:textStyle="bold"
@@ -135,7 +135,7 @@
             android:visibility="invisible"
             />
         <View
-            android:id="@+id/hp"
+            android:id="@+id/Multihp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_alignParentStart="true"

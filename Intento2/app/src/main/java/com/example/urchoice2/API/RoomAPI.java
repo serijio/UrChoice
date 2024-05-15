@@ -2,6 +2,7 @@ package com.example.urchoice2.API;
 
 import com.example.urchoice2.Classes.Rooms;
 import com.example.urchoice2.Classes.UserVote;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RoomAPI {
     @FormUrlEncoded
@@ -37,4 +39,7 @@ public interface RoomAPI {
             @Field("id_user") Integer userId,
             @Field("password") String password
     );
+
+    @GET("/room/WinnerRound/{id_room}")
+    Call<JsonObject> getWinnerRound(@Path("id_room") int idRoom);
 }

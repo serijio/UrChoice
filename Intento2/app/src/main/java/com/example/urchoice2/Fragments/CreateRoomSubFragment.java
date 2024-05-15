@@ -34,7 +34,8 @@ import com.example.urchoice2.Adapters.MainFragment_Room_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
-import com.example.urchoice2.Screens_activities.prueba;
+import com.example.urchoice2.Screens_activities.MultiGame;
+import com.example.urchoice2.Screens_activities.SingleGame;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -148,6 +149,7 @@ public class CreateRoomSubFragment extends Fragment {
                         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt("id_categoryMulti", categoryId);
+                        editor.putInt("id_room", roomId);
                         editor.apply();
                         alertDialogOpen(roomId);
                     } else {
@@ -279,7 +281,7 @@ public class CreateRoomSubFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(requireContext(), prueba.class);
+                        Intent intent = new Intent(requireContext(), MultiGame.class);
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             shouldUpdate = false;

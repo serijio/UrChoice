@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,7 @@ import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
-import com.example.urchoice2.Screens_activities.prueba;
+import com.example.urchoice2.Screens_activities.SingleGame;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
@@ -156,7 +155,7 @@ public class MainRankingSubFragment extends Fragment {
 
     public void StartGame(){
 
-        Intent intent = new Intent(requireContext(), prueba.class);
+        Intent intent = new Intent(requireContext(), SingleGame.class);
         requireContext().startActivity(intent);
 
 
