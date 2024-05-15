@@ -63,6 +63,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         return rootView;
     }
 
+    
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
@@ -72,6 +73,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = preferences.getInt("id_user", 0);
     }
+
 
     public void GetCategories(){
         categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
@@ -101,10 +103,13 @@ public class MainFragment_Category_SubFragment extends Fragment {
         });
 
     }
+
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
 
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
@@ -118,6 +123,8 @@ public class MainFragment_Category_SubFragment extends Fragment {
             ));
         }
     }
+
+
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxx_loanding_alert_dialog, null);
@@ -129,6 +136,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
     }
+
 
     public void dismissWaitAlert() {
         alertDialog.dismiss();
