@@ -13,24 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.urchoice2.API.RoomAPI;
+import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.Classes.Rooms;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.MultiGame;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,10 +35,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment_Room_Adapter.RoomViewHolder> {
+
     private Context context;
+    private Handler handler;
     private boolean shouldUpdate = true;
+    private boolean allVotesReceived = false;
     private List<Rooms> rooms;
     private RoomAPI roomAPI;
+    private RoomGameAPI roomGameAPI;
     private List<UserVote> userVotes  = new ArrayList<>();
     private int roomId;
     private int userId;
@@ -51,11 +52,11 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         this.rooms = rooms;
     }
 
-
     @NonNull
     @Override
     public RoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.row_home_rooms, parent, false);
+        handler = new Handler();
         return new RoomViewHolder(view);
     }
 
@@ -67,6 +68,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
 
         String roomName = rooms.get(position).getName_room();
         int numberOfPlayers = this.rooms.get(position).getUserCount();
+
 
         holder.roomNameTextView.setText(roomName);
         holder.numberOfPlayersTextView.setText(String.valueOf(numberOfPlayers));
@@ -86,9 +88,11 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
 
                 // Aquí abres el AlertDialog
                 roomId = rooms.get(position).getId_room();
+
                 SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("id_categoryMulti", rooms.get(position).getId_cat());
+                editor.putInt("id_room", roomId);
                 editor.apply();
 
                 if(!rooms.get(position).getPass_room().isEmpty()){
@@ -117,14 +121,12 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                             // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
                         }
                     });
-
                 }else{
                     joinRoom(roomId,userId,"");
                 }
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -148,7 +150,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.e("SQL","FUNCIONA");
-                    // Abrir el nuevo AlertDialog f3__x__fragment_alert_waiting_players
                     Room();
                 } else {
                     Log.e("SQL","NO FUNCIONA");
@@ -169,10 +170,11 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         roomAPI = retrofit.create(RoomAPI.class);
+        roomGameAPI = retrofit.create(RoomGameAPI.class);
     }
 
     public void Room(){
-        shouldUpdate = true;;
+        shouldUpdate = true;
         LayoutInflater inflater = LayoutInflater.from(context);
         View waitingPlayersDialogView = inflater.inflate(R.layout.f3__x__fragment_alert_waiting_players, null);
 
@@ -234,39 +236,17 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 waitingPlayersAlertDialog.dismiss();
             }
         });
-
         MaterialButton startButton = waitingPlayersDialogView.findViewById(R.id.alert_start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent2 = new Intent(context, MultiGame.class);
-                        // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            shouldUpdate = false;
-                            startButton.setText("ESPERANDO");
-                            startButton.setTextSize(10);
-                            Listo(roomId, userId, new RoomClosedListener() {
-                                @Override
-                                public void onRoomClosed() {
-                                    shouldUpdate = false;
-                                    // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
-                                    context.startActivity(intent2);
-                                }
-                            });
-
-                        } else {
-                            Listo(roomId, userId, new RoomClosedListener() {
-                                @Override
-                                public void onRoomClosed() {
-                                    // Muestra un Toast informando al usuario que la sala se ha cerrado correctamente
-                                    context.startActivity(intent2);
-                                }
-                            });
-                        }
-                    }
-                }, 400);
+                startButton.setText("ESPERANDO");
+                startButton.setTextSize(10);
+                // Verificar si la versión de Android es igual o superior a LOLLIPOP para manejar la transición de actividades
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Ready(roomId, userId);
+                } else {
+                    Ready(roomId, userId);
+                }
             }
         });
     }
@@ -294,17 +274,16 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                             }
                             updateAdapter(newNames,adapter); // Actualiza el adaptador con los nuevos nombres de usuario
                         } else {
-                            // Manejar respuesta no exitosa
+                            Log.e("SQL", "Error por lo que sea");
                         }
                     }
-
                     @Override
                     public void onFailure(Call<List<UserVote>> call, Throwable t) {
-                        // Manejar error de red u otro error
+                        Log.e("SQL", "Error" + t);
                     }
                 });
             }
-        }, 0, 5000); // Ejecutar la tarea cada 5 segundos
+        }, 0, 3000);
     }
 
     private void updateAdapter(List<UserVote> userVote, RecyclerView.Adapter adapter) {
@@ -316,6 +295,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         adapter.notifyDataSetChanged();
     }
 
+
     public void endRoom(int roomId, int userId) {
         Call<Void> call = roomAPI.endRoom(roomId, userId);
         call.enqueue(new Callback<Void>() {
@@ -324,11 +304,10 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 if (response.isSuccessful()) {
                     Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
                 } else {
-                    // Ocurría un error al intentar finalizar la sala
+                    // OcurriÃ³ un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
@@ -337,28 +316,97 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         });
     }
 
-    public void Listo(int roomId, int userId, final RoomClosedListener listener){
-        Call<Void> call = roomAPI.startRoom(roomId, userId);
+
+    private void startRepeatedCall() {
+        Log.e("SQL","ENTRO AL CALL: " + allVotesReceived );
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!allVotesReceived) {
+                    GetUsers();
+                    handler.postDelayed(this, 3000);
+                } else {
+                    // Todos los votos han sido recibidos, detener la llamada repetida
+                    handler.removeCallbacksAndMessages(null);
+                }
+            }
+        }, 3000);
+    }
+
+
+    public void Ready(int roomId, int userId) {
+        Call<Void> call = roomGameAPI.updateVote(roomId, userId,"LISTO");
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d("RoomEnd", "Operación completada correctamente");
-                    // Llama al método onRoomClosed del listener cuando la sala se cierra correctamente
-                    listener.onRoomClosed();
+                    startRepeatedCall();
                 } else {
-                    // Ocurrió un error al intentar finalizar la sala
-                    Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
+                    Log.e("SQL", "ERRORUPC: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("SQL", "ERRORUP2C: " + t.getMessage());
+            }
+        });
+    }
+
+
+    public void GetUsers() {
+        Call<List<UserVote>> call = roomAPI.getUsersInRoom(roomId);
+        call.enqueue(new Callback<List<UserVote>>() {
+            @Override
+            public void onResponse(Call<List<UserVote>> call, Response<List<UserVote>> response) {
+                if (response.isSuccessful()) {
+                    Log.e("SQL","FUNCIONOGET");
+                    List<UserVote> users = response.body();
+                    boolean allVotesReceivedTemp = true;
+                    for (UserVote user : users) {
+                        if (user.getVote_game() == null || user.getVote_game().isEmpty()) {
+                            allVotesReceivedTemp = false;
+                            break;
+                        }
+                    }
+                    allVotesReceived = allVotesReceivedTemp;
+                    Log.e("SQL","BOOL" + allVotesReceived);
+                    if (allVotesReceived) {
+                        VoteClear(" ");
+                        handler.removeCallbacksAndMessages(null);
+                    }
+                } else {
+                    Log.e("SQL","ERRORGET");
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Ocurrió un error de red o error al procesar la respuesta
-                Log.e("RoomEnd", "Error de red: " + t.getMessage());
+            public void onFailure(Call<List<UserVote>> call, Throwable t) {
+                Log.e("SQL","ERRORGET2");
             }
         });
     }
+
+    public void VoteClear(String voto) {
+        Call<Void> call = roomGameAPI.updateVote(roomId, userId, voto);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    shouldUpdate = false;
+                    Intent intent = new Intent(context,MultiGame.class);
+                    context.startActivity(intent);
+                } else {
+                    Log.e("SQL", "ERRORUPC: " + response.message());
+
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("SQL", "ERRORUP2C: " + t.getMessage());
+            }
+        });
+    }
+
 
     public interface RoomClosedListener {
         void onRoomClosed();

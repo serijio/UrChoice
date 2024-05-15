@@ -358,7 +358,6 @@ public class MultiGame extends AppCompatActivity {
                 Log.e("SQL", "ERRORW2");
             }
         });
-
     }
 
 
@@ -387,10 +386,6 @@ public class MultiGame extends AppCompatActivity {
         });
     }
 
-
-
-
-
     public void endRoom(int roomId, int userId) {
         Call<Void> call = roomAPI.endRoom(roomId, userId);
         call.enqueue(new Callback<Void>() {
@@ -408,7 +403,6 @@ public class MultiGame extends AppCompatActivity {
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
@@ -416,5 +410,4 @@ public class MultiGame extends AppCompatActivity {
             }
         });
     }
-
 }
