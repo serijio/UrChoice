@@ -33,6 +33,7 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -202,7 +203,6 @@ public class MultiGame extends AppCompatActivity {
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
                 if (response.isSuccessful()) {
                     List<Element> elementList = response.body();
-                    //Collections.shuffle(elementList);
                     shuffledElements = elementList;
                     Log.e("SQL", "GAMECONECT: " + shuffledElements.size());
                     startRound();
@@ -228,7 +228,6 @@ public class MultiGame extends AppCompatActivity {
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
                     // Mostrar los nombres de los elementos en los TextView correspondientes
-
                     Log.e("SQL", "ROUNDCONECT: " + shuffledElements.size());
                     Bitmap base64Image = base64ToBitmap(firstElement.img_elem);
                     Bitmap base64Image2 = base64ToBitmap(secondElement.img_elem);
@@ -239,6 +238,7 @@ public class MultiGame extends AppCompatActivity {
                 } else if (shuffledElements.size() != 1) {
                     Log.e("SQL", "ROUNDCONECT: " + shuffledElements.size());
                     shuffledElements = new ArrayList<>(winnerElements);
+                    Collections.sort(shuffledElements, Comparator.comparing(Element::getName_elem));
                     winnerElements.clear();
                     currentRound = 0;
                     startRound();

@@ -33,4 +33,20 @@ public interface UserAPI {
     Call<List<User>> getUsers();
     @GET("/users/{id_user}")
     Call<User> getUser(@Path("id_user") int userId);
+
+    @FormUrlEncoded
+    @POST("/user/UpdateName")
+    Call<Void> updateUserName(
+            @Field("user_id") int user_id,
+            @Field("nick_user") String new_nick_user
+    );
+
+    @FormUrlEncoded
+    @POST("/user/UpdateIMG")
+    Call<Void> updateUserIMG(
+            @Field("user_id") int user_id,
+            @Field("img_user") String img_user
+    );
+
+
 }
