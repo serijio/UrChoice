@@ -92,8 +92,6 @@ public class MainFragment_Category_SubFragment extends Fragment {
     }
 
     public void GetCategories(){
-
-
         categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
@@ -106,7 +104,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
                     recyclerView.setLayoutManager(layoutManager);
 
                     // Aquí creas tu adaptador y lo estableces en el RecyclerView
-                    Main_Screen_Adapter main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
+                    main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(main_screen_adapter);
                     dismissWaitAlert();
                 } else {
