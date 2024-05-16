@@ -10,15 +10,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteCard"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:background="@drawable/x"
         app:backgroundTint="@null"
-        android:layout_marginLeft="64dp"
-
-        />
+        android:layout_marginStart="64dp" />
 
     <!-- Ajuste de la altura del ImageView -->
     <ImageView
@@ -35,9 +34,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_marginTop="68dp"
         android:layout_marginBottom="5dp"
         android:textAlignment="center"
-        android:textSize="10dp"
+        android:textSize="10sp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:text="CARDNAME"/>
+        android:text="@string/card_name" />
+
 </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -139,6 +139,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.999" />
 
+
     <!--Constaints horizontales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h141"
