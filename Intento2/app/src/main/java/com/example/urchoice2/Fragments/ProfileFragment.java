@@ -9,11 +9,13 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -67,6 +69,7 @@ public class ProfileFragment extends Fragment {
     private EditText profileNameEditText;
     private MaterialButton editNewNameButton;
     private MaterialButton setNewNameButton;
+    private AlertDialog alertDialog;
     private static final int PICK_IMAGE_REQUEST1 = 0;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -99,10 +102,12 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.f5___fragment_profile, container, false);
+
         edit_profile_image_button  = view.findViewById(R.id.edit_profile_image);
         profile_image = view.findViewById(R.id.profile_image);
         profileMail = view.findViewById(R.id.profilemail);
         profileBackground = view.findViewById(R.id.profile_background);
+
         edit_profile_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,6 +205,7 @@ public class ProfileFragment extends Fragment {
             Uri selectedImageUri = data.getData();
 
             try {
+
                 selectedBitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), selectedImageUri);
                 profile_image.setImageBitmap(selectedBitmap);
                 profileBackground.setImageBitmap(selectedBitmap);
@@ -235,7 +241,9 @@ public class ProfileFragment extends Fragment {
         friendAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
+        waitAlert();
         GetFriends();
+
     }
 
 
@@ -251,6 +259,7 @@ public class ProfileFragment extends Fragment {
                     TextView friendTextView = view.findViewById(R.id.friends);
                     friendTextView.setText(String.valueOf(friendCount));
                     GetUser();
+                    dismissWaitAlert();
                 }else{
                     Log.e("SQL","ERROR");
                 }
@@ -343,5 +352,20 @@ public class ProfileFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("id_user");
         editor.apply();
+    }
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 }

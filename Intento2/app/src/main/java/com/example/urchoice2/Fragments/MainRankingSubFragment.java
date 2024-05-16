@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Base64;
@@ -36,6 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainRankingSubFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private AlertDialog alertDialog;
 
     private String mParam1;
     private String mParam2;
@@ -68,7 +71,7 @@ public class MainRankingSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f1___x_sub__fragment_main_ranking, container, false);
-
+        waitAlert();
         GetCategory(view);
         GetRanking(view);
         MaterialButton startGameButton = view.findViewById(R.id.start_game_button); // Reemplaza start_game_button con el ID real de tu botón
@@ -134,6 +137,8 @@ public class MainRankingSubFragment extends Fragment {
                         nameTextView.setText(elements.get(i).getName_elem());
                         imgImageView.setImageBitmap(base64ToBitmap(elements.get(i).getImg_elem()));
                         //scoreuser.setText(elements.get(i).getVictories());
+
+                        dismissWaitAlert();
                     }
                     // Haz algo con los datos recibidos
                 } else {
@@ -159,6 +164,21 @@ public class MainRankingSubFragment extends Fragment {
         requireContext().startActivity(intent);
 
 
+    }
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 
 

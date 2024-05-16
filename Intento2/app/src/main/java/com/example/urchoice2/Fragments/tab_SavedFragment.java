@@ -52,7 +52,8 @@ public class tab_SavedFragment extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.rvSaved);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        waitAlert();
+
+
 
         return rootView;
     }
@@ -66,7 +67,9 @@ public class tab_SavedFragment extends Fragment {
         savedAPI = retrofit.create(SavedAPI.class);
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         int userId = preferences.getInt("id_user", 0);
+        waitAlert();
         GetSaved(userId);
+
     }
 
 
@@ -93,6 +96,7 @@ public class tab_SavedFragment extends Fragment {
             public void onFailure(Call<List<Saved>> call, Throwable t) {
                 // Error en la conexión o al procesar la respuesta
                 Log.e("Retrofit", "Error de conexión: " + t.getMessage(), t);
+                dismissWaitAlert();
             }
         });
     }

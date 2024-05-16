@@ -1,9 +1,11 @@
 package com.example.urchoice2.Fragments;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class MainFragment_Room_SubFragment extends Fragment {
     private RecyclerView recyclerView;
     private RoomAPI roomAPI;
     private MainFragment_Room_Adapter roomAdapter;
+    private AlertDialog alertDialog;
 
 
 
@@ -53,6 +56,7 @@ public class MainFragment_Room_SubFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         roomAPI = retrofit.create(RoomAPI.class);
+        waitAlert();
     }
     public void GetRooms(){
         Call<List<Rooms>> call = roomAPI.getRooms();
@@ -65,16 +69,35 @@ public class MainFragment_Room_SubFragment extends Fragment {
 
                     roomAdapter = new MainFragment_Room_Adapter(getContext(),rooms);
                     recyclerView.setAdapter(roomAdapter);
+                    dismissWaitAlert();
                 } else {
-
+                    dismissWaitAlert();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Rooms>> call, Throwable t) {
                 // Manejar errores de la llamada
+                dismissWaitAlert();
             }
         });
+    }
+
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 
 

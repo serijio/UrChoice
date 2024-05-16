@@ -86,12 +86,16 @@ public class tab_FavouriteFragment extends Fragment {
                     dismissWaitAlert();
                 } else {
                     Log.e("Retrofit", "No hay");
+                    dismissWaitAlert();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Favs>> call, Throwable t) {
+
+
                 Log.e("SQL","EROR");
+                dismissWaitAlert();
             }
         });
     }

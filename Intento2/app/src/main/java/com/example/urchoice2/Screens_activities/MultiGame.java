@@ -63,7 +63,7 @@ public class MultiGame extends AppCompatActivity {
     private Integer roomId;
     private TextView winnerName;
     private ImageView winnerImage;
-
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -318,6 +318,7 @@ public class MultiGame extends AppCompatActivity {
                     for (UserVote user : users) {
                         if (user.getVote_game() == null || user.getVote_game().isEmpty()) {
                             allVotesReceivedTemp = false;
+                            waitAlert();
                             break;
                         }
                     }
@@ -368,6 +369,7 @@ public class MultiGame extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+                    dismissWaitAlert();
                     if(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()).equals(mostVotedGame)){
                         winnerElements.add(shuffledElements.get(currentRound * 2));
                     } else {
@@ -410,5 +412,21 @@ public class MultiGame extends AppCompatActivity {
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });
+    }
+
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(MultiGame.this).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MultiGame.this);
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 }
