@@ -42,6 +42,7 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f2___fragment_friends, container, false);
+        friends_requests = view.findViewById(R.id.see_requests_button);
 
         friends_requests.setOnClickListener(new View.OnClickListener() {
             @Override

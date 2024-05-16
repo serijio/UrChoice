@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toTopOf="@id/h400"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="1dp"
+        android:elevation="0dp"
         android:background="@color/blue" />
 
     <View

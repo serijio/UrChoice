@@ -42,6 +42,7 @@ public class FriendsRequestsSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f2___x_sub_fragment_friends_requests, container, false);
+        back_to_friends = view.findViewById(R.id.back_to_friends_button);
 
         back_to_friends.setOnClickListener(new View.OnClickListener() {
             @Override
