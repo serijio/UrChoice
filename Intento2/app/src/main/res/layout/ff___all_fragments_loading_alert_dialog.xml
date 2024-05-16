@@ -8,10 +8,9 @@
         android:id="@+id/loanding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:padding="20dp"
-        android:scaleType="centerCrop"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:scaleType="fitXY"
         android:src="@drawable/gotohome" />
 
     <RelativeLayout
@@ -22,7 +21,7 @@
             android:id="@+id/rojo"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="0dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -32,7 +31,7 @@
             android:id="@+id/azul"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="0dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
@@ -41,20 +40,14 @@
         <TextView
             android:id="@+id/card_image_data"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="290dp"
+            android:layout_marginTop="177dp"
             android:text="@string/loading"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:gravity="center|center_vertical"
             android:elevation="1dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/navbar_add"
-            app:riv_corner_radius="80dp" />
+            style="@style/AlertDialogTest" />
 
         <ProgressBar
             android:layout_width="match_parent"

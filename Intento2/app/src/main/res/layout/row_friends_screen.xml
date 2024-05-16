@@ -62,7 +62,5 @@
                 android:src="@drawable/delete_icon_blue" />
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

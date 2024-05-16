@@ -43,8 +43,7 @@ public class MainFragment extends Fragment {
     private int userId;
 
     private UserAPI userApi;
-    public MainFragment() {
-    }
+    public MainFragment() {}
 
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();

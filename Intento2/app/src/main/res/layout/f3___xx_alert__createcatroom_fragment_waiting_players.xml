@@ -8,7 +8,6 @@
         android:id="@+id/waiting_playes_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
         android:scaleType="fitXY"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -17,19 +16,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="195dp"
-        android:text="X PLAYERS"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textAlignment="center" />
+        android:layout_marginTop="170dp"
+        android:text="@string/x_players"
+        style="@style/AlertDialogTest" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_players"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="238dp"
         android:layout_marginLeft="55dp"
         android:layout_marginRight="55dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -37,28 +32,24 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/alert_start_button"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="45dp"
-        android:layout_alignParentLeft="true"
+        android:layout_marginTop="440dp"
+        android:layout_marginStart="40dp"
+        android:layout_alignParentStart="true"
         android:background="#00FFFFFF"
-        android:backgroundTint="@null"
-        android:textColor="@color/white"
-        android:text="START"
-        android:textSize="20dp" />
+        android:text="@string/start_now"
+        style="@style/profile_text" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/alert_exit_button"
-        android:layout_width="90dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="450dp"
-        android:layout_marginRight="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="40dp"
         android:background="#00FFFFFF"
-        android:backgroundTint="@null"
-        android:text="EXIT"
-        android:textSize="20dp"
-        android:textColor="@color/white" />
+        android:text="@string/exit"
+        style="@style/profile_text" />
 
 </RelativeLayout>

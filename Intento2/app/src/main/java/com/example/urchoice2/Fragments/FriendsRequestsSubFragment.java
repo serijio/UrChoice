@@ -12,17 +12,17 @@ import android.view.ViewGroup;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
 
-public class FriendsFragment extends Fragment {
+public class FriendsRequestsSubFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    MaterialButton friends_requests;
+    MaterialButton back_to_friends;
 
-    public FriendsFragment() {}
+    public FriendsRequestsSubFragment() {}
 
-    public static FriendsFragment newInstance(String param1, String param2) {
-        FriendsFragment fragment = new FriendsFragment();
+    public static FriendsRequestsSubFragment newInstance(String param1, String param2) {
+        FriendsRequestsSubFragment fragment = new FriendsRequestsSubFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -41,22 +41,22 @@ public class FriendsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f2___fragment_friends, container, false);
+        View view = inflater.inflate(R.layout.f2___x_sub_fragment_friends_requests, container, false);
 
-        friends_requests.setOnClickListener(new View.OnClickListener() {
+        back_to_friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                see_requests();
+                back_friends();
             }
         });
 
         return view;
     }
 
-    public void see_requests() {
-        Fragment friendsRequestsFragment = new FriendsRequestsSubFragment();
+    public void back_friends() {
+        Fragment friendsFragment = new FriendsFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.friends_layout, friendsRequestsFragment);
+        transaction.replace(R.id.requests_layout, friendsFragment);
         transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
         transaction.commit();
     }

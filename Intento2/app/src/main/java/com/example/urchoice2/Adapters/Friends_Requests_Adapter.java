@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.R;
+import com.example.urchoice2.RecyclerViews.Friends_Requests_Model;
 import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 
@@ -23,30 +24,32 @@ import java.util.ArrayList;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_Adapter.MyViewHolder> {
+public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Requests_Adapter.MyViewHolder> {
     Context context;
-    ArrayList<Friends_Screen_Model> friendsScreenModels;
+    ArrayList<Friends_Requests_Model> friendsRequestsModels;
     private LayoutInflater inflater;
     private UserAPI userAPI;
 
-    public Friends_Screen_Adapter(Context context, ArrayList<Friends_Screen_Model> friendsScreenModels) {
+    public Friends_Requests_Adapter(Context context, ArrayList<Friends_Requests_Model> friendsRequestsModels) {
         this.context = context;
-        this.friendsScreenModels = friendsScreenModels;
+        this.friendsRequestsModels = friendsRequestsModels;
         Conectar();
     }
 
 
     @NonNull
     @Override
-    public Friends_Screen_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Friends_Requests_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Conectar();
         inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.row_friends_screen, parent, false);
-        return new Friends_Screen_Adapter.MyViewHolder(view);
+        View view = inflater.inflate(R.layout.row_friends_requests, parent, false);
+        return new Friends_Requests_Adapter.MyViewHolder(view);
     }
 
 
-    public void onBindViewHolder(@NonNull Friends_Screen_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {}
+    public void onBindViewHolder(@NonNull Friends_Requests_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+    }
 
 
     public void Conectar(){
@@ -59,11 +62,12 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView friendImg;
-        TextView friendName;
-        TextView friendEmail;
-        ImageView deleteButton;
-        CardView cvFriends;
+        ImageView friendReqImg;
+        TextView friendReqName;
+        TextView friendReqEmail;
+        ImageView acceptButton;
+        ImageView declineButton;
+        CardView cvFriendsRequests;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +76,6 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
 
     @Override
     public int getItemCount() {
-        return friendsScreenModels.size();
+        return friendsRequestsModels.size();
     }
 }

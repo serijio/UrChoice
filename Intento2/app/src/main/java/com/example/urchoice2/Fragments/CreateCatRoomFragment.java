@@ -15,9 +15,7 @@ public class CreateCatRoomFragment extends Fragment {
    MaterialButton create_category_button;
    MaterialButton create_private_room_button;
 
-   public CreateCatRoomFragment(){
-
-   }
+   public CreateCatRoomFragment() {}
 
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

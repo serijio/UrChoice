@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:id="@+id/friends_layout"
     tools:context=".Fragments.FriendsFragment">
 
     <View
@@ -48,8 +49,8 @@
         app:boxCornerRadiusTopEnd="0dp"
         app:boxCornerRadiusBottomStart="0dp"
         app:boxCornerRadiusBottomEnd="0dp"
-        style="@style/SearchFriendsBar"
-        >
+        style="@style/SearchFriendsBar" >
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,8 +61,7 @@
             android:textColorHint="@color/blue"
             android:textSize="18sp"
             app:endIconDrawable="@drawable/search_friends"
-            app:endIconTint="@color/blue"
-            />
+            app:endIconTint="@color/blue" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,6 +73,26 @@
         app:layout_constraintStart_toEndOf="@id/v82"
         app:layout_constraintEnd_toStartOf="@id/v83"
         android:background="@drawable/search_friends" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friends_recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h140"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/v86"
+        app:layout_constraintEnd_toStartOf="@id/v87" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/see_requests_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/h138"
+        app:layout_constraintBottom_toTopOf="@id/h139"
+        app:layout_constraintStart_toEndOf="@id/v84"
+        app:layout_constraintEnd_toStartOf="@id/v85"
+        android:text="@string/requests"
+        style="@style/FriendRequests" />
 
 
     <!--Constraints verticales-->
@@ -137,14 +157,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.12" />
+        app:layout_constraintGuide_percent="0.58" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.88" />
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v86"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.001" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v87"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.999" />
 
 
     <!--Constraints horizontales-->
@@ -216,7 +250,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.309" />
+        app:layout_constraintGuide_percent="0.265" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h139"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.325" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h140"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

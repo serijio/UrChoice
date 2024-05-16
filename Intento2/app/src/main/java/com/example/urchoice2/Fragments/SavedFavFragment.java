@@ -41,7 +41,7 @@ public class SavedFavFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f4__x__fragment_saved_favourite, container, false);
+        View view = inflater.inflate(R.layout.f4___fragment_saved_favourite, container, false);
         TabLayout tabLayout = view.findViewById(R.id.ftab_layout);
         ViewPager viewPager = view.findViewById(R.id.fview_pager);
 

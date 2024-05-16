@@ -209,7 +209,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-
         app:layout_constraintBottom_toTopOf="@id/h100"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -220,7 +219,6 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h102"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
@@ -228,11 +226,9 @@
 
     <TextView
         android:id="@+id/Number2Score"
-
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h102"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -263,7 +259,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-
         app:layout_constraintBottom_toTopOf="@id/h108"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -274,7 +269,6 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h110"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
@@ -282,11 +276,9 @@
 
     <TextView
         android:id="@+id/Number3Score"
-
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h110"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -317,7 +309,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-
         app:layout_constraintBottom_toTopOf="@id/h116"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -328,7 +319,6 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h118"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
@@ -339,7 +329,6 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h118"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -370,7 +359,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-
         app:layout_constraintBottom_toTopOf="@id/h124"
         app:layout_constraintEnd_toStartOf="@id/v69"
         app:layout_constraintStart_toEndOf="@id/v68"
@@ -381,7 +369,6 @@
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h126"
         app:layout_constraintEnd_toStartOf="@id/v71"
         app:layout_constraintStart_toEndOf="@id/v70"
@@ -389,11 +376,9 @@
 
     <TextView
         android:id="@+id/Number5Score"
-
         style="@style/RankingStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@id/h126"
         app:layout_constraintEnd_toStartOf="@id/v73"
         app:layout_constraintStart_toEndOf="@id/v72"
@@ -420,8 +405,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/h127" />
 
-
-    <!--Constraints verticales-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/start_game_button"
         android:layout_width="0dp"
@@ -440,6 +423,8 @@
         app:layout_constraintTop_toBottomOf="@id/h127"
         app:layout_constraintVertical_bias="0.0" />
 
+
+    <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v50"
         android:layout_width="wrap_content"

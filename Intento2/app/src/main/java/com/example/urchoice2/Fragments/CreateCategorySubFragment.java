@@ -137,7 +137,7 @@ public class CreateCategorySubFragment extends Fragment {
         return view;
     }
     public void create_new_category_alert_dialog(){
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_new_category,null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.xxxxxx_prueba_alert_create_category,null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);

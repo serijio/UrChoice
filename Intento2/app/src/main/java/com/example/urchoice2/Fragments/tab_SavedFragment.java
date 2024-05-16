@@ -48,15 +48,15 @@ public class tab_SavedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
-        View rootView = inflater.inflate(R.layout.f4__x__fragment_saved, container, false);
+        View rootView = inflater.inflate(R.layout.f4___x_sub__fragment_saved, container, false);
 
         recyclerView = rootView.findViewById(R.id.rvSaved);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         waitAlert();
 
         return rootView;
     }
+
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -69,6 +69,7 @@ public class tab_SavedFragment extends Fragment {
         GetSaved(userId);
     }
 
+
     private void GetSaved(int idUser) {
         Call<List<Saved>> call = savedAPI.obtenerGuardados(idUser);
         call.enqueue(new Callback<List<Saved>>() {
@@ -76,19 +77,18 @@ public class tab_SavedFragment extends Fragment {
             public void onResponse(Call<List<Saved>> call, Response<List<Saved>> response) {
                 if (response.isSuccessful()) {
                     saveds = response.body();
-
                     setRvMain();
 
                     saved_saved_screen_adapter = new Saved_Saved_Screen_Adapter(requireContext(), savedSavedScreenModels, saveds);
                     recyclerView.setAdapter(saved_saved_screen_adapter);
-                    dismissWaitAlert();
 
+                    dismissWaitAlert();
                 } else {
                     // La solicitud no fue exitosa (código de respuesta no 200-299)
                     Log.e("Retrofit", "No hay");
+                    dismissWaitAlert();
                 }
             }
-
             @Override
             public void onFailure(Call<List<Saved>> call, Throwable t) {
                 // Error en la conexión o al procesar la respuesta
@@ -96,10 +96,13 @@ public class tab_SavedFragment extends Fragment {
             }
         });
     }
+
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+
 
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
@@ -115,6 +118,7 @@ public class tab_SavedFragment extends Fragment {
         }
     }
 
+
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
@@ -125,10 +129,10 @@ public class tab_SavedFragment extends Fragment {
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
-
-
     }
+
+
     public void dismissWaitAlert() {
-            alertDialog.dismiss();
+        alertDialog.dismiss();
     }
 }

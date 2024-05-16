@@ -48,7 +48,7 @@ public class tab_FavouriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
-        View rootView = inflater.inflate(R.layout.f4__x__fragment_favourite, container, false);
+        View rootView = inflater.inflate(R.layout.f4___x_sub__fragment_favourite, container, false);
 
         recyclerView = rootView.findViewById(R.id.rvFavs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

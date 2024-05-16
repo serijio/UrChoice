@@ -30,10 +30,11 @@
     <!--FRAGMENTS-->
     <string name="create_fragment">NEW</string>
     <string name="friends_fragment">FRIENDS</string>
-    <string name="saved_fragment">FAVORITES</string>
+    <string name="saved_fragment">LIBRARY</string>
     <string name="profile_fragment">PROFILE</string>
     <string name="user_fragment">USER</string>
     <string name="find">Find by ID</string>
+    <string name="friends_requests">REQUESTS</string>
 
     <!--CREATE ALL ROOMS SCREEN-->
     <string name="priv">PRIVATE ROOM</string>
@@ -57,6 +58,8 @@
     <!--FRIENDS SCREEN-->
     <string name="lukinda">Lukinda551</string>
     <string name="lukinda_mail">/@LUKINDA551</string>
+    <string name="requests">Requests ></string>
+    <string name="back_friends">BACK TO FRIENDS</string>
 
     <!--X SCREEN-->
 
@@ -85,8 +88,13 @@
     <string name="card_name">CARD NAME</string>
     <string name="go_home">GO TO HOME</string>
     <string name="success">Ur category has been created!!</string>
+    <string name="x_players">X PLAYERS</string>
+    <string name="start_now">START</string>
+    <string name="exit">EXIT</string>
 
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>
     <string name="loading_title">WAITING FOR SERVER</string>
     <string name="loading_message">WAIT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

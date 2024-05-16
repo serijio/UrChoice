@@ -2,19 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent" >
 
     <ImageView
         android:id="@+id/waiting_players_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="375dp"
+        android:layout_height="320dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/gotohome" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/alert_dialog" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -37,23 +37,20 @@
 
         <TextView
             android:id="@+id/card_image_data"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="158dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginTop="160dp"
             android:text="@string/success"
             android:elevation="1dp"
             style="@style/profile_text" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/gotohome"
-            android:layout_width="match_parent"
+            android:layout_width="318dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="230dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="235dp"
+            android:layout_centerHorizontal="true"
             android:text="@string/go_home"
             app:backgroundTint="@null"
             android:background="@drawable/tap_to_start_rec"
