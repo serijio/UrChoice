@@ -1,5 +1,6 @@
 package com.example.urchoice2.Screens_activities;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +52,7 @@ public class SingleGame extends AppCompatActivity {
     private TextView winnerName;
     private ImageView winnerImage;
     private Integer userId;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class SingleGame extends AppCompatActivity {
         setContentView(R.layout.xx__fragment_individual_game_round_layout);
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         categoryId = sharedPreferences.getInt("id_categorySingle", 0);
+        waitAlert();
         Conectar();
         textViewElement1 = findViewById(R.id.card_name1);
         textViewElement2 = findViewById(R.id.card_name2);
@@ -167,6 +171,7 @@ public class SingleGame extends AppCompatActivity {
                     List<Element> elementList = response.body();
                     Collections.shuffle(elementList);
                     shuffledElements = elementList;
+                    dismissWaitAlert();
                     startRound();
                 }
             }
@@ -224,4 +229,27 @@ public class SingleGame extends AppCompatActivity {
             }
         });
     }
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(SingleGame.this).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SingleGame.this);
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
+    }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        // Dejar vacío para deshabilitar el botón de retroceso
+    }
+
+
+
 }
