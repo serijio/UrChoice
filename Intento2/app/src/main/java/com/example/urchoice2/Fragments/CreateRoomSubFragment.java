@@ -29,9 +29,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.CategoriesAPI;
+import com.example.urchoice2.API.FavsAPI;
+import com.example.urchoice2.API.ListItem;
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
+import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Category;
+import com.example.urchoice2.Classes.Favs;
+import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.Classes.UserVote;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.MultiGame;
@@ -54,10 +59,18 @@ public class CreateRoomSubFragment extends Fragment {
     private Handler handler;
     private MaterialButton createRoomButton;
     private CategoriesAPI categoriesAPI;
+
+    //PRUEBA SERIJIO OWO
+    private FavsAPI favsAPI;
+    private SavedAPI savedAPI;
     private RoomAPI roomAPI;
     private Integer userId;
     private RoomGameAPI roomGameAPI;
-    private List<Category> categoryList;
+    private List<Category> categoryList = new ArrayList<>();
+
+    //PRUEBA SERIJIO OWO
+    private List<Favs> favsList = new ArrayList<>();
+    private List<Saved> savedList = new ArrayList<>();
     private Integer selectedPosition;
     private int roomId;
     private boolean shouldUpdate = true;
@@ -97,6 +110,8 @@ public class CreateRoomSubFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GetCategories();
+                //GetFavs();
+                //GetSaved();
             }
         });
         return view;
@@ -129,16 +144,42 @@ public class CreateRoomSubFragment extends Fragment {
 
         // Datos para el RecyclerView
         String[] category_name = new String[categoryList.size()];
-        Log.e("SQL","TamaÃ±o: " + categoryList.size());
+
+
+        /*PRUEBA SERIJIO OWO
+        String[] favs_name = new String[favsList.size()];
+        String[] saved_name = new String[savedList.size()]; */
+
+        Log.e("SQL","Tamaño: " + categoryList.size() + favsList.size() + savedList.size());
         for (int i = 0; i < categoryList.size(); i++) {
             category_name[i] = categoryList.get(i).getName_cat();
         }
+
+        /*PRUEBA SERIJIO OWO
+        for (int i = 0; i < favsList.size(); i++) {
+            favs_name[i] = favsList.get(i).getName_cat();
+        }
+        //PRUEBA SERIJIO OWO
+        for (int i = 0; i < savedList.size(); i++) {
+            saved_name[i] = savedList.get(i).getName_cat();
+        } */
 
         ArrayList<String> imageBase64List = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             String base64Image = categoryList.get(i).getImg_cat();
             imageBase64List.add(base64Image);
         }
+
+        /*//PRUEBA SERIJIO OWO
+        for (int i = 0; i < favsList.size(); i++) {
+            String base64Image = favsList.get(i).getImg_cat();
+            imageBase64List.add(base64Image);
+        }
+        //PRUEBA SERIJIO OWO
+        for (int i = 0; i < savedList.size(); i++) {
+            String base64Image = savedList.get(i).getImg_cat();
+            imageBase64List.add(base64Image);
+        }*/
 
         String[] imagesBase64 = imageBase64List.toArray(new String[0]);
 
@@ -160,6 +201,8 @@ public class CreateRoomSubFragment extends Fragment {
                 ImageView imageView = holder.itemView.findViewById(R.id.card_image);
                 TextView textView = holder.itemView.findViewById(R.id.card_title);
                 Category category = categoryList.get(position);
+                //Favs favs = favsList.get(position);
+                //Saved saved = savedList.get(position);
 
                 // Decodificar la imagen Base64 y establecerla en el ImageView
                 Bitmap bitmap = base64ToBitmap(imagesBase64[position]);
@@ -203,6 +246,79 @@ public class CreateRoomSubFragment extends Fragment {
         alertDialog.show();
     }
 
+    /*private void category_alertDialogOpen() {
+        // Inflar el diseño del AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_choose_category, null);
+
+        // Crear el AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+
+        // Obtener la referencia del RecyclerView dentro del diseño del AlertDialog
+        RecyclerView category_recyclerView = view.findViewById(R.id.recycler_category);
+
+        ArrayList<ListItem> mergedList = new ArrayList<>();
+        mergedList.addAll(categoryList);
+        mergedList.addAll(favsList);
+        mergedList.addAll(savedList);
+
+        AlertDialog alertDialog = builder.create();
+        category_recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        category_recyclerView.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_create_category_image, parent, false);
+                return new RecyclerView.ViewHolder(itemView) {};
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+                // Obtener las vistas dentro de la CardView
+                ImageView imageView = holder.itemView.findViewById(R.id.card_image);
+                TextView textView = holder.itemView.findViewById(R.id.card_title);
+                ListItem listItem = mergedList.get(position);
+
+                // Decodificar la imagen Base64 y establecerla en el ImageView
+                Bitmap bitmap = base64ToBitmap(listItem.getImg());
+                imageView.setImageBitmap(bitmap);
+
+                textView.setText(listItem.getName());
+
+                // Añadir onClickListener a cada elemento de RecyclerView
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Cerrar el AlertDialog
+                        alertDialog.dismiss();
+                        selectedPosition = listItem.getId();
+
+                        // Convertir el Bitmap en un Drawable
+                        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+
+                        // Establecer el Drawable como fondo del botón
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            categoryButton.setBackground(bitmapDrawable);
+                        } else {
+                            categoryButton.setBackgroundDrawable(bitmapDrawable);
+                        }
+
+                        // Establecer el texto del botón
+                        categoryButton.setText(listItem.getName());
+                    }
+                });
+            }
+
+            @Override
+            public int getItemCount() {
+                return mergedList.size();
+            }
+        });
+
+        // Mostrar el AlertDialog
+        alertDialog.show();
+    }*/
+
 
     public void GetCategories(){
         categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
@@ -211,6 +327,13 @@ public class CreateRoomSubFragment extends Fragment {
                 if (response.isSuccessful()) {
                     categoryList = response.body();
                     category_alertDialogOpen();
+                    /*if (!categoryList.isEmpty()) {
+                        category_alertDialogOpen();
+                    } else {
+                        // Handle the case when favsList is empty
+                        // For example, display a message to the user
+                        Log.e("SQL", "Favs list is empty");
+                    }*/
                 } else {
                     Log.e("SQL","ERROR AL SACAR CATEGORIA");
                 }
@@ -221,6 +344,75 @@ public class CreateRoomSubFragment extends Fragment {
         });
 
     }
+
+
+    /*PRUEBA SERIJIO OWO
+    public void GetFavs() {
+        if (!favsList.isEmpty()) {
+        favsAPI.obtenerFavoritos(userId).enqueue(new Callback<List<Favs>>() {
+            @Override
+            public void onResponse(Call<List<Favs>> call, Response<List<Favs>> response) {
+                if (response.isSuccessful()) {
+                    favsList = response.body();
+                    if (!favsList.isEmpty()) {
+                        category_alertDialogOpen();
+                    } else {
+                        // Handle the case when favsList is empty
+                        // For example, display a message to the user
+                        Log.e("SQL", "Favs list is empty");
+                    }
+                } else {
+                    Log.e("SQL", "ERROR AL SACAR CATEGORIA");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Favs>> call, Throwable t) {
+                // Handle the failure case, if needed
+            }
+        });
+    }  else {
+        // Handle the case when favsList is empty
+        // For example, display a message to the user
+        Log.e("SQL", "Favs list is empty"); } }
+
+
+    public void GetSaved(){
+        if (!favsList.isEmpty()) {
+        savedAPI.obtenerGuardados(userId).enqueue(new Callback<List<Saved>>() {
+            @Override
+            public void onResponse(Call<List<Saved>> call, Response<List<Saved>> response) {
+                if (response.isSuccessful()) {
+                    if (!savedList.isEmpty()) {
+                        category_alertDialogOpen();
+                    } else {
+                        // Handle the case when favsList is empty
+                        // For example, display a message to the user
+                        Log.e("SQL", "Favs list is empty");
+                    }
+                } else {
+                    Log.e("SQL","ERROR AL SACAR CATEGORIA");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Saved>> call, Throwable t) {
+            }
+        });
+
+    } else {
+        // Handle the case when favsList is empty
+        // For example, display a message to the user
+        Log.e("SQL", "Favs list is empty"); } }
+
+
+    private List<ListItem> mergeLists() {
+        List<ListItem> mergedList = new ArrayList<>();
+        mergedList.addAll(categoryList);
+        mergedList.addAll(favsList);
+        mergedList.addAll(savedList);
+        return mergedList;
+    }
+    //FIN PRUEBA SERIJIO OWO*/
 
 
     public void createRoom(int categoryId, int userId,String nameRoom,String password) {

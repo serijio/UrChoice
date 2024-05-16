@@ -1,6 +1,8 @@
 package com.example.urchoice2.Classes;
 
-public class Saved {
+import com.example.urchoice2.API.ListItem;
+
+public class Saved implements ListItem {
     private int id_save;
     private int id_user;
     private int id_cat;
@@ -63,5 +65,20 @@ public class Saved {
 
     public void setSaved(boolean saved) {
         isSaved = saved;
+    }
+
+    @Override
+    public int getId() {
+        return id_cat;
+    }
+
+    @Override
+    public String getName() {
+        return name_cat;
+    }
+
+    @Override
+    public String getImg() {
+        return img_cat;
     }
 }

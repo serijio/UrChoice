@@ -1,55 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/waiting_playes_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:layout_width="375dp"
+        android:layout_height="500dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:src="@drawable/start_game_background" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/alert_dialog2" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
-        android:text="@string/x_players"
-        style="@style/AlertDialogTest" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_players"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="238dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginRight="55dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="1" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/alert_start_button"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
-        android:layout_marginStart="40dp"
-        android:layout_alignParentStart="true"
-        android:background="#00FFFFFF"
-        android:text="@string/start_now"
-        style="@style/profile_text" />
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/alert_exit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="440dp"
-        android:layout_marginEnd="40dp"
-        android:background="#00FFFFFF"
-        android:text="@string/exit"
-        style="@style/profile_text" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/rojo"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="110dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/rojo" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/azul"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="110dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/azul" />
+
+        <TextView
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="170dp"
+            android:text="@string/x_players"
+            style="@style/AlertDialogTest" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_players"
+            android:layout_width="310dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="232dp"
+            android:layout_centerHorizontal="true"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/alert_start_button"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="430dp"
+            android:layout_alignStart="@id/recycler_players"
+            android:background="#00FFFFFF"
+            android:text="@string/start_now"
+            style="@style/profile_text" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/alert_exit_button"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/recycler_players"
+            android:layout_marginTop="430dp"
+            android:background="#00FFFFFF"
+            android:text="@string/exit"
+            style="@style/profile_text" />
+
+    </RelativeLayout>
 </RelativeLayout>

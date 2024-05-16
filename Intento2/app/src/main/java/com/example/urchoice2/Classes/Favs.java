@@ -1,6 +1,8 @@
 package com.example.urchoice2.Classes;
 
-public class Favs {
+import com.example.urchoice2.API.ListItem;
+
+public class Favs implements ListItem {
     private int id_fav;
     private int id_user;
     private int id_cat;
@@ -63,5 +65,20 @@ public class Favs {
 
     public void setSaved(boolean saved) {
         isSaved = saved;
+    }
+
+    @Override
+    public int getId() {
+        return id_cat;
+    }
+
+    @Override
+    public String getName() {
+        return name_cat;
+    }
+
+    @Override
+    public String getImg() {
+        return img_cat;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.urchoice2.Classes;
 
-public class Category {
+import com.example.urchoice2.API.ListItem;
+
+public class Category implements ListItem {
     public int id_cat;
     public String name_cat;
     public String img_cat;
@@ -33,5 +35,20 @@ public class Category {
 
     public void setImg_cat(String img_cat) {
         this.img_cat = img_cat;
+    }
+
+    @Override
+    public int getId() {
+        return id_cat;
+    }
+
+    @Override
+    public String getName() {
+        return name_cat;
+    }
+
+    @Override
+    public String getImg() {
+        return img_cat;
     }
 }
