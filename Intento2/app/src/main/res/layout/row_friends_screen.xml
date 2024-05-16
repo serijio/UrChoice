@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" >
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvFriends"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" >
 
         <View
             android:layout_width="match_parent"
@@ -27,32 +27,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="0dp">
+            android:padding="0dp" >
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/friends_image"
-                android:layout_width="45dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.35"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/a"
-                app:shapeAppearanceOverlay="@style/imageborder"/>
+                app:shapeAppearanceOverlay="@style/imageborder" />
 
             <TextView
                 android:id="@+id/friends_name"
-                style="@style/FriendsUsernameStyle"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="@string/lukinda" />
+                android:layout_weight="0.25"
+                android:text="@string/lukinda"
+                style="@style/FriendsUsernameStyle2" />
 
             <TextView
                 android:id="@+id/friends_email"
-                style="@style/FriendsMailStyle"
                 android:layout_width="85dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1"
-                android:text="@string/lukinda_mail" />
+                android:layout_weight="0.2"
+                android:text="@string/lukinda_mail"
+                style="@style/FriendsUsernameStyle3" />
 
             <ImageView
                 android:id="@+id/delete_friend"
@@ -60,7 +60,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
                 android:paddingTop="4dp"
-                android:paddingEnd="15dp"
+                android:paddingEnd="25dp"
                 android:paddingBottom="4dp"
                 android:src="@drawable/delete_icon_blue" />
 
