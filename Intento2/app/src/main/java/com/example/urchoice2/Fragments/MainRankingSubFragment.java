@@ -12,6 +12,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Base64;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
+import com.example.urchoice2.Screens_activities.MainScreen;
 import com.example.urchoice2.Screens_activities.SingleGame;
 import com.google.android.material.button.MaterialButton;
 
@@ -48,7 +50,9 @@ public class MainRankingSubFragment extends Fragment {
     private ElementsAPI elementsAPI;
     private CategoriesAPI categoriesAPI;
     private Integer categoryId;
+    private MaterialButton startGameButton;
 
+    private MaterialButton go_back_button;
     public MainRankingSubFragment() {}
 
     public static MainRankingSubFragment newInstance(String param1, String param2) {
@@ -76,7 +80,7 @@ public class MainRankingSubFragment extends Fragment {
         waitAlert();
         GetCategory(view);
         GetRanking(view);
-        MaterialButton startGameButton = view.findViewById(R.id.start_game_button); // Reemplaza start_game_button con el ID real de tu botón
+        startGameButton = view.findViewById(R.id.start_game_button); // Reemplaza start_game_button con el ID real de tu botón
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +88,14 @@ public class MainRankingSubFragment extends Fragment {
 
             }
 
+        });
+
+        go_back_button = view.findViewById(R.id.back_home_button);
+        go_back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back_home();
+            }
         });
         return view;
     }
@@ -138,7 +150,8 @@ public class MainRankingSubFragment extends Fragment {
 
                         nameTextView.setText(elements.get(i).getName_elem());
                         imgImageView.setImageBitmap(base64ToBitmap(elements.get(i).getImg_elem()));
-                        //scoreuser.setText(elements.get(i).getVictories());
+                        scoreuser.setText(Integer.toString(elements.get(i).getVictories()));
+
 
                         dismissWaitAlert();
                     }
@@ -154,6 +167,7 @@ public class MainRankingSubFragment extends Fragment {
             }
         });
     }
+
 
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
@@ -194,6 +208,22 @@ public class MainRankingSubFragment extends Fragment {
             });
         }
     }
+    public void back_home() {
 
+        // Reemplaza el fragmento actual con MainFragment
+        Fragment mainFragment = new MainFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.mainframe, mainFragment);
+        transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
+        transaction.commit();
+
+        //SI QUITAS ESTO QUEDA RARO Y FEO SERGIO AYUDAAAAA
+        /*
+        go_back_button.setVisibility(View.GONE);
+        startGameButton.setVisibility(View.GONE);
+        go_back_button.setEnabled(false);
+        startGameButton.setEnabled(false);
+        */
+    }
 
 }

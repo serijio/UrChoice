@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.FavsAPI;
-import com.example.urchoice2.API.ListItem;
+
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.SavedAPI;
@@ -76,6 +76,7 @@ public class CreateRoomSubFragment extends Fragment {
     private boolean shouldUpdate = true;
     private boolean allVotesReceived = false;
     private List<UserVote> userVotes = new ArrayList<>();
+    private MaterialButton close_alert_category;
 
 
     public CreateRoomSubFragment() {}
@@ -134,10 +135,12 @@ public class CreateRoomSubFragment extends Fragment {
     private void category_alertDialogOpen() {
         // Inflar el diseÃ±o del AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_choose_category, null);
-
         // Crear el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
+
+
+
 
         // Obtener la referencia del RecyclerView dentro del diseÃ±o del AlertDialog
         RecyclerView category_recyclerView = view.findViewById(R.id.recycler_category);
@@ -238,6 +241,13 @@ public class CreateRoomSubFragment extends Fragment {
                 return category_name.length;
             }
         });
+        close_alert_category = view.findViewById(R.id.close_room_choose_category);
+        close_alert_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
 
         // Crear y mostrar el AlertDialo
         alertDialog.setCanceledOnTouchOutside(false);
@@ -321,30 +331,28 @@ public class CreateRoomSubFragment extends Fragment {
 
 
     public void GetCategories(){
-        categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
+        Call<List<Category>> call = categoriesAPI.getAllCategories();
+        call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if (response.isSuccessful()) {
                     categoryList = response.body();
                     category_alertDialogOpen();
-                    /*if (!categoryList.isEmpty()) {
-                        category_alertDialogOpen();
-                    } else {
-                        // Handle the case when favsList is empty
-                        // For example, display a message to the user
-                        Log.e("SQL", "Favs list is empty");
-                    }*/
+
                 } else {
-                    Log.e("SQL","ERROR AL SACAR CATEGORIA");
+                    Log.e("SQL", "Error en la respuesta: " + response.message());
+                    // Manejar errores de la API
                 }
             }
+
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
+                Log.e("SQL", "Error en la llamada: " + t.getMessage());
+                // Manejar errores de conexión
             }
         });
 
     }
-
 
     /*PRUEBA SERIJIO OWO
     public void GetFavs() {

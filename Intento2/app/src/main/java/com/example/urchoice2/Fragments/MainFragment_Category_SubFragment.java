@@ -110,7 +110,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
 
 
     private void setRvMain() {
-        Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
+        Drawable mainFavIcon = ContextCompat.getDrawable( requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
         for (int i = 0; i < categoryList.size(); i++) {
             main_screen_model.add(new Main_Screen_Model(

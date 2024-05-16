@@ -20,4 +20,6 @@ public interface CategoriesAPI {
 
     @GET("/category/{id}")
     Call<Category> getCategory(@Path("id") int categoryId);
+    @GET("/categories/all")
+    Call<List<Category>> getAllCategories();
 }

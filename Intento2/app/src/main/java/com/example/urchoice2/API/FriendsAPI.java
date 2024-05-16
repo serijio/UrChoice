@@ -1,6 +1,9 @@
 package com.example.urchoice2.API;
 
+import com.example.urchoice2.Classes.User;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -23,6 +26,20 @@ public interface FriendsAPI {
             @Field("nuevoEstado") String nuevoEstado
     );
 
-    @GET("/friends/{id_user}")
+    @GET("/friends/count/{id_user}")
     Call<JsonObject> getFriendCount(@Path("id_user") int userId);
+
+    @GET("/friends/{id_user}")
+    Call<List<User>> getFriends(@Path("id_user") int userId);
+
+    @GET("/friends/request/{id_user}")
+    Call<List<User>> getRequests(@Path("id_user") int userId);
+
+    @FormUrlEncoded
+    @PUT("/friends/update")
+    Call<Void> updateFriendStatus(
+            @Field("id_us1") int idUs1,
+            @Field("id_us2") int idUs2,
+            @Field("nuevoEstado") String nuevoEstado
+    );
 }

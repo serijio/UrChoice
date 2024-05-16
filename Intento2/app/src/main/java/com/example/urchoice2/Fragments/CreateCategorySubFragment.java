@@ -70,6 +70,7 @@ public class CreateCategorySubFragment extends Fragment {
     private CategoriesAPI categoriesAPI;
     //private AlertDialog alertDialog2;
     private BitmapDrawable bitmapDrawable;
+    private MaterialButton close_add_card_alert;
 
     private static final int PICK_IMAGE_REQUEST1 = 0;
     private static final int PICK_IMAGE_REQUEST2 = 1;
@@ -174,9 +175,20 @@ public class CreateCategorySubFragment extends Fragment {
     private void create_card_alertDialog(){
         // Inflar el diseño del AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_add_category_card_data,null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
         edit_image_button = view.findViewById(R.id.card_image_data);
         setCard_data_button = view.findViewById(R.id.set_data_alert_addcard_button);
         alert_card_textview = view.findViewById(R.id.card_textEdittextlayout);
+        close_add_card_alert = view.findViewById(R.id.close_card_button);
+        close_add_card_alert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
 
         edit_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,13 +230,10 @@ public class CreateCategorySubFragment extends Fragment {
         });
 
         // Crear el AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
 
-        alertDialog = builder.create();
         alertDialog.show();
         alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(true);
+        alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
     }
 

@@ -2,19 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="375dp"
-        android:layout_height="500dp"
+        android:id="@+id/waiting_players_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/alert_dialog2" />
+        android:scaleType="fitXY"
+        android:src="@drawable/start_game_background" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_card_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="40dp"
+
+            android:background="@drawable/close"
+            app:backgroundTint="@null" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/rojo"
@@ -41,7 +53,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="160dp"
+            android:layout_centerVertical="true"
             android:background="@drawable/circle_image"
             android:elevation="1dp"
             android:src="@drawable/navbar_add"
@@ -50,11 +62,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/card_textinputlayout"
-            android:layout_width="318dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:clickable="false"
-            android:layout_marginTop="330dp"
+            android:paddingTop="338dp"
+            android:paddingBottom="25dp"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@null" >
 
@@ -66,15 +80,13 @@
                 android:hint="@string/card_name"
                 android:cursorVisible="false"
                 style="@style/profile_text" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/set_data_alert_addcard_button"
-            android:layout_width="318dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="412dp"
+            android:layout_marginTop="418dp"
             android:layout_marginStart="37dp"
             android:layout_marginEnd="37dp"
             android:text="@string/insert_card"
