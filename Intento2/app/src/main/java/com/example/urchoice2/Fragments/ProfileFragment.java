@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
     Bitmap selectedBitmap2;
     private MaterialButton logout;
     private int userId;
+    private TextView profileMail;
     private EditText profileNameEditText;
     private MaterialButton editNewNameButton;
     private MaterialButton setNewNameButton;
@@ -100,6 +101,7 @@ public class ProfileFragment extends Fragment {
         view =  inflater.inflate(R.layout.f5___fragment_profile, container, false);
         edit_profile_image_button  = view.findViewById(R.id.edit_profile_image);
         profile_image = view.findViewById(R.id.profile_image);
+        profileMail = view.findViewById(R.id.profilemail);
         profileBackground = view.findViewById(R.id.profile_background);
         edit_profile_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,10 +139,12 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String newName = profileNameEditText.getText().toString();
+                profileMail.setText("/@"+newName);
                 profileNameEditText.setText(newName);
                 setNewNameButton.setVisibility(View.GONE);
                 editNewNameButton.setVisibility(View.VISIBLE);
                 profileNameEditText.setEnabled(false);
+
             }
         });
 

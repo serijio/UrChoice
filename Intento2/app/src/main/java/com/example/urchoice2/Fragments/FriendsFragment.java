@@ -2,12 +2,17 @@ package com.example.urchoice2.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
@@ -50,6 +55,36 @@ public class FriendsFragment extends Fragment {
                 see_requests();
             }
         });
+
+        RecyclerView recyclerView = view.findViewById(R.id.friends_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        String[] usernames = {"TheRockex", "Spidey1912", "Lukinda551", "LordGrim551", "TuMama", "王八蛋"};
+        recyclerView.setAdapter(new RecyclerView.Adapter() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_friends_screen, parent, false);
+                return new RecyclerView.ViewHolder(itemView) {
+                };
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+                TextView playerName = holder.itemView.findViewById(R.id.friends_name);
+                TextView playerMail = holder.itemView.findViewById(R.id.friends_email);
+
+                //MaterialButton delete = holder.itemView.findViewById(R.id.delete_friend);
+                playerName.setText(usernames[position]);
+                playerMail.setText("/@"+usernames[position]);
+
+            }
+
+            @Override
+            public int getItemCount() {
+                return usernames.length;
+            }
+        });
+
 
         return view;
     }
