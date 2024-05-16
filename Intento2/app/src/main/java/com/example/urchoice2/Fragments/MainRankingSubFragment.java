@@ -8,7 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Base64;
@@ -179,6 +181,18 @@ public class MainRankingSubFragment extends Fragment {
     }
     public void dismissWaitAlert() {
         alertDialog.dismiss();
+    }
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // No hacer nada cuando se presiona el botón de retroceso
+                }
+            });
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.urchoice2.Screens_activities;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +75,7 @@ public class MultiGame extends AppCompatActivity {
         categoryId = sharedPreferences.getInt("id_categoryMulti", 0);
         userId = sharedPreferences.getInt("id_user", 0);
         roomId = sharedPreferences.getInt("id_room", 0);
+        waitAlert();
         Conectar();
         textViewElement1 = findViewById(R.id.Multicard_name1);
         textViewElement2 = findViewById(R.id.Multicard_name2);
@@ -84,6 +86,7 @@ public class MultiGame extends AppCompatActivity {
             public void onClick(View v) {
                 // Lógica para manejar la selección del primer element
                 Vote(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()));
+                waitAlert();
             }
         });
 
@@ -92,6 +95,7 @@ public class MultiGame extends AppCompatActivity {
             public void onClick(View v) {
                 // Lógica para manejar la selección del segundo element
                 Vote(String.valueOf(shuffledElements.get(currentRound * 2 + 1).getName_elem()));
+                waitAlert();
             }
         });
 
@@ -174,7 +178,9 @@ public class MultiGame extends AppCompatActivity {
         elementApi = retrofit.create(ElementsAPI.class);
         roomAPI = retrofit.create(RoomAPI.class);
         roomGameAPI = retrofit.create(RoomGameAPI.class);
+
         Game();
+
     }
 
 
@@ -207,6 +213,7 @@ public class MultiGame extends AppCompatActivity {
                     List<Element> elementList = response.body();
                     shuffledElements = elementList;
                     Log.e("SQL", "GAMECONECT: " + shuffledElements.size());
+                    dismissWaitAlert();
                     startRound();
                 }
             }
@@ -273,6 +280,7 @@ public class MultiGame extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+                    //dismissWaitAlert();
                     Log.e("SQL", "FUNCIONO");
                     allVotesReceived = false;
                     startRepeatedCall();
@@ -297,6 +305,8 @@ public class MultiGame extends AppCompatActivity {
                 if (!allVotesReceived) {
                     GetUsers();
                     handler.postDelayed(this, 3000);
+                    dismissWaitAlert();
+
                 } else {
                     // Todos los votos han sido recibidos, detener la llamada repetida
                     handler.removeCallbacksAndMessages(null);
@@ -318,7 +328,6 @@ public class MultiGame extends AppCompatActivity {
                     for (UserVote user : users) {
                         if (user.getVote_game() == null || user.getVote_game().isEmpty()) {
                             allVotesReceivedTemp = false;
-                            waitAlert();
                             break;
                         }
                     }
@@ -369,7 +378,6 @@ public class MultiGame extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    dismissWaitAlert();
                     if(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()).equals(mostVotedGame)){
                         winnerElements.add(shuffledElements.get(currentRound * 2));
                     } else {
@@ -428,5 +436,10 @@ public class MultiGame extends AppCompatActivity {
     }
     public void dismissWaitAlert() {
         alertDialog.dismiss();
+    }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        // Dejar vacío para deshabilitar el botón de retroceso
     }
 }
