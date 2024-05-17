@@ -26,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.Adapters.CreateCategory_CardAdapter;
@@ -113,16 +114,16 @@ public class CreateCategorySubFragment extends Fragment {
                 TextInputEditText textInputEditText = view.findViewById(R.id.create_cat_name_insert);
                 String categoryName = textInputEditText.getText().toString();
 
-                /*if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
+                if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
                     Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() < 4){
                     Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
-                }else if(cardsList.size() % 2 != 0){
+                }else if((cardsList.size() & (cardsList.size() - 1)) == 0){
                     Toast.makeText(getActivity(), "El número de cartas tienen que ser pares", Toast.LENGTH_SHORT).show();
                 }else{
                     String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList);
-                }*/
+                }
 
                 String IMGString = bitmapToBase64(selectedBitmap2);
                 InsertCategory(categoryName, IMGString, cardsList);
@@ -373,7 +374,7 @@ public class CreateCategorySubFragment extends Fragment {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         /*evitar que se pete debido a ciertas imagenes sobre todo las de camara*/
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
 
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);

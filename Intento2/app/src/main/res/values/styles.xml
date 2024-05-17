@@ -237,6 +237,8 @@
         <item name="android:textAlignment">gravity</item>
     </style>
 
+
+    <!--Create Category-->
     <style name="CreateCategoryStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxBackgroundColor">#00000000</item>
         <item name="boxStrokeColor">@color/text_input_outline_color_red</item>

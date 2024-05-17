@@ -211,6 +211,7 @@ public class MultiGame extends AppCompatActivity {
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
                 if (response.isSuccessful()) {
                     List<Element> elementList = response.body();
+
                     shuffledElements = elementList;
                     Log.e("SQL", "GAMECONECT: " + shuffledElements.size());
                     dismissWaitAlert();
@@ -380,8 +381,10 @@ public class MultiGame extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()).equals(mostVotedGame)){
                         winnerElements.add(shuffledElements.get(currentRound * 2));
+                        Log.e("SQL","Ganador" + shuffledElements.get(currentRound * 2).getName_elem());
                     } else {
                         winnerElements.add(shuffledElements.get(currentRound * 2 + 1));
+                        Log.e("SQL","Ganador" + shuffledElements.get(currentRound * 2 + 1).getName_elem());
                     }
                     currentRound++;
                     startRound();
