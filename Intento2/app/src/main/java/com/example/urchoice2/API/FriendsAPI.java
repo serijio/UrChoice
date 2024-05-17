@@ -15,10 +15,6 @@ import retrofit2.http.Path;
 
 public interface FriendsAPI {
     @FormUrlEncoded
-    @POST("friends")
-    Call<Void> addFriend(@Field("id_us1") int id_us1, @Field("id_us2") int id_us2);
-
-    @FormUrlEncoded
     @PUT("friends/update")
     Call<Void> updateFriendRelation(
             @Field("id_us1") int id_us1,
@@ -42,4 +38,8 @@ public interface FriendsAPI {
             @Field("id_us2") int idUs2,
             @Field("nuevoEstado") String nuevoEstado
     );
+
+    @FormUrlEncoded
+    @POST("friends")
+    Call<Void> addFriend(@Field("id_us1") int id_us1, @Field("nick_name") String nick_name);
 }

@@ -73,13 +73,15 @@ public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Reque
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateFriend(friendsList.get(position).getId_user(), "Aceptada");
+                UpdateFriend(friendsList.get(position).getId_user(), "Aceptada", position);
+                friendsList.remove(friendsList.get(position));
             }
         });
         holder.declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateFriend(friendsList.get(position).getId_user(), "Denegado");
+                UpdateFriend(friendsList.get(position).getId_user(), "Denegado", position);
+                friendsList.remove(friendsList.get(position));
             }
         });
     }
@@ -123,7 +125,7 @@ public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Reque
         userId = preferences.getInt("id_user", 0);
     }
 
-    public void UpdateFriend(int idUs2, String nuevoEstado){
+    public void UpdateFriend(int idUs2, String nuevoEstado, int position){
         Log.e("SQL","DATOS: " + idUs2 + "," + userId + "," + nuevoEstado);
         Call<Void> call = friendsAPI.updateFriendStatus(userId, idUs2, nuevoEstado);
         call.enqueue(new Callback<Void>() {
@@ -131,6 +133,9 @@ public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Reque
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.d("SQL", "Actualización exitosa");
+                    friendsRequestsModels.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, friendsRequestsModels.size());
                     // Manejar respuesta exitosa
                 } else {
                     Log.e("SQL", "Error en la respuesta: " + response.message());

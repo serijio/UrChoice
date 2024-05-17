@@ -19,8 +19,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.API.UserAPI;
@@ -31,6 +33,7 @@ import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Friends_Requests_Model;
 import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,9 @@ public class FriendsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
+    String nick_name;
     MaterialButton friends_requests;
+    ImageButton friends_add;
     private FriendsAPI friendsAPI;
     private List<User> users;
     private int userId;
@@ -79,11 +84,22 @@ public class FriendsFragment extends Fragment {
         Conectar();
         View view = inflater.inflate(R.layout.f2___fragment_friends, container, false);
         friends_requests = view.findViewById(R.id.see_requests_button);
+        friends_add = view.findViewById(R.id.send_request);
+
+        TextInputEditText textInputEditText = view.findViewById(R.id.search_friends);
+        nick_name = textInputEditText.getText().toString();
 
         friends_requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 see_requests();
+            }
+        });
+
+        friends_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Addfriend();
             }
         });
 
@@ -111,6 +127,35 @@ public class FriendsFragment extends Fragment {
         userId = sharedPreferences.getInt("id_user", 0);
         GetFriends();
     }
+
+    public void Addfriend(){
+        Call<Void> call = friendsAPI.addFriend(userId, nick_name);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // La solicitud se realizó correctamente (código de estado 200)
+                    Toast.makeText(requireContext(), "Solicitud Enviada", Toast.LENGTH_SHORT).show();
+                } else if (response.code() == 404) {
+                    // El usuario no existe (código de estado 404)
+                    Toast.makeText(requireContext(), "No existe usuario", Toast.LENGTH_SHORT).show();
+                } else if (response.code() == 400) {
+                    // Ya existe una relación de amistad entre los dos usuarios (código de estado 400)
+                    Toast.makeText(requireContext(), "Ya son amigos", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Otro error
+                    Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("API_CALL", "Error en la llamada: " + t.getMessage());
+                Toast.makeText(requireContext(), "Error en la llamada: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     public void GetFriends(){
         Call<List<User>> call = friendsAPI.getFriends(userId);

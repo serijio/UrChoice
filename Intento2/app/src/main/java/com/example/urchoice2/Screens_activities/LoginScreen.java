@@ -131,9 +131,6 @@ public class LoginScreen extends AppCompatActivity {
 
                     fotoperfil.setImageBitmap(base64ToBitmap(user.getImg_user()));
 
-
-
-
                     SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("id_user", user.getId_user());
@@ -158,5 +155,4 @@ public class LoginScreen extends AppCompatActivity {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
-
 }

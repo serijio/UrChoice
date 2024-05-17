@@ -238,13 +238,14 @@ public class CreateCategorySubFragment extends Fragment {
     }
 
 
-
     public void selectImageFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST1);
     }
+
+
     public void selectCategoryImageFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");

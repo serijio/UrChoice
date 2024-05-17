@@ -38,7 +38,6 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_friends"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColorHint="@color/blue"
@@ -53,6 +52,7 @@
         style="@style/SearchFriendsBar" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_friends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/find"
@@ -60,31 +60,23 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="18sp"
-            app:endIconDrawable="@drawable/search_friends"
-            app:endIconTint="@color/blue" />
-
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
-      <ImageButton
+
+    <ImageButton
+        android:id="@+id/send_request"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/h136"
         app:layout_constraintBottom_toTopOf="@id/h137"
         app:layout_constraintStart_toEndOf="@id/v82"
         app:layout_constraintEnd_toStartOf="@id/v83"
-        android:background="@drawable/search_friends" />
-
-
-
-
-
-
+        android:background="@drawable/add_friend" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friends_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/v87"
         app:layout_constraintStart_toEndOf="@id/v86"
@@ -150,7 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.79" />
+        app:layout_constraintGuide_percent="0.77" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v83"

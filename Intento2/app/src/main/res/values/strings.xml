@@ -33,7 +33,7 @@
     <string name="saved_fragment">LIBRARY</string>
     <string name="profile_fragment">PROFILE</string>
     <string name="user_fragment">USER</string>
-    <string name="find">Find by ID</string>
+    <string name="find">Add friend by name</string>
     <string name="friends_requests">REQUESTS</string>
 
     <!--CREATE ALL ROOMS SCREEN-->
