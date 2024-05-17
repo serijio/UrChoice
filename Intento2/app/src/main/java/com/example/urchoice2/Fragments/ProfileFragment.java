@@ -30,10 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.API.FriendsAPI;
-import com.example.urchoice2.API.RoomAPI;
-import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
@@ -41,7 +38,6 @@ import com.example.urchoice2.Screens_activities.SplashScreen;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
-import com.makeramen.roundedimageview.RoundedDrawable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -111,6 +107,7 @@ public class ProfileFragment extends Fragment {
         edit_profile_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 selectImageFromGallery();
             }
         });
@@ -140,21 +137,17 @@ public class ProfileFragment extends Fragment {
         });
 
         setNewNameButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 String newName = profileNameEditText.getText().toString();
+                UpdateName(newName);
                 profileMail.setText("/@"+newName);
                 profileNameEditText.setText(newName);
                 setNewNameButton.setVisibility(View.GONE);
                 editNewNameButton.setVisibility(View.VISIBLE);
                 profileNameEditText.setEnabled(false);
-
             }
         });
-
-
-
         return view;
     }
 
@@ -209,6 +202,7 @@ public class ProfileFragment extends Fragment {
                 selectedBitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), selectedImageUri);
                 profile_image.setImageBitmap(selectedBitmap);
                 profileBackground.setImageBitmap(selectedBitmap);
+                UpdateIMG(selectedBitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -281,12 +275,16 @@ public class ProfileFragment extends Fragment {
                 if (response.isSuccessful()) {
                     user = response.body();
                     TextInputEditText nombreTextView = view.findViewById(R.id.profileName_edittext);
+                    TextView emailTextView = view.findViewById(R.id.profilemail);
                     nombreTextView.setText(user.getNick_user());
+                    emailTextView.setText("@" + user.getNick_user());
 
                     ImageView userIMG = view.findViewById(R.id.profile_image);
-                    if(user.getImg_user() != null || user.getImg_user().isEmpty()){
-                        userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
-                    }
+                    ImageView userBackgorundIMG = view.findViewById(R.id.profile_background);
+
+                    userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
+                    userBackgorundIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
+
 
                     TextView profileGames = view.findViewById(R.id.games);
                     profileGames.setText(String.valueOf(user.getGamesPlayed()));
@@ -303,45 +301,40 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    public void UpdateName(){
-        TextInputEditText nombreTextView = view.findViewById(R.id.profileName_edittext);
-        String nameString = nombreTextView.getText().toString();
-        Call<Void> call = userAPI.updateUserName(userId, nameString);
+    public void UpdateName(String newName){
+        Call<Void> call = userAPI.updateUserName(userId, newName);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(requireContext(), "Bienvenido " + nameString, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Bienvenido " + newName, Toast.LENGTH_SHORT).show();
                 } else {
-                    // La llamada no fue exitosa, maneja el error aquÃ­
+                    Log.e("SQL","ERROR");
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Error de red o error en la llamada, maneja el error aquÃ­
+                Log.e("SQL","ERROR2" + t);
             }
         });
     }
 
 
-    public void UpdateIMG(){
-        ImageView imgView = view.findViewById(R.id.profile_image);
-        Drawable drawable = imgView.getDrawable();
-        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-        String IMGString = bitmapToBase64(bitmap);
-        Call<Void> call = userAPI.updateUserName(userId, IMGString);
+    public void UpdateIMG(Bitmap selectedBitmap){
+        String IMGString = bitmapToBase64(selectedBitmap);
+        Call<Void> call = userAPI.updateUserIMG(userId, IMGString);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-
+                    Toast.makeText(requireContext(), "Imagen Actualizada", Toast.LENGTH_SHORT).show();
                 } else {
-                    // La llamada no fue exitosa, maneja el error aquí
+                    Log.e("SQL","ERROR");
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Error de red o error en la llamada, maneja el error aquí
+                Log.e("SQL","ERROR2" + t);
             }
         });
     }

@@ -7,9 +7,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -122,10 +125,20 @@ public class LoginScreen extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     User user = response.body();
+                    Toast.makeText(LoginScreen.this, "Bienvenido de vuelta " + user.getNick_user(), Toast.LENGTH_SHORT).show();
+
+                    ImageView fotoperfil = findViewById(R.id.login_profile_pic);
+
+                    fotoperfil.setImageBitmap(base64ToBitmap(user.getImg_user()));
+
+
+
+
                     SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("id_user", user.getId_user());
                     editor.apply();
+
                     Log.e("SQL","Usuario encontrado");
                     /*Intent intent = new Intent(LoginScreen.this, MainScreen.class);
                     startActivity(intent);*/
@@ -136,8 +149,14 @@ public class LoginScreen extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginScreen.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("SQL","Error: " + t.getMessage());
             }
         });
     }
+
+    public Bitmap base64ToBitmap(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
 }

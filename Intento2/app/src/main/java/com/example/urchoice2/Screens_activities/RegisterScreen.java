@@ -1,14 +1,22 @@
 package com.example.urchoice2.Screens_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +27,8 @@ import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
+
+import java.io.ByteArrayOutputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -110,7 +120,32 @@ public class RegisterScreen extends AppCompatActivity {
             }
         }, 400);
     }
+    public String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        /*evitar que se pete debido a ciertas imagenes sobre todo las de camara*/
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    private Bitmap vectorToBitmap(VectorDrawable vectorDrawable) {
+        // Crear un nuevo Bitmap con las dimensiones del VectorDrawable
+        Bitmap bitmap = Bitmap.createBitmap(
+                vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(),
+                Bitmap.Config.ARGB_8888);
+
+        // Asociar el Bitmap con un lienzo (Canvas)
+        Canvas canvas = new Canvas(bitmap);
+
+        // Dibujar el VectorDrawable en el lienzo
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+
+        return bitmap;
+    }
 
     public void Registrer() {
 
@@ -123,10 +158,16 @@ public class RegisterScreen extends AppCompatActivity {
         String nickString = nickTextView.getText().toString();
         String contraString = contraTextView.getText().toString();
         String contra2String = contra2TextView.getText().toString();
+        Drawable vectorDrawable = ContextCompat.getDrawable(this, R.drawable.nopic_login_inside);
+
+        // Convertir el VectorDrawable a Bitmap
+        Bitmap bitmap = vectorToBitmap((VectorDrawable) vectorDrawable);
+        String IMGString = bitmapToBase64(bitmap);
+
 
         if(!emailString.isEmpty() || !emailString.isEmpty() || !nickString.isEmpty() || !contraString.isEmpty()){
             if(contraString.equals(contra2String)){
-                Call<User> call = userApi.registerUser(emailString, nickString, "", contraString);
+                Call<User> call = userApi.registerUser(emailString, nickString, IMGString, contraString);
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
@@ -139,12 +180,12 @@ public class RegisterScreen extends AppCompatActivity {
                             Toast.makeText(RegisterScreen.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
                             SignToMainButton();
                         } else {
-                            Toast.makeText(RegisterScreen.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterScreen.this, "Ya existe un usuario con ese email o nombre", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(RegisterScreen.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("SQL","ERROR" + t);
                     }
                 });
             }else{

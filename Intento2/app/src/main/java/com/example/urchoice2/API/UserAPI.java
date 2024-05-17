@@ -29,8 +29,10 @@ public interface UserAPI {
             @Field("contra") String contra
     );
 
-    @GET("user")
-    Call<List<User>> getUsers();
+    @GET("/users/all/{id_user}")
+    Call<List<User>> getUsers(@Path("id_user") int userId);
+
+
     @GET("/users/{id_user}")
     Call<User> getUser(@Path("id_user") int userId);
 

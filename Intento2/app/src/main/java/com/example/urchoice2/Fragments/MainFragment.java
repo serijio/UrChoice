@@ -152,9 +152,7 @@ public class MainFragment extends Fragment {
 
             username.setText(user.getNick_user());
             email.setText(user.getEmail_user());
-            if(user.getImg_user() != null || user.getImg_user().isEmpty()){
-                userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
-            }
+            userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
             games.setText(String.valueOf(user.getGamesPlayed()));
         }
     }
