@@ -52,6 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.15"
                 android:text="@string/lukinda_mail"
+                android:textSize="10dp"
                 style="@style/FriendsUsernameStyle5" />
 
             <ImageView
