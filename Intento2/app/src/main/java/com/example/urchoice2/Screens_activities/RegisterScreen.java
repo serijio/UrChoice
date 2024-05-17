@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -130,19 +131,18 @@ public class RegisterScreen extends AppCompatActivity {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
-    private Bitmap vectorToBitmap(VectorDrawable vectorDrawable) {
-        // Crear un nuevo Bitmap con las dimensiones del VectorDrawable
-        Bitmap bitmap = Bitmap.createBitmap(
-                vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(),
-                Bitmap.Config.ARGB_8888);
+    public Bitmap drawableToBitmap(Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
 
-        // Asociar el Bitmap con un lienzo (Canvas)
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-
-        // Dibujar el VectorDrawable en el lienzo
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        vectorDrawable.draw(canvas);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
 
         return bitmap;
     }
@@ -158,10 +158,10 @@ public class RegisterScreen extends AppCompatActivity {
         String nickString = nickTextView.getText().toString();
         String contraString = contraTextView.getText().toString();
         String contra2String = contra2TextView.getText().toString();
-        Drawable vectorDrawable = ContextCompat.getDrawable(this, R.drawable.nopic_login_inside);
+        // Obtener el recurso Drawable
+        Drawable drawable = getResources().getDrawable(R.drawable.logo);
 
-        // Convertir el VectorDrawable a Bitmap
-        Bitmap bitmap = vectorToBitmap((VectorDrawable) vectorDrawable);
+        Bitmap bitmap = drawableToBitmap(drawable);
         String IMGString = bitmapToBase64(bitmap);
 
 
@@ -189,7 +189,7 @@ public class RegisterScreen extends AppCompatActivity {
                     }
                 });
             }else{
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Las contraseÃ±as no coinciden", Toast.LENGTH_SHORT).show();
             }
         }else{
             Toast.makeText(this, "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
