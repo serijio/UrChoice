@@ -285,6 +285,26 @@
         <item name="shapeAppearance">@style/recShape</item>
     </style>
 
+
+    <!--Create Room-->
+    <style name="CreateRoomStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundColor">#00000000</item>
+        <item name="boxStrokeColor">@color/text_input_outline_color_blue</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="CreateRoomText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="fontFamily">@font/orbimedium</item>
+    </style>
+
+
+
     <style name="FriendRequests" parent="Widget.Material3.Button">
         <item name="backgroundTint">#00000000</item>
         <item name="strokeColor">#00000000</item>

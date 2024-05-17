@@ -50,6 +50,11 @@
     <string name="no_cards_yet_caps">U HAVEN\'T ADD ANY CARDS YET.\nWHAT U WAITING FOR?</string>
     <string name="no_cards_yet_minus">U haven\'t add any cards yet.\nWhat u waiting for?</string>
 
+
+    <!--CREATE ROOM SUB FRAGMENT-->
+    <string name="room_name">ROOM NAME</string>
+    <string name="choose">CHOOSE CATEGORY</string>
+
     <!--CARDVIEWS-->
     <string name="cat_name">LA MAMÁ DE LUCA</string>
     <string name="cat_name2">Akame Ga Kill Esdeath</string>
