@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +63,10 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         return new RoomViewHolder(view);
     }
 
+    public Bitmap base64ToBitmap(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 
     public void onBindViewHolder(@NonNull RoomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Conectar();
@@ -72,6 +79,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
 
         holder.roomNameTextView.setText(roomName);
         holder.numberOfPlayersTextView.setText(String.valueOf(numberOfPlayers));
+        holder.roomIMG.setImageBitmap(base64ToBitmap(rooms.get(position).getImg_cat()));
 
         if (position % 2 == 0) {
             // Si la posición es par, establecer el fondo azul
@@ -135,11 +143,13 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
     public class RoomViewHolder extends RecyclerView.ViewHolder {
         TextView roomNameTextView;
         TextView numberOfPlayersTextView;
+        ImageView roomIMG;
 
         public RoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomNameTextView = itemView.findViewById(R.id.room_name);
             numberOfPlayersTextView = itemView.findViewById(R.id.number_players);
+            roomIMG = itemView.findViewById(R.id.roomIMG);
         }
     }
 
