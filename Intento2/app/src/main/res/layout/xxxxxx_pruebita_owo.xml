@@ -83,6 +83,40 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColorHint="@color/blue"
+        app:layout_constraintTop_toBottomOf="@id/h190"
+        app:layout_constraintBottom_toTopOf="@id/h191"
+        app:layout_constraintStart_toEndOf="@id/v122"
+        app:layout_constraintEnd_toStartOf="@id/v123"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusBottomEnd="0dp"
+        style="@style/CreateRoomStyle" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pin"
+            android:inputType="text"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/orbimedium"
+            android:textColorHint="@color/blue"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h192"
+        app:layout_constraintBottom_toTopOf="@id/h193"
+        app:layout_constraintStart_toEndOf="@id/v124"
+        app:layout_constraintEnd_toStartOf="@id/v125"
+        style="@style/CreateRoomButtons" />
 
     <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
@@ -239,28 +273,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h191"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.79" />
+        app:layout_constraintGuide_percent="0.53" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h192"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.54" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h193"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.79" />
+        app:layout_constraintGuide_percent="0.76" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h194"

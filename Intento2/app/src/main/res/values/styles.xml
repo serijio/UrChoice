@@ -303,6 +303,17 @@
         <item name="fontFamily">@font/orbimedium</item>
     </style>
 
+    <style name="CreateRoomButtons" parent="Widget.Material3.Button">
+        <item name="backgroundTint">#00000000</item>
+        <item name="strokeColor">@color/red</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:fontFamily">@font/orbimedium</item>
+        <item name="shapeAppearance">@style/recShape</item>
+    </style>
+
 
 
     <style name="FriendRequests" parent="Widget.Material3.Button">
