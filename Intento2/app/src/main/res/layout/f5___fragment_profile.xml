@@ -47,8 +47,7 @@
         app:layout_constraintTop_toTopOf="@id/h307"
         app:layout_constraintRight_toRightOf="@id/v304"
         app:layout_constraintLeft_toLeftOf="@id/v305"
-        style="@style/profile_number"
-        android:text="9" />
+        style="@style/profile_number" />
 
     <TextView
         android:layout_width="120dp"
@@ -81,8 +80,7 @@
         app:layout_constraintTop_toTopOf="@id/h307"
         app:layout_constraintRight_toRightOf="@id/v303"
         app:layout_constraintLeft_toLeftOf="@id/v304"
-        style="@style/profile_number"
-        android:text="-1" />
+        style="@style/profile_number" />
 
     <ImageView
         android:id="@+id/profile_background"
@@ -91,8 +89,7 @@
         android:layout_marginTop="80dp"
         android:scaleType="centerCrop"
         android:elevation="0dp"
-        android:alpha="0.6"
-        android:src="@drawable/a" />
+        android:alpha="0.6" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logout_button"
@@ -119,7 +116,6 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/profileborder"
-            app:srcCompat="@drawable/a"
             app:strokeWidth="10dp"
             app:strokeColor="@color/black"
             />
@@ -146,13 +142,13 @@
             android:id="@+id/profileName_textinputlayout"
             android:layout_width="190dp"
             android:layout_height="wrap_content" >
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/profileName_edittext"
                 style="@style/profile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
-                android:text="LUKINDA551"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -175,17 +171,17 @@
             android:layout_marginLeft="200dp"
             android:visibility="gone" />
     </RelativeLayout>
+
     <TextView
         android:id="@+id/profilemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/h307"
         app:layout_constraintTop_toTopOf="@id/h311"
-        android:text="LUKINDA551"
-        style="@style/profile_text"
-        />
+        style="@style/profile_text" />
 
 
+    <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v300"
         android:layout_width="wrap_content"

@@ -326,7 +326,7 @@ public class MultiGame extends AppCompatActivity {
                     List<UserVote> users = response.body();
                     boolean allVotesReceivedTemp = true;
                     for (UserVote user : users) {
-                        if (user.getVote_game() == null || user.getVote_game().isEmpty()) {
+                        if (user.getVote_game() == null || user.getVote_game().isEmpty() || user.getVote_game().equals("LISTO")) {
                             allVotesReceivedTemp = false;
                             break;
                         }
