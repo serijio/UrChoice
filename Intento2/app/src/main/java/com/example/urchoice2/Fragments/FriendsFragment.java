@@ -86,9 +86,6 @@ public class FriendsFragment extends Fragment {
         friends_requests = view.findViewById(R.id.see_requests_button);
         friends_add = view.findViewById(R.id.send_request);
 
-        TextInputEditText textInputEditText = view.findViewById(R.id.search_friends);
-        nick_name = textInputEditText.getText().toString();
-
         friends_requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +96,8 @@ public class FriendsFragment extends Fragment {
         friends_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextInputEditText textInputEditText = view.findViewById(R.id.search_friends);
+                nick_name = textInputEditText.getText().toString();
                 Addfriend();
             }
         });
@@ -129,6 +128,7 @@ public class FriendsFragment extends Fragment {
     }
 
     public void Addfriend(){
+        Log.e("SQL","DATOS: " + nick_name + userId);
         Call<Void> call = friendsAPI.addFriend(userId, nick_name);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -181,6 +181,7 @@ public class FriendsFragment extends Fragment {
         });
     }
 
+
     private void setRvMain() {
         Drawable mainDelIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
         for (int i = 0; i < users.size(); i++) {
@@ -198,31 +199,3 @@ public class FriendsFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }
-
-/*
-recyclerView.setAdapter(new RecyclerView.Adapter() {
-                        @NonNull
-                        @Override
-                        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_friends_screen, parent, false);
-                            return new RecyclerView.ViewHolder(itemView) {
-                            };
-                        }
-
-                        @Override
-                        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                            TextView playerName = holder.itemView.findViewById(R.id.friends_name);
-                            TextView playerMail = holder.itemView.findViewById(R.id.friends_email);
-
-                            //MaterialButton delete = holder.itemView.findViewById(R.id.delete_friend);
-                            playerName.setText(users.get(position).getNick_user());
-                            playerMail.setText("/@"+ users.get(position).getEmail_user());
-
-                        }
-
-                        @Override
-                        public int getItemCount() {
-                            return users.size();
-                        }
-                    });
-*/
