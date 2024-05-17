@@ -36,9 +36,9 @@
         app:layout_constraintStart_toEndOf="@id/v39"
         app:layout_constraintEnd_toStartOf="@id/v40"
         android:elevation="1dp"
-        android:src="@drawable/nopic_blue" />
+         />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/UserPhoto"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -48,7 +48,13 @@
         app:layout_constraintEnd_toStartOf="@id/v40"
         android:src="@drawable/nopic_login_inside"
         android:elevation="1dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="centerCrop"
+        android:background="@color/blue"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/black"
+        app:shapeAppearanceOverlay="@style/profileborder"
+        app:srcCompat="@drawable/nopic_login_inside"
+        />
 
     <TextView
         android:id="@+id/home_username"
