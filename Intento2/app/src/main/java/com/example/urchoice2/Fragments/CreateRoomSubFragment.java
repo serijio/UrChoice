@@ -85,7 +85,7 @@ public class CreateRoomSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.xxxxxx_pruebita_owo, container, false);
+        View view = inflater.inflate(R.layout.f3___x_sub__fragment_create_room_screen, container, false);
         handler = new Handler();
         Conectar();
         createRoomButton = view.findViewById(R.id.create_room_button);
