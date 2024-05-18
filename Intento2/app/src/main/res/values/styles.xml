@@ -305,12 +305,23 @@
 
     <style name="CreateRoomButtons" parent="Widget.Material3.Button">
         <item name="backgroundTint">#00000000</item>
-        <item name="strokeColor">@color/red</item>
+        <item name="strokeColor">@color/blue</item>
         <item name="strokeWidth">2dp</item>
         <item name="android:textColor">@color/red</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:fontFamily">@font/orbimedium</item>
+        <item name="shapeAppearance">@style/recShape</item>
+    </style>
+
+    <style name="CreateRoom" parent="Widget.Material3.Button">
+        <item name="backgroundTint">#00000000</item>
+        <item name="strokeColor">#00000000</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/orbiblack</item>
         <item name="shapeAppearance">@style/recShape</item>
     </style>
 
@@ -368,8 +379,4 @@
         <item name="cornerSize">30%</item>
 
     </style>
-
-
-
-
 </resources>

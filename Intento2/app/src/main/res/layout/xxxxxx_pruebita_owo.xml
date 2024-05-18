@@ -72,6 +72,7 @@
         style="@style/CreateRoomStyle" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nick_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/room_name"
@@ -79,7 +80,7 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,6 +99,7 @@
         style="@style/CreateRoomStyle" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pin"
@@ -105,18 +107,36 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/choose_categorybutton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/h192"
         app:layout_constraintBottom_toTopOf="@id/h193"
+        app:layout_constraintStart_toEndOf="@id/v122"
+        app:layout_constraintEnd_toStartOf="@id/v123"
+        android:text="@string/choose"
+        android:fontFamily="@font/orbimedium"
+        android:textColor="@color/blue"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        style="@style/CreateRoomButtons" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/create_room_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/h194"
+        app:layout_constraintBottom_toTopOf="@id/h195"
         app:layout_constraintStart_toEndOf="@id/v124"
         app:layout_constraintEnd_toStartOf="@id/v125"
-        style="@style/CreateRoomButtons" />
+        android:text="@string/create_cat"
+        style="@style/CreateRoom" />
+
 
     <!--Constraints verticales-->
     <androidx.constraintlayout.widget.Guideline
@@ -166,14 +186,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.18" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v123"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.82" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v124"
@@ -301,13 +321,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.82" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h195"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.79" />
+        app:layout_constraintGuide_percent="0.87" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
