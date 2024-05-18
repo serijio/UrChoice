@@ -12,6 +12,25 @@
         android:layout_height="match_parent"
         android:textSize="50sp"
         android:textColor="@color/white"
-        android:text="Hula Luca OwO" />
+        android:text="Hula Luca
+        fg
+        d
+        dfdfgdg
+        dfgfg
+        gdfg
+        gdfdfg
+        dfgd
+        dfgfg
+        dfg
+        dg
+        dfg
+        d
+        fg
+
+        dfg
+        d
+        fg
+        dfg
+        OwOdfg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
