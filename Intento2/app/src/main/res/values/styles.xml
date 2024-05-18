@@ -334,22 +334,29 @@
 
 
     <!--Profile-->
-    <style name="ProfileNameStyle" parent="Widget.Material3.Button">
+    <style name="ProfileNameStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="backgroundTint">#00000000</item>
-        <item name="strokeColor">#00000000</item>
-        <item name="strokeWidth">0dp</item>
+        <item name="boxStrokeColor">#00000000</item>
+        <item name="boxStrokeWidth">0dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">22sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/orbimedium</item>
+        <item name="shapeAppearance">@style/recShape</item>
+    </style>
+
+    <style name="ProfileEmailStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textAlignment">gravity</item>
         <item name="android:fontFamily">@font/orbimedium</item>
-        <item name="shapeAppearance">@style/recShape</item>
     </style>
 
     <style name="ProfilePlayedFriendsStyle">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:gravity">center_horizontal|top</item>
         <item name="android:textAlignment">gravity</item>
         <item name="android:fontFamily">@font/orbimedium</item>
     </style>

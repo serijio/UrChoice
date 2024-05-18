@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_categories_fragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    android:id="@+id/my_categories_fragment"
-    tools:context=".Fragments.ProfileFragment">
+    tools:context=".Fragments.my_categories" >
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/h300"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/blue"
-        android:elevation="1dp"
         app:layout_constraintBottom_toTopOf="@id/h300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +34,6 @@
         app:layout_constraintBottom_toTopOf="@id/h302"
         app:layout_constraintStart_toEndOf="@id/v300"
         app:layout_constraintEnd_toStartOf="@id/v301"
-        android:elevation="1dp"
         android:background="@drawable/user_info_container" />
 
     <TextView
@@ -36,8 +43,7 @@
         app:layout_constraintBottom_toTopOf="@id/h304"
         app:layout_constraintStart_toEndOf="@id/v302"
         app:layout_constraintEnd_toStartOf="@id/v303"
-        android:elevation="1dp"
-        android:text="MY CATEGORIES"
+        android:text="@string/my_cat"
         style="@style/mycategories" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -219,4 +225,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

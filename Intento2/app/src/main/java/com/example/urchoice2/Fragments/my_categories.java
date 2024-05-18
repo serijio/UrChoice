@@ -40,10 +40,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class my_categories extends Fragment {
-    private String mParam1;
+    /*private String mParam1;
     private String mParam2;
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM2 = "param2";*/
     private int userId;
     private CategoriesAPI categoriesAPI;
     private RecyclerView recyclerView;
@@ -54,7 +54,7 @@ public class my_categories extends Fragment {
 
     public my_categories(){}
 
-    public static my_categories newInstance(String param1, String param2) {
+    /*public static my_categories newInstance(String param1, String param2) {
         my_categories fragment = new my_categories();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -69,6 +69,19 @@ public class my_categories extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }*/
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.f5___x_fragment_profile_my_categories, container, false);
+        Conectar();
+        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
+
+        recyclerView = view.findViewById(R.id.recycler_my_categories);
+        recyclerView.setLayoutManager(layoutManager);
+        GetMyCategories();
+        return view;
     }
 
 
@@ -81,17 +94,6 @@ public class my_categories extends Fragment {
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = preferences.getInt("id_user", 0);
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Conectar();
-        View rootView = inflater.inflate(R.layout.f5___x_fragment_profile_my_categories, container, false);
-        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
-
-        recyclerView = rootView.findViewById(R.id.recycler_my_categories);
-        recyclerView.setLayoutManager(layoutManager);
-        GetMyCategories();
-        return rootView;
-    }
 
 
     public void GetMyCategories(){
@@ -102,7 +104,7 @@ public class my_categories extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     categoryList = response.body();
                     setRvMain();
-                    Log.e("SQL","DATOS: " + categoryList.get(0).getName_cat());
+                    //Log.e("SQL","DATOS: " + categoryList.get(0).getName_cat());
                     my_categories_adapter = new My_categories_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(my_categories_adapter);
                 } else {
