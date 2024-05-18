@@ -14,16 +14,18 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,11 +80,15 @@ public class EditCategoriesSubFragment extends Fragment {
     private MaterialButton close_add_card_alert;
     MaterialButton add_new_card_button;
     MaterialButton create_category_button;
+    MaterialButton cancel_edit_button;
+    MaterialButton go_back_profile;
+    MaterialButton keep_editing;
     private BitmapDrawable bitmapDrawable;
     private AlertDialog alertDialog;
     private androidx.appcompat.app.AlertDialog waitalertDialog;
     RoundedImageView edit_image_button;
     MaterialButton setCard_data_button;
+    MaterialButton cancel_edit;
 
 
     public EditCategoriesSubFragment() {}
@@ -105,7 +111,7 @@ public class EditCategoriesSubFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile__edit_categories, container, false);
+        View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile_my_categories_edit, container, false);
         cardsList = new ArrayList<>();
         Conectar(view);
         waitAlert();
@@ -150,6 +156,14 @@ public class EditCategoriesSubFragment extends Fragment {
 
 
                 }
+            }
+        });
+
+        cancel_edit_button = view.findViewById(R.id.cancel_edit_button);
+        cancel_edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel_edit_alert_dialog();
             }
         });
 
@@ -364,6 +378,51 @@ public class EditCategoriesSubFragment extends Fragment {
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
+
+
+    public void cancel_edit_alert_dialog() {
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___xx_alert__cancel_edit_category, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+
+        final AlertDialog alertDialog3 = builder.create();
+        alertDialog3.setCanceledOnTouchOutside(false);
+        alertDialog3.setCancelable(false);
+        alertDialog3.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog3.show();
+
+        go_back_profile = view.findViewById(R.id.go_profile);
+        keep_editing = view.findViewById(R.id.keep_edit);
+
+        go_back_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CancelEdit();
+                alertDialog3.dismiss();
+            }
+        });
+
+        keep_editing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog3.dismiss();
+            }
+        });
+    }
+
+
+    public void CancelEdit() {
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        ProfileFragment profileFragment = new ProfileFragment();
+        fragmentTransaction.replace(R.id.owo, profileFragment);
+        fragmentTransaction.addToBackStack(null);
+
+        // Realizamos el cambio de fragmento
+        fragmentTransaction.commit();
+    }
+
 
     private void UpdateCategory(String categoryName, String categoryImage, List<Element> elements){
         JSONObject jsonRequest = new JSONObject();

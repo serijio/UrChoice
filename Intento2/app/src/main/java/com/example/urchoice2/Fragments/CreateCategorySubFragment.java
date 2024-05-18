@@ -448,10 +448,4 @@ public class CreateCategorySubFragment extends Fragment {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
     }
-
-
-
-
-
-
 }

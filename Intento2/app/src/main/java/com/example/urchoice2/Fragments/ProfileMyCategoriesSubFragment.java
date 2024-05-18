@@ -70,7 +70,7 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f5___x_fragment_profile_my_categories, container, false);
+        View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile_my_categories, container, false);
         Conectar();
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
         waitAlert();

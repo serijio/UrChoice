@@ -35,6 +35,7 @@
     <string name="user_fragment">USER</string>
     <string name="find">Add friend by name</string>
     <string name="friends_requests">REQUESTS</string>
+    <string name="edit">EDIT</string>
 
     <!--CREATE ALL ROOMS SCREEN-->
     <string name="priv">PRIVATE ROOM</string>
@@ -98,6 +99,18 @@
     <string name="exit">EXIT</string>
     <string name="my_cat">MY CATEGORIES</string>
     <string name="played">PLAYED\nGAMES</string>
+    <string name="sure">ARE U SURE?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
+
+
+    <!--Cancel edit alert-->
+    <string name="discard">DISCARD CHANGES?</string>
+    <string name="back_profile">GO TO PROFILE</string>
+    <string name="keep_editing">KEEP EDITING</string>
+
 
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>
     <string name="loading_title">WAITING FOR SERVER</string>

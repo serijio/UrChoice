@@ -115,6 +115,7 @@
         <item name="android:gravity">center_horizontal|center_vertical</item>
         <item name="android:textAlignment">gravity</item>
     </style>
+
     <style name="mycategories">
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/white</item>
@@ -125,6 +126,15 @@
 
     <style name="profile_text">
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="fontFamily">@font/orbiblack</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textAlignment">gravity</item>
+    </style>
+
+    <style name="CancelEditAlert">
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="hintTextColor">@color/white</item>
         <item name="fontFamily">@font/orbiblack</item>
