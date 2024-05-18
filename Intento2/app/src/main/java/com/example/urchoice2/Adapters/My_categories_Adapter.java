@@ -13,12 +13,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.FavsAPI;
 import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
+import com.example.urchoice2.Fragments.EditCategoriesSubFragment;
+import com.example.urchoice2.Fragments.FriendsFragment;
+import com.example.urchoice2.Fragments.MainRankingSubFragment;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 import com.google.android.material.button.MaterialButton;
@@ -36,6 +43,8 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
     ArrayList<Main_Screen_Model> mainScreenModels;
     private LayoutInflater inflater;
     private List<Category> categoryList;
+    private MaterialButton catedit;
+    private MaterialButton catDelete;
 
     private int userId;
 
@@ -65,6 +74,23 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
         Bitmap bitmap = base64ToBitmap(category_img);
         holder.catName.setText(category_name);
         holder.catImg.setImageBitmap(bitmap);
+
+        holder.catedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+
+                // Iniciar la transacción de fragmento
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                // Reemplazar el fragmento actual con MainRankingSubFragment
+                EditCategoriesSubFragment fragment = new EditCategoriesSubFragment();
+                transaction.replace(R.id.my_categories_fragment, fragment); // Reemplaza R.id.mainFrame(El frame intermedio) con el ID de tu contenedor de fragmentos
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
     }
 
 
@@ -77,12 +103,16 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
         ImageView catImg;
 
         TextView catName;
+        MaterialButton catedit;
+        MaterialButton catDelete;
         CardView cvMain;
         public my_categories_CardViewHolder(@NonNull View itemView) {
             super(itemView);
             this.cvMain = itemView.findViewById(R.id.main_cv);
             this.catName = itemView.findViewById(R.id.main_cv_cat_name);
             this.catImg = itemView.findViewById(R.id.main_cv_cat_image);
+            this.catDelete = itemView.findViewById(R.id.delete_category);
+            this.catedit = itemView.findViewById(R.id.edit_category);
         }
 
 
