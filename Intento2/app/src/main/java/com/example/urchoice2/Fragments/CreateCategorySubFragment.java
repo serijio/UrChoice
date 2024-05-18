@@ -89,6 +89,7 @@ public class CreateCategorySubFragment extends Fragment {
         //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Conectar();
 
+
         cardsList = new ArrayList<>();
         add_new_card_button = view.findViewById(R.id.add_new_card);
 
@@ -134,6 +135,9 @@ public class CreateCategorySubFragment extends Fragment {
 
         if(cardsList.isEmpty()){
             empty_text.setVisibility(View.VISIBLE);
+            empty_text.setElevation(0);
+        }else{
+            empty_text.setVisibility(View.INVISIBLE);
             empty_text.setElevation(0);
         }
         return view;

@@ -153,8 +153,12 @@ public class EditCategoriesSubFragment extends Fragment {
 
         empty_text = view.findViewById(R.id.empty_card_views_text);
 
-        if(cardsList.isEmpty()){
+        if(!cardsList.isEmpty()){
             empty_text.setVisibility(View.VISIBLE);
+            empty_text.setElevation(0);
+        }else{
+            empty_text.setVisibility(View.INVISIBLE);
+
             empty_text.setElevation(0);
         }
         return view;

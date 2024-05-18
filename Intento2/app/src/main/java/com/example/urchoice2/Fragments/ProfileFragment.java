@@ -110,10 +110,24 @@ public class ProfileFragment extends Fragment {
         profile_image = view.findViewById(R.id.profile_image);
         profileMail = view.findViewById(R.id.profilemail);
         profileBackground = view.findViewById(R.id.profile_background);
+
+
         my_categories_button= view.findViewById(R.id.profile_categories_button);
         my_categories_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                my_categories_button.setEnabled(true);
+                edit_profile_image_button.setEnabled(true);
+                profileNameEditText.setEnabled(true);
+                logout.setEnabled(true);
+                editNewNameButton.setEnabled(true);
+                setNewNameButton.setEnabled(true);
+                profileNameEditText.setVisibility(View.GONE);
+                logout.setVisibility(View.GONE);
+                editNewNameButton.setVisibility(View.GONE);
+                setNewNameButton.setVisibility(View.GONE);
+                my_categories_button.setVisibility(View.GONE);
+                edit_profile_image_button.setVisibility(View.GONE);
                 my_categories_fragment();
             }
         });
