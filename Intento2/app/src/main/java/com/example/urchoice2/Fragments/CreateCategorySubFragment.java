@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -77,6 +78,8 @@ public class CreateCategorySubFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST2 = 1;
     private TextView empty_text;
 
+    private int userId;
+
     public CreateCategorySubFragment() {}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -122,11 +125,8 @@ public class CreateCategorySubFragment extends Fragment {
                     Toast.makeText(getActivity(), "El número de cartas tienen que ser pares", Toast.LENGTH_SHORT).show();
                 }else{
                     String IMGString = bitmapToBase64(selectedBitmap2);
-                    InsertCategory(categoryName, IMGString, cardsList);
+                    InsertCategory(categoryName, IMGString, cardsList,userId);
                 }
-
-                String IMGString = bitmapToBase64(selectedBitmap2);
-                InsertCategory(categoryName, IMGString, cardsList);
             }
         });
 
@@ -384,7 +384,7 @@ public class CreateCategorySubFragment extends Fragment {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
-    private void InsertCategory(String categoryName,String categoryImage, List<Element> elements){
+    private void InsertCategory(String categoryName,String categoryImage, List<Element> elements, int userId){
         for(int i = 0; i < elements.size(); i++){
             Log.e("CategoryActivity", "Nombre: " + elements.get(i).getName_elem());
         }
@@ -393,6 +393,7 @@ public class CreateCategorySubFragment extends Fragment {
         try {
             jsonRequest.put("name_cat", categoryName);
             jsonRequest.put("img_cat", categoryImage);
+            jsonRequest.put("id_user", userId);
 
             JSONArray elementsArray = new JSONArray();
             for (Element element : elements) {
@@ -436,6 +437,8 @@ public class CreateCategorySubFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         categoriesAPI = retrofit.create(CategoriesAPI.class);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getInt("id_user", 0);
     }
 
 

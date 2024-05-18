@@ -8,14 +8,15 @@
     tools:context=".Fragments.ProfileFragment">
 
     <View
+        android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/h300"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/blue"
         android:elevation="1dp"
-        android:background="@color/blue" />
+        app:layout_constraintBottom_toTopOf="@id/h300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="0dp"
@@ -90,6 +91,18 @@
         android:scaleType="centerCrop"
         android:elevation="0dp"
         android:alpha="0.6" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/profile_categories_button"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        app:backgroundTint="@null"
+        style="@style/FriendRequests"
+        android:text="MY CATEGORIES"
+        app:layout_constraintBottom_toTopOf="@+id/h309"
+        app:layout_constraintRight_toRightOf="@+id/v308"
+        app:layout_constraintStart_toStartOf="@+id/v300"
+        app:layout_constraintTop_toTopOf="@+id/h302" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logout_button"
@@ -238,6 +251,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v308"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+
 
     <!--Constraints horizontales-->
     <androidx.constraintlayout.widget.Guideline
@@ -324,4 +345,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h312"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h313"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
