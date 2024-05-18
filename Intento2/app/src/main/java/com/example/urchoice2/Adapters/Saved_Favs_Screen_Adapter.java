@@ -81,6 +81,7 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
 
                 if (!saved.isSaved()) {
                     holder.favsButton.setImageResource(R.drawable.fav_red_border);
+
                     eliminarFavorito(userId,favsList.get(position).getId_cat());
                     saved.setSaved(true);
 

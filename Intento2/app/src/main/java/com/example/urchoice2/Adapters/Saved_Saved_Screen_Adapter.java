@@ -79,11 +79,15 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
             @Override
             public void onClick(View v) {
                 if (!saved.isSaved()) {
+
                     holder.savedButton.setImageResource(R.drawable.save_blue_border);
+
                     eliminarSaved(userId, saved.getId_cat());
                     saved.setSaved(true);
 
                 } else {
+                    holder.savedSaveButton.setImageResource(R.drawable.fav_red_border);
+
                     holder.savedButton.setImageResource(R.drawable.save_fav_click);
                     insertarSaved(userId, saved.getId_cat());
                     saved.setSaved(false);
@@ -95,9 +99,17 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
             @Override
             public void onClick(View v) {
                 if(favsList.contains(saved)){
+                    holder.savedButton.setImageResource(R.drawable.save_fav_click);
+
+                    holder.savedSaveButton.setImageResource(R.drawable.fav_red_border);
+
+
                     eliminarFavorito(userId,saved.getId_cat());
                     favsList.remove(saved);
                 }else{
+                    holder.savedSaveButton.setImageResource(R.drawable.fav_red_click);
+                    holder.savedButton.setImageResource(R.drawable.save_blue_border);
+
                     addFav(userId,saved.getId_cat());
                     favsList.add(saved);
                     saved.setSaved(true);
