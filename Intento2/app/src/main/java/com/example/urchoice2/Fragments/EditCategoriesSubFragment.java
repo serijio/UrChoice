@@ -79,7 +79,8 @@ public class EditCategoriesSubFragment extends Fragment {
     MaterialButton add_new_card_button;
     MaterialButton create_category_button;
     private BitmapDrawable bitmapDrawable;
-    AlertDialog alertDialog;
+    private AlertDialog alertDialog;
+    private androidx.appcompat.app.AlertDialog waitalertDialog;
     RoundedImageView edit_image_button;
     MaterialButton setCard_data_button;
 
@@ -107,6 +108,7 @@ public class EditCategoriesSubFragment extends Fragment {
         View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile__edit_categories, container, false);
         cardsList = new ArrayList<>();
         Conectar(view);
+        waitAlert();
 
         cardsList = new ArrayList<>();
         add_new_card_button = view.findViewById(R.id.edit_new_card);
@@ -337,6 +339,7 @@ public class EditCategoriesSubFragment extends Fragment {
 
                     // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
                     recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
+                    dismissWaitAlert();
                 }
             }
             @Override
@@ -404,5 +407,22 @@ public class EditCategoriesSubFragment extends Fragment {
                 Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
             }
         });
+    }
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(requireContext());
+        builder.setView(view);
+
+        waitalertDialog = builder.create();
+        waitalertDialog.setCanceledOnTouchOutside(false);
+        waitalertDialog.setCancelable(false);
+        waitalertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        waitalertDialog.show();
+    }
+
+
+    public void dismissWaitAlert() {
+        waitalertDialog.dismiss();
     }
 }

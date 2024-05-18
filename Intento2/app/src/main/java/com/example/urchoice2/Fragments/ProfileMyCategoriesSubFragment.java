@@ -1,5 +1,6 @@
 package com.example.urchoice2.Fragments;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
@@ -38,6 +40,7 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";*/
     private int userId;
+    private AlertDialog alertDialog;
     private CategoriesAPI categoriesAPI;
     private RecyclerView recyclerView;
     private List<Category> categoryList;
@@ -70,7 +73,7 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
         View view = inflater.inflate(R.layout.f5___x_fragment_profile_my_categories, container, false);
         Conectar();
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
-
+        waitAlert();
         recyclerView = view.findViewById(R.id.recycler_my_categories);
         recyclerView.setLayoutManager(layoutManager);
         GetMyCategories();
@@ -100,6 +103,7 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
                     //Log.e("SQL","DATOS: " + categoryList.get(0).getName_cat());
                     my_categories_adapter = new My_categories_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(my_categories_adapter);
+                    dismissWaitAlert();
                 } else {
                     Log.e("SQL", "Request failed");
                 }
@@ -127,5 +131,21 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+    public void waitAlert(){
+        // Construir el nuevo AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
+
+
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 }
