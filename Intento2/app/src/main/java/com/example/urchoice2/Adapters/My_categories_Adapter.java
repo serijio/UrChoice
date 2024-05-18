@@ -38,8 +38,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
     private List<Category> categoryList;
 
     private int userId;
-    private SavedAPI savedAPI;
-    private FavsAPI favsAPI;
+
 
 
 
@@ -93,8 +92,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        savedAPI = retrofit.create(SavedAPI.class);
-        favsAPI = retrofit.create(FavsAPI.class);
+
         SharedPreferences preferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = preferences.getInt("id_user", 0);
     }
