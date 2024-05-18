@@ -1,25 +1,50 @@
 package com.example.urchoice2.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.ElementsAPI;
+import com.example.urchoice2.Adapters.CreateCategory_CardAdapter;
+import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.makeramen.roundedimageview.RoundedDrawable;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -36,12 +61,28 @@ public class EditCategoriesSubFragment extends Fragment {
     private static final String ARG_ID_CAT = "id_cat";
     private String mParam1;
     private String mParam2;
+    Bitmap selectedBitmap;
+    private TextView empty_text;
+    Bitmap selectedBitmap2;
+    private static final int PICK_IMAGE_REQUEST1 = 0;
+    private static final int PICK_IMAGE_REQUEST2 = 1;
     private int idCat;
-
     private CategoriesAPI categoriesAPI;
     private ElementsAPI elementApi;
-
     private int userId;
+    private Category category;
+    List<Element> cardsList;
+    RecyclerView recyclerView;
+    TextView alert_card_textview;
+    private MaterialButton add_category_image_button;
+    private MaterialButton close_add_card_alert;
+    MaterialButton add_new_card_button;
+    MaterialButton create_category_button;
+    private BitmapDrawable bitmapDrawable;
+    AlertDialog alertDialog;
+    RoundedImageView edit_image_button;
+    MaterialButton setCard_data_button;
+
 
     public EditCategoriesSubFragment() {}
 
@@ -64,12 +105,185 @@ public class EditCategoriesSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile__edit_categories, container, false);
-        Log.e("SQL","DATOS: " + idCat);
+        cardsList = new ArrayList<>();
+        Conectar(view);
+
+        cardsList = new ArrayList<>();
+        add_new_card_button = view.findViewById(R.id.edit_new_card);
+
+        add_new_card_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                create_card_alertDialog();
+            }
+        });
+        add_category_image_button = view.findViewById(R.id.edit_new_category_image_button);
+        add_category_image_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectCategoryImageFromGallery();
+            }
+        });
+        cardsList = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.edit_recycler_card_category);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(new CreateCategory_CardAdapter(cardsList));
+
+        create_category_button = view.findViewById(R.id.edit_new_category_button);
+        create_category_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextInputEditText textInputEditText = view.findViewById(R.id.edit_cat_name_insert);
+                String categoryName = textInputEditText.getText().toString();
+
+                if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                }else if(cardsList.size() < 4){
+                    Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
+                }else if((cardsList.size() & (cardsList.size() - 1)) != 0){
+                    Toast.makeText(getActivity(), "El número de cartas tiene que ser potencia de 2", Toast.LENGTH_SHORT).show();
+                }else{
+                    String IMGString = bitmapToBase64(selectedBitmap2);
+                    UpdateCategory(categoryName, IMGString,cardsList);
+
+
+                }
+            }
+        });
+
+        empty_text = view.findViewById(R.id.empty_card_views_text);
+
+        if(cardsList.isEmpty()){
+            empty_text.setVisibility(View.VISIBLE);
+            empty_text.setElevation(0);
+        }
         return view;
     }
 
 
-    public void Conectar(){
+    private void create_card_alertDialog(){
+        // Inflar el diseño del AlertDialog
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_add_category_card_data,null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        edit_image_button = view.findViewById(R.id.card_image_data);
+        setCard_data_button = view.findViewById(R.id.set_data_alert_addcard_button);
+        alert_card_textview = view.findViewById(R.id.card_textEdittextlayout);
+        close_add_card_alert = view.findViewById(R.id.close_card_button);
+        close_add_card_alert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        edit_image_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImageFromGallery();
+            }
+        });
+
+        // Configurar el botón para establecer la imagen y el nombre de la carta
+        setCard_data_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                String cardName = alert_card_textview.getText().toString();
+                Bitmap cardImage = ((RoundedDrawable) edit_image_button.getDrawable()).getSourceBitmap();
+
+                // Establecer la imagen en el RoundedImageView
+                ((RoundedImageView) edit_image_button).setImageBitmap(cardImage);
+
+                String base64Image = bitmapToBase64(cardImage);
+
+                //edit_image_button.setImageBitmap(cardImage);
+
+                alert_card_textview.setText(cardName);
+
+                if(cardName.isEmpty() || cardName == null || base64Image.isEmpty() || base64Image == null){
+                    Toast.makeText(getContext(), "Los datos son obligatorios", Toast.LENGTH_SHORT).show();
+                }else{
+                    // Establecer la imagen y el nombre de la carta donde lo desees
+                    Element newCard = new Element(0, base64Image, cardName, 0,0);
+
+                    cardsList.add(newCard);
+
+                    // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
+                    recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
+
+                    empty_text.setVisibility(View.INVISIBLE);
+                    empty_text.setElevation(1);
+
+                    // Cerrar el AlertDialog
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
+        // Crear el AlertDialog
+
+        alertDialog.show();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+    }
+
+    public void selectImageFromGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST1);
+    }
+
+    public void selectCategoryImageFromGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST2);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Obtiene la URI de la imagen seleccionada
+            Uri selectedImageUri = data.getData();
+
+            try {
+                // Convierte la URI en un Bitmap
+                selectedBitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), selectedImageUri);
+                // Establece el Bitmap en el ImageButton
+                edit_image_button.setImageBitmap(selectedBitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if (requestCode == PICK_IMAGE_REQUEST2 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Obtiene la URI de la imagen seleccionada
+            Uri selectedImageUri = data.getData();
+            try {
+                // Convierte la URI en un Bitmap
+                selectedBitmap2 = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), selectedImageUri);
+                // Convierte el Bitmap en un Drawable
+                //Drawable drawable = new BitmapDrawable(getResources(), selectedBitmap2);
+                // Establece el Drawable como fondo del MaterialButton
+                //add_category_image_button.setBackground(drawable);
+                // Convertir Bitmap a Drawable
+                bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
+                // Establecer el Drawable como fondo del botón
+                //bitmapDrawable.setGravity(Gravity.CENTER);
+                add_category_image_button.setBackground(bitmapDrawable);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void Conectar(View view){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -78,24 +292,73 @@ public class EditCategoriesSubFragment extends Fragment {
         elementApi = retrofit.create(ElementsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        GetCategories();
+        GetCategory(view);
     }
 
-    public void GetCategories(){
+    public void GetCategory(View view){
+        Call<Category> call = categoriesAPI.getCategory(idCat);
+        call.enqueue(new Callback<Category>() {
+            @Override
+            public void onResponse(Call<Category> call, Response<Category> response) {
+                if (response.isSuccessful()) {
+                    category = response.body();
+                    // Aquí puedes manejar la categoría recibida
+                    Log.d("Categoría", "ID: " + category.getId_cat() + ", Nombre: " + category.getName_cat());
+                    GetElemetsCategory(view);
+                } else {
+                    // Manejar el caso en que la respuesta no sea exitosa
+                    Log.e("Error", "Error al obtener la categoría");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Category> call, Throwable t) {
+                // Manejar el caso de error en la comunicación
+                Log.e("Error", "Error en la llamada al servidor: " + t.getMessage());
+            }
+        });
+    }
+    public void GetElemetsCategory(View view){
         elementApi.getElementsByCategory(idCat).enqueue(new Callback<List<Element>>() {
             @Override
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
                 if (response.isSuccessful()) {
                     List<Element> elementList = response.body();
+                    Log.e("SQL","DATOS: " + elementList.get(0).getName_elem());
+                    TextInputEditText textInputEditText = view.findViewById(R.id.edit_cat_name_insert);
+                    textInputEditText.setText(category.getName_cat());
+                    BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), base64ToBitmap(category.getImg_cat()));
+                    add_category_image_button.setBackground(bitmapDrawable);
+                    cardsList.addAll(elementList);
+
+                    // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
+                    recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
                 }
             }
             @Override
             public void onFailure(Call<List<Element>> call, Throwable t) {
+                Log.e("SQL","ERROR");
+
             }
         });
     }
 
-    private void InsertCategory(String categoryName, String categoryImage, List<Element> elements){
+    public Bitmap base64ToBitmap(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        /*evitar que se pete debido a ciertas imagenes sobre todo las de camara*/
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    private void UpdateCategory(String categoryName, String categoryImage, List<Element> elements){
         JSONObject jsonRequest = new JSONObject();
         try {
             jsonRequest.put("id_cat", idCat);
