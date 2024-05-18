@@ -64,7 +64,6 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
         String category_name = categoryList.get(position).getName_cat();
         String category_img = categoryList.get(position).getImg_cat();
         Bitmap bitmap = base64ToBitmap(category_img);
-
         holder.catName.setText(category_name);
         holder.catImg.setImageBitmap(bitmap);
     }
@@ -77,15 +76,12 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
     }
     public class my_categories_CardViewHolder extends RecyclerView.ViewHolder {
         ImageView catImg;
-        ImageView favsButton;
-        ImageView saveButton;
+
         TextView catName;
         CardView cvMain;
         public my_categories_CardViewHolder(@NonNull View itemView) {
             super(itemView);
             this.cvMain = itemView.findViewById(R.id.main_cv);
-            this.favsButton = itemView.findViewById(R.id.main_fav);
-            this.saveButton = itemView.findViewById(R.id.main_save);
             this.catName = itemView.findViewById(R.id.main_cv_cat_name);
             this.catImg = itemView.findViewById(R.id.main_cv_cat_image);
         }
