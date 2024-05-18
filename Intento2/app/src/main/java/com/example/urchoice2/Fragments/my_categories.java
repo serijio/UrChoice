@@ -1,6 +1,7 @@
 package com.example.urchoice2.Fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -9,7 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +27,7 @@ import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Adapters.My_categories_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.R;
+import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 
 import java.util.ArrayList;
@@ -79,43 +85,50 @@ public class my_categories extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
         View rootView = inflater.inflate(R.layout.f5___x_fragment_profile_my_categories, container, false);
-        Log.d("msg","cargado");
         recyclerView = rootView.findViewById(R.id.recycler_my_categories);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        GetCategories();
-
-
-
+        GetMyCategories();
         return rootView;
     }
-    public void GetCategories(){
-        categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
+
+
+    public void GetMyCategories(){
+        Call<List<Category>> call = categoriesAPI.getCategoriesByUserId(userId); // Cambia 1 por el user_id que desees
+        call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     categoryList = response.body();
-                    // Para que el recycler tenga 2 columnas
-                    GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
-                    recyclerView.setLayoutManager(layoutManager);
-
-                    // Aquí creas tu adaptador y lo estableces en el RecyclerView
+                    setRvMain();
+                    Log.e("SQL","DATOS: " + categoryList.get(0).getName_cat());
                     my_categories_adapter = new My_categories_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(my_categories_adapter);
-
                 } else {
-                    Log.e("API Error", "Error al obtener las categorías: " + response.message());
+                    Log.e("SQL", "Request failed");
                 }
             }
-
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Log.e("API Error", "Error al realizar la llamada: " + t.getMessage());
+                Log.e("SQL", "Network error", t);
             }
         });
-
     }
 
+    private void setRvMain() {
+        Drawable mainFavIcon = ContextCompat.getDrawable( requireContext(), R.drawable.fav_red_border);
+        Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
+        for (int i = 0; i < categoryList.size(); i++) {
+            main_screen_model.add(new Main_Screen_Model(
+                    categoryList.get(i).getName_cat(),
+                    base64ToBitmap(categoryList.get(i).getImg_cat()),
+                    mainFavIcon,
+                    mainSaveIcon
+            ));
+        }
+    }
 
-
+    public Bitmap base64ToBitmap(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 }
