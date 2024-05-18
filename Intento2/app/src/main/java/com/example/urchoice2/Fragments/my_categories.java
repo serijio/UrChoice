@@ -44,15 +44,7 @@ public class my_categories extends Fragment {
     private List<Category> categoryList;
     private My_categories_Adapter my_categories_adapter;
     private ArrayList<Main_Screen_Model> main_screen_model = new ArrayList<>();
-    Context context;
-    ArrayList<Main_Screen_Model> mainScreenModels;
-    private LayoutInflater inflater;
 
-    private List<Category> categorySavedList = new ArrayList<>();
-    private List<Category> categoryFavList = new ArrayList<>();
-
-    private SavedAPI savedAPI;
-    private FavsAPI favsAPI;
 
     public my_categories(){}
 
