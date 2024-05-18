@@ -1,11 +1,8 @@
 package com.example.urchoice2.Fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -21,13 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.urchoice2.API.CategoriesAPI;
-import com.example.urchoice2.API.FavsAPI;
-import com.example.urchoice2.API.SavedAPI;
-import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Adapters.My_categories_Adapter;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.R;
-import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 
 import java.util.ArrayList;
@@ -39,7 +32,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class my_categories extends Fragment {
+public class ProfileMyCategoriesSubFragment extends Fragment {
     /*private String mParam1;
     private String mParam2;
     private static final String ARG_PARAM1 = "param1";
@@ -52,10 +45,10 @@ public class my_categories extends Fragment {
     private ArrayList<Main_Screen_Model> main_screen_model = new ArrayList<>();
 
 
-    public my_categories(){}
+    public ProfileMyCategoriesSubFragment(){}
 
-    /*public static my_categories newInstance(String param1, String param2) {
-        my_categories fragment = new my_categories();
+    /*public static ProfileMyCategoriesSubFragment newInstance(String param1, String param2) {
+        ProfileMyCategoriesSubFragment fragment = new ProfileMyCategoriesSubFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

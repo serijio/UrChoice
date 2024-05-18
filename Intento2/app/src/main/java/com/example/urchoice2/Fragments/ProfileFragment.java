@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -87,9 +85,9 @@ public class ProfileFragment extends Fragment {
         return fragment;
     }
     public void my_categories_fragment() {
-        Fragment my_categories = new my_categories();
+        Fragment myCategoriesSubFragment = new ProfileMyCategoriesSubFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.my_profile, my_categories);
+        transaction.replace(R.id.my_profile, myCategoriesSubFragment);
         transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
         transaction.commit();
     }
