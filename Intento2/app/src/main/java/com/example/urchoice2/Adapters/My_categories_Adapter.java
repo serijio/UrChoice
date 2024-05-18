@@ -54,13 +54,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
     private MaterialButton catedit;
     private MaterialButton catDelete;
     private CategoriesAPI categoriesAPI;
-
-
-
     private int userId;
-
-
-
 
 
     public My_categories_Adapter(Context context, ArrayList<Main_Screen_Model> mainScreenModels, List<Category> category) {
@@ -119,7 +113,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
                 yes_delete_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteCategory(categoryList.get(position).getId_cat());
+                        deleteCategory(position);
                         alertDialog.dismiss();
                     }
                 });
@@ -127,7 +121,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
                 no_delete_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       alertDialog.dismiss();
+                        alertDialog.dismiss();
                     }
                 });
                 alertDialog.setCanceledOnTouchOutside(false);
@@ -181,15 +175,16 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
-    public void deleteCategory(int categoryId) {
-        Call<Void> call = categoriesAPI.deleteCategory(categoryId);
+    public void deleteCategory(int position) {
+        Call<Void> call = categoriesAPI.deleteCategory(categoryList.get(position).getId_cat());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.d("CategoryActivity", "Categoría eliminada exitosamente");
-                    // Aquí puedes realizar la llamada POST para insertar la nueva categoría si lo deseas
-                    // insertCategory(...);
+                    mainScreenModels.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, mainScreenModels.size());
                 } else {
                     Log.e("CategoryActivity", "Error al eliminar la categoría: " + response.message());
                 }

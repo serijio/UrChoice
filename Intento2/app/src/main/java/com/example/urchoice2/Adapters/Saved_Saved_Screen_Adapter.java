@@ -72,15 +72,19 @@ public class Saved_Saved_Screen_Adapter extends RecyclerView.Adapter<Saved_Saved
         }
         holder.savedImg.setImageBitmap(bitmap);
         holder.savedName.setText(category_name);
+        holder.savedButton.setImageResource(R.drawable.save_fav_click);
+
 
         holder.savedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!saved.isSaved()) {
+                    holder.savedButton.setImageResource(R.drawable.save_blue_border);
                     eliminarSaved(userId, saved.getId_cat());
                     saved.setSaved(true);
 
                 } else {
+                    holder.savedButton.setImageResource(R.drawable.save_fav_click);
                     insertarSaved(userId, saved.getId_cat());
                     saved.setSaved(false);
                 }

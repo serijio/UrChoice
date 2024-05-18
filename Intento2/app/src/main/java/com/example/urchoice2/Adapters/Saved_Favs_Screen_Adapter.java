@@ -74,16 +74,18 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
             }
         });
 
-
+        holder.favsButton.setImageResource(R.drawable.fav_red_click);
         holder.favsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (!saved.isSaved()) {
+                    holder.favsButton.setImageResource(R.drawable.fav_red_border);
                     eliminarFavorito(userId,favsList.get(position).getId_cat());
                     saved.setSaved(true);
 
                 } else {
+                    holder.favsButton.setImageResource(R.drawable.fav_red_click);
                     insertarFavorito(userId,favsList.get(position).getId_cat());
                     saved.setSaved(false);
                 }

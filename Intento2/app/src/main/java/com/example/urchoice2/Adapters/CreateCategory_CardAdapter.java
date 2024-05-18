@@ -45,6 +45,14 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
         Element element = cardsList.get(position);
         Bitmap bitmap = base64ToBitmap(element.getImg_elem());
         holder.bind(bitmap, element.getName_elem());
+        holder.deleteCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardsList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, cardsList.size());
+            }
+        });
     }
 
 

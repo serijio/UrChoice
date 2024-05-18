@@ -145,8 +145,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Habilita el EditText para que se pueda editar
-                editNewNameButton.setVisibility(View.GONE);
+                editNewNameButton.setVisibility(View.INVISIBLE);
+                editNewNameButton.setElevation(0);
                 setNewNameButton.setVisibility(View.VISIBLE);
+                setNewNameButton.setElevation(1);
                 profileNameEditText.setEnabled(true);
                 profileNameEditText.setText("");
             }
@@ -159,8 +161,11 @@ public class ProfileFragment extends Fragment {
                 UpdateName(newName);
                 profileMail.setText("/@"+newName);
                 profileNameEditText.setText(newName);
-                setNewNameButton.setVisibility(View.GONE);
+
+                setNewNameButton.setVisibility(View.INVISIBLE);
+                setNewNameButton.setElevation(0);
                 editNewNameButton.setVisibility(View.VISIBLE);
+                editNewNameButton.setElevation(1);
                 profileNameEditText.setEnabled(false);
             }
         });

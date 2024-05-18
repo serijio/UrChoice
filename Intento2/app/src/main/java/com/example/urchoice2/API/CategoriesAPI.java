@@ -22,7 +22,7 @@ public interface CategoriesAPI {
     @GET("/categories/{id_user}")
     Call<List<Category>> getCategories(@Path("id_user") int userId);
 
-    @DELETE("categories/{id_cat}")
+    @DELETE("/categories/delete/{id_cat}")
     Call<Void> deleteCategory(@Path("id_cat") int idCat);
 
     @GET("/category/{id}")

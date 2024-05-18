@@ -80,6 +80,14 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:src="@drawable/fav_red_border" />
+                    <ImageView
+                        android:id="@+id/mainClick_fav"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:visibility="gone"
+                        android:src="@drawable/fav_red_click" />
 
                     <ImageView
                         android:id="@+id/main_save"
@@ -88,6 +96,15 @@
                         android:paddingStart="5dp"
                         android:paddingEnd="15dp"
                         android:src="@drawable/save_blue_border" />
+                    <ImageView
+                        android:id="@+id/mainClick_save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="15dp"
+                        android:visibility="gone"
+                        android:src="@drawable/save_fav_click" />
+
 
                 </LinearLayout>
 

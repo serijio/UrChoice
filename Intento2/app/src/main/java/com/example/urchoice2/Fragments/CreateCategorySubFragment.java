@@ -121,8 +121,8 @@ public class CreateCategorySubFragment extends Fragment {
                     Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() < 4){
                     Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
-                }else if((cardsList.size() & (cardsList.size() - 1)) == 0){
-                    Toast.makeText(getActivity(), "El número de cartas tienen que ser pares", Toast.LENGTH_SHORT).show();
+                }else if((cardsList.size() & (cardsList.size() - 1)) != 0){
+                    Toast.makeText(getActivity(), "El número de cartas tiene que ser potencia de 2", Toast.LENGTH_SHORT).show();
                 }else{
                     String IMGString = bitmapToBase64(selectedBitmap2);
                     InsertCategory(categoryName, IMGString, cardsList,userId);
@@ -214,19 +214,23 @@ public class CreateCategorySubFragment extends Fragment {
 
                 alert_card_textview.setText(cardName);
 
-                // Establecer la imagen y el nombre de la carta donde lo desees
-                Element newCard = new Element(0, base64Image, cardName, 0,0);
+                if(cardName.isEmpty() || cardName == null || base64Image.isEmpty() || base64Image == null){
+                    Toast.makeText(getContext(), "Los datos son obligatorios", Toast.LENGTH_SHORT).show();
+                }else{
+                    // Establecer la imagen y el nombre de la carta donde lo desees
+                    Element newCard = new Element(0, base64Image, cardName, 0,0);
 
-                cardsList.add(newCard);
+                    cardsList.add(newCard);
 
-                // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
-                recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
+                    // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
+                    recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
 
-                empty_text.setVisibility(View.INVISIBLE);
-                empty_text.setElevation(1);
+                    empty_text.setVisibility(View.INVISIBLE);
+                    empty_text.setElevation(1);
 
-                // Cerrar el AlertDialog
-                alertDialog.dismiss();
+                    // Cerrar el AlertDialog
+                    alertDialog.dismiss();
+                }
             }
         });
 
