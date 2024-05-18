@@ -18,6 +18,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -71,6 +72,7 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+    private MaterialButton my_categories_button;
 
     private User user;
 
@@ -83,6 +85,13 @@ public class ProfileFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+    public void my_categories_fragment() {
+        Fragment my_categories = new my_categories();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.my_profile, my_categories);
+        transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
+        transaction.commit();
     }
 
     @Override
@@ -103,6 +112,13 @@ public class ProfileFragment extends Fragment {
         profile_image = view.findViewById(R.id.profile_image);
         profileMail = view.findViewById(R.id.profilemail);
         profileBackground = view.findViewById(R.id.profile_background);
+        my_categories_button= view.findViewById(R.id.profile_categories_button);
+        my_categories_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                my_categories_fragment();
+            }
+        });
 
         edit_profile_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +164,7 @@ public class ProfileFragment extends Fragment {
                 profileNameEditText.setEnabled(false);
             }
         });
+
         return view;
     }
 
@@ -361,4 +378,5 @@ public class ProfileFragment extends Fragment {
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }
+
 }

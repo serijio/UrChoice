@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".Fragments.ProfileFragment"
-    android:id="@+id/my_profile"
-    >
+    tools:context=".Fragments.ProfileFragment">
 
     <View
         android:id="@+id/view"
@@ -38,162 +36,19 @@
         app:layout_constraintStart_toEndOf="@id/v302"
         app:layout_constraintEnd_toStartOf="@id/v303"
         android:elevation="1dp"
-        android:text="@string/profile_fragment"
-        style="@style/FragmentName" />
-
-    <TextView
-        android:id="@+id/games"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/h305"
-        app:layout_constraintTop_toTopOf="@id/h307"
-        app:layout_constraintRight_toRightOf="@id/v304"
-        app:layout_constraintLeft_toLeftOf="@id/v305"
-        style="@style/profile_number" />
-
-    <TextView
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/h306"
-        app:layout_constraintTop_toTopOf="@id/h305"
-        app:layout_constraintRight_toRightOf="@id/v304"
-        app:layout_constraintLeft_toLeftOf="@id/v305"
-        style="@style/profile_text"
-        android:text="PARTIDAS JUGADAS" />
-
-    <TextView
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/h306"
-        app:layout_constraintTop_toTopOf="@id/h305"
-        app:layout_constraintRight_toRightOf="@id/v303"
-        app:layout_constraintLeft_toLeftOf="@id/v304"
-        style="@style/profile_text"
-        android:text="AMIGOS" />
-
-    <TextView
-        android:id="@+id/friends"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/h305"
-        app:layout_constraintTop_toTopOf="@id/h307"
-        app:layout_constraintRight_toRightOf="@id/v303"
-        app:layout_constraintLeft_toLeftOf="@id/v304"
-        style="@style/profile_number" />
-
-    <ImageView
-        android:id="@+id/profile_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:scaleType="centerCrop"
-        android:elevation="0dp"
-        android:alpha="0.6" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/profile_categories_button"
-        android:layout_width="190dp"
-        android:layout_height="60dp"
-        app:backgroundTint="@null"
-        style="@style/FriendRequests"
         android:text="MY CATEGORIES"
-        app:layout_constraintBottom_toTopOf="@+id/h309"
-        app:layout_constraintRight_toRightOf="@+id/v308"
-        app:layout_constraintStart_toStartOf="@+id/v300"
-        app:layout_constraintTop_toTopOf="@+id/h302" />
+        style="@style/mycategories" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/logout_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/logout"
-        app:backgroundTint="@null"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/h302"
-        app:layout_constraintLeft_toLeftOf="@id/v307"
-        app:layout_constraintBottom_toBottomOf="@id/h309" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/h309"
-        app:layout_constraintBottom_toBottomOf="@id/h308"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" >
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profile_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/profileborder"
-            app:strokeWidth="10dp"
-            app:strokeColor="@color/black"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/edit_profile_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/edit"
-            app:backgroundTint="@null"
-            android:layout_marginTop="140dp"
-            android:layout_marginLeft="140dp" />
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/h310"
-        app:layout_constraintBottom_toBottomOf="@id/h311"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" >
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/profileName_textinputlayout"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content" >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/profileName_edittext"
-                style="@style/profile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:textColor="@color/white" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/editnew_namebutton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/edit"
-            app:backgroundTint="@null"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="200dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/setnew_namebutton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/check_button"
-            app:backgroundTint="@null"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="200dp"
-            android:visibility="gone" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/profilemail"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_my_categories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/h307"
-        app:layout_constraintTop_toTopOf="@id/h311"
-        style="@style/profile_text" />
+        android:layout_height="350dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/h309" />
+
+
 
 
     <!--Constraints verticales-->
