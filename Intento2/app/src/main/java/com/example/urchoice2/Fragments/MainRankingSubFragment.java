@@ -24,8 +24,10 @@ import android.widget.TextView;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.ElementsAPI;
+import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
+import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.MainScreen;
 import com.example.urchoice2.Screens_activities.SingleGame;
@@ -43,6 +45,10 @@ public class MainRankingSubFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private AlertDialog alertDialog;
+    private User user;
+    private int userId;
+
+    private UserAPI userApi;
 
     private String mParam1;
     private String mParam2;
@@ -78,8 +84,10 @@ public class MainRankingSubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f1___x_sub__fragment_main_ranking, container, false);
         waitAlert();
+        GetUser(view);
         GetCategory(view);
         GetRanking(view);
+
         startGameButton = view.findViewById(R.id.start_game_button); // Reemplaza start_game_button con el ID real de tu botón
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +113,12 @@ public class MainRankingSubFragment extends Fragment {
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        userApi = retrofit.create(UserAPI.class);
         elementsAPI = retrofit.create(ElementsAPI.class);
         categoriesAPI = retrofit.create(CategoriesAPI.class);
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         categoryId = preferences.getInt("id_categorySingle", 0);
+        userId = preferences.getInt("id_user", 0);
     }
 
     public void GetCategory(View view){
@@ -224,6 +234,40 @@ public class MainRankingSubFragment extends Fragment {
         go_back_button.setEnabled(false);
         startGameButton.setEnabled(false);
         */
+    }
+    public void GetUser(View view){
+        Call<User> call = userApi.getUser(userId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    user = response.body();
+                    updateView(view);
+                    Log.e("API Error", "NOMBRE" + user.getNick_user());
+
+                } else {
+                    Log.e("API Error", "Error al obtener el usuario: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("API Error", "Error al realizar la llamada: " + t.getMessage());
+            }
+        });
+    }
+    private void updateView(View view) {
+        if (user != null) {
+            TextView username = view.findViewById(R.id.ranking_username);
+            TextView email = view.findViewById(R.id.ranking_email);
+            TextView games = view.findViewById(R.id.ranking_games_played);
+            ImageView userIMG = view.findViewById(R.id.ranking_user_photo);
+
+            username.setText(user.getNick_user());
+            email.setText(user.getEmail_user());
+            userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
+            games.setText(String.valueOf(user.getGamesPlayed()));
+        }
     }
 
 }

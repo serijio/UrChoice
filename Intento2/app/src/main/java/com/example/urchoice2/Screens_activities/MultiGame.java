@@ -86,9 +86,7 @@ public class MultiGame extends AppCompatActivity {
             public void onClick(View v) {
                 // Lógica para manejar la selección del primer element
                 Log.e("SQL","Tuyo" + shuffledElements.get(currentRound * 2).getName_elem());
-                //waitAlert();
                 Vote(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()));
-                //waitAlert();
             }
         });
 
@@ -97,9 +95,7 @@ public class MultiGame extends AppCompatActivity {
             public void onClick(View v) {
                 // Lógica para manejar la selección del segundo element
                 Log.e("SQL","Tuyo" + shuffledElements.get(currentRound * 2 + 1).getName_elem());
-                //waitAlert();
                 Vote(String.valueOf(shuffledElements.get(currentRound * 2 + 1).getName_elem()));
-                //waitAlert();
             }
         });
 
@@ -118,6 +114,7 @@ public class MultiGame extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
+
     }
 
 
@@ -196,7 +193,6 @@ public class MultiGame extends AppCompatActivity {
 
                     shuffledElements = elementList;
                     Log.e("SQL", "GAMECONECT: " + shuffledElements.size());
-                    dismissWaitAlert();
                     startRound();
                 }
             }
@@ -217,6 +213,7 @@ public class MultiGame extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                dismissWaitAlert();
                 if (currentRound < shuffledElements.size() / 2) {
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
@@ -258,6 +255,7 @@ public class MultiGame extends AppCompatActivity {
 
 
     public void Vote(String voto) {
+        waitAlert();
         Call<Void> call = roomGameAPI.updateVote(roomId, userId, voto);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -266,7 +264,12 @@ public class MultiGame extends AppCompatActivity {
                     //dismissWaitAlert();
                     Log.e("SQL", "FUNCIONO");
                     allVotesReceived = false;
-                    startRepeatedCall();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startRepeatedCall();
+                        }
+                    }, 1000);
                 } else {
                     Log.e("SQL", "ERRORUP: " + response.message());
 
@@ -288,14 +291,12 @@ public class MultiGame extends AppCompatActivity {
                 if (!allVotesReceived) {
                     GetUsers();
                     handler.postDelayed(this, 1000);
-                    dismissWaitAlert();
-
                 } else {
                     // Todos los votos han sido recibidos, detener la llamada repetida
                     handler.removeCallbacksAndMessages(null);
                 }
             }
-        }, 3000);
+        }, 1000);
     }
 
 
@@ -304,27 +305,25 @@ public class MultiGame extends AppCompatActivity {
         call.enqueue(new Callback<List<UserVote>>() {
             @Override
             public void onResponse(Call<List<UserVote>> call, Response<List<UserVote>> response) {
-                waitAlert();
                 if (response.isSuccessful()) {
                     Log.e("SQL","FUNCIONOGET");
                     List<UserVote> users = response.body();
                     boolean allVotesReceivedTemp = true;
                     for (UserVote user : users) {
-                        if (user.getVote_game() == null || user.getVote_game().isEmpty() || user.getVote_game().equals("LISTO") || user.getVote_game().equals(" ")) {
+                        if (user.getVote_game() == null || user.getVote_game().isEmpty() || user.getVote_game().equals("LISTO") || user.getVote_game().equals(" ") || user.getVote_game().equals(" ")) {
                             allVotesReceivedTemp = false;
-                            //waitAlert();
-                            Log.d("TONOTO: ", "wait alert iniciao");
                             break;
                         }
                     }
-                    //waitAlert();
                     allVotesReceived = allVotesReceivedTemp;
                     Log.e("SQL","BOOL" + allVotesReceived);
                     if (allVotesReceived) {
-                        dismissWaitAlert();
-                        Log.d("TONOTO: ", "adios wait alert");
-                        WinnerRound();
-                        handler.removeCallbacksAndMessages(null);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                WinnerRound();
+                            }
+                        }, 2000);
                     }
                 } else {
                     Log.e("SQL","ERRORGET");
@@ -347,7 +346,12 @@ public class MultiGame extends AppCompatActivity {
                     JsonObject jsonObject = response.body();
                     String mostVotedGame = jsonObject.get("mostVotedGame").getAsString();
                     Log.e("SQL", "datos: " + mostVotedGame);
-                    VoteClear(" ",mostVotedGame);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            VoteClear(" ",mostVotedGame);
+                        }
+                    }, 5000);
 
                 } else {
                     Log.e("SQL", "ERRORW");
@@ -367,7 +371,6 @@ public class MultiGame extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    //waitAlert();
                     Log.e("SQL","Ganador" + mostVotedGame);
                     if(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()).equals(mostVotedGame)){
                         winnerElements.add(shuffledElements.get(currentRound * 2));
@@ -378,9 +381,7 @@ public class MultiGame extends AppCompatActivity {
                     }
                     currentRound++;
                     startRound();
-                    //dismissWaitAlert();
                 } else {
-                    waitAlert();
                     Log.e("SQL", "ERRORUPC: " + response.message());
                 }
             }

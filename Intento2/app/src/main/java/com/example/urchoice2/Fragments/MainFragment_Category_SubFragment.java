@@ -20,10 +20,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Classes.Category;
+import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 
@@ -39,6 +42,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainFragment_Category_SubFragment extends Fragment {
     private Context context;
     private int userId;
+
+
     private CategoriesAPI categoriesAPI;
     private RecyclerView recyclerView;
     private List<Category> categoryList;
@@ -139,4 +144,5 @@ public class MainFragment_Category_SubFragment extends Fragment {
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }
+
 }
