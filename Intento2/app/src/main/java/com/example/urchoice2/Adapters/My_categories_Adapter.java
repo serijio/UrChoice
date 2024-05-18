@@ -1,10 +1,14 @@
 package com.example.urchoice2.Adapters;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.FavsAPI;
 import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Category;
@@ -33,6 +38,9 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -45,6 +53,9 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
     private List<Category> categoryList;
     private MaterialButton catedit;
     private MaterialButton catDelete;
+    private CategoriesAPI categoriesAPI;
+
+
 
     private int userId;
 
@@ -68,7 +79,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
     }
 
     @Override
-    public void onBindViewHolder(@NonNull my_categories_CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull my_categories_CardViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String category_name = categoryList.get(position).getName_cat();
         String category_img = categoryList.get(position).getImg_cat();
         Bitmap bitmap = base64ToBitmap(category_img);
@@ -83,11 +94,50 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
                 // Iniciar la transacción de fragmento
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-                // Reemplazar el fragmento actual con MainRankingSubFragment
-                EditCategoriesSubFragment fragment = new EditCategoriesSubFragment();
-                transaction.replace(R.id.my_categories_fragment, fragment); // Reemplaza R.id.mainFrame(El frame intermedio) con el ID de tu contenedor de fragmentos
+                // Crear una nueva instancia del fragmento y pasar el argumento
+                int idCat = categoryList.get(position).getId_cat();
+                EditCategoriesSubFragment fragment = EditCategoriesSubFragment.newInstance(idCat);
+                transaction.replace(R.id.my_categories_fragment, fragment); // Reemplaza R.id.my_categories_fragment con el ID de tu contenedor de fragmentos
                 transaction.addToBackStack(null);
                 transaction.commit();
+            }
+        });
+        holder.catDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                View view = inflater.inflate(R.layout.f5___xx_alert__delete_category_, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setView(view);
+
+                // Mostrar el AlertDialog
+                AlertDialog alertDialog = builder.create();
+
+
+                MaterialButton yes_delete_button = view.findViewById(R.id.yes_delete);
+                yes_delete_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteCategory(categoryList.get(position).getId_cat());
+                        alertDialog.dismiss();
+                    }
+                });
+                MaterialButton no_delete_button = view.findViewById(R.id.no_delete);
+                no_delete_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.setCancelable(false);
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                alertDialog.show();
+
+
+
+
             }
         });
 
@@ -122,13 +172,34 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        SharedPreferences preferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
-        userId = preferences.getInt("id_user", 0);
+        categoriesAPI = retrofit.create(CategoriesAPI.class);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getInt("id_user", 0);
     }
+
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+    public void deleteCategory(int categoryId) {
+        Call<Void> call = categoriesAPI.deleteCategory(categoryId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("CategoryActivity", "Categoría eliminada exitosamente");
+                    // Aquí puedes realizar la llamada POST para insertar la nueva categoría si lo deseas
+                    // insertCategory(...);
+                } else {
+                    Log.e("CategoryActivity", "Error al eliminar la categoría: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
+            }
+        });
     }
 
 }
