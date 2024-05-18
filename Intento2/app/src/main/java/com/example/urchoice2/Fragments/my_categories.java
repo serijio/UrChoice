@@ -85,8 +85,10 @@ public class my_categories extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
         View rootView = inflater.inflate(R.layout.f5___x_fragment_profile_my_categories, container, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
+
         recyclerView = rootView.findViewById(R.id.recycler_my_categories);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(layoutManager);
         GetMyCategories();
         return rootView;
     }
