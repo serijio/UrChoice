@@ -235,8 +235,11 @@ public class MultiGame extends AppCompatActivity {
                     Collections.sort(shuffledElements, Comparator.comparing(Element::getName_elem));
                     winnerElements.clear();
                     currentRound = 0;
-                    showCountdownAlert();
-                    startRound();
+                    if(shuffledElements.size() != 1){
+                        showCountdownAlert();
+                    }else{
+                        startRound();
+                    }
                 } else {
                     Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
                     call.enqueue(new Callback<Void>() {
@@ -279,8 +282,9 @@ public class MultiGame extends AppCompatActivity {
         handler.postDelayed(() -> {
             if (alertDialog.isShowing()) {
                 alertDialog.dismiss();
+                startRound();
             }
-        }, 5200);
+        }, 5000);
     }
 
     private void dismissAlert() {

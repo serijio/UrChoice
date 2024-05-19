@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -211,8 +212,12 @@ public class SingleGame extends AppCompatActivity {
                     shuffledElements = new ArrayList<>(winnerElements);
                     winnerElements.clear();
                     currentRound = 0;
-                    showCountdownAlert();
-                    startRound();
+                    Log.e("SQL","DATOSWE: " + shuffledElements.size());
+                    if(shuffledElements.size() != 1){
+                        showCountdownAlert();
+                    }else{
+                        startRound();
+                    }
                 } else {
                     //winnerName.setText(shuffledElements.get(0).getName_elem());
                     Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
@@ -257,8 +262,9 @@ public class SingleGame extends AppCompatActivity {
         handler.postDelayed(() -> {
             if (alertDialog.isShowing()) {
                 alertDialog.dismiss();
+                startRound();
             }
-        }, 5200);
+        }, 5000);
     }
 
 
@@ -301,7 +307,4 @@ public class SingleGame extends AppCompatActivity {
     public void onBackPressed() {
         // Dejar vacío para deshabilitar el botón de retroceso
     }
-
-
-
 }

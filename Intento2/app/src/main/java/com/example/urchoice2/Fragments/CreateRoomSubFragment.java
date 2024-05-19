@@ -131,7 +131,7 @@ public class CreateRoomSubFragment extends Fragment {
 
     private void category_alertDialogOpen() {
         // Inflar el diseÃ±o del AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_choose_category, null);
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__choose_category, null);
         // Crear el AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);

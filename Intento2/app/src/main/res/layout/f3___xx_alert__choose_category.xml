@@ -12,17 +12,8 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/alert_dialog3" />
 
-    <!--com.google.android.material.button.MaterialButton
-        android:id="@+id/close_room_choose_category"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginStart="310dp"
-        android:background="@drawable/decline_request"
-        android:backgroundTint="@color/white"
-        app:backgroundTint="@null" /-->
-
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchTextInputLayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -37,6 +28,7 @@
         style="@style/SearchCategory" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/type"
@@ -48,12 +40,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_category"
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:layout_marginTop="230dp"
         android:layout_centerHorizontal="true" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/close_room_choose_category"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

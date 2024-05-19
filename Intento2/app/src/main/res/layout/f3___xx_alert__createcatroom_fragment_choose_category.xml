@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/close_room_choose_category"
+
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="112dp"
@@ -37,13 +37,13 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/searchTextInputLayout"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:hintTextColor="@color/white" >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/searchEditText"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="SEARCH AN CATEGORY"
@@ -57,7 +57,7 @@
             <!-- Otros elementos -->
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_category"
+
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
