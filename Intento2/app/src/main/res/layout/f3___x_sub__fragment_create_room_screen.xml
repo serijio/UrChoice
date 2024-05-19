@@ -119,11 +119,13 @@
         app:layout_constraintBottom_toTopOf="@id/h193"
         app:layout_constraintStart_toEndOf="@id/v122"
         app:layout_constraintEnd_toStartOf="@id/v123"
+        android:background="@drawable/blue_border2"
         android:text="@string/choose"
         android:fontFamily="@font/orbimedium"
         android:textColor="@color/blue"
         android:textAlignment="textStart"
         android:textSize="18sp"
+        app:backgroundTint="@null"
         style="@style/CreateRoomButtons" />
 
     <com.google.android.material.button.MaterialButton

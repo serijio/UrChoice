@@ -111,8 +111,6 @@ public class CreateRoomSubFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GetCategories();
-                //GetFavs();
-                //GetSaved();
             }
         });
         return view;
@@ -139,50 +137,22 @@ public class CreateRoomSubFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
 
-
-
-
         // Obtener la referencia del RecyclerView dentro del diseÃ±o del AlertDialog
         RecyclerView category_recyclerView = view.findViewById(R.id.recycler_category);
 
         // Datos para el RecyclerView
         String[] category_name = new String[categoryList.size()];
 
-
-        /*PRUEBA SERIJIO OWO
-        String[] favs_name = new String[favsList.size()];
-        String[] saved_name = new String[savedList.size()]; */
-
         Log.e("SQL","Tamaño: " + categoryList.size() + favsList.size() + savedList.size());
         for (int i = 0; i < categoryList.size(); i++) {
             category_name[i] = categoryList.get(i).getName_cat();
         }
-
-        /*PRUEBA SERIJIO OWO
-        for (int i = 0; i < favsList.size(); i++) {
-            favs_name[i] = favsList.get(i).getName_cat();
-        }
-        //PRUEBA SERIJIO OWO
-        for (int i = 0; i < savedList.size(); i++) {
-            saved_name[i] = savedList.get(i).getName_cat();
-        } */
 
         ArrayList<String> imageBase64List = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             String base64Image = categoryList.get(i).getImg_cat();
             imageBase64List.add(base64Image);
         }
-
-        /*//PRUEBA SERIJIO OWO
-        for (int i = 0; i < favsList.size(); i++) {
-            String base64Image = favsList.get(i).getImg_cat();
-            imageBase64List.add(base64Image);
-        }
-        //PRUEBA SERIJIO OWO
-        for (int i = 0; i < savedList.size(); i++) {
-            String base64Image = savedList.get(i).getImg_cat();
-            imageBase64List.add(base64Image);
-        }*/
 
         String[] imagesBase64 = imageBase64List.toArray(new String[0]);
 
@@ -204,8 +174,6 @@ public class CreateRoomSubFragment extends Fragment {
                 ImageView imageView = holder.itemView.findViewById(R.id.card_image);
                 TextView textView = holder.itemView.findViewById(R.id.card_title);
                 Category category = categoryList.get(position);
-                //Favs favs = favsList.get(position);
-                //Saved saved = savedList.get(position);
 
                 // Decodificar la imagen Base64 y establecerla en el ImageView
                 Bitmap bitmap = base64ToBitmap(imagesBase64[position]);
@@ -353,74 +321,6 @@ public class CreateRoomSubFragment extends Fragment {
         });
 
     }
-
-    /*PRUEBA SERIJIO OWO
-    public void GetFavs() {
-        if (!favsList.isEmpty()) {
-        favsAPI.obtenerFavoritos(userId).enqueue(new Callback<List<Favs>>() {
-            @Override
-            public void onResponse(Call<List<Favs>> call, Response<List<Favs>> response) {
-                if (response.isSuccessful()) {
-                    favsList = response.body();
-                    if (!favsList.isEmpty()) {
-                        category_alertDialogOpen();
-                    } else {
-                        // Handle the case when favsList is empty
-                        // For example, display a message to the user
-                        Log.e("SQL", "Favs list is empty");
-                    }
-                } else {
-                    Log.e("SQL", "ERROR AL SACAR CATEGORIA");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Favs>> call, Throwable t) {
-                // Handle the failure case, if needed
-            }
-        });
-    }  else {
-        // Handle the case when favsList is empty
-        // For example, display a message to the user
-        Log.e("SQL", "Favs list is empty"); } }
-
-
-    public void GetSaved(){
-        if (!favsList.isEmpty()) {
-        savedAPI.obtenerGuardados(userId).enqueue(new Callback<List<Saved>>() {
-            @Override
-            public void onResponse(Call<List<Saved>> call, Response<List<Saved>> response) {
-                if (response.isSuccessful()) {
-                    if (!savedList.isEmpty()) {
-                        category_alertDialogOpen();
-                    } else {
-                        // Handle the case when favsList is empty
-                        // For example, display a message to the user
-                        Log.e("SQL", "Favs list is empty");
-                    }
-                } else {
-                    Log.e("SQL","ERROR AL SACAR CATEGORIA");
-                }
-            }
-            @Override
-            public void onFailure(Call<List<Saved>> call, Throwable t) {
-            }
-        });
-
-    } else {
-        // Handle the case when favsList is empty
-        // For example, display a message to the user
-        Log.e("SQL", "Favs list is empty"); } }
-
-
-    private List<ListItem> mergeLists() {
-        List<ListItem> mergedList = new ArrayList<>();
-        mergedList.addAll(categoryList);
-        mergedList.addAll(favsList);
-        mergedList.addAll(savedList);
-        return mergedList;
-    }
-    //FIN PRUEBA SERIJIO OWO*/
 
 
     public void createRoom(int categoryId, int userId,String nameRoom,String password) {
