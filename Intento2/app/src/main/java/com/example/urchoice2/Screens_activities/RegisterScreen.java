@@ -167,6 +167,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         if(!emailString.isEmpty() || !emailString.isEmpty() || !nickString.isEmpty() || !contraString.isEmpty()){
             if(contraString.equals(contra2String)){
+
                 Call<User> call = userApi.registerUser(emailString, nickString, IMGString, contraString);
                 call.enqueue(new Callback<User>() {
                     @Override

@@ -16,13 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.Classes.Rooms;
 import com.example.urchoice2.Classes.UserVote;
+import com.example.urchoice2.Fragments.MainFragment_Room_SubFragment;
 import com.example.urchoice2.R;
 import com.example.urchoice2.Screens_activities.MultiGame;
 import com.google.android.material.button.MaterialButton;
@@ -200,10 +206,12 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
             }
 
             @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
                 TextView playerName = holder.itemView.findViewById(R.id.player_name);
                 ImageView readyicon = holder.itemView.findViewById(R.id.ready_status);
                 MaterialButton exitstatus = holder.itemView.findViewById(R.id.exit_status);
+
+
                 playerName.setText(userVotes.get(position).getNick_user());
                 boolean admin = false;
 
@@ -216,9 +224,25 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 if(userVotes.get(position).getVote_game().equals("LISTO")){
                     readyicon.setVisibility(View.VISIBLE);
                 }
+
                 if(admin == true){
-                    exitstatus.setVisibility(View.VISIBLE);
+                    if(userVotes.get(position).getId_user() == userId){
+                        exitstatus.setVisibility(View.INVISIBLE);
+                    }else{
+                        exitstatus.setVisibility(View.VISIBLE);
+                    }
                 }
+
+                exitstatus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.remove("id_categoryMulti");
+                        editor.apply();
+                        endRoom(roomId,userVotes.get(position).getId_user());
+                    }
+                });
             }
 
             @Override
@@ -226,7 +250,6 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                 return userVotes.size();
             }
         });
-        UsersRoom(recyclerView.getAdapter());
 
         // Construir el nuevo AlertDialog
         AlertDialog.Builder waitingPlayersBuilder = new AlertDialog.Builder(context);
@@ -236,6 +259,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         AlertDialog waitingPlayersAlertDialog = waitingPlayersBuilder.create();
         waitingPlayersAlertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         waitingPlayersAlertDialog.show();
+        UsersRoom(recyclerView.getAdapter(), waitingPlayersAlertDialog);
 
         MaterialButton exitButton = waitingPlayersDialogView.findViewById(R.id.alert_exit_button);
         exitButton.setOnClickListener(new View.OnClickListener() {
@@ -261,7 +285,7 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
         });
     }
 
-    public void UsersRoom(RecyclerView.Adapter adapter) {
+    public void UsersRoom(RecyclerView.Adapter adapter, AlertDialog waitingPlayersAlertDialog) {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -278,9 +302,18 @@ public class MainFragment_Room_Adapter extends RecyclerView.Adapter<MainFragment
                         if (response.isSuccessful()) {
                             userVotes = response.body();
                             List<UserVote> newNames = new ArrayList<>();
+                            boolean presente = false;
                             for (UserVote userVote : userVotes) {
+                                if(userVote.getId_user() == userId){
+                                    presente = true;
+                                }
                                 newNames.add(userVote);
                                 Log.e("SQL", "User: " + userVote.getNick_user());
+                            }
+                            if(presente == false){
+                                shouldUpdate = false;
+                                waitingPlayersAlertDialog.dismiss();
+                                Toast.makeText(context, "Has sido expulsado de la sala", Toast.LENGTH_SHORT).show();
                             }
                             updateAdapter(newNames,adapter); // Actualiza el adaptador con los nuevos nombres de usuario
                         } else {

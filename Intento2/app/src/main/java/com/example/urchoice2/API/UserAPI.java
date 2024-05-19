@@ -50,5 +50,9 @@ public interface UserAPI {
             @Field("img_user") String img_user
     );
 
+    @FormUrlEncoded
+    @POST("/app/end")
+    Call<Void> endAPP(@Field("id_user") int userId);
+
 
 }

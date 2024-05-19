@@ -224,79 +224,6 @@ public class CreateRoomSubFragment extends Fragment {
         alertDialog.show();
     }
 
-    /*private void category_alertDialogOpen() {
-        // Inflar el diseño del AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f3___xx_alert__createcatroom_fragment_choose_category, null);
-
-        // Crear el AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-
-        // Obtener la referencia del RecyclerView dentro del diseño del AlertDialog
-        RecyclerView category_recyclerView = view.findViewById(R.id.recycler_category);
-
-        ArrayList<ListItem> mergedList = new ArrayList<>();
-        mergedList.addAll(categoryList);
-        mergedList.addAll(favsList);
-        mergedList.addAll(savedList);
-
-        AlertDialog alertDialog = builder.create();
-        category_recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        category_recyclerView.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_create_category_image, parent, false);
-                return new RecyclerView.ViewHolder(itemView) {};
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-                // Obtener las vistas dentro de la CardView
-                ImageView imageView = holder.itemView.findViewById(R.id.card_image);
-                TextView textView = holder.itemView.findViewById(R.id.card_title);
-                ListItem listItem = mergedList.get(position);
-
-                // Decodificar la imagen Base64 y establecerla en el ImageView
-                Bitmap bitmap = base64ToBitmap(listItem.getImg());
-                imageView.setImageBitmap(bitmap);
-
-                textView.setText(listItem.getName());
-
-                // Añadir onClickListener a cada elemento de RecyclerView
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Cerrar el AlertDialog
-                        alertDialog.dismiss();
-                        selectedPosition = listItem.getId();
-
-                        // Convertir el Bitmap en un Drawable
-                        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-
-                        // Establecer el Drawable como fondo del botón
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            categoryButton.setBackground(bitmapDrawable);
-                        } else {
-                            categoryButton.setBackgroundDrawable(bitmapDrawable);
-                        }
-
-                        // Establecer el texto del botón
-                        categoryButton.setText(listItem.getName());
-                    }
-                });
-            }
-
-            @Override
-            public int getItemCount() {
-                return mergedList.size();
-            }
-        });
-
-        // Mostrar el AlertDialog
-        alertDialog.show();
-    }*/
-
 
     public void GetCategories(){
         Call<List<Category>> call = categoriesAPI.getAllCategories();
@@ -383,11 +310,13 @@ public class CreateRoomSubFragment extends Fragment {
                 if(userVotes.get(position).getVote_game().equals("LISTO")){
                     readyicon.setVisibility(View.VISIBLE);
                 }
+                if(userVotes.get(position).getId_user() == userId){
+                    exitstatus.setVisibility(View.INVISIBLE);
+                }
 
                 exitstatus.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        shouldUpdate = false;
                         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.remove("id_categoryMulti");
@@ -457,6 +386,8 @@ public class CreateRoomSubFragment extends Fragment {
                     @Override
                     public void onResponse(Call<List<UserVote>> call, Response<List<UserVote>> response) {
                         if (response.isSuccessful()) {
+                            Log.e("SQL", "HOLA");
+
                             // Crear una lista de nombres de usuario a partir de los datos obtenidos
                             userVotes = response.body();
                             List<UserVote> newNames = new ArrayList<>();

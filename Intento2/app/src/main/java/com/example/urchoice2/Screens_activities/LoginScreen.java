@@ -27,6 +27,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -136,6 +137,7 @@ public class LoginScreen extends AppCompatActivity {
                     editor.putInt("id_user", user.getId_user());
                     editor.apply();
 
+                    EndAPP(user.getId_user());
                     Log.e("SQL","Usuario encontrado");
                     /*Intent intent = new Intent(LoginScreen.this, MainScreen.class);
                     startActivity(intent);*/
@@ -154,5 +156,25 @@ public class LoginScreen extends AppCompatActivity {
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    public void EndAPP(int userId) {
+        Call<Void> call = userApi.endAPP(userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
+                } else {
+                    // OcurriÃ³ un error al intentar finalizar la sala
+                    Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
+                Log.e("RoomEnd", "Error de red: " + t.getMessage());
+            }
+        });
     }
 }

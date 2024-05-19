@@ -13,15 +13,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextPaint;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TapToStartScreen extends AppCompatActivity {
     MaterialTextView MtextView;
@@ -29,9 +37,12 @@ public class TapToStartScreen extends AppCompatActivity {
     ImageView taptostart_bluecard, taptostart_redcard;
     MaterialButton tapButton;
     LinearLayout linear;
+    private UserAPI userApi;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Conectar();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a2___activity_tap_to_start_screen);
         MtextView = findViewById(R.id.tap_app_title);
@@ -48,6 +59,15 @@ public class TapToStartScreen extends AppCompatActivity {
             }
         });
     }
+
+    public void Conectar(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://railwayserver-production-7692.up.railway.app")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        userApi = retrofit.create(UserAPI.class);
+    }
+
     private void setDegradadoTitulo(){
         TextPaint pintar = MtextView.getPaint();
         float width = pintar.measureText(("UrChoice"));
@@ -78,11 +98,12 @@ public class TapToStartScreen extends AppCompatActivity {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TapToStartScreen.this,pairs);
 
                     SharedPreferences preferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
-                    int userId = preferences.getInt("id_user", 0);
+                    userId = preferences.getInt("id_user", 0);
                     startActivity(intent, options.toBundle());
                     if(userId == 0){
                         startActivity(intent, options.toBundle());
                     }else{
+                        EndAPP();
                         Intent intent2 = new Intent(TapToStartScreen.this, MainScreen.class);
                         startActivity(intent2, options.toBundle());
 
@@ -96,5 +117,25 @@ public class TapToStartScreen extends AppCompatActivity {
                 }
             }
         },400);
+    }
+
+    public void EndAPP() {
+        Call<Void> call = userApi.endAPP(userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
+                } else {
+                    // OcurriÃ³ un error al intentar finalizar la sala
+                    Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
+                Log.e("RoomEnd", "Error de red: " + t.getMessage());
+            }
+        });
     }
 }
