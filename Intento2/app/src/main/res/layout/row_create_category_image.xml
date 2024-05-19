@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/a"
             android:scaleType="centerCrop"
-            android:alpha="0.5"/> <!-- Aquí puedes poner una imagen por defecto -->
+            android:alpha="0.5" />
 
         <TextView
             android:id="@+id/card_title"
