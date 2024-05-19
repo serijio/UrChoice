@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class SingleGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handler = new Handler(Looper.getMainLooper());
         setContentView(R.layout.xx__fragment_individual_game_round_layout);
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         categoryId = sharedPreferences.getInt("id_categorySingle", 0);
@@ -209,6 +211,7 @@ public class SingleGame extends AppCompatActivity {
                     shuffledElements = new ArrayList<>(winnerElements);
                     winnerElements.clear();
                     currentRound = 0;
+                    showCountdownAlert();
                     startRound();
                 } else {
                     //winnerName.setText(shuffledElements.get(0).getName_elem());
@@ -251,18 +254,15 @@ public class SingleGame extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
 
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (alertDialog.isShowing()) {
-                    alertDialog.dismiss();
-                }
+        handler.postDelayed(() -> {
+            if (alertDialog.isShowing()) {
+                alertDialog.dismiss();
             }
-        }, 6000);
+        }, 5200);
     }
-    /*
 
+
+    /*
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(SingleGame.this).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);

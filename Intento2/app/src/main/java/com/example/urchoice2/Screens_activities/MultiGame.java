@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Pair;
@@ -70,7 +71,7 @@ public class MultiGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handler = new Handler();
+        handler = new Handler(Looper.getMainLooper());
         setContentView(R.layout.xx__fragment_multi_game_round_layout);
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         categoryId = sharedPreferences.getInt("id_categoryMulti", 0);
@@ -234,6 +235,7 @@ public class MultiGame extends AppCompatActivity {
                     Collections.sort(shuffledElements, Comparator.comparing(Element::getName_elem));
                     winnerElements.clear();
                     currentRound = 0;
+                    showCountdownAlert();
                     startRound();
                 } else {
                     Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
@@ -274,15 +276,11 @@ public class MultiGame extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
 
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (alertDialog.isShowing()) {
-                    alertDialog.dismiss();
-                }
+        handler.postDelayed(() -> {
+            if (alertDialog.isShowing()) {
+                alertDialog.dismiss();
             }
-        }, 6000);
+        }, 5200);
     }
 
     private void dismissAlert() {
