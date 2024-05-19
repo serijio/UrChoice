@@ -12,11 +12,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.FavsAPI;
-
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
 import com.example.urchoice2.API.SavedAPI;
@@ -60,15 +62,14 @@ public class CreateRoomSubFragment extends Fragment {
     private MaterialButton createRoomButton;
     private CategoriesAPI categoriesAPI;
 
-    //PRUEBA SERIJIO OWO
     private FavsAPI favsAPI;
     private SavedAPI savedAPI;
     private RoomAPI roomAPI;
     private Integer userId;
     private RoomGameAPI roomGameAPI;
     private List<Category> categoryList = new ArrayList<>();
+    private List<Category> filteredCategoryList = new ArrayList<>();
 
-    //PRUEBA SERIJIO OWO
     private List<Favs> favsList = new ArrayList<>();
     private List<Saved> savedList = new ArrayList<>();
     private Integer selectedPosition;
@@ -81,10 +82,8 @@ public class CreateRoomSubFragment extends Fragment {
 
     public CreateRoomSubFragment() {}
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f3___x_sub__fragment_create_room_screen, container, false);
         handler = new Handler();
         Conectar();
@@ -157,58 +156,25 @@ public class CreateRoomSubFragment extends Fragment {
         String[] imagesBase64 = imageBase64List.toArray(new String[0]);
 
         // Configurar el RecyclerView
-        categoryButton.findViewById(R.id.choose_categorybutton);
         AlertDialog alertDialog = builder.create();
+        CategoryAdapter adapter = new CategoryAdapter(categoryList, imagesBase64, category_name, alertDialog);
         category_recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        category_recyclerView.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            @NonNull
+        category_recyclerView.setAdapter(adapter);
+
+        TextInputEditText searchEditText = view.findViewById(R.id.searchEditText);
+        searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_create_category_image, parent, false);
-                return new RecyclerView.ViewHolder(itemView) {};
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.filter(s.toString());
             }
 
             @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-                // Obtener las vistas dentro de la CardView
-                ImageView imageView = holder.itemView.findViewById(R.id.card_image);
-                TextView textView = holder.itemView.findViewById(R.id.card_title);
-                Category category = categoryList.get(position);
-
-                // Decodificar la imagen Base64 y establecerla en el ImageView
-                Bitmap bitmap = base64ToBitmap(imagesBase64[position]);
-                imageView.setImageBitmap(bitmap);
-
-                textView.setText(category_name[position]);
-
-                // Añadir onClickListener a cada elemento de RecyclerView
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Cerrar el AlertDialog
-                        alertDialog.dismiss();
-                        selectedPosition = category.getId_cat();
-
-                        // Convertir el Bitmap en un Drawable
-                        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-
-                        // Establecer el Drawable como fondo del botón
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            categoryButton.setBackground(bitmapDrawable);
-                        } else {
-                            categoryButton.setBackgroundDrawable(bitmapDrawable);
-                        }
-
-                        // Establecer el texto del botón
-                        categoryButton.setText(category_name[position]);
-                    }
-                });
-            }
-            @Override
-            public int getItemCount() {
-                return category_name.length;
-            }
+            public void afterTextChanged(Editable s) {}
         });
+
         close_alert_category = view.findViewById(R.id.close_room_choose_category);
         close_alert_category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -545,6 +511,84 @@ public class CreateRoomSubFragment extends Fragment {
                     // No hacer nada cuando se presiona el botÃ³n de retroceso
                 }
             });
+        }
+    }
+
+
+    public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+        private List<Category> categoryList;
+        private List<Category> filteredCategoryList;
+        private String[] imagesBase64;
+        private String[] category_name;
+        private AlertDialog alertDialog;
+
+        public CategoryAdapter(List<Category> categoryList, String[] imagesBase64, String[] category_name, AlertDialog alertDialog) {
+            this.categoryList = categoryList;
+            this.filteredCategoryList = new ArrayList<>(categoryList);
+            this.imagesBase64 = imagesBase64;
+            this.category_name = category_name;
+            this.alertDialog = alertDialog;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_create_category_image, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Category category = filteredCategoryList.get(position);
+            holder.textView.setText(category.getName_cat());
+            String base64Image = category.getImg_cat();
+            byte[] imageBytes = Base64.decode(base64Image, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            holder.imageView.setImageBitmap(bitmap);
+
+            holder.itemView.setOnClickListener(v -> {
+                // Update the category button with the selected category image and text
+                categoryButton.setText(category.getName_cat());
+                selectedPosition = category.getId_cat();
+                // Convert the Bitmap to a Drawable and set it as the button's background
+                BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    categoryButton.setBackground(bitmapDrawable);
+                } else {
+                    categoryButton.setBackgroundDrawable(bitmapDrawable);
+                }
+                alertDialog.dismiss();
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return filteredCategoryList.size();
+        }
+
+        public void filter(String text) {
+            filteredCategoryList.clear();
+            if (text.isEmpty()) {
+                filteredCategoryList.addAll(categoryList);
+            } else {
+                for (Category category : categoryList) {
+                    if (category.getName_cat().toLowerCase().contains(text.toLowerCase())) {
+                        filteredCategoryList.add(category);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            TextView textView;
+            ImageView imageView;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                textView = itemView.findViewById(R.id.card_title);
+                imageView = itemView.findViewById(R.id.card_image);
+            }
         }
     }
 }
