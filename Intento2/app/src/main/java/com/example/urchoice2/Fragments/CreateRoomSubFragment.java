@@ -233,12 +233,18 @@ public class CreateRoomSubFragment extends Fragment {
                         editor.apply();
                         alertDialogOpen(roomId);
                     } else {
+
                         // La respuesta del servidor fue exitosa pero el roomId es cero
                         Log.e("RoomCreation", "El ID de la nueva sala es cero");
                     }
                 } else {
-                    // Ocurría un error al intentar crear la sala
-                    Log.e("RoomCreation", "Error al crear la sala: " + response.message());
+
+                    if (response.code() == 400) {
+                        Toast.makeText(requireContext(), "A room with that name already exists.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Otro código de estado, maneja según sea necesario
+                        Log.e("RoomCreation", "El ID de la nueva sala es cero");
+                    }
                 }
             }
             @Override

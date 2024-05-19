@@ -423,12 +423,19 @@ public class CreateCategorySubFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+
+
                     // La solicitud fue exitosa
                     Log.d("CategoryActivity", "Categoría creada exitosamente");
                     create_new_category_alert_dialog();
                 } else {
-                    // La solicitud no fue exitosa
-                    Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+                    if (response.code() == 400) {
+                        Toast.makeText(requireContext(), "Ya existe una categoria con ese nombre", Toast.LENGTH_SHORT).show();
+                        Log.e("CategoryActivity", "Error: Ya existe una categoría con ese nombre");
+                    } else {
+                        // Otro código de estado, maneja según sea necesario
+                        Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+                    }
                 }
             }
 
@@ -439,6 +446,8 @@ public class CreateCategorySubFragment extends Fragment {
             }
         });
     }
+
+
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
