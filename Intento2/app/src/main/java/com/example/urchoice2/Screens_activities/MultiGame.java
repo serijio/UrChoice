@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.API.RoomAPI;
 import com.example.urchoice2.API.RoomGameAPI;
@@ -215,6 +216,7 @@ public class MultiGame extends AppCompatActivity {
             public void run() {
                 dismissWaitAlert();
                 if (currentRound < shuffledElements.size() / 2) {
+                    //showCountdownAlert();
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
                     // Mostrar los nombres de los elementos en los TextView correspondientes
@@ -251,6 +253,41 @@ public class MultiGame extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private void showCountdownAlert() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.ff___xx_alert__countdown, null);
+
+        //cargar gif
+        ImageView countdownImageView = view.findViewById(R.id.countdownImageView);
+        Glide.with(this).asGif().load(R.drawable.countdown).into(countdownImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (alertDialog.isShowing()) {
+                    alertDialog.dismiss();
+                }
+            }
+        }, 6000);
+    }
+
+    private void dismissAlert() {
+        if (alertDialog != null && alertDialog.isShowing()) {
+            alertDialog.dismiss();
+        }
     }
 
 

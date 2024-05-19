@@ -50,7 +50,7 @@
         app:tabGravity="fill"
         app:tabIconTint="@color/red"
         app:tabIndicatorColor="#F44336"
-        app:tabIndicatorHeight="3dp"
+        app:tabIndicatorHeight="1dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/red"
         app:tabTextColor="@color/white" />

@@ -110,6 +110,8 @@
     <string name="discard">DISCARD CHANGES?</string>
     <string name="back_profile">GO TO PROFILE</string>
     <string name="keep_editing">KEEP EDITING</string>
+    <string name="update_successful">UR CATEGORY HAS BEEN UPDATED!</string>
+    <string name="next_round">NEXT ROUND IN...</string>
 
 
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>

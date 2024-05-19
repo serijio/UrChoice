@@ -412,6 +412,30 @@ public class EditCategoriesSubFragment extends Fragment {
     }
 
 
+    public void update_successful_alert_dialog() {
+        View view = LayoutInflater.from(requireContext()).inflate(R.layout.f5___xx_alert__category_nice_update, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+
+        final AlertDialog alertDialog4 = builder.create();
+        alertDialog4.setCanceledOnTouchOutside(false);
+        alertDialog4.setCancelable(false);
+        alertDialog4.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog4.show();
+
+        go_back_profile = view.findViewById(R.id.gotoprofile);
+
+        go_back_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CancelEdit();
+                alertDialog4.dismiss();
+            }
+        });
+    }
+
+
     public void CancelEdit() {
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -454,6 +478,7 @@ public class EditCategoriesSubFragment extends Fragment {
                 if (response.isSuccessful()) {
                     // La solicitud fue exitosa
                     Log.d("CategoryActivity", "Categoría creada exitosamente");
+                    update_successful_alert_dialog();
                 } else {
                     // La solicitud no fue exitosa
                     Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
