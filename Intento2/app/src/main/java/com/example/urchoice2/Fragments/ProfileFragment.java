@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -29,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Classes.User;
@@ -48,6 +51,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfileFragment extends Fragment {
+    private Handler handler;
     MaterialButton edit_name_button;
     MaterialButton edit_profile_image_button;
     private UserAPI userAPI;
@@ -95,6 +99,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handler = new Handler(Looper.getMainLooper());
         Conectar();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -171,7 +176,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 String newName = profileNameEditText.getText().toString();
                 UpdateName(newName);
-                profileMail.setText("/@"+newName);
+                profileMail.setText("@"+newName);
                 profileNameEditText.setText(newName);
 
                 setNewNameButton.setVisibility(View.INVISIBLE);
@@ -269,7 +274,8 @@ public class ProfileFragment extends Fragment {
         friendAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        waitAlert();
+        //waitAlert();
+        showCountdownAlert();
         GetFriends();
 
     }
@@ -287,7 +293,7 @@ public class ProfileFragment extends Fragment {
                     TextView friendTextView = view.findViewById(R.id.friends);
                     friendTextView.setText(String.valueOf(friendCount));
                     GetUser();
-                    dismissWaitAlert();
+                    //dismissWaitAlert();
                 }else{
                     Log.e("SQL","ERROR");
                 }
@@ -380,6 +386,8 @@ public class ProfileFragment extends Fragment {
         editor.remove("id_user");
         editor.apply();
     }
+
+
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
@@ -392,6 +400,32 @@ public class ProfileFragment extends Fragment {
         alertDialog.show();
 
     }
+
+    private void showCountdownAlert() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___xx_alert__countdown, null);
+
+        //cargar gif
+        ImageView countdownImageView = view.findViewById(R.id.countdownImageView);
+        Glide.with(this).asGif().load(R.drawable.countdown).into(countdownImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+
+        handler.postDelayed(() -> {
+            if (alertDialog.isShowing()) {
+                alertDialog.dismiss();
+            }
+        }, 5200);
+    }
+
+
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }
