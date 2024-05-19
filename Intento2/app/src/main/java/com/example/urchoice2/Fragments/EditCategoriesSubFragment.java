@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -144,14 +146,29 @@ public class EditCategoriesSubFragment extends Fragment {
                 TextInputEditText textInputEditText = view.findViewById(R.id.edit_cat_name_insert);
                 String categoryName = textInputEditText.getText().toString();
 
-                if(categoryName.isEmpty() || cardsList.isEmpty() || bitmapDrawable.toString().isEmpty()){
+                if(categoryName.isEmpty() || cardsList.isEmpty() || add_category_image_button.getBackground().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() < 4){
                     Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
                 }else if((cardsList.size() & (cardsList.size() - 1)) != 0){
                     Toast.makeText(getActivity(), "El número de cartas tiene que ser potencia de 2", Toast.LENGTH_SHORT).show();
                 }else{
-                    String IMGString = bitmapToBase64(selectedBitmap2);
+                    // Paso 1: Obtener el Drawable del botón
+                    Drawable drawable = add_category_image_button.getBackground();
+
+                    Bitmap bitmap;
+
+                    if (drawable instanceof BitmapDrawable) {
+                        bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    } else {
+                        bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(bitmap);
+                        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        drawable.draw(canvas);
+                    }
+
+
+                    String IMGString = bitmapToBase64(bitmap);
                     UpdateCategory(categoryName, IMGString,cardsList);
 
 
@@ -492,6 +509,8 @@ public class EditCategoriesSubFragment extends Fragment {
             }
         });
     }
+
+
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);

@@ -17,20 +17,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urchoice2.API.CategoriesAPI;
-import com.example.urchoice2.API.FavsAPI;
-import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Classes.Category;
-import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.Fragments.EditCategoriesSubFragment;
-import com.example.urchoice2.Fragments.FriendsFragment;
-import com.example.urchoice2.Fragments.MainRankingSubFragment;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 import com.google.android.material.button.MaterialButton;
@@ -100,7 +94,7 @@ public class My_categories_Adapter extends RecyclerView.Adapter<My_categories_Ad
             @Override
             public void onClick(View v) {
                 LayoutInflater inflater = LayoutInflater.from(context);
-                View view = inflater.inflate(R.layout.f5___xx_alert__delete_category_, null);
+                View view = inflater.inflate(R.layout.f5___xx_alert__delete_category, null);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setView(view);
