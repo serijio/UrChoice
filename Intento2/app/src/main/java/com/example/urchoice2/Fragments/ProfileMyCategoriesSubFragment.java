@@ -18,7 +18,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.Adapters.My_categories_Adapter;
 import com.example.urchoice2.Classes.Category;
@@ -73,7 +75,8 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
         View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile_my_categories, container, false);
         Conectar();
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
-        waitAlert();
+        //waitAlert();
+        waitAlertAltera();
         recyclerView = view.findViewById(R.id.recycler_my_categories);
         recyclerView.setLayoutManager(layoutManager);
         GetMyCategories();
@@ -132,9 +135,28 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+    /*
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }*/
+
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+
+        //cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Create the AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
         alertDialog = builder.create();

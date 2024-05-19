@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FavsAPI;
 import com.example.urchoice2.Adapters.Saved_Favs_Screen_Adapter;
 import com.example.urchoice2.Classes.Favs;
@@ -53,7 +55,8 @@ public class tab_FavouriteFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rvFavs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        waitAlert();
+        //waitAlert();
+        waitAlertAltera();
 
         return rootView;
     }
@@ -119,7 +122,24 @@ public class tab_FavouriteFragment extends Fragment {
         }
     }
 
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
 
+        //cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
+    /*
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
@@ -132,7 +152,7 @@ public class tab_FavouriteFragment extends Fragment {
         alertDialog.show();
 
 
-    }
+    }*/
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }

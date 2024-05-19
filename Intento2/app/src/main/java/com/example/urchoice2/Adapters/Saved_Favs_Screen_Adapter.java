@@ -73,7 +73,7 @@ public class Saved_Favs_Screen_Adapter extends RecyclerView.Adapter<Saved_Favs_S
 
             }
         });
-
+        holder.favsSaveButton.setVisibility(View.GONE);
         holder.favsButton.setImageResource(R.drawable.fav_red_click);
         holder.favsButton.setOnClickListener(new View.OnClickListener() {
             @Override

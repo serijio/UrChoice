@@ -28,9 +28,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.ElementsAPI;
 import com.example.urchoice2.Adapters.CreateCategory_CardAdapter;
@@ -116,7 +118,8 @@ public class EditCategoriesSubFragment extends Fragment {
         View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile_my_categories_edit, container, false);
         cardsList = new ArrayList<>();
         Conectar(view);
-        waitAlert();
+        //waitAlert();
+        waitAlertAltera();
 
         cardsList = new ArrayList<>();
         add_new_card_button = view.findViewById(R.id.edit_new_card);
@@ -510,7 +513,7 @@ public class EditCategoriesSubFragment extends Fragment {
         });
     }
 
-
+    /*
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
@@ -522,8 +525,24 @@ public class EditCategoriesSubFragment extends Fragment {
         waitalertDialog.setCancelable(false);
         waitalertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         waitalertDialog.show();
-    }
+    }*/
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
 
+        //cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
 
     public void dismissWaitAlert() {
         waitalertDialog.dismiss();

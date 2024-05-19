@@ -76,7 +76,8 @@ public class MultiGame extends AppCompatActivity {
         categoryId = sharedPreferences.getInt("id_categoryMulti", 0);
         userId = sharedPreferences.getInt("id_user", 0);
         roomId = sharedPreferences.getInt("id_room", 0);
-        waitAlert();
+        waitAlertAltera();
+        //waitAlert();
         Conectar();
         textViewElement1 = findViewById(R.id.Multicard_name1);
         textViewElement2 = findViewById(R.id.Multicard_name2);
@@ -292,7 +293,8 @@ public class MultiGame extends AppCompatActivity {
 
 
     public void Vote(String voto) {
-        waitAlert();
+        //waitAlert();
+        waitAlertAltera();
         Call<Void> call = roomGameAPI.updateVote(roomId, userId, voto);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -454,6 +456,7 @@ public class MultiGame extends AppCompatActivity {
             }
         });
     }
+    /*
 
     public void waitAlert(){
         // Construir el nuevo AlertDialog
@@ -466,7 +469,27 @@ public class MultiGame extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
 
+    }*/
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(this);  // Utiliza 'this' en lugar de 'requireContext()'
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+
+        // Cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Crear el AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);  // Utiliza 'this' en lugar de 'requireContext()'
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
     }
+
+
+
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }
