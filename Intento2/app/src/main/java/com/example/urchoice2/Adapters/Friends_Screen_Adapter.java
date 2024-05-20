@@ -138,4 +138,5 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
             }
         });
     }
+
 }
