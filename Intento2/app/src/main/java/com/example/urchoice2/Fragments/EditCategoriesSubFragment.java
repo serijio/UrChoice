@@ -545,6 +545,6 @@ public class EditCategoriesSubFragment extends Fragment {
     }
 
     public void dismissWaitAlert() {
-        waitalertDialog.dismiss();
+        alertDialog.dismiss();
     }
 }
