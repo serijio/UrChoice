@@ -1,13 +1,17 @@
 package com.example.urchoice2.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Adapters.Friends_Requests_Adapter;
@@ -50,6 +55,7 @@ public class FriendsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+    private AlertDialog alertDialog;
     private RecyclerView recyclerView;
     String nick_name;
     MaterialButton friends_requests;
@@ -86,6 +92,7 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
+        waitAlertAltera();
         View view = inflater.inflate(R.layout.f2___fragment_friends, container, false);
         friends_requests = view.findViewById(R.id.see_requests_button);
         friends_add = view.findViewById(R.id.send_request);
@@ -137,6 +144,20 @@ public class FriendsFragment extends Fragment {
             }
         };
     }
+    //deshabilitar boton de retroceder
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    // No hacer nada cuando se presiona el botÃ³n de retroceso
+                }
+            });
+        }
+    }
 
     public void Addfriend(){
         Log.e("SQL","DATOS: " + nick_name + userId);
@@ -178,6 +199,7 @@ public class FriendsFragment extends Fragment {
                     setRvMain();
                     friends_requests_adapter = new Friends_Screen_Adapter(requireContext(),friendsScreenModels,users);
                     recyclerView.setAdapter(friends_requests_adapter);
+                    dismissWaitAlert();
                 } else {
                     Log.e("SQL", "Error en la respuesta: " + response.message());
                     // Manejar errores de la API
@@ -221,5 +243,27 @@ public class FriendsFragment extends Fragment {
     public void onPause() {
         super.onPause();
         handler.removeCallbacks(runnable); // Detiene la ejecución
+    }
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+
+        //cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
+
+
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 }

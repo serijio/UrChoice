@@ -1,8 +1,11 @@
 package com.example.urchoice2.Fragments;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +57,21 @@ public class CreateCatRoomFragment extends Fragment {
       transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
       transaction.commit();
    }
+   //deshabilitar boton de retroceder
+   @Override
+   public void onAttach(Context context) {
+      super.onAttach(context);
+      if (context instanceof AppCompatActivity) {
+         AppCompatActivity activity = (AppCompatActivity) context;
+         activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+               // No hacer nada cuando se presiona el botÃ³n de retroceso
+            }
+         });
+      }
+   }
+
 
    /*public void Create_category_button() {
       try {

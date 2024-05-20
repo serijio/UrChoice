@@ -110,7 +110,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.f5___fragment_profile, container, false);
-        waitAlertAltera();
 
         edit_profile_image_button  = view.findViewById(R.id.edit_profile_image);
         profile_image = view.findViewById(R.id.profile_image);
