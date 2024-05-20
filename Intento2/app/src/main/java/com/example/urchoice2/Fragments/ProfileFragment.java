@@ -274,8 +274,7 @@ public class ProfileFragment extends Fragment {
         friendAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        //waitAlert();
-        showCountdownAlert();
+        waitAlert();
         GetFriends();
 
     }
@@ -401,7 +400,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void showCountdownAlert() {
+    /*private void showCountdownAlert() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___xx_alert__countdown, null);
 
@@ -423,7 +422,7 @@ public class ProfileFragment extends Fragment {
                 alertDialog.dismiss();
             }
         }, 5200);
-    }
+    }*/
 
 
     public void dismissWaitAlert() {
