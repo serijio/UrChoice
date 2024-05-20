@@ -153,7 +153,13 @@ public class MainFragment extends Fragment {
             username.setText(user.getNick_user());
             email.setText(user.getEmail_user());
             userIMG.setImageBitmap(base64ToBitmap(user.getImg_user()));
-            games.setText(String.valueOf(user.getGamesPlayed()));
+            if(user.getGamesPlayed() < 10){
+                games.setText("00" + user.getGamesPlayed());
+            }else if(user.getGamesPlayed() < 100){
+                games.setText("0" + user.getGamesPlayed());
+            }else{
+                games.setText(String.valueOf(user.getGamesPlayed()));
+            }
         }
     }
 }

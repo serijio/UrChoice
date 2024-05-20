@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +33,8 @@ public class MainFragment_Room_SubFragment extends Fragment {
     private RoomAPI roomAPI;
     private MainFragment_Room_Adapter roomAdapter;
     private AlertDialog alertDialog;
-
-
+    private Handler handler;
+    private Runnable runnable;
 
 
     public MainFragment_Room_SubFragment() {}
@@ -46,9 +48,6 @@ public class MainFragment_Room_SubFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rooms_recyler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        GetRooms();
-
-
         return rootView;
     }
 
@@ -58,6 +57,14 @@ public class MainFragment_Room_SubFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         roomAPI = retrofit.create(RoomAPI.class);
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                GetRooms();
+                handler.postDelayed(this, 3000);
+            }
+        };
         waitAlertAltera();
     }
     public void GetRooms(){
@@ -85,18 +92,17 @@ public class MainFragment_Room_SubFragment extends Fragment {
         });
     }
 
-    /*public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-    }*/
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.post(runnable); // Inicia la ejecución
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable); // Detiene la ejecución
+    }
 
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
@@ -116,10 +122,7 @@ public class MainFragment_Room_SubFragment extends Fragment {
         alertDialog.show();
     }
 
-
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }
-
-
 }
