@@ -113,6 +113,7 @@
     <string name="update_successful">UR CATEGORY HAS BEEN UPDATED!</string>
     <string name="next_round">NEXT ROUND IN...</string>
     <string name="type">TYPE A CATEGORY</string>
+    <string name="looking">I\'M LOOKING FOR...</string>
 
 
     <string name="new_category_succesfully">LA CATEGORIA SE HA PODIDO GENERAR CORRECTAMENTE REGRESE A HOME</string>

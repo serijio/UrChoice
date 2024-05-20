@@ -46,6 +46,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     private List<Category> categoryList;
     private List<Category> categorySavedList = new ArrayList<>();
     private List<Category> categoryFavList = new ArrayList<>();
+    private List<Category> filteredCategoryList = new ArrayList<>();
     private int userId;
     private SavedAPI savedAPI;
     private FavsAPI favsAPI;
@@ -55,6 +56,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
         this.context = context;
         this.mainScreenModels = mainScreenModels;
         this.categoryList = category;
+        this.filteredCategoryList = new ArrayList<>(categoryList);
     }
 
 
@@ -69,12 +71,14 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
 
 
     public void onBindViewHolder(@NonNull Main_Screen_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        String category_name = categoryList.get(position).getName_cat();
-        String category_img = categoryList.get(position).getImg_cat();
+        Category category = filteredCategoryList.get(position);
+        String category_name = category.getName_cat();
+        String category_img = category.getImg_cat();
         Bitmap bitmap = base64ToBitmap(category_img);
 
         holder.catName.setText(category_name);
         holder.catImg.setImageBitmap(bitmap);
+
         holder.catImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +145,21 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
     }
 
 
+    public void filter(String text) {
+        filteredCategoryList.clear();
+        if (text.isEmpty()) {
+            filteredCategoryList.addAll(categoryList);
+        } else {
+            for (Category category : categoryList) {
+                if (category.getName_cat().toLowerCase().contains(text.toLowerCase())) {
+                    filteredCategoryList.add(category);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView catImg;
         ImageView favsButton;
@@ -161,7 +180,7 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
 
     @Override
     public int getItemCount() {
-        return mainScreenModels.size();
+        return filteredCategoryList.size();
     }
 
     public void Conectar(){

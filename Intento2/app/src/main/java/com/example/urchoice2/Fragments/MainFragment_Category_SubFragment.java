@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +46,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainFragment_Category_SubFragment extends Fragment {
     private Context context;
     private int userId;
-
-
     private CategoriesAPI categoriesAPI;
     private RecyclerView recyclerView;
     private List<Category> categoryList;
@@ -61,6 +62,21 @@ public class MainFragment_Category_SubFragment extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.rvCategoriesHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        TextInputEditText searchMainEditText = rootView.findViewById(R.id.searchMainEditText);
+        searchMainEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                main_screen_adapter.filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
         //waitAlert();
         waitAlertAltera();
         GetCategories();
@@ -87,14 +103,6 @@ public class MainFragment_Category_SubFragment extends Fragment {
                 if (response.isSuccessful()) {
                     categoryList = response.body();
                     setRvMain();
-
-                    // Para que el recycler tenga 2 columnas
-                    GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
-                    recyclerView.setLayoutManager(layoutManager);
-
-                    // Aquí creas tu adaptador y lo estableces en el RecyclerView
-                    main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
-                    recyclerView.setAdapter(main_screen_adapter);
                     dismissWaitAlert();
                 } else {
                     Log.e("API Error", "Error al obtener las categorías: " + response.message());
@@ -117,6 +125,14 @@ public class MainFragment_Category_SubFragment extends Fragment {
 
 
     private void setRvMain() {
+        // Para que el recycler tenga 2 columnas
+        GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Aquí creas tu adaptador y lo estableces en el RecyclerView
+        main_screen_adapter = new Main_Screen_Adapter(requireContext(), main_screen_model, categoryList);
+        recyclerView.setAdapter(main_screen_adapter);
+
         Drawable mainFavIcon = ContextCompat.getDrawable( requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
         for (int i = 0; i < categoryList.size(); i++) {
