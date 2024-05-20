@@ -58,6 +58,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateRoomSubFragment extends Fragment {
     private MaterialButton categoryButton;
+    ImageView category_button_image;
     private Handler handler;
     private MaterialButton createRoomButton;
     private CategoriesAPI categoriesAPI;
@@ -106,6 +107,7 @@ public class CreateRoomSubFragment extends Fragment {
         });
 
         categoryButton = view.findViewById(R.id.choose_categorybutton);
+        category_button_image = view.findViewById(R.id.choose_category_image);
         categoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -559,9 +561,11 @@ public class CreateRoomSubFragment extends Fragment {
                 // Convert the Bitmap to a Drawable and set it as the button's background
                 BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    categoryButton.setBackground(bitmapDrawable);
+                    category_button_image.setImageBitmap(bitmap);
+                    //categoryButton.setBackground(bitmapDrawable);
                 } else {
-                    categoryButton.setBackgroundDrawable(bitmapDrawable);
+                    category_button_image.setImageBitmap(bitmap);
+                    //categoryButton.setBackgroundDrawable(bitmapDrawable);
                 }
                 alertDialog.dismiss();
             });

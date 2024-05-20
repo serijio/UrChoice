@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CreateCategorySubFragment extends Fragment {
     MaterialButton add_new_card_button;
     MaterialButton add_category_image_button;
+    ImageView add_category_image;
     RoundedImageView edit_image_button;
     Bitmap selectedBitmap;
     Bitmap selectedBitmap2;
@@ -100,6 +102,7 @@ public class CreateCategorySubFragment extends Fragment {
             }
         });
         add_category_image_button = view.findViewById(R.id.add_new_category_image_button);
+        add_category_image = view.findViewById(R.id.add_new_category_image);
         add_category_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -294,7 +297,10 @@ public class CreateCategorySubFragment extends Fragment {
                 bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
                 // Establecer el Drawable como fondo del botón
                 //bitmapDrawable.setGravity(Gravity.CENTER);
-                add_category_image_button.setBackground(bitmapDrawable);
+
+                //add_category_image_button.setBackground(bitmapDrawable);
+                //add_category_image.setBackground(bitmapDrawable);
+                add_category_image.setImageBitmap(selectedBitmap2);
 
             } catch (IOException e) {
                 e.printStackTrace();
