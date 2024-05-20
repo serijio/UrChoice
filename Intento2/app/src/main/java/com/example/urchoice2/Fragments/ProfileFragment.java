@@ -274,7 +274,8 @@ public class ProfileFragment extends Fragment {
         friendAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        waitAlert();
+        //waitAlert();
+        waitAlertAltera();
         GetFriends();
 
     }
@@ -327,6 +328,7 @@ public class ProfileFragment extends Fragment {
 
                     TextView profileGames = view.findViewById(R.id.games);
                     profileGames.setText(String.valueOf(user.getGamesPlayed()));
+                    dismissWaitAlert();
                 } else {
                     Log.e("API Error", "Error al obtener el usuario: " + response.message());
                 }
@@ -386,7 +388,7 @@ public class ProfileFragment extends Fragment {
         editor.apply();
     }
 
-
+    /*
     public void waitAlert(){
         // Construir el nuevo AlertDialog
         View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
@@ -398,7 +400,7 @@ public class ProfileFragment extends Fragment {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
 
-    }
+    }*/
 
     /*private void showCountdownAlert() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
@@ -424,6 +426,23 @@ public class ProfileFragment extends Fragment {
         }, 5200);
     }*/
 
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+
+        //cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
 
     public void dismissWaitAlert() {
         alertDialog.dismiss();
