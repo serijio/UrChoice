@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,9 @@ public class FriendsFragment extends Fragment {
     private int userId;
     private Friends_Screen_Adapter friends_requests_adapter;
     private ArrayList<Friends_Screen_Model> friendsScreenModels = new ArrayList<>();
+
+    private Handler handler;
+    private Runnable runnable;
 
     public FriendsFragment() {}
 
@@ -124,7 +128,14 @@ public class FriendsFragment extends Fragment {
         friendsAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        GetFriends();
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                GetFriends();
+                handler.postDelayed(this, 2000);
+            }
+        };
     }
 
     public void Addfriend(){
@@ -163,7 +174,7 @@ public class FriendsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
-                    users = response.body();
+                    users = new ArrayList<>(response.body());
                     setRvMain();
                     friends_requests_adapter = new Friends_Screen_Adapter(requireContext(),friendsScreenModels,users);
                     recyclerView.setAdapter(friends_requests_adapter);
@@ -183,6 +194,7 @@ public class FriendsFragment extends Fragment {
 
 
     private void setRvMain() {
+        friendsScreenModels = new ArrayList<>();
         Drawable mainDelIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
         for (int i = 0; i < users.size(); i++) {
             friendsScreenModels.add(new Friends_Screen_Model(
@@ -197,5 +209,17 @@ public class FriendsFragment extends Fragment {
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.post(runnable); // Inicia la ejecución
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable); // Detiene la ejecución
     }
 }

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +53,9 @@ public class FriendsRequestsSubFragment extends Fragment {
 
     private Friends_Requests_Adapter friends_requests_adapter;
     private ArrayList<Friends_Requests_Model> friendsRequestsModels = new ArrayList<>();
+
+    private Handler handler;
+    private Runnable runnable;
 
     public FriendsRequestsSubFragment() {}
 
@@ -107,7 +111,14 @@ public class FriendsRequestsSubFragment extends Fragment {
         friendsAPI = retrofit.create(FriendsAPI.class);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         userId = sharedPreferences.getInt("id_user", 0);
-        GetFriends();
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                GetFriends();
+                handler.postDelayed(this, 2000);
+            }
+        };
     }
 
     public void GetFriends(){
@@ -116,7 +127,7 @@ public class FriendsRequestsSubFragment extends Fragment {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
-                    users = response.body();
+                    users = new ArrayList<>(response.body());
                     setRvMain();
                     friends_requests_adapter = new Friends_Requests_Adapter(requireContext(),friendsRequestsModels,users);
                     recyclerView.setAdapter(friends_requests_adapter);
@@ -135,6 +146,7 @@ public class FriendsRequestsSubFragment extends Fragment {
     }
 
     private void setRvMain() {
+        friendsRequestsModels = new ArrayList<>();
         Drawable mainAddIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
         Drawable mainDelIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
         for (int i = 0; i < users.size(); i++) {
@@ -151,5 +163,17 @@ public class FriendsRequestsSubFragment extends Fragment {
     public Bitmap base64ToBitmap(String base64Image) {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.post(runnable); // Inicia la ejecución
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable); // Detiene la ejecución
     }
 }
