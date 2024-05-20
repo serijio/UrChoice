@@ -108,11 +108,13 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                     eliminarFavorito(userId, categoryList.get(position).getId_cat());
                     categoryFavList.remove(categoryList.get(position));
                     holder.favsButton.setImageResource(R.drawable.fav_red_border);
+                    holder.saveButton.setImageResource(R.drawable.save_fav_click);
 
                 }else{
                     addFav(userId, categoryList.get(position).getId_cat());
                     categoryFavList.add(categoryList.get(position));
                     holder.favsButton.setImageResource(R.drawable.fav_red_click);
+                    holder.saveButton.setImageResource(R.drawable.save_blue_border);
 
                 }
             }
@@ -125,12 +127,15 @@ public class Main_Screen_Adapter extends RecyclerView.Adapter<Main_Screen_Adapte
                     eliminarSaved(userId, categoryList.get(position).getId_cat());
                     categorySavedList.remove(categoryList.get(position));
                     holder.saveButton.setImageResource(R.drawable.save_blue_border);
+                    holder.favsButton.setImageResource(R.drawable.fav_red_click);
 
 
                 }else{
                     insertarSaved(userId, categoryList.get(position).getId_cat());
                     categorySavedList.add(categoryList.get(position));
                     holder.saveButton.setImageResource(R.drawable.save_fav_click);
+                    holder.favsButton.setImageResource(R.drawable.fav_red_border);
+
 
 
                 }
