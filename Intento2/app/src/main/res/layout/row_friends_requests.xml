@@ -43,6 +43,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.24"
                 android:text="@string/lukinda"
+                android:textSize="13sp"
                 style="@style/FriendsUsernameStyle" />
 
             <TextView
@@ -51,6 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.15"
                 android:text="@string/lukinda_mail"
+                android:textSize="6sp"
                 style="@style/FriendsEmailStyleLeft" />
 
             <ImageView

@@ -81,9 +81,11 @@ public class EditCategoriesSubFragment extends Fragment {
     RecyclerView recyclerView;
     TextView alert_card_textview;
     private MaterialButton add_category_image_button;
+    ImageView add_category_image;
     private MaterialButton close_add_card_alert;
     MaterialButton add_new_card_button;
     MaterialButton create_category_button;
+
     MaterialButton cancel_edit_button;
     MaterialButton go_back_profile;
     MaterialButton keep_editing;
@@ -131,6 +133,7 @@ public class EditCategoriesSubFragment extends Fragment {
             }
         });
         add_category_image_button = view.findViewById(R.id.edit_new_category_image_button);
+        add_category_image = view.findViewById(R.id.edit_new_category_image);
         add_category_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +152,7 @@ public class EditCategoriesSubFragment extends Fragment {
                 TextInputEditText textInputEditText = view.findViewById(R.id.edit_cat_name_insert);
                 String categoryName = textInputEditText.getText().toString();
 
-                if(categoryName.isEmpty() || cardsList.isEmpty() || add_category_image_button.getBackground().toString().isEmpty()){
+                if(categoryName.isEmpty() || cardsList.isEmpty() || add_category_image.getDrawable().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Fields are required", Toast.LENGTH_SHORT).show();
                 }else if(categoryName.length() > 20){
                     Toast.makeText(getActivity(), "Name cannot contain more than 20 characters ", Toast.LENGTH_SHORT).show();
@@ -159,7 +162,7 @@ public class EditCategoriesSubFragment extends Fragment {
                     Toast.makeText(getActivity(), "The number of cards must be a power of 2", Toast.LENGTH_SHORT).show();
                 }else{
                     // Paso 1: Obtener el Drawable del botón
-                    Drawable drawable = add_category_image_button.getBackground();
+                    Drawable drawable = add_category_image.getDrawable();
 
                     Bitmap bitmap;
 
@@ -317,7 +320,8 @@ public class EditCategoriesSubFragment extends Fragment {
                 bitmapDrawable = new BitmapDrawable(getResources(), selectedBitmap2);
                 // Establecer el Drawable como fondo del botón
                 //bitmapDrawable.setGravity(Gravity.CENTER);
-                add_category_image_button.setBackground(bitmapDrawable);
+                //add_category_image_button.setBackground(bitmapDrawable);
+                add_category_image.setImageBitmap(selectedBitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -360,7 +364,7 @@ public class EditCategoriesSubFragment extends Fragment {
             }
         });
     }
-    public void GetElemetsCategory(View view){
+    public void GetElemetsCategory(View view) {
         elementApi.getElementsByCategory(idCat).enqueue(new Callback<List<Element>>() {
             @Override
             public void onResponse(Call<List<Element>> call, Response<List<Element>> response) {
@@ -369,19 +373,20 @@ public class EditCategoriesSubFragment extends Fragment {
                     Log.e("SQL","DATOS: " + elementList.get(0).getName_elem());
                     TextInputEditText textInputEditText = view.findViewById(R.id.edit_cat_name_insert);
                     textInputEditText.setText(category.getName_cat());
-                    BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), base64ToBitmap(category.getImg_cat()));
-                    add_category_image_button.setBackground(bitmapDrawable);
-                    cardsList.addAll(elementList);
+                    Bitmap categoryBitmap = base64ToBitmap(category.getImg_cat());
+                    add_category_image.setImageBitmap(categoryBitmap);
 
                     // Notificar al adaptador del RecyclerView que se ha agregado una nueva carta
+                    cardsList.addAll(elementList);
                     recyclerView.getAdapter().notifyItemInserted(cardsList.size() - 1);
+
                     dismissWaitAlert();
                 }
             }
+
             @Override
             public void onFailure(Call<List<Element>> call, Throwable t) {
                 Log.e("SQL","ERROR");
-
             }
         });
     }

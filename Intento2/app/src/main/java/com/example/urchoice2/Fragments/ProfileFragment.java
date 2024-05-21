@@ -176,7 +176,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 String newName = profileNameEditText.getText().toString();
                 UpdateName(newName);
-                profileMail.setText("@"+newName);
+                profileMail.setText(newName);
                 profileNameEditText.setText(newName);
 
                 setNewNameButton.setVisibility(View.INVISIBLE);

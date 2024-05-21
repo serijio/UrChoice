@@ -66,7 +66,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
         }
         //MaterialButton delete = holder.itemView.findViewById(R.id.delete_friend);
         playerName.setText(friendsList.get(position).getNick_user());
-        playerMail.setText("/@"+ friendsList.get(position).getEmail_user());
+        playerMail.setText(friendsList.get(position).getEmail_user());
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
