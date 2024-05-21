@@ -34,8 +34,8 @@
         app:layout_constraintBottom_toTopOf="@id/h230"
         app:layout_constraintStart_toEndOf="@id/v156"
         app:layout_constraintEnd_toStartOf="@id/v157"
-        android:text="@string/my_cat"
-        style="@style/mycategories" />
+        android:text="@string/my_games"
+        style="@style/FragmentName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_my_categories"

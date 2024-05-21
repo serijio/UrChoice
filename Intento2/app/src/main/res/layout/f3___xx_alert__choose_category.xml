@@ -41,8 +41,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_category"
-        android:layout_width="300dp"
-        android:layout_height="170dp"
+        android:layout_width="280dp"
+        android:layout_height="160dp"
         android:layout_marginTop="230dp"
         android:layout_centerHorizontal="true" />
 
@@ -51,7 +51,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="405dp"
         android:text="@string/cancel"
         android:textSize="25sp"
         style="@style/CategoryButtonsWhite" />
