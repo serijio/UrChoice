@@ -126,7 +126,7 @@ public class LoginScreen extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     User user = response.body();
-                    Toast.makeText(LoginScreen.this, "Bienvenido de vuelta " + user.getNick_user(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, "Welcome back " + user.getNick_user(), Toast.LENGTH_SHORT).show();
 
                     ImageView fotoperfil = findViewById(R.id.login_profile_pic);
 
@@ -143,7 +143,7 @@ public class LoginScreen extends AppCompatActivity {
                     startActivity(intent);*/
                     LogToMainButton();
                 } else {
-                    Toast.makeText(LoginScreen.this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginScreen.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

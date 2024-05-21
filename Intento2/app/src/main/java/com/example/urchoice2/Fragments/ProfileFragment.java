@@ -348,7 +348,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(requireContext(), "Bienvenido " + newName, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Welcome " + newName, Toast.LENGTH_SHORT).show();
                 } else {
                     Log.e("SQL","ERROR");
                 }
@@ -368,7 +368,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(requireContext(), "Imagen Actualizada", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(requireContext(), "Updated Image", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.e("SQL","ERROR");
                 }

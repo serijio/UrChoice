@@ -89,7 +89,7 @@ public class EditCategoriesSubFragment extends Fragment {
     MaterialButton keep_editing;
     private BitmapDrawable bitmapDrawable;
     private AlertDialog alertDialog;
-    private androidx.appcompat.app.AlertDialog waitalertDialog;
+    private AlertDialog waitalertDialog;
     RoundedImageView edit_image_button;
     MaterialButton setCard_data_button;
     MaterialButton cancel_edit;
@@ -150,11 +150,13 @@ public class EditCategoriesSubFragment extends Fragment {
                 String categoryName = textInputEditText.getText().toString();
 
                 if(categoryName.isEmpty() || cardsList.isEmpty() || add_category_image_button.getBackground().toString().isEmpty()){
-                    Toast.makeText(getActivity(), "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Fields are required", Toast.LENGTH_SHORT).show();
+                }else if(categoryName.length() > 20){
+                    Toast.makeText(getActivity(), "Name cannot contain more than 20 characters ", Toast.LENGTH_SHORT).show();
                 }else if(cardsList.size() < 4){
-                    Toast.makeText(getActivity(), "Ponga mas de 4 Cartas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "The minimum number of cards are 4", Toast.LENGTH_SHORT).show();
                 }else if((cardsList.size() & (cardsList.size() - 1)) != 0){
-                    Toast.makeText(getActivity(), "El número de cartas tiene que ser potencia de 2", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "The number of cards must be a power of 2", Toast.LENGTH_SHORT).show();
                 }else{
                     // Paso 1: Obtener el Drawable del botón
                     Drawable drawable = add_category_image_button.getBackground();
@@ -469,48 +471,61 @@ public class EditCategoriesSubFragment extends Fragment {
 
 
     private void UpdateCategory(String categoryName, String categoryImage, List<Element> elements){
-        JSONObject jsonRequest = new JSONObject();
-        try {
-            jsonRequest.put("id_cat", idCat);
-            jsonRequest.put("name_cat", categoryName);
-            jsonRequest.put("img_cat", categoryImage);
-            jsonRequest.put("id_user", userId);
 
-            JSONArray elementsArray = new JSONArray();
-            for (Element element : elements) {
-                JSONObject elementObject = new JSONObject();
-                elementObject.put("name_elem", element.getName_elem());
-                elementObject.put("img_elem", element.getImg_elem());
-                elementObject.put("victories", element.getVictories());
-                elementObject.put("id_cat", element.getId_cat());
-                elementsArray.put(elementObject);
+
+        boolean mayor = false;
+        for(int i = 0; i < elements.size(); i++){
+            if(elements.get(i).getName_elem().length() > 15){
+                mayor = true;
             }
-            jsonRequest.put("elements", elementsArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonRequest.toString());
-        Call<Void> call = categoriesAPI.updateCategory(requestBody);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // La solicitud fue exitosa
-                    Log.d("CategoryActivity", "Categoría creada exitosamente");
-                    update_successful_alert_dialog();
-                } else {
-                    // La solicitud no fue exitosa
-                    Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+        if(mayor == true){
+            Toast.makeText(getActivity(), "The name of an element is more than 15 characters", Toast.LENGTH_SHORT).show();
+        }else{
+            JSONObject jsonRequest = new JSONObject();
+            try {
+                jsonRequest.put("id_cat", idCat);
+                jsonRequest.put("name_cat", categoryName);
+                jsonRequest.put("img_cat", categoryImage);
+                jsonRequest.put("id_user", userId);
+
+                JSONArray elementsArray = new JSONArray();
+                for (Element element : elements) {
+                    JSONObject elementObject = new JSONObject();
+                    elementObject.put("name_elem", element.getName_elem());
+                    elementObject.put("img_elem", element.getImg_elem());
+                    elementObject.put("victories", element.getVictories());
+                    elementObject.put("id_cat", element.getId_cat());
+                    elementsArray.put(elementObject);
                 }
+                jsonRequest.put("elements", elementsArray);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Error de red o error en la respuesta
-                Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
-            }
-        });
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonRequest.toString());
+            Call<Void> call = categoriesAPI.updateCategory(requestBody);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        // La solicitud fue exitosa
+                        Log.d("CategoryActivity", "Categoría creada exitosamente");
+                        update_successful_alert_dialog();
+                    } else {
+                        // La solicitud no fue exitosa
+                        Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    // Error de red o error en la respuesta
+                    Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
+                }
+            });
+        }
     }
 
     /*

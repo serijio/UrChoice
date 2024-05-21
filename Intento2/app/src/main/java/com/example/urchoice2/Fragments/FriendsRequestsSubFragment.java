@@ -1,9 +1,11 @@
 package com.example.urchoice2.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -20,8 +22,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.Adapters.Friends_Requests_Adapter;
 import com.example.urchoice2.Adapters.Saved_Favs_Screen_Adapter;
@@ -56,6 +60,7 @@ public class FriendsRequestsSubFragment extends Fragment {
 
     private Handler handler;
     private Runnable runnable;
+    private AlertDialog alertDialog;
 
     public FriendsRequestsSubFragment() {}
 
@@ -175,5 +180,27 @@ public class FriendsRequestsSubFragment extends Fragment {
     public void onPause() {
         super.onPause();
         handler.removeCallbacks(runnable); // Detiene la ejecución
+    }
+    public void waitAlertAltera() {
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+
+        //cargar gif
+        ImageView alteraImageView = view.findViewById(R.id.altera);
+        Glide.with(this).asGif().load(R.drawable.altera_final).into(alteraImageView);
+
+        // Create the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
+
+
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 }

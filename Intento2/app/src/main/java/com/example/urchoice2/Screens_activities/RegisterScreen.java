@@ -156,6 +156,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         String emailString = emailTextView.getText().toString();
         String nickString = nickTextView.getText().toString();
+        nickString = nickString.replace(" ", "");
         String contraString = contraTextView.getText().toString();
         String contra2String = contra2TextView.getText().toString();
         // Obtener el recurso Drawable
@@ -165,7 +166,9 @@ public class RegisterScreen extends AppCompatActivity {
         String IMGString = bitmapToBase64(bitmap);
 
 
-        if(!emailString.isEmpty() || !emailString.isEmpty() || !nickString.isEmpty() || !contraString.isEmpty()){
+        if(nickString.length() > 15){
+            Toast.makeText(RegisterScreen.this, "Name cannot contain more than 15 characters", Toast.LENGTH_SHORT).show();
+        } else if(!emailString.isEmpty() || !emailString.isEmpty() || !nickString.isEmpty() || !contraString.isEmpty()){
             if(contraString.equals(contra2String)){
 
                 Call<User> call = userApi.registerUser(emailString, nickString, IMGString, contraString);
@@ -178,10 +181,10 @@ public class RegisterScreen extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putInt("id_user", user.getId_user());
                             editor.apply();
-                            Toast.makeText(RegisterScreen.this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterScreen.this, "Successfully registered user", Toast.LENGTH_SHORT).show();
                             SignToMainButton();
                         } else {
-                            Toast.makeText(RegisterScreen.this, "Ya existe un usuario con ese email o nombre", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterScreen.this, "A user already exists with that email or name", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
@@ -190,10 +193,10 @@ public class RegisterScreen extends AppCompatActivity {
                     }
                 });
             }else{
-                Toast.makeText(this, "Las contraseÃ±as no coinciden", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Passwords don´t match", Toast.LENGTH_SHORT).show();
             }
         }else{
-            Toast.makeText(this, "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fields are required", Toast.LENGTH_SHORT).show();
         }
     }
 }

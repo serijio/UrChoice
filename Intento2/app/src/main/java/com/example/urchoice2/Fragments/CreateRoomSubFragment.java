@@ -98,8 +98,13 @@ public class CreateRoomSubFragment extends Fragment {
                 TextInputEditText passroom = view.findViewById(R.id.passRoom);
                 String nameRoom = nickroom.getText().toString();
                 String password = passroom.getText().toString();
-                if(nameRoom.isEmpty() || selectedPosition == null){
-                    Toast.makeText(context, "Los campos son obligatorios", Toast.LENGTH_SHORT).show();
+
+                if(nameRoom.length() > 10){
+                    Toast.makeText(context, "Name can not contain more than 10 characters ", Toast.LENGTH_SHORT).show();
+                }else if(password.length() > 8){
+                    Toast.makeText(context, "Pin can not contain more than 8 characters ", Toast.LENGTH_SHORT).show();
+                } else if(nameRoom.isEmpty() || selectedPosition == null){
+                    Toast.makeText(context, "Fields are required", Toast.LENGTH_SHORT).show();
                 }else{
                     createRoom(selectedPosition,userId,nameRoom,password);
                 }

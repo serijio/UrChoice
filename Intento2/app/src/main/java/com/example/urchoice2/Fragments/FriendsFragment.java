@@ -167,13 +167,13 @@ public class FriendsFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     // La solicitud se realizó correctamente (código de estado 200)
-                    Toast.makeText(requireContext(), "Solicitud Enviada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Request sent", Toast.LENGTH_SHORT).show();
                 } else if (response.code() == 404) {
                     // El usuario no existe (código de estado 404)
-                    Toast.makeText(requireContext(), "No existe usuario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "No user exist with that friend", Toast.LENGTH_SHORT).show();
                 } else if (response.code() == 400) {
                     // Ya existe una relación de amistad entre los dos usuarios (código de estado 400)
-                    Toast.makeText(requireContext(), "Ya son amigos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "You already have that friend", Toast.LENGTH_SHORT).show();
                 } else {
                     // Otro error
                     Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_SHORT).show();
@@ -187,7 +187,6 @@ public class FriendsFragment extends Fragment {
             }
         });
     }
-
 
     public void GetFriends(){
         Call<List<User>> call = friendsAPI.getFriends(userId);

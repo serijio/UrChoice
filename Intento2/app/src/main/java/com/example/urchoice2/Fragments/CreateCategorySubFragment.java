@@ -399,59 +399,69 @@ public class CreateCategorySubFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
     private void InsertCategory(String categoryName,String categoryImage, List<Element> elements, int userId){
+        boolean mayor = false;
         for(int i = 0; i < elements.size(); i++){
-            Log.e("CategoryActivity", "Nombre: " + elements.get(i).getName_elem());
-        }
-
-        JSONObject jsonRequest = new JSONObject();
-        try {
-            jsonRequest.put("name_cat", categoryName);
-            jsonRequest.put("img_cat", categoryImage);
-            jsonRequest.put("id_user", userId);
-
-            JSONArray elementsArray = new JSONArray();
-            for (Element element : elements) {
-                JSONObject elementObject = new JSONObject();
-                elementObject.put("name_elem", element.getName_elem());
-                elementObject.put("img_elem", element.getImg_elem());
-                elementObject.put("victories", element.getVictories());
-                elementObject.put("id_cat", element.getId_cat());
-                elementsArray.put(elementObject);
+            if(elements.get(i).getName_elem().length() > 15){
+                mayor = true;
             }
-            jsonRequest.put("elements", elementsArray);
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonRequest.toString());
-        Call<Void> call = categoriesAPI.createCategory(requestBody);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
+        if(mayor == true){
+            Toast.makeText(getActivity(), "The name of an element is more than 15 characters", Toast.LENGTH_SHORT).show();
+        }else{
+            JSONObject jsonRequest = new JSONObject();
+            try {
+                jsonRequest.put("name_cat", categoryName);
+                jsonRequest.put("img_cat", categoryImage);
+                jsonRequest.put("id_user", userId);
+
+                JSONArray elementsArray = new JSONArray();
+                for (Element element : elements) {
+                    JSONObject elementObject = new JSONObject();
+                    elementObject.put("name_elem", element.getName_elem());
+                    elementObject.put("img_elem", element.getImg_elem());
+                    elementObject.put("victories", element.getVictories());
+                    elementObject.put("id_cat", element.getId_cat());
+                    elementsArray.put(elementObject);
+                }
+                jsonRequest.put("elements", elementsArray);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonRequest.toString());
+            Call<Void> call = categoriesAPI.createCategory(requestBody);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
 
 
-                    // La solicitud fue exitosa
-                    Log.d("CategoryActivity", "Categoría creada exitosamente");
-                    create_new_category_alert_dialog();
-                } else {
-                    if (response.code() == 400) {
-                        Toast.makeText(requireContext(), "Ya existe una categoria con ese nombre", Toast.LENGTH_SHORT).show();
-                        Log.e("CategoryActivity", "Error: Ya existe una categoría con ese nombre");
+                        // La solicitud fue exitosa
+                        Log.d("CategoryActivity", "Categoría creada exitosamente");
+                        create_new_category_alert_dialog();
                     } else {
-                        // Otro código de estado, maneja según sea necesario
-                        Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+                        if (response.code() == 400) {
+                            Toast.makeText(requireContext(), "Ya existe una categoria con ese nombre", Toast.LENGTH_SHORT).show();
+                            Log.e("CategoryActivity", "Error: Ya existe una categoría con ese nombre");
+                        } else {
+                            // Otro código de estado, maneja según sea necesario
+                            Log.e("CategoryActivity", "Error al crear la categoría: " + response.message());
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Error de red o error en la respuesta
-                Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    // Error de red o error en la respuesta
+                    Log.e("CategoryActivity", "Error en la llamada: " + t.getMessage());
+                }
+            });
+        }
+
+
     }
+
 
 
     public void Conectar(){
