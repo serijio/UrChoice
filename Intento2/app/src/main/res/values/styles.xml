@@ -2,9 +2,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    <!--Nuevos organizaos-->
     <!--Alert Dialogs--><!--Altera loading, Waiting players, Delete category, Cancel edition of category--><!--Alert Dialogs-->
     <style name="AlertDialogTest">
         <item name="android:textSize">30sp</item>
@@ -101,51 +98,51 @@
 
 
 
-    <!--General--><!--User info in Mains (fragment and class), navbar, name of fragments, --><!--General--><!--General--><!--General--><!--General--><!--General--><!--General--><!--General--><!--General-->
-    <style name="NavBarStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="backgroundTint">@color/blue</item>
-        <item name="itemIconTint">@color/black</item>
-        <item name="itemRippleColor">@color/red</item>
-        <item name="startIconTint">@color/black</item>
-        <item name="android:state_selected">true</item>
-        <item name="itemActiveIndicatorStyle">@style/activeIndicator</item>
-    </style>
+    <!--General--><!--User info in Mains (fragment and class), navbar, name of fragments, --><!--General-->
+        <style name="NavBarStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+            <item name="backgroundTint">@color/blue</item>
+            <item name="itemIconTint">@color/black</item>
+            <item name="itemRippleColor">@color/red</item>
+            <item name="startIconTint">@color/black</item>
+            <item name="android:state_selected">true</item>
+            <item name="itemActiveIndicatorStyle">@style/activeIndicator</item>
+        </style>
 
-    <style name="activeIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/red</item>
-    </style>
+        <style name="activeIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+            <item name="android:color">@color/red</item>
+        </style>
 
-    <style name="TopUserInfoNickname">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">left|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="TopUserInfoNickname">
+            <item name="android:textSize">13sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">left|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
-    <style name="TopUserInfoEmail">
-        <item name="android:textSize">8sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="fontFamily">@font/orbimedium</item>
-        <item name="android:gravity">left|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="TopUserInfoEmail">
+            <item name="android:textSize">8sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="fontFamily">@font/orbimedium</item>
+            <item name="android:gravity">left|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
-    <style name="TopUserInfoGames">
-        <item name="android:textSize">23sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="TopUserInfoGames">
+            <item name="android:textSize">23sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">center_horizontal|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
-    <style name="FragmentName">
-        <item name="android:textSize">40sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="FragmentName">
+            <item name="android:textSize">40sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">center_horizontal|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
     <style name="profile_text">
         <item name="android:textSize">20sp</item>
@@ -156,7 +153,7 @@
         <item name="android:textAlignment">gravity</item>
     </style>
 
-    <style name="recShape" parent="ShapeAppearance.Material3.SmallComponent">
+        <style name="recShape" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerSize">0dp</item>
     </style>
 
@@ -311,7 +308,7 @@
 
 
 
-    <!--Friends--><!--Friends to requests button, requests to friends button, username and email letter style, adding friends button--><!--Friends--><!--Friends--><!--Friends--><!--Friends--><!--Friends--><!--Friends--><!--Friends--><!--Friends-->
+    <!--Friends--><!--Friends to requests button, requests to friends button, username and email letter style, adding friends button--><!--Friends-->
         <style name="FriendRequests" parent="Widget.Material3.Button">
             <item name="backgroundTint">#00000000</item>
             <item name="strokeColor">#00000000</item>
@@ -329,15 +326,6 @@
             <item name="android:gravity">center_vertical|start</item>
             <item name="android:textAlignment">gravity</item>
             <item name="fontFamily">@font/orbimedium</item>
-        </style>
-
-        <style name="AlertDialogTest">
-            <item name="android:textSize">20sp</item>
-            <item name="android:textColor">@color/white</item>
-            <item name="hintTextColor">@color/white</item>
-            <item name="fontFamily">@font/orbiblack</item>
-            <item name="android:gravity">center_horizontal|center_vertical</item>
-            <item name="android:textAlignment">gravity</item>
         </style>
 
         <style name="FriendsUsernameStyle">
@@ -386,63 +374,63 @@
 
 
     <!--Profile-->
-    <style name="ProfileNameStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="backgroundTint">#00000000</item>
-        <item name="boxStrokeColor">#00000000</item>
-        <item name="boxStrokeWidth">0dp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:fontFamily">@font/orbimedium</item>
-        <item name="shapeAppearance">@style/recShape</item>
-    </style>
+        <style name="ProfileNameStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+            <item name="backgroundTint">#00000000</item>
+            <item name="boxStrokeColor">#00000000</item>
+            <item name="boxStrokeWidth">0dp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="android:textSize">22sp</item>
+            <item name="android:textAlignment">center</item>
+            <item name="android:fontFamily">@font/orbimedium</item>
+            <item name="shapeAppearance">@style/recShape</item>
+        </style>
 
-    <style name="ProfileEmailStyle">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:fontFamily">@font/orbimedium</item>
-    </style>
+        <style name="ProfileEmailStyle">
+            <item name="android:textColor">@color/white</item>
+            <item name="android:textSize">18sp</item>
+            <item name="android:gravity">center_vertical|center_horizontal</item>
+            <item name="android:textAlignment">gravity</item>
+            <item name="android:fontFamily">@font/orbimedium</item>
+        </style>
 
-    <style name="ProfilePlayedFriendsStyle">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:gravity">center_horizontal|top</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:fontFamily">@font/orbimedium</item>
-    </style>
+        <style name="ProfilePlayedFriendsStyle">
+            <item name="android:textColor">@color/white</item>
+            <item name="android:textSize">20sp</item>
+            <item name="android:gravity">center_horizontal|top</item>
+            <item name="android:textAlignment">gravity</item>
+            <item name="android:fontFamily">@font/orbimedium</item>
+        </style>
 
-    <style name="ProfilePlayedFriendsBigStyle">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/orbimedium</item>
-    </style>
+        <style name="ProfilePlayedFriendsBigStyle">
+            <item name="android:textColor">@color/white</item>
+            <item name="android:textSize">24sp</item>
+            <item name="android:gravity">center_vertical|center_horizontal</item>
+            <item name="android:textAlignment">gravity</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:fontFamily">@font/orbimedium</item>
+        </style>
 
-    <style name="CancelEditAlert">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="hintTextColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="CancelEditAlert">
+            <item name="android:textSize">15sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="hintTextColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">center_horizontal|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
-    <style name="ProfileImageCustomShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">30%</item>
-    </style>
+        <style name="ProfileImageCustomShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+            <item name="cornerFamily">cut</item>
+            <item name="cornerSize">30%</item>
+        </style>
 
-    <style name="mycategories">
-        <item name="android:textSize">27sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="mycategories">
+            <item name="android:textSize">27sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">center_horizontal|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
 
 </resources>
