@@ -15,34 +15,36 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:layout_width="318dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="205dp"
+            android:layout_marginTop="190dp"
             android:text="@string/discard"
             style="@style/AlertDialogTest" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/go_profile"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="280dp"
             android:background="#00FFFFFF"
             android:layout_marginStart="30dp"
             android:layout_alignParentStart="true"
             android:text="@string/back_profile"
-            style="@style/CancelEditAlert" />
+            android:textSize="16sp"
+            style="@style/AlertDialogTestMini" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/keep_edit"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="280dp"
             android:layout_marginEnd="30dp"
             android:background="#00FFFFFF"
             android:text="@string/keep_editing"
-            style="@style/CancelEditAlert" />
+            android:textSize="16sp"
+            style="@style/AlertDialogTestMini" />
 
     </RelativeLayout>
 </RelativeLayout>

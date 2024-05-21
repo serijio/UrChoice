@@ -37,7 +37,7 @@
             app:lottie_rawRes="@raw/azul" />
 
         <TextView
-            android:layout_width="260dp"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="170dp"
@@ -46,7 +46,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_players"
-            android:layout_width="260dp"
+            android:layout_width="270dp"
             android:layout_height="150dp"
             android:layout_marginTop="232dp"
             android:layout_centerHorizontal="true"
@@ -61,7 +61,7 @@
             android:layout_alignStart="@id/recycler_players"
             android:background="#00FFFFFF"
             android:text="@string/start_now"
-            style="@style/profile_text" />
+            style="@style/AlertDialogTestMini" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/alert_exit_button"
@@ -71,7 +71,7 @@
             android:layout_marginTop="400dp"
             android:background="#00FFFFFF"
             android:text="@string/exit"
-            style="@style/profile_text" />
+            style="@style/AlertDialogTestMini" />
 
     </RelativeLayout>
 </RelativeLayout>

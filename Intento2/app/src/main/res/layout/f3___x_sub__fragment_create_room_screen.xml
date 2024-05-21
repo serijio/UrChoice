@@ -59,7 +59,7 @@
     <!--Campos-->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:textColorHint="@color/blue"
         app:layout_constraintTop_toBottomOf="@id/h188"
         app:layout_constraintBottom_toTopOf="@id/h189"
@@ -86,7 +86,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:textColorHint="@color/blue"
         app:layout_constraintTop_toBottomOf="@id/h190"
         app:layout_constraintBottom_toTopOf="@id/h191"
@@ -292,14 +292,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.36" />
+        app:layout_constraintGuide_percent="0.37" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h189"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.44" />
+        app:layout_constraintGuide_percent="0.432" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h190"
@@ -313,21 +313,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.53" />
+        app:layout_constraintGuide_percent="0.512" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h192"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.54" />
+        app:layout_constraintGuide_percent="0.537" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h193"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.76" />
+        app:layout_constraintGuide_percent="0.745" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h194"

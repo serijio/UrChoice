@@ -107,10 +107,10 @@
 
 
     <!--Cancel edit alert-->
-    <string name="discard">DISCARD CHANGES?</string>
-    <string name="back_profile">GO TO PROFILE</string>
-    <string name="keep_editing">KEEP EDITING</string>
-    <string name="update_successful">UR CATEGORY HAS BEEN UPDATED!</string>
+    <string name="discard">Discard changes?</string>
+    <string name="back_profile">GO TO\nPROFILE</string>
+    <string name="keep_editing">KEEP\nEDITING</string>
+    <string name="update_successful">Ur category has been updated!</string>
     <string name="next_round">NEXT ROUND IN...</string>
     <string name="type">TYPE A CATEGORY</string>
     <string name="looking">I\'M LOOKING FOR...</string>

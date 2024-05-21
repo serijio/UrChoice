@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--Alert Dialogs--><!--Altera loading, Waiting players, Delete category, Cancel edition of category--><!--Alert Dialogs-->
-    <style name="AlertDialogTest">
-        <item name="android:textSize">30sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="hintTextColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="AlertDialogTest">
+            <item name="android:textSize">30sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="hintTextColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">center_horizontal|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
-    <style name="AlertDialogTestMini">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="hintTextColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
+        <style name="AlertDialogTestMini">
+            <item name="android:textSize">20sp</item>
+            <item name="android:textColor">@color/white</item>
+            <item name="hintTextColor">@color/white</item>
+            <item name="fontFamily">@font/orbiblack</item>
+            <item name="android:gravity">center_horizontal|center_vertical</item>
+            <item name="android:textAlignment">gravity</item>
+        </style>
 
 
 
@@ -144,15 +144,6 @@
             <item name="android:textAlignment">gravity</item>
         </style>
 
-    <style name="profile_text">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="hintTextColor">@color/white</item>
-        <item name="fontFamily">@font/orbiblack</item>
-        <item name="android:gravity">center_horizontal|center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-    </style>
-
         <style name="recShape" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerSize">0dp</item>
     </style>
@@ -199,11 +190,11 @@
             <item name="boxStrokeColor">@color/text_input_outline_color_red</item>
             <item name="boxStrokeWidth">2dp</item>
             <item name="android:textAlignment">textStart</item>
-            <item name="android:textSize">18sp</item>
+            <item name="android:textSize">14sp</item>
         </style>
 
         <style name="CreateCategoryText">
-            <item name="android:textSize">13sp</item>
+            <item name="android:textSize">14sp</item>
             <item name="android:textColor">@color/red</item>
             <item name="android:gravity">center_vertical|start</item>
             <item name="android:textAlignment">gravity</item>
@@ -211,7 +202,7 @@
         </style>
 
         <style name="CreateEditCategoryRecyclerText">
-            <item name="android:textSize">12sp</item>
+            <item name="android:textSize">14sp</item>
             <item name="android:textColor">@color/red</item>
             <item name="android:gravity">center_vertical|center_horizontal</item>
             <item name="android:textAlignment">gravity</item>
@@ -245,7 +236,7 @@
             <item name="strokeColor">@color/red</item>
             <item name="strokeWidth">2dp</item>
             <item name="android:textColor">@color/red</item>
-            <item name="android:textSize">13sp</item>
+            <item name="android:textSize">14sp</item>
             <item name="android:textAlignment">textStart</item>
             <item name="android:fontFamily">@font/orbimedium</item>
             <item name="shapeAppearance">@style/recShape</item>
@@ -271,7 +262,7 @@
             <item name="boxStrokeColor">@color/text_input_outline_color_blue</item>
             <item name="boxStrokeWidth">2dp</item>
             <item name="android:textAlignment">textStart</item>
-            <item name="android:textSize">13sp</item>
+            <item name="android:textSize">14sp</item>
         </style>
 
         <style name="CreateRoomChooseCategoryButton" parent="Widget.Material3.Button">
@@ -410,26 +401,9 @@
             <item name="android:fontFamily">@font/orbimedium</item>
         </style>
 
-        <style name="CancelEditAlert">
-            <item name="android:textSize">15sp</item>
-            <item name="android:textColor">@color/white</item>
-            <item name="hintTextColor">@color/white</item>
-            <item name="fontFamily">@font/orbiblack</item>
-            <item name="android:gravity">center_horizontal|center_vertical</item>
-            <item name="android:textAlignment">gravity</item>
-        </style>
-
         <style name="ProfileImageCustomShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
             <item name="cornerFamily">cut</item>
             <item name="cornerSize">30%</item>
         </style>
 
-        <style name="mycategories">
-            <item name="android:textSize">27sp</item>
-            <item name="android:textColor">@color/white</item>
-            <item name="fontFamily">@font/orbiblack</item>
-            <item name="android:gravity">center_horizontal|center_vertical</item>
-            <item name="android:textAlignment">gravity</item>
-        </style>
-    
 </resources>

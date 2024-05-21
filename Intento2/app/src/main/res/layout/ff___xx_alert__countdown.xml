@@ -43,7 +43,7 @@
             android:layout_marginTop="155dp"
             android:text="@string/next_round"
             android:elevation="1dp"
-            style="@style/profile_text" />
+            style="@style/AlertDialogTestMini" />
 
         <ImageView
             android:id="@+id/countdownImageView"
