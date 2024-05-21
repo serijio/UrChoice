@@ -61,7 +61,7 @@
         app:boxCornerRadiusTopEnd="0dp"
         app:boxCornerRadiusBottomStart="0dp"
         app:boxCornerRadiusBottomEnd="0dp"
-        style="@style/CreateCategoryStyle" >
+        style="@style/CreateCategoryInputStyle" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_cat_name_insert"
@@ -104,7 +104,7 @@
         android:textColor="@color/red"
         android:textSize="18sp"
         app:backgroundTint="@null"
-        style="@style/CreateCategoryButtons" />
+        style="@style/CategoryAddFieldsButtons" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_new_card"
@@ -118,7 +118,7 @@
         app:icon="@drawable/add_icon"
         app:iconTint="@color/red"
         app:iconGravity="end"
-        style="@style/CreateCategoryButtons" />
+        style="@style/CategoryAddFieldsButtons" />
 
     <View
         android:layout_width="0dp"
@@ -151,7 +151,7 @@
         app:layout_constraintEnd_toStartOf="@id/v115"
         android:text="@string/no_cards_yet_minus"
         android:visibility="invisible"
-        style="@style/CreateCategoryMiniText" />
+        style="@style/CreateEditCategoryRecyclerText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_card_category"
@@ -172,7 +172,7 @@
         app:layout_constraintStart_toEndOf="@id/v112"
         app:layout_constraintEnd_toStartOf="@id/v113"
         android:text="@string/create_cat"
-        style="@style/CreateCategory" />
+        style="@style/CategoryButtonsRed" />
 
 
     <!--Constraints verticales-->

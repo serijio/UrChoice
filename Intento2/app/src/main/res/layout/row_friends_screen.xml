@@ -35,7 +35,7 @@
                 android:layout_weight="0.35"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/a"
-                app:shapeAppearanceOverlay="@style/imageborder" />
+                app:shapeAppearanceOverlay="@style/FriendsImageCustomShape" />
 
             <TextView
                 android:id="@+id/friends_name"
@@ -43,7 +43,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
                 android:text="@string/lukinda"
-                style="@style/FriendsUsernameStyle2" />
+                style="@style/FriendsUsernameStyle" />
 
             <TextView
                 android:id="@+id/friends_email"
@@ -51,7 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
                 android:text="@string/lukinda_mail"
-                style="@style/FriendsUsernameStyle3" />
+                style="@style/FriendsEmailStyle" />
 
             <ImageView
                 android:id="@+id/delete_friend"

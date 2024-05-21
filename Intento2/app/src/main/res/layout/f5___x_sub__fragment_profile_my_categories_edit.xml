@@ -59,7 +59,7 @@
         app:boxCornerRadiusTopEnd="0dp"
         app:boxCornerRadiusBottomStart="0dp"
         app:boxCornerRadiusBottomEnd="0dp"
-        style="@style/CreateCategoryStyle" >
+        style="@style/CreateCategoryInputStyle" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_cat_name_insert"
@@ -90,7 +90,7 @@
         android:textColor="@color/red"
         android:textAlignment="textStart"
         android:textSize="18sp"
-        style="@style/CreateCategoryButtons" />
+        style="@style/CategoryAddFieldsButtons" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_new_card"
@@ -104,7 +104,7 @@
         app:icon="@drawable/add_icon"
         app:iconTint="@color/red"
         app:iconGravity="end"
-        style="@style/CreateCategoryButtons" />
+        style="@style/CategoryAddFieldsButtons" />
 
     <View
         android:layout_width="0dp"
@@ -135,7 +135,7 @@
         app:layout_constraintEnd_toStartOf="@id/v169"
         android:text="@string/no_cards_yet_minus"
         android:visibility="invisible"
-        style="@style/CreateCategoryMiniText" />
+        style="@style/CreateEditCategoryRecyclerText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/edit_recycler_card_category"
@@ -156,8 +156,7 @@
         app:layout_constraintStart_toEndOf="@id/v170"
         app:layout_constraintEnd_toStartOf="@id/v171"
         android:text="@string/save"
-        android:textSize="20sp"
-        style="@style/CreateCategory" />
+        style="@style/CategoryButtonsRed" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel_edit_button"
@@ -167,10 +166,8 @@
         app:layout_constraintBottom_toTopOf="@id/h252"
         app:layout_constraintStart_toEndOf="@id/v172"
         app:layout_constraintEnd_toStartOf="@id/v173"
-        android:textColor="@color/white"
         android:text="@string/cancel"
-        android:textSize="20sp"
-        style="@style/CreateCategory" />
+        style="@style/CategoryButtonsWhite" />
 
 
     <!--Constraints verticales-->

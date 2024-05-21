@@ -91,7 +91,7 @@
         app:layout_constraintStart_toEndOf="@id/v142"
         app:layout_constraintEnd_toStartOf="@id/v143"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/profileborder"
+        app:shapeAppearanceOverlay="@style/ProfileImageCustomShape"
         app:strokeWidth="10dp"
         app:strokeColor="@color/black" />
 

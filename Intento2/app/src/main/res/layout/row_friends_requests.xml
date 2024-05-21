@@ -35,15 +35,15 @@
                 android:layout_weight="0.35"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/a"
-                app:shapeAppearanceOverlay="@style/imageborder" />
+                app:shapeAppearanceOverlay="@style/FriendsImageCustomShape" />
 
             <TextView
                 android:id="@+id/requests_name"
                 android:layout_width="75dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.20"
+                android:layout_weight="0.24"
                 android:text="@string/lukinda"
-                style="@style/FriendsUsernameStyle4" />
+                style="@style/FriendsUsernameStyle" />
 
             <TextView
                 android:id="@+id/requests_email"
@@ -51,27 +51,26 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.15"
                 android:text="@string/lukinda_mail"
-                android:textSize="10dp"
-                style="@style/FriendsUsernameStyle5" />
+                style="@style/FriendsEmailStyleLeft" />
 
             <ImageView
                 android:id="@+id/accept_request"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.17"
-                android:paddingTop="20dp"
+                android:layout_weight="0.2"
+                android:paddingTop="18dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
+                android:paddingBottom="18dp"
                 android:src="@drawable/accept_request" />
 
             <ImageView
                 android:id="@+id/decline_request"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.17"
-                android:paddingTop="20dp"
+                android:layout_weight="0.2"
+                android:paddingTop="18dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
+                android:paddingBottom="18dp"
                 android:src="@drawable/decline_request" />
 
         </LinearLayout>

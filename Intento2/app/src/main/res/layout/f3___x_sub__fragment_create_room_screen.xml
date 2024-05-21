@@ -69,7 +69,7 @@
         app:boxCornerRadiusTopEnd="0dp"
         app:boxCornerRadiusBottomStart="0dp"
         app:boxCornerRadiusBottomEnd="0dp"
-        style="@style/CreateRoomStyle" >
+        style="@style/CreateRoomTextStyle" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nick_room"
@@ -80,7 +80,7 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +96,7 @@
         app:boxCornerRadiusTopEnd="0dp"
         app:boxCornerRadiusBottomStart="0dp"
         app:boxCornerRadiusBottomEnd="0dp"
-        style="@style/CreateRoomStyle" >
+        style="@style/CreateRoomTextStyle" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passRoom"
@@ -107,7 +107,7 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,9 +135,9 @@
         android:fontFamily="@font/orbimedium"
         android:textColor="@color/blue"
         android:textAlignment="textStart"
-        android:textSize="12sp"
+        android:textSize="18sp"
         app:backgroundTint="@null"
-        style="@style/CreateRoomButtons" />
+        style="@style/CreateRoomChooseCategoryButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/create_room_button"
@@ -148,7 +148,7 @@
         app:layout_constraintStart_toEndOf="@id/v124"
         app:layout_constraintEnd_toStartOf="@id/v125"
         android:text="@string/create_cat"
-        style="@style/CreateRoom" />
+        style="@style/CategoryButtonsRed" />
 
 
     <!--Constraints verticales-->

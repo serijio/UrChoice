@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/card_image_data"
-            android:layout_width="318dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
