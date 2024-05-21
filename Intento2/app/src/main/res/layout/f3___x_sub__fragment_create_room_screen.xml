@@ -80,7 +80,7 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,7 +107,7 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/orbimedium"
             android:textColorHint="@color/blue"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +135,7 @@
         android:fontFamily="@font/orbimedium"
         android:textColor="@color/blue"
         android:textAlignment="textStart"
-        android:textSize="18sp"
+        android:textSize="12sp"
         app:backgroundTint="@null"
         style="@style/CreateRoomButtons" />
 

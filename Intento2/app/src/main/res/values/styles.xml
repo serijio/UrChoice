@@ -195,7 +195,7 @@
         </style>
 
         <style name="CreateCategoryText">
-            <item name="android:textSize">18sp</item>
+            <item name="android:textSize">12sp</item>
             <item name="android:textColor">@color/red</item>
             <item name="android:gravity">center_vertical|start</item>
             <item name="android:textAlignment">gravity</item>
@@ -215,7 +215,7 @@
             <item name="strokeColor">#00000000</item>
             <item name="strokeWidth">0dp</item>
             <item name="android:textColor">@color/red</item>
-            <item name="android:textSize">35sp</item>
+            <item name="android:textSize">20sp</item>
             <item name="android:textAlignment">center</item>
             <item name="android:fontFamily">@font/orbiblack</item>
             <item name="shapeAppearance">@style/recShape</item>
@@ -226,7 +226,7 @@
             <item name="strokeColor">@color/red</item>
             <item name="strokeWidth">2dp</item>
             <item name="android:textColor">@color/red</item>
-            <item name="android:textSize">18sp</item>
+            <item name="android:textSize">12sp</item>
             <item name="android:textAlignment">textStart</item>
             <item name="android:fontFamily">@font/orbimedium</item>
             <item name="shapeAppearance">@style/recShape</item>
@@ -287,7 +287,7 @@
             <item name="strokeColor">#00000000</item>
             <item name="strokeWidth">0dp</item>
             <item name="android:textColor">@color/red</item>
-            <item name="android:textSize">35sp</item>
+            <item name="android:textSize">30sp</item>
             <item name="android:textAlignment">center</item>
             <item name="android:fontFamily">@font/orbiblack</item>
             <item name="shapeAppearance">@style/recShape</item>
@@ -322,7 +322,7 @@
             <item name="strokeColor">#00000000</item>
             <item name="strokeWidth">0dp</item>
             <item name="android:textColor">@color/blue</item>
-            <item name="android:textSize">15sp</item>
+            <item name="android:textSize">13sp</item>
             <item name="android:gravity">center_vertical|center_horizontal</item>
             <item name="android:textAlignment">gravity</item>
             <item name="android:fontFamily">@font/orbimedium</item>
