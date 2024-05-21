@@ -85,6 +85,7 @@ public class FriendsRequestsSubFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Conectar();
+        waitAlertAltera();
         View view = inflater.inflate(R.layout.f2___x_sub_fragment_friends_requests, container, false);
         back_to_friends = view.findViewById(R.id.back_to_friends_button);
         recyclerView = view.findViewById(R.id.requests_recycler);
@@ -136,6 +137,7 @@ public class FriendsRequestsSubFragment extends Fragment {
                     setRvMain();
                     friends_requests_adapter = new Friends_Requests_Adapter(requireContext(),friendsRequestsModels,users);
                     recyclerView.setAdapter(friends_requests_adapter);
+                    dismissWaitAlert();
                 } else {
                     Log.e("SQL", "Error en la respuesta: " + response.message());
                     // Manejar errores de la API
