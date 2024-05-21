@@ -48,7 +48,7 @@
         android:background="@color/blue"
         app:strokeWidth="1dp"
         app:strokeColor="@color/black"
-        app:shapeAppearanceOverlay="@style/profileborder"
+        app:shapeAppearanceOverlay="@style/ProfileImageCustomShape"
         app:srcCompat="@drawable/nopic_login_inside"
         app:layout_constraintBottom_toTopOf="@id/h75"
         app:layout_constraintEnd_toStartOf="@id/v53"

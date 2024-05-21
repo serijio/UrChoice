@@ -50,9 +50,9 @@
         app:layout_constraintStart_toEndOf="@id/v25"
         app:layout_constraintEnd_toStartOf="@id/v26"
         android:scaleType="centerCrop"
-        app:strokeWidth="1dp"
+        app:strokeWidth="3dp"
         app:strokeColor="@color/black"
-        app:shapeAppearanceOverlay="@style/profileborder"
+        app:shapeAppearanceOverlay="@style/ProfileImageCustomShape"
         app:srcCompat="@drawable/nopic_login_inside" />
 
     <com.google.android.material.textfield.TextInputLayout

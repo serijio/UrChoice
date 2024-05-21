@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toStartOf="@id/v143"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/ProfileImageCustomShape"
-        app:strokeWidth="6dp"
+        app:strokeWidth="5dp"
         app:strokeColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
