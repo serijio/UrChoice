@@ -1,10 +1,12 @@
 package com.example.urchoice2.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
     Context context;
     ArrayList<Friends_Screen_Model> friendsScreenModels;
     private LayoutInflater inflater;
+    private AlertDialog alertDialog;
     private FriendsAPI friendsAPI;
     private int userId;
     private List<User> friendsList;
@@ -72,6 +76,12 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
             @Override
             public void onClick(View v) {
                 UpdateFriend(friendsList.get(position).getId_user());
+            }
+        });
+        holder.friendName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SeeProfileFriend(friendsList.get(position));
             }
         });
     }
@@ -138,6 +148,32 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
             }
         });
     }
+    public void SeeProfileFriend(User user){
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.friends_profile_alertdialog, null);
+
+        TextView gameplayed = view.findViewById(R.id.games);
+        TextInputEditText nameUser = view.findViewById(R.id.profileName_edittext);
+        TextView email = view.findViewById(R.id.profilemail);
+        ImageView profile = view.findViewById(R.id.profile_image);
+        ImageView profilebackground = view.findViewById(R.id.profile_background);
+
+        Bitmap imagen = base64ToBitmap(user.getImg_user());
+        profile.setImageBitmap(imagen);
+        profilebackground.setImageBitmap(imagen);
+        gameplayed.setText(String.valueOf(user.getGamesPlayed()));
+        email.setText(user.getEmail_user());
+        nameUser.setText(user.getNick_user());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(view);
+        alertDialog = builder.create();
+        //alertDialog.setCanceledOnTouchOutside(false);
+        //alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        alertDialog.show();
+    }
+
 
 
 }

@@ -1,10 +1,12 @@
 package com.example.urchoice2.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Requests_Adapter.MyViewHolder> {
     Context context;
     ArrayList<Friends_Requests_Model> friendsRequestsModels;
+    private AlertDialog alertDialog;
     private LayoutInflater inflater;
     private FriendsAPI friendsAPI;
     private int userId;
@@ -84,6 +87,7 @@ public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Reque
                 friendsList.remove(friendsList.get(position));
             }
         });
+
     }
 
     public Bitmap base64ToBitmap(String base64Image) {
@@ -150,4 +154,6 @@ public class Friends_Requests_Adapter extends RecyclerView.Adapter<Friends_Reque
             }
         });
     }
+
+
 }
