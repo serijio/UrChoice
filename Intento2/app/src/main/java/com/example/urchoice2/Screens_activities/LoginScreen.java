@@ -49,6 +49,7 @@ public class LoginScreen extends AppCompatActivity {
         backPic = findViewById(R.id.login_back_profile_pic);
         Conectar();
 
+        //Volver al layout de start
         logToStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +57,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
 
+        //Realizar login
         logNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +65,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
     }
+
 
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -72,6 +75,7 @@ public class LoginScreen extends AppCompatActivity {
         userApi = retrofit.create(UserAPI.class);
     }
 
+    //Metodo para volver al layout start
     public void LogToStartButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -92,6 +96,7 @@ public class LoginScreen extends AppCompatActivity {
         }, 400);
     }
 
+    //Metodo para volver al layout main
     public void LogToMainButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -114,6 +119,8 @@ public class LoginScreen extends AppCompatActivity {
         }, 400);
     }
 
+
+    //Metodo para login cogiendo si hay algun usuario con ese gmail y contraseña en la base de datos
     public void Login() {
         TextView emailTextView = findViewById(R.id.login_email_insert);
         TextView contraTextView = findViewById(R.id.login_pass_insert);
@@ -138,9 +145,6 @@ public class LoginScreen extends AppCompatActivity {
                     editor.apply();
 
                     EndAPP(user.getId_user());
-                    Log.e("SQL","Usuario encontrado");
-                    /*Intent intent = new Intent(LoginScreen.this, MainScreen.class);
-                    startActivity(intent);*/
                     LogToMainButton();
                 } else {
                     Toast.makeText(LoginScreen.this, "User not found", Toast.LENGTH_SHORT).show();
@@ -158,6 +162,7 @@ public class LoginScreen extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
+    //Borrar cualquier dato dejado atras por el usuario en la base de datos
     public void EndAPP(int userId) {
         Call<Void> call = userApi.endAPP(userId);
         call.enqueue(new Callback<Void>() {
@@ -166,13 +171,11 @@ public class LoginScreen extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
                 } else {
-                    // OcurriÃ³ un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });

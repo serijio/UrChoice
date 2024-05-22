@@ -1,14 +1,11 @@
 package com.example.urchoice2.Fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.urchoice2.Adapters.MyPagerAdapter;
 import com.example.urchoice2.R;
 import com.google.android.material.tabs.TabLayout;
@@ -63,7 +60,6 @@ public class SavedFavFragment extends Fragment {
                 // Cambiar al fragmento correspondiente al hacer clic en la pestaña
                 viewPager.setCurrentItem(tab.getPosition());
             }
-            //HOLA
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {

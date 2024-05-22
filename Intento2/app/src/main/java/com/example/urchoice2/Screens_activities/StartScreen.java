@@ -65,6 +65,8 @@ public class StartScreen extends AppCompatActivity {
                 }, null, Shader.TileMode.CLAMP);
         MtextView.getPaint().setShader(textShader);
     }
+
+    //Metodo para ir al layout login
     public void ToLoginButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -87,6 +89,7 @@ public class StartScreen extends AppCompatActivity {
         }, 400);
     }
 
+    //Metodo para ir al layout de sign
     public void ToSignButton() {
         new Handler().postDelayed(new Runnable() {
             @Override

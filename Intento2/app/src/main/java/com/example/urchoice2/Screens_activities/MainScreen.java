@@ -49,18 +49,15 @@ public class MainScreen extends AppCompatActivity {
                     replaceFragment(new FriendsFragment());
                 } else if (itemId == R.id.nav_add) {
                     replaceFragment (new CreateCatRoomFragment());
-                    //replaceFragment (new CreateCategorySubFragment());
                 } else if (itemId == R.id.nav_favs) {
                     replaceFragment (new SavedFavFragment());
                 } else if (itemId == R.id.nav_user) {
                     replaceFragment (new ProfileFragment());
                 }
-
                 return true;
             }
         });
     }
-
 
 
     private void replaceFragment(Fragment fragment) {

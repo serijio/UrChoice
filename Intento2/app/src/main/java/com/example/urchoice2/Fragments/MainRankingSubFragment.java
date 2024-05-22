@@ -7,13 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.API.ElementsAPI;
@@ -30,12 +27,9 @@ import com.example.urchoice2.Classes.Category;
 import com.example.urchoice2.Classes.Element;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
-import com.example.urchoice2.Screens_activities.MainScreen;
 import com.example.urchoice2.Screens_activities.SingleGame;
 import com.google.android.material.button.MaterialButton;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,17 +42,13 @@ public class MainRankingSubFragment extends Fragment {
     private AlertDialog alertDialog;
     private User user;
     private int userId;
-
     private UserAPI userApi;
-
     private String mParam1;
     private String mParam2;
-
     private ElementsAPI elementsAPI;
     private CategoriesAPI categoriesAPI;
     private Integer categoryId;
     private MaterialButton startGameButton;
-
     private MaterialButton go_back_button;
     public MainRankingSubFragment() {}
 
@@ -122,6 +112,7 @@ public class MainRankingSubFragment extends Fragment {
         userId = preferences.getInt("id_user", 0);
     }
 
+    //Metodo para coger la informacion de la categoria seleccionada
     public void GetCategory(View view){
         Call<Category> call = categoriesAPI.getCategory(categoryId);
         call.enqueue(new Callback<Category>() {
@@ -147,6 +138,7 @@ public class MainRankingSubFragment extends Fragment {
         });
     }
 
+    //Metodo para coger a los 5 elementos de la categoria con mas victorias
     public void GetRanking(View view){
         Call<List<Element>> call = elementsAPI.getRanking(categoryId);
         call.enqueue(new Callback<List<Element>>() {
@@ -166,15 +158,12 @@ public class MainRankingSubFragment extends Fragment {
 
                         dismissWaitAlert();
                     }
-                    // Haz algo con los datos recibidos
-                } else {
-                    // Maneja el error de respuesta
                 }
             }
 
             @Override
             public void onFailure(Call<List<Element>> call, Throwable t) {
-                // Maneja el error de la llamada
+                // Error de la llamada
             }
         });
     }
@@ -185,24 +174,13 @@ public class MainRankingSubFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
+    //Ir a la pantalla de juego
     public void StartGame(){
-
         Intent intent = new Intent(requireContext(), SingleGame.class);
         requireContext().startActivity(intent);
     }
-    /*public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-    }*/
 
-
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
@@ -237,23 +215,19 @@ public class MainRankingSubFragment extends Fragment {
             });
         }
     }
-    public void back_home() {
 
+    //Metodo para volver al main
+    public void back_home() {
         // Reemplaza el fragmento actual con MainFragment
         Fragment mainFragment = new MainFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.mainframe, mainFragment);
-        transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
+        transaction.addToBackStack(null);
         transaction.commit();
-
-        //SI QUITAS ESTO QUEDA RARO Y FEO SERGIO AYUDAAAAA
-        /*
-        go_back_button.setVisibility(View.GONE);
-        startGameButton.setVisibility(View.GONE);
-        go_back_button.setEnabled(false);
-        startGameButton.setEnabled(false);
-        */
     }
+
+
+    //Metodo para recibir la informacion del usuario que hizo login
     public void GetUser(View view){
         Call<User> call = userApi.getUser(userId);
         call.enqueue(new Callback<User>() {
@@ -275,6 +249,8 @@ public class MainRankingSubFragment extends Fragment {
             }
         });
     }
+
+    //Metodo para rellenar el layout con los datos del usuario
     private void updateView(View view) {
         if (user != null) {
             TextView username = view.findViewById(R.id.ranking_username);

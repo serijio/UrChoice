@@ -55,6 +55,7 @@ public class RegisterScreen extends AppCompatActivity {
         titleSign = findViewById(R.id.sign_title);
         Conectar();
 
+        //Volver al start
         signToStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +63,7 @@ public class RegisterScreen extends AppCompatActivity {
             }
         });
 
+        //Crear usuario
         createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +81,7 @@ public class RegisterScreen extends AppCompatActivity {
         userApi = retrofit.create(UserAPI.class);
     }
 
+    //Metodo para ir al layout Start
     public void SignToStartButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -100,7 +103,7 @@ public class RegisterScreen extends AppCompatActivity {
         }, 400);
     }
 
-
+//Metodo para ir al layout main
     public void SignToMainButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -121,15 +124,18 @@ public class RegisterScreen extends AppCompatActivity {
             }
         }, 400);
     }
+
+
     public String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         /*evitar que se pete debido a ciertas imagenes sobre todo las de camara*/
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
+
+
 
     public Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
@@ -147,6 +153,8 @@ public class RegisterScreen extends AppCompatActivity {
         return bitmap;
     }
 
+
+    //Metodo para registrar al user en la base de datos
     public void Registrer() {
 
         TextView emailTextView = findViewById(R.id.sign_email_insert);

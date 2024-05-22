@@ -37,10 +37,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfileMyCategoriesSubFragment extends Fragment {
-    /*private String mParam1;
-    private String mParam2;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";*/
     private int userId;
     private AlertDialog alertDialog;
     private CategoriesAPI categoriesAPI;
@@ -52,30 +48,11 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
 
     public ProfileMyCategoriesSubFragment(){}
 
-    /*public static ProfileMyCategoriesSubFragment newInstance(String param1, String param2) {
-        ProfileMyCategoriesSubFragment fragment = new ProfileMyCategoriesSubFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f5___x_sub__fragment_profile_my_categories, container, false);
         Conectar();
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
-        //waitAlert();
         waitAlertAltera();
         recyclerView = view.findViewById(R.id.recycler_my_categories);
         recyclerView.setLayoutManager(layoutManager);
@@ -94,7 +71,7 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
         userId = preferences.getInt("id_user", 0);
     }
 
-
+//Coger las categorias creadas por el user
     public void GetMyCategories(){
         Call<List<Category>> call = categoriesAPI.getCategoriesByUserId(userId); // Cambia 1 por el user_id que desees
         call.enqueue(new Callback<List<Category>>() {
@@ -103,7 +80,6 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     categoryList = response.body();
                     setRvMain();
-                    //Log.e("SQL","DATOS: " + categoryList.get(0).getName_cat());
                     my_categories_adapter = new My_categories_Adapter(requireContext(), main_screen_model, categoryList);
                     recyclerView.setAdapter(my_categories_adapter);
                     dismissWaitAlert();
@@ -118,6 +94,7 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
         });
     }
 
+    //Rellenar las cardview con los datos de las categorias
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable( requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
@@ -135,19 +112,8 @@ public class ProfileMyCategoriesSubFragment extends Fragment {
         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
-    /*
-    public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-    }*/
 
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);

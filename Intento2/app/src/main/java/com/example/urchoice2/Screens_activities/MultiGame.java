@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
@@ -33,12 +32,10 @@ import com.example.urchoice2.Classes.VoteCount;
 import com.example.urchoice2.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.JsonObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,12 +75,13 @@ public class MultiGame extends AppCompatActivity {
         userId = sharedPreferences.getInt("id_user", 0);
         roomId = sharedPreferences.getInt("id_room", 0);
         waitAlertAltera();
-        //waitAlert();
         Conectar();
         textViewElement1 = findViewById(R.id.Multicard_name1);
         textViewElement2 = findViewById(R.id.Multicard_name2);
         imageViewElement1 = findViewById(R.id.MultiimageView1);
         imageViewElement2 = findViewById(R.id.MultiimageView2);
+
+        //Votar al primer elemento
         textViewElement1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +91,7 @@ public class MultiGame extends AppCompatActivity {
             }
         });
 
+        //Votar al segundo elemento
         textViewElement2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,23 +103,7 @@ public class MultiGame extends AppCompatActivity {
 
     }
 
-    //lo nuevo de Luca
-
-    public void AlertWaitingPlayers(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View view = layoutInflater.inflate(R.layout.xx__fragment_multi_waiting_game_alert,null);
-        AlertDialog alertDialog = builder.create();
-
-        alertDialog.setView(view);
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-
-    }
-
-
+//Layout donde se muestra al ganador
     public void AlertWinner() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -151,7 +134,7 @@ public class MultiGame extends AppCompatActivity {
 
     }
 
-
+//Volver al layout main
     public void changeToMainButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -171,8 +154,6 @@ public class MultiGame extends AppCompatActivity {
         }, 400);
     }
 
-    //lo nuevo de Luca
-
     public void Conectar(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://railwayserver-production-7692.up.railway.app")
@@ -186,7 +167,7 @@ public class MultiGame extends AppCompatActivity {
 
     }
 
-
+//Coger los elementos de la categoria a jugar
     public void Game(){
         elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
             @Override
@@ -211,26 +192,26 @@ public class MultiGame extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-
+//Empezar ronda
     private void startRound() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 dismissWaitAlert();
+                //Empezar ronda entre los elementos iniciales
                 if (currentRound < shuffledElements.size() / 2) {
                     //showCountdownAlert();
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
                     // Mostrar los nombres de los elementos en los TextView correspondientes
-                    Log.e("SQL", "ROUNDCONECT: " + shuffledElements.size());
                     Bitmap base64Image = base64ToBitmap(firstElement.img_elem);
                     Bitmap base64Image2 = base64ToBitmap(secondElement.img_elem);
                     imageViewElement1.setImageBitmap(base64Image);
                     imageViewElement2.setImageBitmap(base64Image2);
                     textViewElement1.setText(firstElement.name_elem);
                     textViewElement2.setText(secondElement.name_elem);
+                    //Solo quedan los elementos ganadores
                 } else if (shuffledElements.size() != 1) {
-                    Log.e("SQL", "ROUNDCONECT: " + shuffledElements.size());
                     shuffledElements = new ArrayList<>(winnerElements);
                     Collections.sort(shuffledElements, Comparator.comparing(Element::getName_elem));
                     winnerElements.clear();
@@ -240,6 +221,7 @@ public class MultiGame extends AppCompatActivity {
                     }else{
                         startRound();
                     }
+                    //Solo queda el ganador
                 } else {
                     Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
                     call.enqueue(new Callback<Void>() {
@@ -261,7 +243,7 @@ public class MultiGame extends AppCompatActivity {
         });
     }
 
-
+//Dialog de empezar ronda
     private void showCountdownAlert() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.ff___xx_alert__countdown, null);
@@ -293,7 +275,7 @@ public class MultiGame extends AppCompatActivity {
         }
     }
 
-
+//Metodo para subir tu voto
     public void Vote(String voto) {
         //waitAlert();
         waitAlertAltera();
@@ -302,8 +284,6 @@ public class MultiGame extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    //dismissWaitAlert();
-                    Log.e("SQL", "FUNCIONO");
                     allVotesReceived = false;
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -323,7 +303,7 @@ public class MultiGame extends AppCompatActivity {
         });
     }
 
-
+//Poner en bucle para sacar los votos de los jugadores
     private void startRepeatedCall() {
         Log.e("SQL","ENTRO AL CALL: " + allVotesReceived );
         handler.postDelayed(new Runnable() {
@@ -340,14 +320,13 @@ public class MultiGame extends AppCompatActivity {
         }, 1000);
     }
 
-
+//Sacar los votos de los usuarios
     public void GetUsers() {
         Call<List<UserVote>> call = roomAPI.getUsersInRoom(roomId);
         call.enqueue(new Callback<List<UserVote>>() {
             @Override
             public void onResponse(Call<List<UserVote>> call, Response<List<UserVote>> response) {
                 if (response.isSuccessful()) {
-                    Log.e("SQL","FUNCIONOGET");
                     List<UserVote> users = response.body();
                     boolean allVotesReceivedTemp = true;
                     for (UserVote user : users) {
@@ -357,7 +336,6 @@ public class MultiGame extends AppCompatActivity {
                         }
                     }
                     allVotesReceived = allVotesReceivedTemp;
-                    Log.e("SQL","BOOL" + allVotesReceived);
                     if (allVotesReceived) {
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -377,7 +355,7 @@ public class MultiGame extends AppCompatActivity {
         });
     }
 
-
+//Metodo recibir el elemento ganador
     public void WinnerRound(){
         Call<JsonObject> call = roomAPI.getWinnerRound(roomId);
         call.enqueue(new Callback<JsonObject>() {
@@ -386,7 +364,6 @@ public class MultiGame extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     JsonObject jsonObject = response.body();
                     String mostVotedGame = jsonObject.get("mostVotedGame").getAsString();
-                    Log.e("SQL", "datos: " + mostVotedGame);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -405,20 +382,17 @@ public class MultiGame extends AppCompatActivity {
         });
     }
 
-
+//Metodo para limpiar el voto
     public void VoteClear(String voto, String mostVotedGame) {
         Call<Void> call = roomGameAPI.updateVote(roomId, userId, voto);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.e("SQL","Ganador" + mostVotedGame);
                     if(String.valueOf(shuffledElements.get(currentRound * 2).getName_elem()).equals(mostVotedGame)){
                         winnerElements.add(shuffledElements.get(currentRound * 2));
-                        Log.e("SQL","Ganador" + shuffledElements.get(currentRound * 2).getName_elem());
                     } else {
                         winnerElements.add(shuffledElements.get(currentRound * 2 + 1));
-                        Log.e("SQL","Ganador" + shuffledElements.get(currentRound * 2 + 1).getName_elem());
                     }
                     currentRound++;
                     startRound();
@@ -433,7 +407,7 @@ public class MultiGame extends AppCompatActivity {
         });
     }
 
-
+//Metodo para acabar la sala
     public void endRoom(int roomId, int userId) {
         Call<Void> call = roomAPI.endRoom(roomId, userId);
         call.enqueue(new Callback<Void>() {
@@ -447,31 +421,18 @@ public class MultiGame extends AppCompatActivity {
                     editor.apply();
                     Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
                 } else {
-                    // OcurriÃ³ un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });
     }
-    /*
 
-    public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(MultiGame.this).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(MultiGame.this);
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
 
-    }*/
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(this);  // Utiliza 'this' en lugar de 'requireContext()'
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);

@@ -2,7 +2,6 @@ package com.example.urchoice2.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,13 +10,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
@@ -30,7 +27,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.API.UserAPI;
@@ -40,10 +36,8 @@ import com.example.urchoice2.Screens_activities.SplashScreen;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,16 +46,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfileFragment extends Fragment {
     private Handler handler;
-    MaterialButton edit_name_button;
     MaterialButton edit_profile_image_button;
     private UserAPI userAPI;
     private FriendsAPI friendAPI;
     ImageView profile_image;
     private View view;
     ImageView profileBackground;
-    TextView profile_userName;
     Bitmap selectedBitmap;
-    Bitmap selectedBitmap2;
     private MaterialButton logout;
     private int userId;
     private TextView profileMail;
@@ -75,7 +66,6 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private MaterialButton my_categories_button;
-
     private User user;
 
     public ProfileFragment() {}
@@ -88,6 +78,8 @@ public class ProfileFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
     public void my_categories_fragment() {
         Fragment myCategoriesSubFragment = new ProfileMyCategoriesSubFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -95,6 +87,7 @@ public class ProfileFragment extends Fragment {
         transaction.addToBackStack(null); // Opcional: añadir a la pila de retroceso
         transaction.commit();
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,6 +100,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.f5___fragment_profile, container, false);
@@ -118,6 +112,8 @@ public class ProfileFragment extends Fragment {
 
 
         my_categories_button= view.findViewById(R.id.profile_categories_button);
+
+        //Ir al fragment para ver sus categorias creadas
         my_categories_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,20 +133,25 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //Cambiar la imagen del perfil
         edit_profile_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 selectImageFromGallery();
             }
         });
+
         logout = view.findViewById(R.id.logout_button);
+
+        //Cerrar Sesion
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CerrarSesion();
             }
         });
+
+
         profileNameEditText = view.findViewById(R.id.profileName_edittext);
         editNewNameButton = view.findViewById(R.id.editnew_namebutton);
         setNewNameButton = view.findViewById(R.id.setnew_namebutton);
@@ -171,6 +172,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
+        //Editar nombre de perfil
         setNewNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +193,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-
+//Metodo para Cerrar Sesion
     public void CerrarSesion(){
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -213,7 +216,6 @@ public class ProfileFragment extends Fragment {
 
     public String bitmapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         /*evitar que se pete debido a ciertas imagenes sobre todo las de camara*/
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 
@@ -281,6 +283,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
+    //Coger el numero de amigos que tiene el usuario
     public void GetFriends(){
         Log.e("SQL","DATOS: " + userId);
         Call<JsonObject> call = friendAPI.getFriendCount(userId);
@@ -307,6 +310,7 @@ public class ProfileFragment extends Fragment {
     }
 
 
+    //Coger la informacion del usuario que inicio sesion
     public void GetUser(){
         Call<User> call = userAPI.getUser(userId);
         call.enqueue(new Callback<User>() {
@@ -341,7 +345,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
+//Metodo para updatear el name del user
     public void UpdateName(String newName){
         Call<Void> call = userAPI.updateUserName(userId, newName);
         call.enqueue(new Callback<Void>() {
@@ -360,7 +364,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
+//Metodo para updatear la img del user
     public void UpdateIMG(Bitmap selectedBitmap){
         String IMGString = bitmapToBase64(selectedBitmap);
         Call<Void> call = userAPI.updateUserIMG(userId, IMGString);
@@ -381,52 +385,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
-    public void LogOut(){
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UrChoice", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove("id_user");
-        editor.apply();
-    }
-
-    /*
-    public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-
-    }*/
-
-    /*private void showCountdownAlert() {
-        LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.ff___xx_alert__countdown, null);
-
-        //cargar gif
-        ImageView countdownImageView = view.findViewById(R.id.countdownImageView);
-        Glide.with(this).asGif().load(R.drawable.countdown).into(countdownImageView);
-
-        // Create the AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-
-        handler.postDelayed(() -> {
-            if (alertDialog.isShowing()) {
-                alertDialog.dismiss();
-            }
-        }, 5200);
-    }*/
-
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);

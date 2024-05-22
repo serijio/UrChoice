@@ -119,6 +119,7 @@ public class TapToStartScreen extends AppCompatActivity {
         },400);
     }
 
+    //Borrar todos los registros del usuario
     public void EndAPP() {
         Call<Void> call = userApi.endAPP(userId);
         call.enqueue(new Callback<Void>() {
@@ -127,13 +128,11 @@ public class TapToStartScreen extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("RoomEnd", "OperaciÃ³n completada correctamente");
                 } else {
-                    // OcurriÃ³ un error al intentar finalizar la sala
                     Log.e("RoomEnd", "Error al finalizar la sala: " + response.message());
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // OcurriÃ³ un error de red tap_blue_card otro error durante la llamada
                 Log.e("RoomEnd", "Error de red: " + t.getMessage());
             }
         });

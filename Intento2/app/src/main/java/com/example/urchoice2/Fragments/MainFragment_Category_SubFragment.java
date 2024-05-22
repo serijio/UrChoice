@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -25,20 +23,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.CategoriesAPI;
 import com.example.urchoice2.Adapters.Main_Screen_Adapter;
 import com.example.urchoice2.Classes.Category;
-import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Main_Screen_Model;
 import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,6 +59,8 @@ public class MainFragment_Category_SubFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         TextInputEditText searchMainEditText = rootView.findViewById(R.id.searchMainEditText);
+
+        //Buscador de las categorias
         searchMainEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -94,7 +89,6 @@ public class MainFragment_Category_SubFragment extends Fragment {
             activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-                    // No hacer nada cuando se presiona el botÃ³n de retroceso
                 }
             });
         }
@@ -112,7 +106,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         userId = preferences.getInt("id_user", 0);
     }
 
-
+//Metodo para coger todas las categorias de la base de datos
     public void GetCategories(){
         categoriesAPI.getCategories(userId).enqueue(new Callback<List<Category>>() {
             @Override
@@ -140,7 +134,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-
+//Rellenar las cardview con la informacion de las categorias
     private void setRvMain() {
         // Para que el recycler tenga 2 columnas
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 2);
@@ -162,20 +156,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
         }
     }
 
-
-    /*public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-    }*/
-
-
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);

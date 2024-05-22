@@ -65,12 +65,13 @@ public class SingleGame extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         categoryId = sharedPreferences.getInt("id_categorySingle", 0);
         waitAlertAltera();
-        //waitAlert();
         Conectar();
         textViewElement1 = findViewById(R.id.card_name1);
         textViewElement2 = findViewById(R.id.card_name2);
         imageViewElement1 = findViewById(R.id.imageView1);
         imageViewElement2 = findViewById(R.id.imageView2);
+
+        //Eleccion del primer elemento
         textViewElement1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,11 +79,10 @@ public class SingleGame extends AppCompatActivity {
                 winnerElements.add(shuffledElements.get(currentRound * 2));
                 currentRound++;
                 startRound();
-                //lo nuevo de Luca
-                //AlertWaitingPlayers();
             }
         });
 
+        //Eleccion del segundo elemento
         textViewElement2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +95,7 @@ public class SingleGame extends AppCompatActivity {
 
     }
 
-
+//Alert del ganador
     public void AlertWinner() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -127,7 +127,7 @@ public class SingleGame extends AppCompatActivity {
 
     }
 
-
+//Volver al main
     public void changeToMainButton() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -142,12 +142,8 @@ public class SingleGame extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SingleGame.this, pairs);
                     startActivity(intent, options.toBundle());
-                    //SUPUESTO CREEMOS QUE NO
-                    //finish();
                 } else {
                     startActivity(intent);
-                    //SUPUESTO CREEMOS QUE NO
-                    //finish();
                 }
             }
         }, 400);
@@ -167,7 +163,7 @@ public class SingleGame extends AppCompatActivity {
         Game();
     }
 
-
+//Coger los elementos de la categoria
     public void Game(){
         elementApi.getElementsByCategory(categoryId).enqueue(new Callback<List<Element>>() {
             @Override
@@ -192,34 +188,36 @@ public class SingleGame extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-
+//Metodo para empezar la ronda
     private void startRound() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                //Si son los elmentos principales
                 if (currentRound < shuffledElements.size() / 2) {
-                    //showCountdownAlert();
                     Element firstElement = shuffledElements.get(currentRound * 2);
                     Element secondElement = shuffledElements.get(currentRound * 2 + 1);
-                    // Mostrar los nombres de los elementos en los TextView correspondientes
                     Bitmap base64Image = base64ToBitmap(firstElement.img_elem);
                     Bitmap base64Image2 = base64ToBitmap(secondElement.img_elem);
                     imageViewElement1.setImageBitmap(base64Image);
                     imageViewElement2.setImageBitmap(base64Image2);
                     textViewElement1.setText(firstElement.name_elem);
                     textViewElement2.setText(secondElement.name_elem);
+
+                    //Si solo quedan los ganadores
                 } else if (shuffledElements.size() != 1) {
                     shuffledElements = new ArrayList<>(winnerElements);
                     winnerElements.clear();
                     currentRound = 0;
-                    Log.e("SQL","DATOSWE: " + shuffledElements.size());
                     if(shuffledElements.size() != 1){
                         showCountdownAlert();
                     }else{
                         startRound();
                     }
+
+                    //Si solo queda el ganador
                 } else {
-                    //winnerName.setText(shuffledElements.get(0).getName_elem());
                     Call<Void> call = elementApi.updateElement(shuffledElements.get(0).getId_elem(), shuffledElements.get(0).getVictories(),userId);
                     call.enqueue(new Callback<Void>() {
                         @Override
@@ -242,6 +240,7 @@ public class SingleGame extends AppCompatActivity {
     }
 
 
+    //Alert para el comienzo de cada ronda
     private void showCountdownAlert() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.ff___xx_alert__countdown, null);
@@ -267,20 +266,7 @@ public class SingleGame extends AppCompatActivity {
         }, 5000);
     }
 
-
-    /*
-    public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(SingleGame.this).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(SingleGame.this);
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-
-    }*/
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(this);  // Utiliza 'this' en lugar de 'requireContext()'
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);

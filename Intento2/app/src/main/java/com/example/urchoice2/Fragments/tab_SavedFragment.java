@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,17 +20,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.SavedAPI;
 import com.example.urchoice2.Adapters.Saved_Saved_Screen_Adapter;
 import com.example.urchoice2.Classes.Saved;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Saved_Saved_Screen_Model;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,7 +35,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tab_SavedFragment extends Fragment {
-    private Context context;
     private List<Saved> saveds;
     private RecyclerView recyclerView;
     private ArrayList<Saved_Saved_Screen_Model> savedSavedScreenModels = new ArrayList<>();
@@ -57,8 +52,6 @@ public class tab_SavedFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rvSaved);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-
         return rootView;
     }
 
@@ -71,13 +64,13 @@ public class tab_SavedFragment extends Fragment {
         savedAPI = retrofit.create(SavedAPI.class);
         SharedPreferences preferences = requireContext().getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         int userId = preferences.getInt("id_user", 0);
-        //waitAlert();
         waitAlertAltera();
         GetSaved(userId);
 
     }
 
 
+    //Metodo para recoger los saved del usuario
     private void GetSaved(int idUser) {
         Call<List<Saved>> call = savedAPI.obtenerGuardados(idUser);
         call.enqueue(new Callback<List<Saved>>() {
@@ -112,7 +105,7 @@ public class tab_SavedFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-
+//Rellenar las cardview con las categorias en saved
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
@@ -127,18 +120,7 @@ public class tab_SavedFragment extends Fragment {
         }
     }
 
-    /*
-    public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
-    }*/
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
@@ -170,7 +152,6 @@ public class tab_SavedFragment extends Fragment {
             activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-                    // No hacer nada cuando se presiona el botÃ³n de retroceso
                 }
             });
         }

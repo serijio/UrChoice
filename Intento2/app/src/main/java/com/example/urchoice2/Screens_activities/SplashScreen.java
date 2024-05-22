@@ -21,16 +21,13 @@ import com.example.urchoice2.R;
 import com.google.android.material.textview.MaterialTextView;
 
 public class SplashScreen extends AppCompatActivity {
-
     MaterialTextView MtextView;
     ImageView linea1, linea2, linea3, linea4, linea5, linea6, linea7, linea8, linea9, linea10, linea11, linea12, bluecard, redcard;
-    //MaterialButton bottomlogo;
     Animation topTobottomAnimation, bottomTotopAnimation, bottomAnimation, left_middleAnimation, right_middleAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //DEGRADADO DE TITULO
         setContentView(R.layout.a1___activity_splash_screen);
@@ -59,7 +56,6 @@ public class SplashScreen extends AppCompatActivity {
 
         bluecard = findViewById(R.id.bluecard);
         redcard = findViewById(R.id.redcard);
-        //bottomlogo = findViewById(R.id.tapScreenButton);
 
         linea1.setAnimation(topTobottomAnimation);
         linea2.setAnimation(topTobottomAnimation);
@@ -77,7 +73,6 @@ public class SplashScreen extends AppCompatActivity {
 
         bluecard.setAnimation(left_middleAnimation);
         redcard.setAnimation(right_middleAnimation);
-        //bottomlogo.setAnimation(bottomAnimation);
 
         //SPLASH SCREEN TRANSITION
 

@@ -13,23 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FavsAPI;
 import com.example.urchoice2.Adapters.Saved_Favs_Screen_Adapter;
 import com.example.urchoice2.Classes.Favs;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Saved_Favs_Screen_Model;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,7 +33,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tab_FavouriteFragment extends Fragment {
-    private Context context;
     private List<Favs> favorites;
     private RecyclerView recyclerView;
     private ArrayList <Saved_Favs_Screen_Model> savedFavsScreenModels = new ArrayList<>();
@@ -55,7 +50,6 @@ public class tab_FavouriteFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.rvFavs);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //waitAlert();
         waitAlertAltera();
 
         return rootView;
@@ -73,6 +67,7 @@ public class tab_FavouriteFragment extends Fragment {
         GetFavs(userId);
     }
 
+    //Metodo para coger los favoritos del user
     private void GetFavs(int id_user) {
         Call<List<Favs>> call = favsAPI.obtenerFavoritos(id_user);
         call.enqueue(new Callback<List<Favs>>() {
@@ -80,7 +75,6 @@ public class tab_FavouriteFragment extends Fragment {
             public void onResponse(Call<List<Favs>> call, Response<List<Favs>> response) {
                 if (response.isSuccessful()) {
                     favorites = response.body();
-                    //Log.e("SQL","DATOS: " + favorites.get(0).getName_cat());
 
                     setRvMain();
 
@@ -95,8 +89,6 @@ public class tab_FavouriteFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Favs>> call, Throwable t) {
-
-
                 Log.e("SQL","EROR");
                 dismissWaitAlert();
             }
@@ -108,6 +100,7 @@ public class tab_FavouriteFragment extends Fragment {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
+    //Rellenar las cardview con las categorias en favourites del user
     private void setRvMain() {
         Drawable mainFavIcon = ContextCompat.getDrawable(requireContext(), R.drawable.fav_red_border);
         Drawable mainSaveIcon = ContextCompat.getDrawable(requireContext(), R.drawable.save_blue_border);
@@ -122,6 +115,7 @@ public class tab_FavouriteFragment extends Fragment {
         }
     }
 
+    //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
         View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
@@ -139,20 +133,7 @@ public class tab_FavouriteFragment extends Fragment {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
     }
-    /*
-    public void waitAlert(){
-        // Construir el nuevo AlertDialog
-        View view = LayoutInflater.from(requireContext()).inflate(R.layout.ff___all_fragments_loading_alert_dialog, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-        alertDialog.show();
 
-
-    }*/
     public void dismissWaitAlert() {
         alertDialog.dismiss();
     }

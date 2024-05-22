@@ -5,10 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,13 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.urchoice2.API.UserAPI;
 import com.example.urchoice2.Adapters.MyPagerAdapter;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.google.android.material.tabs.TabLayout;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,14 +30,8 @@ public class MainFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-
     private User user;
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-
     private int userId;
-
     private UserAPI userApi;
     public MainFragment() {}
 
@@ -95,12 +85,10 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                // No se requiere ninguna acción al deseleccionar una pestaña
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                // No se requiere ninguna acción al volver a seleccionar una pestaña
             }
         });
 
@@ -121,6 +109,7 @@ public class MainFragment extends Fragment {
         userId = preferences.getInt("id_user", 0);
     }
 
+    //Metodo para coger la información del usaurio que inició sesión
     public void GetUser(View view){
         Call<User> call = userApi.getUser(userId);
         call.enqueue(new Callback<User>() {
@@ -128,6 +117,7 @@ public class MainFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     user = response.body();
+                    //Poner los datos en el layout
                     updateView(view);
                     Log.e("API Error", "NOMBRE" + user.getNick_user());
 
@@ -143,6 +133,7 @@ public class MainFragment extends Fragment {
         });
     }
 
+    //Metodo para rellenar el layout con la información
     private void updateView(View view) {
         if (user != null) {
             TextView username = view.findViewById(R.id.home_username);
