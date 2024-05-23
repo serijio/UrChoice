@@ -154,7 +154,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
         View view = inflater.inflate(R.layout.friends_profile_alertdialog, null);
 
         TextView gameplayed = view.findViewById(R.id.games);
-        TextInputEditText nameUser = view.findViewById(R.id.profileName_edittext);
+        TextView nameUser = view.findViewById(R.id.profileName);
         TextView email = view.findViewById(R.id.profilemail);
         ImageView profile = view.findViewById(R.id.profile_image);
         ImageView profilebackground = view.findViewById(R.id.profile_background);

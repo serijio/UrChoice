@@ -104,6 +104,7 @@
     <string name="no">NO</string>
     <string name="save">SAVE</string>
     <string name="cancel">CANCEL</string>
+    <string name="close">CLOSE</string>
 
 
     <!--Cancel edit alert-->

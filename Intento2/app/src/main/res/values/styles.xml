@@ -371,6 +371,11 @@
             <item name="android:textSize">18sp</item>
         </style>
 
+        <style name="friendsprfofilecorner" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSize">30%</item>
+        </style>
+
 
 
     <!--Favourites and saved--><!--Favourites and saved--><!--Favourites and saved--><!--Favourites and saved-->
@@ -425,12 +430,5 @@
             <item name="cornerFamily">cut</item>
             <item name="cornerSize">30%</item>
         </style>
-    <style name="friendsprfofilecorner" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">30%</item>
-    </style>
-
-    
-
 
 </resources>
