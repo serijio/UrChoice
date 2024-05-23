@@ -1,5 +1,6 @@
 package com.example.urchoice2.Adapters;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -41,7 +42,7 @@ public class CreateCategory_CardAdapter extends RecyclerView.Adapter<CreateCateg
 
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CardViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Element element = cardsList.get(position);
         Bitmap bitmap = base64ToBitmap(element.getImg_elem());
         holder.bind(bitmap, element.getName_elem());

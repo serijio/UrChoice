@@ -23,6 +23,7 @@ import com.example.urchoice2.API.FriendsAPI;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -157,7 +158,10 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
         TextView email = view.findViewById(R.id.profilemail);
         ImageView profile = view.findViewById(R.id.profile_image);
         ImageView profilebackground = view.findViewById(R.id.profile_background);
+        MaterialButton closeButton = view.findViewById(R.id.view_bottomclose);
+        TextView friend_profilename = view.findViewById(R.id.friend_profilename);
 
+        friend_profilename.setText(user.getNick_user());
         Bitmap imagen = base64ToBitmap(user.getImg_user());
         profile.setImageBitmap(imagen);
         profilebackground.setImageBitmap(imagen);
@@ -172,6 +176,17 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
         //alertDialog.setCancelable(false);
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         alertDialog.show();
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissWaitAlert();
+            }
+        });
+
+    }
+    public void dismissWaitAlert() {
+        alertDialog.dismiss();
     }
 
 
