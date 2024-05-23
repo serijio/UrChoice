@@ -61,7 +61,7 @@ public class SingleGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handler = new Handler(Looper.getMainLooper());
-        setContentView(R.layout.xx__fragment_individual_game_round_layout);
+        setContentView(R.layout.ff___fragment_individual_game_round_layout);
         SharedPreferences sharedPreferences = getSharedPreferences("UrChoice", Context.MODE_PRIVATE);
         categoryId = sharedPreferences.getInt("id_categorySingle", 0);
         waitAlertAltera();
@@ -99,7 +99,7 @@ public class SingleGame extends AppCompatActivity {
     public void AlertWinner() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View view = layoutInflater.inflate(R.layout.xx__fragment_game_win_alert_layout, null);
+        View view = layoutInflater.inflate(R.layout.ff___alert_winner_game, null);
 
         ViewGroup winnerLayout = view.findViewById(R.id.winner_layout);
         View inflatedLayout = layoutInflater.inflate(R.layout.xx__activity_game_win_layout, null);

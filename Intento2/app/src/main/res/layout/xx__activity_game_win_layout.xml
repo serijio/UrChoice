@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
+    <!--TextView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:shadowRadius="1"
         app:layout_constraintBottom_toBottomOf="@id/xx2"
         app:layout_constraintTop_toTopOf="@id/xx1"
-        />
+        /-->
     <TextView
         android:id="@+id/winner_card_name"
         android:layout_width="match_parent"

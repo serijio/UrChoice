@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Screens_activities.MultiGame">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/vs_game_layout"
+        android:alpha="0.8"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/MultiimageView1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h270"
+        app:layout_constraintBottom_toTopOf="@id/h271"
+        app:layout_constraintStart_toEndOf="@id/v188"
+        app:layout_constraintEnd_toStartOf="@id/v189"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/GameImageCustomShape"
+        android:src="@drawable/nopic_login_inside" />
+
+    <TextView
+        android:id="@+id/Multicard_name1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h270"
+        app:layout_constraintBottom_toTopOf="@id/h271"
+        app:layout_constraintStart_toEndOf="@id/v188"
+        app:layout_constraintEnd_toStartOf="@id/v189"
+        style="@style/GameTextStyle" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/MultiimageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h272"
+        app:layout_constraintBottom_toTopOf="@id/h273"
+        app:layout_constraintStart_toEndOf="@id/v188"
+        app:layout_constraintEnd_toStartOf="@id/v189"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/GameImageCustomShape"
+        android:src="@drawable/nopic_login_inside" />
+
+    <TextView
+        android:id="@+id/Multicard_name2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/h272"
+        app:layout_constraintBottom_toTopOf="@id/h273"
+        app:layout_constraintStart_toEndOf="@id/v188"
+        app:layout_constraintEnd_toStartOf="@id/v189"
+        style="@style/GameTextStyle" />
+
+
+
+    <!--Constraints verticales-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v188"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v189"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+
+
+    <!--Constraints horizontales-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h270"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h271"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h272"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h273"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

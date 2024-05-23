@@ -8,8 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent" >
+
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             android:layout_above="@id/hx"
             android:src="@drawable/logo"
             android:scaleType="centerCrop" />
+
         <TextView
             android:id="@+id/card_name1"
             android:layout_width="match_parent"
