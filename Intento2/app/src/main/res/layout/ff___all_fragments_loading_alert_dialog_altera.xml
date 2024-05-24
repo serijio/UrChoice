@@ -39,22 +39,23 @@
 
         <TextView
             android:id="@+id/card_image_data"
-            android:layout_width="318dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="172dp"
+            android:layout_marginTop="150dp"
             android:text="@string/loading"
             android:elevation="1dp"
             style="@style/AlertDialogTest" />
 
-        <ProgressBar
-            android:layout_width="318dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="245dp" />
+        <ImageView
+            android:id="@+id/altera"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="200dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/altera_final" />
 
     </RelativeLayout>
 </RelativeLayout>
