@@ -24,7 +24,6 @@ import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
 import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,7 +150,7 @@ public class Friends_Screen_Adapter extends RecyclerView.Adapter<Friends_Screen_
     }
     public void SeeProfileFriend(User user){
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.friends_profile_alertdialog, null);
+        View view = inflater.inflate(R.layout.f2___xx_alert__friends_profile, null);
 
         TextView gameplayed = view.findViewById(R.id.games);
         TextView nameUser = view.findViewById(R.id.profileName);

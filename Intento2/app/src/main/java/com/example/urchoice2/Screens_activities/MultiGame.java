@@ -107,10 +107,10 @@ public class MultiGame extends AppCompatActivity {
     public void AlertWinner() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View view = layoutInflater.inflate(R.layout.ff___alert_winner_game, null);
+        View view = layoutInflater.inflate(R.layout.ff___xx_alert__winner_game, null);
 
         ViewGroup winnerLayout = view.findViewById(R.id.winner_layout);
-        View inflatedLayout = layoutInflater.inflate(R.layout.xx__activity_game_win_layout, null);
+        View inflatedLayout = layoutInflater.inflate(R.layout.ff___activity_game_win_layout, null);
         winnerLayout.addView(inflatedLayout); // Agregar el layout inflado a winnerLayout
 
         AlertDialog alertDialog = builder.create();
@@ -435,7 +435,7 @@ public class MultiGame extends AppCompatActivity {
     //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(this);  // Utiliza 'this' en lugar de 'requireContext()'
-        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+        View view = inflater.inflate(R.layout.ff___xx_alert__all_fragments_loading_altera, null);
 
         // Cargar gif
         ImageView alteraImageView = view.findViewById(R.id.altera);

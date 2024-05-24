@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.text.Layout;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -548,7 +547,7 @@ public class EditCategoriesSubFragment extends Fragment {
     }*/
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+        View view = inflater.inflate(R.layout.ff___xx_alert__all_fragments_loading_altera, null);
 
         //cargar gif
         ImageView alteraImageView = view.findViewById(R.id.altera);
