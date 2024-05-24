@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="5dp"
-                    android:text="@string/cat_name"
+
                     style="@style/MainCardViewStyle" />
 
             </FrameLayout>
@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.64"
-                android:src="@drawable/b"
+
                 android:scaleType="centerCrop" />
 
 
