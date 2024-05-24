@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <ImageView
         android:id="@+id/winner_card_image"
@@ -19,22 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <!--TextView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WIN"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="80sp"
-        android:textColor="@color/white"
-        android:shadowColor="@color/black"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:shadowRadius="1"
-        app:layout_constraintBottom_toBottomOf="@id/xx2"
-        app:layout_constraintTop_toTopOf="@id/xx1"
-        /-->
     <TextView
         android:id="@+id/winner_card_name"
         android:layout_width="match_parent"
@@ -50,8 +33,8 @@
         android:shadowDx="10"
         android:shadowDy="10"
         android:shadowRadius="1"
-        android:fontFamily="@font/orbimedium"
-        />
+        android:fontFamily="@font/orbimedium" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/main_home_materialbutton"
         android:layout_width="wrap_content"
@@ -66,9 +49,7 @@
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="1"
-        android:fontFamily="@font/orbimedium"
-        />
-
+        android:fontFamily="@font/orbimedium" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/rojo"
@@ -101,6 +82,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.65" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/xx2"
         android:layout_width="wrap_content"
@@ -114,6 +96,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/xx4"
         android:layout_width="wrap_content"
@@ -127,10 +110,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vxx1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
