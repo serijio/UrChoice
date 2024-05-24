@@ -34,7 +34,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.35"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/a"
                 app:shapeAppearanceOverlay="@style/FriendsImageCustomShape" />
 
             <TextView
@@ -42,7 +41,6 @@
                 android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.24"
-                android:text="@string/lukinda"
                 android:textSize="13sp"
                 style="@style/FriendsUsernameStyle" />
 
@@ -51,7 +49,6 @@
                 android:layout_width="65dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.15"
-                android:text="@string/lukinda_mail"
                 android:textSize="6sp"
                 style="@style/FriendsEmailStyleLeft" />
 

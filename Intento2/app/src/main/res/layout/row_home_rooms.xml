@@ -30,9 +30,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:elevation="1dp"
-
-        android:scaleType="centerCrop"
-        android:src="@drawable/a" />
+        android:scaleType="centerCrop" />
 
 
     <TextView
@@ -41,9 +39,8 @@
         android:layout_height="80dp"
         android:background="@color/red"
         android:layout_marginTop="25dp"
-        android:paddingRight="200dp"
+        android:paddingEnd="200dp"
         android:elevation="0dp"
-        android:text="ROOM NAME"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:gravity="center"

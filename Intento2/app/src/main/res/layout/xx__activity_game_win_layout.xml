@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:elevation="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
