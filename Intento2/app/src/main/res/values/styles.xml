@@ -431,4 +431,11 @@
             <item name="cornerSize">30%</item>
         </style>
 
+    <style name="friendsprfofilecorner" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30%</item>
+    </style>
+    
+
+
 </resources>

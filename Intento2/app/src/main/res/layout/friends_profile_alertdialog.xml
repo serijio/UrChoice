@@ -8,7 +8,7 @@
     android:background="#00000000" >
 
 
-    <!--Extremos-->
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,6 +17,7 @@
         app:layout_constraintStart_toEndOf="@id/v190"
         app:layout_constraintEnd_toStartOf="@id/v191"
         android:background="@color/black" />
+
 
     <ImageView
         android:id="@+id/profile_background"
