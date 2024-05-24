@@ -23,7 +23,6 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
-                android:text="Player1"
                 android:textColor="@color/white" />
 
             <LinearLayout

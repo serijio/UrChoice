@@ -40,7 +40,6 @@
                     android:id="@+id/favs_cv_cat_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/cat_name2"
                     android:layout_weight="0.55"
                     style="@style/FavsCardViewStyle" />
 
