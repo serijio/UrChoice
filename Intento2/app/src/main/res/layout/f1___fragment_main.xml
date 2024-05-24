@@ -64,7 +64,6 @@
         app:layout_constraintBottom_toTopOf="@id/h62"
         app:layout_constraintStart_toEndOf="@id/v41"
         app:layout_constraintEnd_toStartOf="@id/v42"
-        android:text="@string/user_nick"
         android:elevation="1dp"
         style="@style/TopUserInfoNickname" />
 
@@ -76,7 +75,6 @@
         app:layout_constraintBottom_toTopOf="@id/h64"
         app:layout_constraintStart_toEndOf="@id/v41"
         app:layout_constraintEnd_toStartOf="@id/v42"
-        android:text="@string/user_email"
         android:elevation="1dp"
         style="@style/TopUserInfoEmail" />
 
