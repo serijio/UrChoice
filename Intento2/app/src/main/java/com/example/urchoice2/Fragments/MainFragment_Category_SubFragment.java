@@ -159,7 +159,7 @@ public class MainFragment_Category_SubFragment extends Fragment {
     //Wait de altera para que carguen los datos
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+        View view = inflater.inflate(R.layout.ff___xx_alert__all_fragments_loading_altera, null);
 
         //cargar gif
         ImageView alteraImageView = view.findViewById(R.id.altera);

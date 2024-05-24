@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -26,17 +25,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.urchoice2.API.FriendsAPI;
-import com.example.urchoice2.API.UserAPI;
-import com.example.urchoice2.Adapters.Friends_Requests_Adapter;
 import com.example.urchoice2.Adapters.Friends_Screen_Adapter;
 import com.example.urchoice2.Classes.User;
 import com.example.urchoice2.R;
-import com.example.urchoice2.RecyclerViews.Friends_Requests_Model;
 import com.example.urchoice2.RecyclerViews.Friends_Screen_Model;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -246,7 +241,7 @@ public class FriendsFragment extends Fragment {
     }
     public void waitAlertAltera() {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.ff___all_fragments_loading_alert_dialog_altera, null);
+        View view = inflater.inflate(R.layout.ff___xx_alert__all_fragments_loading_altera, null);
 
         //cargar gif
         ImageView alteraImageView = view.findViewById(R.id.altera);
