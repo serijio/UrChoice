@@ -48,7 +48,7 @@ public class TapToStartScreen extends AppCompatActivity {
         MtextView = findViewById(R.id.tap_app_title);
         slogan = findViewById(R.id.tap_slogan);
         linear = findViewById(R.id.tap_credits);
-        tapButton = findViewById(R.id.tap_button);
+        tapButton = findViewById(R.id.tap_now_button);
         taptostart_redcard = findViewById(R.id.tap_redcard);
         taptostart_bluecard = findViewById(R.id.tap_bluecard);
         setDegradadoTitulo();

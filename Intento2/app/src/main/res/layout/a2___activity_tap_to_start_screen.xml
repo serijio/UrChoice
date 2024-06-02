@@ -85,6 +85,7 @@
         style="@style/SloganStyle"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/tap_now_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clickable="false"
